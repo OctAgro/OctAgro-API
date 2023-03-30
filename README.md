@@ -98,6 +98,15 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 ## 💡Demonstração do programa <a id="demonstracao"></a>
 
 ## 🗂️ Backlog das Sprints <a id="backlogs"></a>
+## Sprint 1
+
+| Sprint | US  | Tarefa  | Descrição | Prioridade |
+|:------:|:---:|:--------|:----------|:-----------|
+|  01    | *   | Criação do Wireframe.|Realizar o Wireframe do software para apresentação pro cliente.| Alta
+|  01    | *   | Criação do Banco de dados. | Criar o banco de dados do projeto. | Alta
+|  01    | *   | Criação do Protótipo navegável. | Realizar um Protótipo navegável do software. | Alta
+|  01    | *   | Documentação do software. | Realizar a documentação do software. | Alta
+|  01    | *   | Criação da arquitetura básica e configuração dos arquivos. | Criação de CRUD básico. | Alta
 
 ## 📉 Burndown das Sprints <a id="burndown"></a>
 

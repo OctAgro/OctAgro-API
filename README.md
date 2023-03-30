@@ -51,6 +51,22 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 |  #10 | Geral | Como usuário do sistema, desejo um sistema com ambientação limitada por usuário, para trabalhar em um ambiente limpo e intuitivo para minha função. | 4
 |  #11 | Geral | Como usuário do sistema, desejo um sistema de fácil acesso e que seja responsivo, para facilitar a navegação entre as aplicações e poder acessar a partir de qualquer dispositivo. | 4
 
+## 📝 Backlog do produto <a id="backlogeral"></a>
+
+| Sprint | US  | Tarefa  | Descrição | Prioridade |
+| :----: | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- |
+|  #01   | Geral | Como usuário do sistema, desejo fazer o login e logout, para entrar e sair da minha conta.   | 2
+|  #02   | Recebedor/Analista | Como Recebedor/Analista, desejo registrar, editar ou excluir a entrada da mercadoria descrevendo suas principais características para que o processo de análise seja possível. | 2
+|  #03   | Recebedor/Analista |Como Recebedor/Analista, desejo a criação de um relatório baseado nas informações de comparação entre o Relatório de Compras, a Nota Fiscal e a Mercadoria, para que haja prosseguimento na aprovação da entrada do grão no estoque. | 2
+|  #04   | Recebedor/Analista | Como Recebedor/Analista, desejo comparar as características da mercadoria recebida com as informações da mercadoria descritas no Relatório de Compras e na Nota Fiscal para aprovação ou rejeição da entrada. | 2
+|  #05   | Aprovador | Como Aprovador, desejo validar a mercadoria que foi inspecionada para a entrada do estoque, mesmo ela estando rejeitada pelos critérios. | 2
+|  #06 | Administrador | Como Administrador, desejo gerenciar fornecedores de forma com que eles sejam cadastrados no sistema para que facilite os dados tanto do fornecedor quanto do produto. | 3
+|  #07 | Administrador | Como Administrador, desejo gerenciar produtos (grãos) para caracterizar a mercadoria de forma em que ela possa ser recebida, analisada e aprovada de forma eficiente. | 3
+|  #08 | Administrador | Como Administrador, desejo gerenciar regras de recebimento para determinar o conjunto de critérios a serem seguidos no processo de análise e aprovação da entrada de mercadorias. | 3
+|  #09 | Administrador | Como Administrador, desejo gerenciar usuários colaboradores (recebedores, analistas e aprovadores) de forma com que seja possível criar, editar ou apagar as contas associadas a eles. | 4
+|  #10 | Geral | Como usuário do sistema, desejo um sistema com ambientação limitada por usuário, para trabalhar em um ambiente limpo e intuitivo para minha função. | 4
+|  #11 | Geral | Como usuário do sistema, desejo um sistema de fácil acesso e que seja responsivo, para facilitar a navegação entre as aplicações e poder acessar a partir de qualquer dispositivo. | 4
+
 ## ❓Como Utilizar <a id="comousar"></a>
 
 ## 💡Demonstração do programa <a id="demonstracao"></a>

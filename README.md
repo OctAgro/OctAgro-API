@@ -115,11 +115,14 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 
 ## 📉 Burndown 1
 
-## Mockups - Telas de login, listagem de usuários e validação de produto
-<div>
-      <img src="doc/img/TelaLogin.png" />
-      <img src="doc/img/ListaUsers.png" />
-      <img src="doc/img/Validacao.png" />
+## Mockups
+<div align="center">
+      <h4>Tela de login</h4>
+      <img src="doc/img/TelaLogin.png" width="500"/>
+      <h4>Listagem de usuários</h4>
+      <img src="doc/img/ListaUsers.png" width="500"/>
+      <h4>Tela de Validação de produto</h4>
+      <img src="doc/img/Validacao.png" width="500"/>
 </div>
 
 <h3> Sprint 1: [12/03/23-31/03/23]</h3> 

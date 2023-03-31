@@ -16,9 +16,13 @@
  <a href="#demonstracao">Demonstração</a> • 
  <a href="#userstories">User Stories</a> • 
  <a href="#backlogeral">Backlog do produto</a> • 
- <a href="#backlogs">Backlog da Sprint</a> •
- <a href="#burndown">Burndown da Sprint</a> •
+ <a href="#backlogs">Sprints</a> • 
  <a href="#equipe">Equipe</a> • 
+</p>
+
+<h3 align="center">Sprints</h3>
+<p align="center">
+      <a href="#sprint1">Sprint 1</a>    
 </p>
 
 ## Aprendizagem por Projetos Integrados <a id="API"></a>
@@ -98,18 +102,25 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 
 ## 💡Demonstração do programa <a id="demonstracao"></a>
 
-## 🗂️ Backlog das Sprints <a id="backlogs"></a>
-## Sprint 1
+## 🗂️ Sprints <a id="backlogs"></a>
+## Sprint 1 <a id="sprint1"></a>
 
-| Sprint | US  | Tarefa  | Descrição | Prioridade |
-|:------:|:---:|:--------|:----------|:-----------|
-|  01    | *   | Criação do Wireframe.|Realizar o Wireframe do software para apresentação pro cliente.| Alta
-|  01    | *   | Criação do Banco de dados. | Criar o banco de dados do projeto. | Alta
-|  01    | *   | Criação do Protótipo navegável. | Realizar um Protótipo navegável do software. | Alta
-|  01    | *   | Documentação do software. | Realizar a documentação do software. | Alta
-|  01    | *   | Criação da arquitetura básica e configuração dos arquivos. | Criação de CRUD básico. | Alta
+| Sprint | US  | Tarefa                                                       | Descrição                                                   | Prioridade |
+|:------:|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|:-----------|
+|  01    | *   | Criação do Mockup.                                           | Realizar o Wireframe do software para apresentação pro cliente. | Alta
+|  01    | *   | Criação do Banco de dados.                                   | Criar o banco de dados do projeto.                              | Alta
+|  01    | *   | Criação do Protótipo navegável.                              | Realizar um Protótipo navegável do software.                    | Alta
+|  01    | *   | Documentação do software.                                    | Realizar a documentação do software.                            | Alta
+|  01    | *   | Criação da arquitetura básica e configuração dos arquivos.   | Criação de CRUD básico.                                         | Alta
 
-## 📉 Burndown das Sprints <a id="burndown"></a>
+## 📉 Burndown 1
+
+## Mockups - Telas de login, listagem de usuários e validação de produto
+<div>
+      <img src="doc/img/TelaLogin.png" />
+      <img src="doc/img/ListaUsers.png" />
+      <img src="doc/img/Validacao.png" />
+</div>
 
 <h3> Sprint 1: [12/03/23-31/03/23]</h3> 
 

@@ -101,7 +101,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 ## ❓Como Utilizar <a id="comousar"></a>
 
 ## 🗂️ Sprints <a id="backlogs"></a>
-## Sprint 1 <a id="sprint1"></a>
+Sprint 1 <a id="sprint1"></a>
 
 | Sprint | US  | Tarefa                                                       | Descrição                                                   | Prioridade |
 |:------:|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|:-----------|
@@ -111,10 +111,9 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 |  01    | *   | Documentação do software.                                    | Realizar a documentação do software.                            | Alta
 |  01    | *   | Criação da arquitetura básica e configuração dos arquivos.   | Criação de CRUD básico.                                         | Alta
 
-## 📉 Burndown 1
+📉 Burndown 1
 
-# Mockups
-# Demonstração
+Mockups
 <div align="center">
       <h4>Tela de login</h4>
       <img src="doc/img/TelaLoginSp1.png" width="500"/>
@@ -124,7 +123,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
       <img src="doc/img/ValidacaoSp1.png" width="500"/>
 </div>
 
-# Demonstração - Gifs
+Demonstração - Gifs
 <div align="center">
       <h4>Visão do Admin</h4>
       <img src="doc/gifs/AdminSp1.gif" width="800"/>

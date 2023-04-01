@@ -127,11 +127,11 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 # Demonstração - Gifs
 <div align="center">
       <h4>Visão do Admin</h4>
-      <img src="doc/gifs/AdminSp1.gif" width="500"/>
+      <img src="doc/gifs/AdminSp1.gif" width="800"/>
       <h4>Visão do Recebedor</h4>
-      <img src="doc/img/RecebedorSp1.gif" width="500"/>
+      <img src="doc/gifs/RecebedorSp1.gif" width="800"/>
       <h4>Visão do Analista</h4>
-      <img src="doc/img/AnalistaSp1.gif" width="500"/>
+      <img src="doc/gifs/AnalistaSp1.gif" width="800"/>
       <h4>Visão do Aprovador</h4>
       
 </div>

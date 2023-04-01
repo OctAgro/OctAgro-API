@@ -101,7 +101,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 ## ❓Como Utilizar <a id="comousar"></a>
 
 ## 🗂️ Sprints <a id="backlogs"></a>
-Sprint 1 <a id="sprint1"></a>
+<h2>Sprint 1 <a id="sprint1"></a></h2>
 
 | Sprint | US  | Tarefa                                                       | Descrição                                                   | Prioridade |
 |:------:|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|:-----------|
@@ -111,27 +111,27 @@ Sprint 1 <a id="sprint1"></a>
 |  01    | *   | Documentação do software.                                    | Realizar a documentação do software.                            | Alta
 |  01    | *   | Criação da arquitetura básica e configuração dos arquivos.   | Criação de CRUD básico.                                         | Alta
 
-📉 Burndown 1
+<h2>📉 Burndown 1</h2>
 
-Mockups
+<h2>Mockups</h2>
 <div align="center">
-      <h4>Tela de login</h4>
+      <h3>Tela de login</h3>
       <img src="doc/img/TelaLoginSp1.png" width="500"/>
-      <h4>Listagem de usuários</h4>
+      <h3>Listagem de usuários</h3>
       <img src="doc/img/ListaUsersSp1.png" width="500"/>
-      <h4>Tela de Validação de produto</h4>
+      <h3>Tela de Validação de produto</h3>
       <img src="doc/img/ValidacaoSp1.png" width="500"/>
 </div>
 
-Demonstração - Gifs
+<h2>Demonstração - Gifs</h2>
 <div align="center">
-      <h4>Visão do Admin</h4>
+      <h3>Visão do Admin</h3>
       <img src="doc/gifs/AdminSp1.gif" width="800"/>
-      <h4>Visão do Recebedor</h4>
+      <h3>Visão do Recebedor</h3>
       <img src="doc/gifs/RecebedorSp1.gif" width="800"/>
-      <h4>Visão do Analista</h4>
+      <h3>Visão do Analista</h3>
       <img src="doc/gifs/AnalistaSp1.gif" width="800"/>
-      <h4>Visão do Aprovador</h4>
+      <h3>Visão do Aprovador</h3>
       
 </div>
 

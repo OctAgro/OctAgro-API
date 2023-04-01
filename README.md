@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 # Aprendizagem por Projetos Integrados - Sistema ERP
 
 ## FATEC -  Profº Jessen Vidal, SJC - 2º Semestre DSM - 2023/1
@@ -114,24 +117,40 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 <h2>📉 Burndown 1</h2>
 
 <h2>Mockups</h2>
-<div align="center">
+<!-- <div align="center">
       <h3>Tela de login</h3>
       <img src="doc/img/TelaLoginSp1.png" width="500"/>
       <h3>Listagem de usuários</h3>
       <img src="doc/img/ListaUsersSp1.png" width="500"/>
       <h3>Tela de Validação de produto</h3>
       <img src="doc/img/ValidacaoSp1.png" width="500"/>
+</div> -->
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="doc/img/TelaLoginSp1.png" alt="Imagem 1" />
+    </div>
+    <div class="swiper-slide">
+      <img src="doc/img/ListaUsersSp1.png" alt="Imagem 2" />
+    </div>
+    <div class="swiper-slide">
+      <img src="doc/img/ValidacaoSp1.png" alt="Imagem 3" />
+    </div>
+  </div>
+  <div class="swiper-pagination"></div>
 </div>
+
 
 <h2>Demonstração - Gifs</h2>
 <div align="center">
       <h3>Visão do Admin</h3>
-      <img src="doc/gifs/AdminSp1.gif" width="800"/>
+      <img src="doc/gifs/sprint1/AdminSp1.gif" width="800"/>
       <h3>Visão do Recebedor</h3>
-      <img src="doc/gifs/RecebedorSp1.gif" width="800"/>
+      <img src="doc/gifs/sprint1/RecebedorSp1.gif" width="800"/>
       <h3>Visão do Analista</h3>
-      <img src="doc/gifs/AnalistaSp1.gif" width="800"/>
+      <img src="doc/gifs/sprint1/AnalistaSp1.gif" width="800"/>
       <h3>Visão do Aprovador</h3>
+      <img src="doc/gifs/sprint1/AprovadorSp1.gif" width="800"/>
       
 </div>
 
@@ -149,3 +168,13 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 | Jean Faria   | Desenvolvedor | <a href="https://github.com/jeejinf"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href="https://www.linkedin.com/in/jean-faria-5a4b201b9/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> 
 | Jonas Ribeiro   | Desenvolvedor | <a href="https://github.com/jonasrsribeiro"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href="https://www.linkedin.com/in/jonasrsribeiro/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> 
 | Thiago Zani   | Desenvolvedor | <a href="https://github.com/zani19"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a> | <a href="https://www.linkedin.com/in/thiago-zani-1b8503249/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> 
+
+<script>
+var swiper = new Swiper('.swiper-container', {
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});
+</script>

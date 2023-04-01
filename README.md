@@ -100,8 +100,6 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 
 ## ❓Como Utilizar <a id="comousar"></a>
 
-## 💡Demonstração do programa <a id="demonstracao"></a>
-
 ## 🗂️ Sprints <a id="backlogs"></a>
 ## Sprint 1 <a id="sprint1"></a>
 
@@ -115,14 +113,27 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 
 ## 📉 Burndown 1
 
-## Mockups
+# Mockups
+# Demonstração
 <div align="center">
       <h4>Tela de login</h4>
-      <img src="doc/img/TelaLogin.png" width="500"/>
+      <img src="doc/img/TelaLoginSp1.png" width="500"/>
       <h4>Listagem de usuários</h4>
-      <img src="doc/img/ListaUsers.png" width="500"/>
+      <img src="doc/img/ListaUsersSp1.png" width="500"/>
       <h4>Tela de Validação de produto</h4>
-      <img src="doc/img/Validacao.png" width="500"/>
+      <img src="doc/img/ValidacaoSp1.png" width="500"/>
+</div>
+
+# Demonstração - Gifs
+<div align="center">
+      <h4>Visão do Admin</h4>
+      <img src="doc/gifs/AdminSp1.gif" width="500"/>
+      <h4>Visão do Recebedor</h4>
+      <img src="doc/img/RecebedorSp1.gif" width="500"/>
+      <h4>Visão do Analista</h4>
+      <img src="doc/img/AnalistaSp1.gif" width="500"/>
+      <h4>Visão do Aprovador</h4>
+      
 </div>
 
 <h3> Sprint 1: [12/03/23-31/03/23]</h3> 

@@ -60,7 +60,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 
 | Sprint | US  | Tarefa  | Descrição | Prioridade |
 |:------:|:---:|:--------|:----------|:-----------|
-|  01    | *   | Criação do Wireframe.|Realizar o Wireframe do software para apresentação pro cliente.| Alta
+|  01    | *   | Criação do Mockup.|Realizar o Mockup do software para apresentação pro cliente.| Alta
 |  01    | *   | Criação do Banco de dados. | Criar o banco de dados do projeto. | Alta
 |  01    | *   | Criação do Protótipo navegável. | Realizar um Protótipo navegável do software. | Alta
 |  01    | *   | Documentação do software. | Realizar a documentação do software. | Alta
@@ -116,11 +116,11 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 <h2>Mockups</h2>
 <div align="center">
       <h3>Tela de login</h3>
-      <img src="doc/img/TelaLoginSp1.png" width="500"/>
+      <img src="doc/img/TelaLoginSp1.png" width="800"/>
       <h3>Listagem de usuários</h3>
-      <img src="doc/img/ListaUsersSp1.png" width="500"/>
+      <img src="doc/img/ListaUsersSp1.png" width="800"/>
       <h3>Tela de Validação de produto</h3>
-      <img src="doc/img/ValidacaoSp1.png" width="500"/>
+      <img src="doc/img/ValidacaoSp1.png" width="800"/>
 </div>
 
 <h2>Demonstração - Gifs</h2>
@@ -134,6 +134,21 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
       <h3>Visão do Aprovador</h3>
       <img src="doc/gifs/sprint1/AprovadorSp1.gif" width="800"/>
       
+</div>
+
+<h3>Modelo Entidade Relacionamento</h3>
+<div align="center">
+      <img src="doc/img/MERbd.jpeg" width="800"/>
+</div>
+
+<h2>Diagrama Entidade Relacionamento</h2>
+<div align="center">
+      <img src="doc/img/DERbd.jpeg" width="800"/>
+</div>
+
+<h2>BurnDown</h2>
+<div align="center">
+      <img src="doc/img/BurnDownSp1.png" width="800"/>
 </div>
 
 <h3> Sprint 1: [12/03/23-31/03/23]</h3> 

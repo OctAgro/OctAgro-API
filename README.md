@@ -101,7 +101,15 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 ## ❓Como Utilizar <a id="comousar"></a>
 
 ## 🗂️ Sprints <a id="backlogs"></a>
-<h2>Sprint 1 <a id="sprint1"></a></h2>
+
+<p align="center">
+      <h2>Sprint 1 <a id="sprint1"></a></h2>
+      <a href="#Burn1">BurnDown</a>    
+      <a href="#Mockups1">Mockups</a>  
+      <a href="#Demo1">Mockups</a>
+      <a href="#MER1">MER</a>  
+      <a href="#DER1">MER</a>  
+</p>
 
 | Sprint | US  | Tarefa                                                       | Descrição                                                   | Prioridade |
 |:------:|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|:-----------|
@@ -111,9 +119,12 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 |  01    | *   | Documentação do software.                                    | Realizar a documentação do software.                            | Alta
 |  01    | *   | Criação da arquitetura básica e configuração dos arquivos.   | Criação de CRUD básico.                                         | Alta
 
-<h2>📉 Burndown 1</h2>
+<h2>📉 Burndown 1<a id="Burn1"></a></h2>
+<div align="center">
+      <img src="doc/img/BurnDownSp1.png" width="800"/>
+</div>
 
-<h2>Mockups</h2>
+<h2>Mockups<a id="Mockups1"></a></h2>
 <div align="center">
       <h3>Tela de login</h3>
       <img src="doc/img/TelaLoginSp1.png" width="800"/>
@@ -123,7 +134,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
       <img src="doc/img/ValidacaoSp1.png" width="800"/>
 </div>
 
-<h2>Demonstração - Gifs</h2>
+<h2>Demonstração - Gifs<a id="Demo1"></a></h2>
 <div align="center">
       <h3>Visão do Admin</h3>
       <img src="doc/gifs/sprint1/AdminSp1.gif" width="800"/>
@@ -133,22 +144,16 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
       <img src="doc/gifs/sprint1/AnalistaSp1.gif" width="800"/>
       <h3>Visão do Aprovador</h3>
       <img src="doc/gifs/sprint1/AprovadorSp1.gif" width="800"/>
-      
 </div>
 
-<h3>Modelo Entidade Relacionamento</h3>
+<h3>Modelo Entidade Relacionamento<a id="MER1"></a></h3>
 <div align="center">
       <img src="doc/img/MERbd.jpeg" width="800"/>
 </div>
 
-<h2>Diagrama Entidade Relacionamento</h2>
+<h2>Diagrama Entidade Relacionamento<a id="DER1"></a></h2>
 <div align="center">
       <img src="doc/img/DERbd.jpeg" width="800"/>
-</div>
-
-<h2>BurnDown</h2>
-<div align="center">
-      <img src="doc/img/BurnDownSp1.png" width="800"/>
 </div>
 
 <h3> Sprint 1: [12/03/23-31/03/23]</h3> 

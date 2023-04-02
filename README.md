@@ -104,10 +104,10 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 
 <p align="center">
       <h2>Sprint 1 <a id="sprint1"></a></h2>
-      <a href="#Burn1">BurnDown</a>    
-      <a href="#Mockups1">Mockups</a>  
-      <a href="#Demo1">Mockups</a>
-      <a href="#MER1">MER</a>  
+      <a href="#Burn1">BurnDown</a>   |
+      <a href="#Mockups1">Mockups</a>  |
+      <a href="#Demo1">Demonstração</a>|
+      <a href="#MER1">MER</a>  |
       <a href="#DER1">MER</a>  
 </p>
 

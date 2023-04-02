@@ -9,20 +9,23 @@
 <hr>
 
 <p align="center">
-<a href="#API">Aprendizagem por Projetos Integrados</a> •
- <a href="#sobre">Sobre</a> •
- <a href="#tecnologias">Tecnologias utilizadas</a> •
- <a href="#comousar">Como Utilizar</a> • 
- <a href="#demonstracao">Demonstração</a> • 
- <a href="#userstories">User Stories</a> • 
- <a href="#backlogeral">Backlog do produto</a> • 
- <a href="#backlogs">Sprints</a> • 
- <a href="#equipe">Equipe</a> • 
+      <a href="#API">Aprendizagem por Projetos Integrados</a> •
+      <a href="#sobre">Sobre</a> •
+      <a href="#tecnologias">Tecnologias utilizadas</a> •
+      <a href="#comousar">Como Utilizar</a> • 
+      <a href="#demonstracao">Demonstração</a> • 
+      <a href="#userstories">User Stories</a> • 
+      <a href="#backlogeral">Backlog do produto</a> • 
+      <a href="#equipe">Equipe</a> • 
 </p>
 
-<h3 align="center">Sprints</h3>
+<h3 align="center"><a href="#sprint1">Sprint 1</a></h3>
 <p align="center">
-      <a href="#sprint1">Sprint 1</a>    
+      <a href="#burn1">BurnDown</a>   |
+      <a href="#mockups1">Mockups</a>  |
+      <a href="#demo1">Demonstração</a>|
+      <a href="#mer1">MER</a>  |
+      <a href="#der1">DER</a>    
 </p>
 
 ## Aprendizagem por Projetos Integrados <a id="API"></a>
@@ -60,7 +63,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 
 | Sprint | US  | Tarefa  | Descrição | Prioridade |
 |:------:|:---:|:--------|:----------|:-----------|
-|  01    | *   | Criação do Wireframe.|Realizar o Wireframe do software para apresentação pro cliente.| Alta
+|  01    | *   | Criação do Mockup.|Realizar o Mockup do software para apresentação pro cliente.| Alta
 |  01    | *   | Criação do Banco de dados. | Criar o banco de dados do projeto. | Alta
 |  01    | *   | Criação do Protótipo navegável. | Realizar um Protótipo navegável do software. | Alta
 |  01    | *   | Documentação do software. | Realizar a documentação do software. | Alta
@@ -101,6 +104,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 ## ❓Como Utilizar <a id="comousar"></a>
 
 ## 🗂️ Sprints <a id="backlogs"></a>
+
 <h2>Sprint 1 <a id="sprint1"></a></h2>
 
 | Sprint | US  | Tarefa                                                       | Descrição                                                   | Prioridade |
@@ -111,28 +115,41 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 |  01    | *   | Documentação do software.                                    | Realizar a documentação do software.                            | Alta
 |  01    | *   | Criação da arquitetura básica e configuração dos arquivos.   | Criação de CRUD básico.                                         | Alta
 
-<h2>📉 Burndown 1</h2>
-
-<h2>Mockups</h2>
+<h2>📉 Burndown 1<a id="burn1"></a></h2>
 <div align="center">
-      <h3>Tela de login</h3>
-      <img src="doc/img/TelaLoginSp1.png" width="500"/>
-      <h3>Listagem de usuários</h3>
-      <img src="doc/img/ListaUsersSp1.png" width="500"/>
-      <h3>Tela de Validação de produto</h3>
-      <img src="doc/img/ValidacaoSp1.png" width="500"/>
+      <img src="doc/img/BurnDownSp1.png" width="800"/>
 </div>
 
-<h2>Demonstração - Gifs</h2>
+<h2>Mockups<a id="mockups1"></a></h2>
+<div align="center">
+      <h3>Tela de login</h3>
+      <img src="doc/img/TelaLoginSp1.png" width="800"/>
+      <h3>Listagem de usuários</h3>
+      <img src="doc/img/ListaUsersSp1.png" width="800"/>
+      <h3>Tela de Validação de produto</h3>
+      <img src="doc/img/ValidacaoSp1.png" width="800"/>
+</div>
+
+<h2>Demonstração - Gifs<a id="Demo1"></a></h2>
 <div align="center">
       <h3>Visão do Admin</h3>
-      <img src="doc/gifs/AdminSp1.gif" width="800"/>
+      <img src="doc/gifs/sprint1/AdminSp1.gif" width="800"/>
       <h3>Visão do Recebedor</h3>
-      <img src="doc/gifs/RecebedorSp1.gif" width="800"/>
+      <img src="doc/gifs/sprint1/RecebedorSp1.gif" width="800"/>
       <h3>Visão do Analista</h3>
-      <img src="doc/gifs/AnalistaSp1.gif" width="800"/>
+      <img src="doc/gifs/sprint1/AnalistaSp1.gif" width="800"/>
       <h3>Visão do Aprovador</h3>
-      
+      <img src="doc/gifs/sprint1/AprovadorSp1.gif" width="800"/>
+</div>
+
+<h3>Modelo Entidade Relacionamento<a id="mer1"></a></h3>
+<div align="center">
+      <img src="doc/img/MERbd.jpeg" width="800"/>
+</div>
+
+<h2>Diagrama Entidade Relacionamento<a id="der1"></a></h2>
+<div align="center">
+      <img src="doc/img/DERbd.jpeg" width="800"/>
 </div>
 
 <h3> Sprint 1: [12/03/23-31/03/23]</h3> 

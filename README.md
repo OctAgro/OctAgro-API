@@ -9,20 +9,25 @@
 <hr>
 
 <p align="center">
-<a href="#API">Aprendizagem por Projetos Integrados</a> •
- <a href="#sobre">Sobre</a> •
- <a href="#tecnologias">Tecnologias utilizadas</a> •
- <a href="#comousar">Como Utilizar</a> • 
- <a href="#demonstracao">Demonstração</a> • 
- <a href="#userstories">User Stories</a> • 
- <a href="#backlogeral">Backlog do produto</a> • 
- <a href="#backlogs">Sprints</a> • 
- <a href="#equipe">Equipe</a> • 
+      <a href="#API">Aprendizagem por Projetos Integrados</a> •
+      <a href="#sobre">Sobre</a> •
+      <a href="#tecnologias">Tecnologias utilizadas</a> •
+      <a href="#comousar">Como Utilizar</a> • 
+      <a href="#demonstracao">Demonstração</a> • 
+      <a href="#userstories">User Stories</a> • 
+      <a href="#backlogeral">Backlog do produto</a> • 
+      <a href="#backlogs">Sprints</a> • 
+      <a href="#equipe">Equipe</a> • 
 </p>
 
 <h3 align="center">Sprints</h3>
 <p align="center">
-      <a href="#sprint1">Sprint 1</a>    
+      <a href="#sprint1">Sprint 1</a>
+      <a href="#Burn1">BurnDown</a>   |
+      <a href="#Mockups1">Mockups</a>  |
+      <a href="#Demo1">Demonstração</a>|
+      <a href="#MER1">MER</a>  |
+      <a href="#DER1">DER</a>    
 </p>
 
 ## Aprendizagem por Projetos Integrados <a id="API"></a>
@@ -102,14 +107,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 
 ## 🗂️ Sprints <a id="backlogs"></a>
 
-<p align="center">
-      <h2>Sprint 1 <a id="sprint1"></a></h2>
-      <a href="#Burn1">BurnDown</a>   |
-      <a href="#Mockups1">Mockups</a>  |
-      <a href="#Demo1">Demonstração</a>|
-      <a href="#MER1">MER</a>  |
-      <a href="#DER1">MER</a>  
-</p>
+<h2>Sprint 1 <a id="sprint1"></a></h2>
 
 | Sprint | US  | Tarefa                                                       | Descrição                                                   | Prioridade |
 |:------:|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|:-----------|

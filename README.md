@@ -152,7 +152,7 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
       <img src="doc/img/DERbd.jpeg" width="800"/>
 </div>
 
-<h3> Sprint 1: [12/03/23-31/03/23]</h3> 
+<h3> Sprint 1: [13/03/23-02/04/23]</h3> 
 
 ## :mortar_board: Equipe <a id="equipe"></a>
 

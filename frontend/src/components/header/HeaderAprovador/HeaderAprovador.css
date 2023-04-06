@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gotham";
+}
+
+#app {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  min-height: 100vh;
+}
+
+main .inner {
+  height: 100%;
+  background-color: #f7f1e5;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+main .cabecalho {
+    padding: 5rem 60rem 5rem 60rem;
+    margin: 4rem 3rem;
+    border: 0.1rem solid #000000;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    position: absolute;
+}
+
+.inner {
+  min-height: 100vh;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  width: 280px;
+  height: 105px;
+  left: 258px;
+  top: 9px;
+  background: #e7e0d1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-weight: 600;
+  margin-top: -80rem;
+}
+
+.top-numbers {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.numbers {
+  width: 280px;
+  height: 105px;
+  left: 258px;
+  top: 9px;
+  margin-top: -180rem;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-weight: 600;
+}
+
+/* .msg {
+  position: absolute;
+  width: 607px;
+  height: 273px;
+  left: 82rem;
+  top: 309px;
+  text-align: center;
+  background: #e7e0d1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.msg p {
+  margin-top: 5rem;
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.msg .warning {
+  font-size: 10rem;
+}
+ */

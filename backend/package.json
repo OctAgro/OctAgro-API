@@ -2,12 +2,13 @@
   "name": "api-2sem---octagro",
   "version": "1.0.0",
   "description": "API RESTful desenvolvido através da disciplina de Aprendizado de Projetos Integrados (API) pela FATEC São José dos Campos utilizando metodologia ágil e as tecnologias MySQL, Express, Node.JS e React.",
-  "main": "index.js",
+  "main": "backend/index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js localhost 3000"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,9 @@
     "@typescript-eslint/parser": "^5.56.0",
     "eslint": "^8.36.0",
     "express": "^4.18.2",
-    "react": "^18.2.0"
+    "mysql2": "^3.2.0",
+    "nodemon": "^2.0.22",
+    "react": "^18.2.0",
+    "sequelize": "^6.30.0"
   }
 }

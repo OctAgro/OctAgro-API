@@ -23,11 +23,19 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
     "eslint": "^8.36.0",
     "express": "^4.18.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
     "mysql2": "^3.2.0",
     "nodemon": "^2.0.22",
     "react": "^18.2.0",
-    "sequelize": "^6.30.0"
+    "sequelize": "^6.30.0",
+    "session-file-store": "^1.5.0"
   }
 }

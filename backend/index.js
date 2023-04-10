@@ -5,6 +5,11 @@ const app = express()
 
 app.use(express.json())
 
+//Rotas - invocando depois usando a rota
+const AprovadorRotas = require('./routes/AprovadorRoutes')
+
+app.use('/aprovador', AprovadorRotas)
+
 //Conexao com Banco de Dados
 conexao.sync().then(() => {
     app.listen(3000)

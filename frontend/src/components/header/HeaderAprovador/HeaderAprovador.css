@@ -1,95 +1,50 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Gotham";
+.external {
+  font-family: 'Gotham Black';
+  display: inline-flex;
+  height: 30%;
 }
 
-#app {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  min-height: 100vh;
-}
-
-main .inner {
-  height: 100%;
-  background-color: #f7f1e5;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-main .cabecalho {
-    padding: 5rem 60rem 5rem 60rem;
-    margin: 4rem 3rem;
-    border: 0.1rem solid #000000;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-    position: absolute;
-}
-
-.inner {
-  min-height: 100vh;
+.clipboard-a,
+.clipboard-b {
   display: flex;
-  gap: 30px;
-  justify-content: center;
   align-items: center;
-}
-
-.item {
-  width: 280px;
-  height: 105px;
-  left: 258px;
-  top: 9px;
-  background: #e7e0d1;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  font-size: 20px;
-  display: flex;
   justify-content: center;
-  align-items: flex-end;
-  font-weight: 600;
-  margin-top: -80rem;
+  height: 35%;
+  border-radius: 15px;
+  background-color: rgba(231, 224, 209, 1);
+  -webkit-box-shadow: 5px 0px 10px 1px #000000;
+  box-shadow: 2px 0px 5px 1px #000000;
 }
 
-.top-numbers {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
+.clipboard-a {
+  margin-right: 3rem;
 }
 
-.numbers {
-  width: 280px;
-  height: 105px;
-  left: 258px;
-  top: 9px;
-  margin-top: -180rem;
+.clipboard-b {
+  margin-left: 3rem;
+}
+
+.left-side-a,
+.left-side-b {
   font-size: 5rem;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-end;
-  font-weight: 600;
 }
 
-/* .msg {
-  position: absolute;
-  width: 607px;
-  height: 273px;
-  left: 82rem;
-  top: 309px;
+.right-side-a, .right-side-b {
   text-align: center;
-  background: #e7e0d1;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  font-size: 1.7rem;
 }
 
-.msg p {
-  margin-top: 5rem;
-  font-size: 2.4rem;
-  font-weight: 600;
+.right-side-a h2,
+.right-side-b h2 {
+  display: inline-block;
+  margin-left: 10px;
 }
 
-.msg .warning {
-  font-size: 10rem;
+.right-side-a h3,
+.right-side-b h3 {
+  margin: 0;
+  font-size: 16px;
 }
- */

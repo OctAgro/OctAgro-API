@@ -1,4 +1,4 @@
-nav {
+.navbar {
   position: relative;
   min-width: 200px;
   max-width: 20vw;
@@ -10,16 +10,21 @@ nav {
   box-shadow: 5px 0px 10px 1px #000000;
 }
 
-li {
+.action-items {
   align-items: center;
   justify-content: center;
   display: flex;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+/* @media screen and (max-width: 1400px) {
+  .navbar {
+    display: none;
+  }
+  
+  .menu-hamburguer {
+    display: block;
+  }
+} */
 
 .top-items {
   background-color: rgba(247, 241, 229, 0.7);
@@ -34,6 +39,7 @@ a {
 }
 
 .textoLogo {
+  font-family: 'Gotham Black';
   font-size: 2rem;
   color: #f7f1e5;
   align-self: flex-end;
@@ -44,6 +50,7 @@ a {
   width: 100%;
   position: absolute;
   bottom: 0;
+  text-align: center;
 }
 
 .topSidebar {
@@ -54,15 +61,21 @@ a {
 }
 
 .top-items:hover , .sair:hover {
-  background-color: rgba(247, 241, 229, 0.5);
+  background-color: rgba(247, 241, 229, 0.4);
   transition: 0.4s;
 }
 
 .sair {
-  background-color: rgba(247, 241, 229, 0.7);
+  padding: 0.5rem 0;
+  background-color: rgba(247, 241, 229, 0.5);
   border-top: 0.1rem solid #000000;
   font-weight: 600;
   cursor: pointer;
+  font-family: 'Gotham Black';
+}
+
+.sairTexto {
+  padding-left: 0.5rem;
 }
 
 .icon {
@@ -124,6 +137,7 @@ a {
 .nomeUsuario {
   display: inline;
   font-size: 1.5rem;
+  font-family: 'Gotham Black';
 }
 
 .funcaoUsuario {
@@ -132,6 +146,8 @@ a {
 }
 
 .relatorio {
+  font-family: 'Gotham Black';
+  padding: 1rem 0;
   display: block;
   order: 2;
   flex-grow: 1;

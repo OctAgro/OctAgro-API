@@ -2,14 +2,16 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import App from "./App"
+import './index.css'
+
+import { Login } from "./pages/Login"
 import { HomeAprovador } from "./pages/aprovador/HomeAprovador/HomeAprovador"
 import { RelatorioAprovador } from "./pages/aprovador/RelatorioAprovador/RelatorioAprovador"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Login />,
   },
   {
     path: "/aprovador/home",

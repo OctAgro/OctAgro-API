@@ -1,5 +1,6 @@
 import React from "react"
 import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador"
+import "./RelatorioAprovador.css";
 
 export const RelatorioAprovador = () => {
   return (

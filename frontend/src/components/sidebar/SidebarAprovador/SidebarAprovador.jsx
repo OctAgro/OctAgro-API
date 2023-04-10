@@ -1,7 +1,7 @@
 import React from "react"
 
 import Logo from "../../../assets/Logo.png"
-import UserImg from "../../../assets/placeholder-img-teste.png"
+import UserImg from "../../../assets/UserImg.webp"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -11,15 +11,15 @@ import "./SidebarAprovador.css"
 
 export const SidebarAprovador = () => {
   return (
-    <nav>
+    <nav className="navbar">
       <a href="/aprovador/home">
         <div className="topSidebar">
-            <img className="logo" src={Logo} alt="Logo da Octoplus" />
+            <img className="logo" src={Logo} alt="Logo da OctAgro" />
             <h3 className="textoLogo">OCTAGRO</h3>
         </div>
       </a>
       <ul className="top-items">
-        <li>
+        <li className="action-items">
           <FontAwesomeIcon className="icon" icon={faReceipt} />
           <a className="relatorio">
             Relatórios <br /> pendentes
@@ -48,7 +48,7 @@ export const SidebarAprovador = () => {
         <ul className="sair">
           <li>
             <FontAwesomeIcon icon={faRightToBracket} />
-            <a href="/">Sair</a>
+            <a className="sairTexto" href="/">Sair</a>
           </li>
         </ul>
       </div>

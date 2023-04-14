@@ -98,10 +98,39 @@ module.exports = class UsuarioControllers {
         try {
             await Usuario.create(usuario)
             // req.json('message', 'Cadastro realizado com sucesso!')
-            return res.json({message: "Successfully Registered", status: 201}).status(201)
+            return res.json({message: "Sucesso ao criar usuário!", status: 201}).status(201)
             //res.redirect('/')
         } catch (error) {
             return res.json(error).status(500)
         }
+    }
+
+    //função de logar
+    static async loginPost(req, res) {
+        const {email, senha} = req.body
+
+        if (!email) {
+            return res.json({message: "Por favor, digite seu e-mail!", status: 500}).status(500)
+        }
+
+        else if (!senha) {
+            return res.json({message: "Por favor, digite sua senha!", status: 500}).status(500)
+        }
+
+        //checar se usuário existe
+        const checarUsuario = await Usuario.findOne({where: {email: email}})
+
+        if (!checarUsuario) {
+            return res.json({message: "Usuário não encontrado!", status: 500}).status(500)
+        }
+
+        const checarSenha = bcrypt.compareSync(senha, checarUsuario.senha)
+
+        if (!checarSenha) {
+            return res.json({message: "A senha digitada está inválida!", status: 500}).status(500)
+        }
+
+        res.json({message: "Login feito com sucesso!", status: 201}).status(201)
+
     }
 }

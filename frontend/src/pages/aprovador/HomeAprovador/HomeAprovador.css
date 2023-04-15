@@ -1,9 +1,0 @@
-.home {
-    display: flex;
-    height: 100vh;
-  }
-
-  .container-header {
-    margin: 0 auto;
-    justify-content: space-between;
-  }

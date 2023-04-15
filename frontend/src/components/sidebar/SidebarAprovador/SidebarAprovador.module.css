@@ -10,7 +10,7 @@
   box-shadow: 5px 0px 10px 1px #000000;
 }
 
-.action-items {
+.actionItems {
   align-items: center;
   justify-content: center;
   display: flex;
@@ -26,7 +26,7 @@
   }
 } */
 
-.top-items {
+.topItems {
   background-color: rgba(247, 241, 229, 0.7);
   border: solid #000000;
   border-width: 0.1rem 0 0.2rem 0;
@@ -46,7 +46,7 @@
   padding: 1rem 2rem;
 }
 
-.bot-items {
+.botItems {
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -60,7 +60,7 @@
   cursor: pointer;
 }
 
-.top-items:hover , .sair:hover {
+.topItems:hover , .sair:hover {
   background-color: rgba(247, 241, 229, 0.4);
   transition: 0.4s;
 }

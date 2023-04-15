@@ -1,4 +1,4 @@
-.fundo-login {
+.fundoLogin {
     background-image: url('../assets/img-background.png');
     background-color: #F5F5F5;
     background-size: cover;
@@ -16,23 +16,23 @@
   }
   
 
-.input-login {
+.inputLogin {
     margin: 1rem;
     padding: 0.8rem;
     font-size: 1rem;
 }
 
-.input-login-acessar {
+.inputLoginAcessar {
     margin: 1rem;
     padding: 1rem;
     font-size: 1.2rem;
 }
 
-.logo-top {
+.logoTop {
     margin-top: 1rem;
 }
 
-.box-login {
+.boxLogin {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -47,9 +47,10 @@
     box-shadow: 0px 0px 10px #999;
     text-align: center;
     border-radius: 8px;
+    padding-bottom: 1rem;
 }
 
-.bottom-box-login {
+.bottomBoxLogin {
     display: inline;
     padding: 0 1rem;
     user-select: none;
@@ -57,27 +58,28 @@
     font-size: 0.8rem;
 }
 
-.forgot-password {
+.forgotPassword {
     user-select: none;
     font-family: 'Gotham Black';
 }
 
-.forgot-password:hover {
+.forgotPassword:hover {
     color: #1d1d1d;
 }
 
 
-label {
+.label {
     font-size: 1rem;
     font-weight: bold;
-}
-
-#username-label,
-#password-label {
     font-family: 'Gotham Black';
 }
 
-.input-login {
+#usernameLabel,
+#passwordLabel {
+    font-family: 'Gotham Black';
+}
+
+.inputLogin {
     margin: 1rem 2rem;
     padding: 1rem 3rem;
     font-size: 0.8rem;
@@ -88,7 +90,7 @@ label {
     font-family: 'Gotham Medium';
 }
 
-.input-login-acessar {
+.inputLoginAcessar {
     margin: 1rem 2rem;
     padding: 1rem 3rem;
     font-size: 1.2rem;
@@ -98,17 +100,17 @@ label {
     font-family: 'Gotham Black';
 }
 
-.input-login-acessar:hover {
+.inputLoginAcessar:hover {
     background-color: rgba(255, 191, 0, 1);
     cursor: pointer;
 }
 
 #remember,
-#remember-label {
+#rememberLabel {
     cursor: pointer;
     margin-bottom: 1rem;
 }
 
-#remember-label:hover {
+#rememberLabel:hover {
     color: #1d1d1d;
 }

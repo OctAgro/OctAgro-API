@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import octagroTransparente from "../assets/octagroTransparente.png";
-import "./Login.css";
+import styles from "./Login.module.css";
 
 export const Login = () => {
   // USA MODULO 'JS-COOKIE' PARA LEMBRAR O USERNAME SE O USUARIO MARCAR A OPÇÃO DE 'LEMBRAR-ME'
@@ -28,21 +28,21 @@ export const Login = () => {
   };
 
   return (
-    <div className="fundo-login">
-      <div className="box-login">
+    <div className={styles.fundoLogin}>
+      <div className={styles.boxLogin}>
         <img
-          className="logo-top"
+          className={styles.logoTop}
           src={octagroTransparente}
           alt="Logo da OctAgro"
         />
-        <form className="forms-user">
+        <form className={styles.formsUser}>
           <div>
-            <label htmlFor="username" id="username-label">
+            <label htmlFor="username" id="username-label" className={styles.label}>
               Login:
             </label>
             <br />
             <input
-              className="input-login"
+              className={styles.inputLogin}
               type="text"
               id="username"
               name="username"
@@ -54,12 +54,12 @@ export const Login = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" id="password-label">
+            <label htmlFor="password" id="password-label" className={styles.label}>
               Senha:
             </label>
             <br />
             <input
-              className="input-login"
+              className={styles.inputLogin}
               type="password"
               id="password"
               name="password"
@@ -71,24 +71,24 @@ export const Login = () => {
             />
           </div>
           <input
-            className="input-login-acessar"
+            className={styles.inputLoginAcessar}
             type="submit"
             value="Acessar"
             onClick={handleValidation}
           />
         </form>
-        <div className="bottom-box-login">
+        <div className={styles.bottomBoxLogin}>
           <input
             type="checkbox"
             name="remember"
             id="remember"
             onChange={handleRemember}
           />
-          <label htmlFor="remember" id="remember-label">
+          <label htmlFor="remember" id="remember-label" className={styles.label}>
             Lembrar-me
           </label>
         </div>
-        <a className="forgot-password" href="">
+        <a className={styles.forgotPassword} href="">
           Esqueceu a senha?
         </a>
       </div>

@@ -1,14 +1,6 @@
-//const RelatorioAprovador = require('../models/Aprovador')
+const RelatorioAprovador = require('../models/RelatorioAprovador')
 
 module.exports = class AprovadorController {
-
-    static async getHome(req,res) {
-        res.json('Bem vindo, aprovador!')
-    }
-
-    static async postHome(req,res) {
-        res.json({messagem: 'Bem vindo a sua página, aprovador!'})
-    }
 
     static async aprovadorFinalMercadoria(req, res) {
         //trazendo as informações preenchidas pelo usuario Aprovador através do "req.body"
@@ -19,7 +11,8 @@ module.exports = class AprovadorController {
             checkboxInfoRecebedorReprovado,
             checkboxInfoAnalistaAprovado,
             checkboxInfoAnalistaReprovado,
-            textoRevisaoFinalAprovador } = req.body
+            textoRevisaoFinalAprovador,
+            statusFinalAprovacao } = req.body
 
         //checando se as checkboxs/caixas de seleção estão corretamente preenchidas
         const listaErros = []
@@ -51,9 +44,41 @@ module.exports = class AprovadorController {
         //verificando a lista de erros, se houver uma ou mais incidências, ele mostra o erro e seu status; se não tudo é aprovado
         if (listaErros.length > 0) {
             res.status(400).json({ erros: listaErros })
-        } else {
-            res.status(200).json({ mensagem: 'Certo!' })
         }
 
+        //Salvando dados na Tabela do Banco de Dados
+        const relatorioAprovador = new RelatorioAprovador({
+
+            doc_status: checkboxDocumentacaoProdutoAprovado, 
+            /* checkboxDocumentacaoProdutoReprovado, */
+            info_recebedor_status: checkboxInfoRecebedorAprovado,
+            /* checkboxInfoRecebedorReprovado, */
+            info_analista_status: checkboxInfoAnalistaAprovado,
+            /* checkboxInfoAnalistaReprovado, */
+            revisao_aprovador: textoRevisaoFinalAprovador,
+            status_final_aprovacao: statusFinalAprovacao
+        })
+
+        try {
+            const novoRelatorioAprovador = await relatorioAprovador.save()
+            res.status(201).json({mensagem: 'Relatório salvo com sucesso!', novoRelatorioAprovador})
+        } catch(erro) {
+            res.status(500).json({mensagem: erro})
+        }
     }
+
+    //Função de encontrar Relatório pelo Id
+    static async encontrarRelatorioPorId(req,res) {
+        const idRelatorio = req.params.id
+        const relatorioProcurado = await RelatorioAprovador.findByPk(idRelatorio)
+
+        if (!relatorioProcurado) {
+            res.status(422).json({mensagem: "Relatório não encontrado!"})
+        }
+
+        res.status(200).json({mensagem: relatorioProcurado})
+
+    }
+
+
 }

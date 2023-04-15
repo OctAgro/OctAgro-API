@@ -1,6 +1,8 @@
 const express = require('express')
 const conexao = require('./db/conexao')
 
+const RelatorioAprovadores = require('./models/RelatorioAprovador')
+
 const app = express()
 
 app.use(express.json())

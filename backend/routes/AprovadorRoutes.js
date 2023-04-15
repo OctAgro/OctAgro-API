@@ -3,10 +3,8 @@ const router = require('express').Router()
 const AprovadorController = require('../controllers/AprovadorController')
 
 //Todas as rotas do usuario aprovador
-router.get('/home', AprovadorController.getHome)
-router.post('/home', AprovadorController.postHome)
-router.post('/relatorio', AprovadorController.aprovadorFinalMercadoria)
-//router.post('/relatorios-pendentes')
-//router.post('/relatorios-pendentes/:id')
+router.post('/home', AprovadorController.aprovadorHomePage)
+router.post('/relatorios', AprovadorController.aprovadorFinalMercadoria)
+router.post('/relatorios/:id', AprovadorController.encontrarRelatorioPorId)
 
 module.exports = router

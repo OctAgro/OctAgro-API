@@ -7,19 +7,20 @@ const bodyParser = require('body-parser')
 const app = express()
 const RelatorioAprovadores = require('./models/RelatorioAprovador')
 
+//Rotas - invocando depois usando a rota
+const AprovadorRotas = require('./routes/AprovadorRoutes')
+const UsuarioRotas = require('./routes/UsuarioRoutes')
+
 //Body Parse
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
+//Usando Rotas
+app.use('/aprovador', AprovadorRotas)
+app.use('/usuario', UsuarioRotas)
+
 //mensagens com flash
 app.use(flash())
-
-//Rotas - invocando depois usando a rota
-const AprovadorRotas = require('./routes/AprovadorRoutes')
-const usuario = require('./routes/usuarioRoutes')
-
-app.use('/aprovador', AprovadorRotas)
-app.use('/usuario', usuario)
 
 //Conexao com Banco de Dados
 conexao.sync().then(() => {

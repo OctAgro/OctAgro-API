@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
-
 const db = require('../db/conexao')
+const Usuario = require('../models/Usuario')
 
 const RelatorioAprovadores = db.define('RelatorioAprovadores', {
     id_relatorio_aprovador: {
@@ -27,7 +27,7 @@ const RelatorioAprovadores = db.define('RelatorioAprovadores', {
     revisao_aprovador: {
         type: DataTypes.STRING,
         required: false,
-        allowNull: true
+        allowNull: false
     },
 
     status_final_aprovacao: {
@@ -36,5 +36,8 @@ const RelatorioAprovadores = db.define('RelatorioAprovadores', {
         allowNull: true
     }
 })
+
+//Criando relação entre tabela RelatorioAprovador e Usuario
+RelatorioAprovadores.belongsTo(Usuario, { foreignKey: 'id_usuario' })
 
 module.exports = RelatorioAprovadores

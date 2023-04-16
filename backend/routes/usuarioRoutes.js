@@ -1,12 +1,11 @@
-const express = require('express'),
-      router = express.Router()
+const router = require('express').Router()
 
-const usuarioController = require('../controllers/usuarioControllers')
+const UsuarioController = require('../controllers/UsuarioController')
 
 // router.get("/login", usuarioController.login)
-router.post("/loginPost", usuarioController.loginPost)
+router.post('/loginPost', UsuarioController.loginPost)
 // router.get("/registrarUsuario", usuarioController.registrarUsuario)
-router.post("/registrarUsuarioPost", usuarioController.registrarUsuarioPost)
+router.post('/registrarUsuarioPost', UsuarioController.registrarUsuarioPost)
 // router.get("/:id", usuarioController.buscarUsuario)
 // router.delete("/:id", usuarioController.deletarUsuario)
 // router.put("/atualizarUsuarioPost", usuarioController.atualizarUsuario)

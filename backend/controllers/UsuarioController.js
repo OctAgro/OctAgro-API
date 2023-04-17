@@ -1,4 +1,4 @@
-const Usuario = require('../models/usuario')
+const Usuario = require('../models/Usuario')
 
 const bcrypt = require('bcryptjs')
 
@@ -133,4 +133,5 @@ module.exports = class UsuarioControllers {
         res.json({message: "Login feito com sucesso!", status: 201}).status(201)
 
     }
+
 }

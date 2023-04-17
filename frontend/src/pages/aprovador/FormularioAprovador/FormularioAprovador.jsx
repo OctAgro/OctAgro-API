@@ -3,15 +3,15 @@ import React from "react";
 // importando os componentes
 import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador";
 import { HeaderAprovadorVoltar } from "../../../components/header/HeaderAprovadorVoltar/HeaderAprovadorVoltar";
-import { TabelaRelatorios } from "../../../components/TabelaRelatorios/TabelaRelatorios";
+import { FormAprovador } from "../../../components/FormAprovador/FormAprovador";
 
 // Imagem para simular o Icone do usuário
 import UserImg from "../../../assets/UserImg.webp";
 
-// importando o CSS do module.css
-import styles from "./RelatorioAprovador.module.css";
 
-export const RelatorioAprovador = () => {
+import styles from "./FormularioAprovador.module.css";
+
+export const FormularioAprovador = () => {
   return (
     <div className={styles.main}>
       <SidebarAprovador
@@ -21,14 +21,9 @@ export const RelatorioAprovador = () => {
       />
 
       <div className={styles.container}>
-        <HeaderAprovadorVoltar link="/aprovador/home" />
+      <HeaderAprovadorVoltar link="/aprovador/relatorio" />
         <div>
-          <TabelaRelatorios
-            numeroPedido="1001"
-            descricao="Café"
-            situacao="Aceito"
-            funcionario="Thiago Zani"
-          />
+          <FormAprovador numeroPedido="1001" nomeAnalista="Thiago Zani" />
         </div>
       </div>
     </div>

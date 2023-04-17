@@ -1,0 +1,50 @@
+.external {
+  font-family: 'Gotham Black';
+  display: flex;
+}
+
+
+.clipboardA,
+.clipboardB {
+  display: flex;
+  min-height: 70%;
+  border-radius: 15px;
+  background-color: rgba(231, 224, 209, 1);
+  -webkit-box-shadow: 5px 0px 10px 1px #000000;
+  box-shadow: 2px 0px 5px 1px #000000;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.clipboardB {
+  margin-left: 3rem;
+}
+
+.leftSideA,
+.leftSideB {
+  font-size: 5rem;
+  margin-right: 0.5rem;
+}
+
+.rightSideA, .rightSideB {
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+.rightSideA h2,
+.rightSideB h2 {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.rightSideA h3,
+.rightSideB h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  font-size: 3.5rem;
+}

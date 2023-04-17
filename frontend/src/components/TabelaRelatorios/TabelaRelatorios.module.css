@@ -1,0 +1,23 @@
+.table {
+    font-family: 'Gotham Black';
+}
+
+.tableBackground {
+    background-color: #E7E0D1;
+    padding: 1rem;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Gotham Black';
+    margin: 1rem;
+}
+
+.tableRow {
+    border: 1px solid black;
+}
+
+.tableData {
+    text-align: center;
+    border: 2px solid black;
+}

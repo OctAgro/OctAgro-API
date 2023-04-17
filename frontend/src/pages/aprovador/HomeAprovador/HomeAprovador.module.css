@@ -1,0 +1,10 @@
+.main {
+  display: flex;
+  height: 100vh;
+  background-color: #F7F1E5;
+}
+
+.containerHeader {
+  margin: 0 auto;
+  justify-content: space-between;
+}

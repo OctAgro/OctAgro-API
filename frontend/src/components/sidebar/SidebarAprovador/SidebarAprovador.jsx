@@ -1,5 +1,5 @@
 import React from "react"
-
+import { Link } from "react-router-dom"
 import Logo from "../../../assets/Logo.png"
 import UserImg from "../../../assets/UserImg.webp"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
@@ -12,18 +12,19 @@ import styles from "./SidebarAprovador.module.css"
 export const SidebarAprovador = () => {
   return (
     <nav className={styles.navbar}>
-      <a href="/aprovador/home">
+      <Link to="/aprovador/home">
         <div className={styles.topSidebar}>
-            <img className={styles.logo} src={Logo} alt="Logo da OctAgro" />
-            <h3 className={styles.textoLogo}>OCTAGRO</h3>
+          <img className={styles.logo} src={Logo} alt="Logo da OctAgro" />
+          <h3 className={styles.textoLogo}>OCTAGRO</h3>
         </div>
-      </a>
+      </Link>
       <ul className={styles.topItems}>
         <li className={styles.actionItems}>
           <FontAwesomeIcon className={styles.icon} icon={faReceipt} />
-          <a href="/aprovador/relatorio" className={styles.relatorio}>
+
+          <Link to="/aprovador/relatorio" className={styles.relatorio}>
             Relatórios <br /> pendentes
-          </a>
+          </Link>
         </li>
       </ul>
       <div className={styles.botItems}>
@@ -48,7 +49,9 @@ export const SidebarAprovador = () => {
         <ul className={styles.sair}>
           <li>
             <FontAwesomeIcon icon={faRightToBracket} />
-            <a className={styles.sairTexto} href="/">Sair</a>
+            <a className={styles.sairTexto} href="/">
+              Sair
+            </a>
           </li>
         </ul>
       </div>

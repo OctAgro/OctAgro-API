@@ -1,17 +1,18 @@
-import React from "react";
-import styles from "./HeaderAprovadorVoltar.module.css";
+import React from "react"
+import { Link } from "react-router-dom"
+import styles from "./HeaderAprovadorVoltar.module.css"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClipboard } from "@fortawesome/free-regular-svg-icons";
-import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClipboard } from "@fortawesome/free-regular-svg-icons"
+import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
 export const HeaderAprovadorVoltar = () => {
   return (
     <div className={styles.external}>
 
-      <a href="/aprovador/home">
+      <Link to="/aprovador/home" className={styles.arrow}>
         <FontAwesomeIcon icon={faCircleChevronLeft} className={styles.icon} />
-      </a>
+      </Link>
 
       <div className={styles.clipboardA}>
         <div className={styles.leftSideA}>
@@ -37,5 +38,5 @@ export const HeaderAprovadorVoltar = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

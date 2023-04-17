@@ -10,8 +10,20 @@
 }
 
 @media screen and (max-width: 375px) {
-    .logo-top {
-      width: 50%;
+    .logoTop {
+      width: 30%;
+    }
+  }
+
+@media screen and (max-height: 725px) {
+    .logoTop {
+      max-width: 50%;
+    }
+  }
+
+@media screen and (max-height: 650px) {
+    .logoTop {
+      max-width: 20%;
     }
   }
   
@@ -29,6 +41,7 @@
 }
 
 .logoTop {
+    width: 60%;
     margin-top: 1rem;
 }
 

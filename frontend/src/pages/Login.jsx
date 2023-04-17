@@ -19,9 +19,10 @@ export const Login = () => {
   const [password, setPassword] = useState("");
 
   // SCRIPT CRIADO PELO NOSSO CHEFE LEANDRO PARA VALIDAR OS CAMPOS (falta mesclar com o backend)
-  const handleValidation = (event) => {
-    if (username === "username" && password === "password") {
-      alert("Login efetuado com sucesso!");
+  const handleValidation = (e) => {
+    e.preventDefault
+    if (username === "aprovador" && password === "password") {
+      alert("Show!")
     } else {
       alert("Login ou senha incorretas! Tente de novo.");
     }

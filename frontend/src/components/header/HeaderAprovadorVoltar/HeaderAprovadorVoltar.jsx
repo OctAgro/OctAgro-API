@@ -11,12 +11,12 @@ export const HeaderAprovadorVoltar = (props) => {
     <div className={styles.external}>
 
       <Link to={props.link} className={styles.arrow}>
-        <FontAwesomeIcon icon={faCircleChevronLeft} className={styles.icon} />
+        <FontAwesomeIcon icon={faCircleChevronLeft} className={styles.iconArrow} />
       </Link>
 
       <div className={styles.clipboardA}>
         <div className={styles.leftSideA}>
-          <FontAwesomeIcon className="icon" icon={faClipboard} />
+          <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
         </div>
         <div className={styles.rightSideA}>
           <h2>0</h2>

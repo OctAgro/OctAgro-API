@@ -6,11 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClipboard } from "@fortawesome/free-regular-svg-icons"
 import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
-export const HeaderAprovadorVoltar = () => {
+export const HeaderAprovadorVoltar = (props) => {
   return (
     <div className={styles.external}>
 
-      <Link to="/aprovador/home" className={styles.arrow}>
+      <Link to={props.link} className={styles.arrow}>
         <FontAwesomeIcon icon={faCircleChevronLeft} className={styles.icon} />
       </Link>
 

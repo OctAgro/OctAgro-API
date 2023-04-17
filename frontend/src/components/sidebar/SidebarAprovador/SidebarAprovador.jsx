@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import Logo from "../../../assets/Logo.png"
-import UserImg from "../../../assets/UserImg.webp"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -9,7 +8,7 @@ import { faReceipt, faRightToBracket } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./SidebarAprovador.module.css"
 
-export const SidebarAprovador = () => {
+export const SidebarAprovador = (props) => {
   return (
     <nav className={styles.navbar}>
       <Link to="/aprovador/home">
@@ -37,13 +36,13 @@ export const SidebarAprovador = () => {
             />
             <img
               className={styles.fotoUsuario}
-              src={UserImg}
+              src={props.imagem}
               alt="Foto de perfil do usuário"
             />
           </div>
           <div className={styles.infoUsuario}>
-            <h3 className={styles.nomeUsuario}>Thiago Zani</h3>
-            <h4 className={styles.funcaoUsuario}>Aprovador</h4>
+            <h3 className={styles.nomeUsuario}>{props.nome}</h3>
+            <h4 className={styles.funcaoUsuario}>{props.funcao}</h4>
           </div>
         </ul>
         <ul className={styles.sair}>

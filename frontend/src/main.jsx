@@ -7,6 +7,7 @@ import './index.css'
 import { Login } from "./pages/Login"
 import { HomeAprovador } from "./pages/aprovador/HomeAprovador/HomeAprovador"
 import { RelatorioAprovador } from "./pages/aprovador/RelatorioAprovador/RelatorioAprovador"
+import { FormularioAprovador } from "./pages/aprovador/FormularioAprovador/FormularioAprovador"
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/aprovador/relatorio",
     element: <RelatorioAprovador />,
+  },
+  {
+    path: "/aprovador/relatorio/:id",
+    element: <FormularioAprovador />,
   },
 ])
 

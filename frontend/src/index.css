@@ -12,3 +12,8 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+
+fieldset {
+    border: none;
+}

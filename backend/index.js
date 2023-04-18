@@ -6,8 +6,11 @@ const FileStore = require('session-file-store')(session)
 const bodyParser = require('body-parser')
 const app = express()
 const RelatorioAprovadores = require('./models/RelatorioAprovador')
+const RelatorioAnalista = require('./models/RelatorioAnalista')
+
 
 //Rotas - invocando depois usando a rota
+const AnalistaRotas = require ('./routes/AnalistaRoutes')
 const AprovadorRotas = require('./routes/AprovadorRoutes')
 const UsuarioRotas = require('./routes/UsuarioRoutes')
 
@@ -16,6 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 //Usando Rotas
+app.use('/analista/', AnalistaRotas)
 app.use('/aprovador', AprovadorRotas)
 app.use('/usuario', UsuarioRotas)
 

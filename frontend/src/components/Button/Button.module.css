@@ -1,4 +1,5 @@
 .btn {
+    cursor: pointer;
     background-color: #512C13;
     color: white;
     font-family: 'Gotham Black';

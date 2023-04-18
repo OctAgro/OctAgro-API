@@ -1,0 +1,12 @@
+.external { 
+    background-color: #F7F1E5;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-family: 'Gotham Black';
+    z-index: 2;
+}
+
+.icon {
+    cursor: pointer;
+}

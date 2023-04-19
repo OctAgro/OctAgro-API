@@ -42,4 +42,6 @@ const Usuario = db.define('usuario', {
 //comentar pois ele força a criar
 // Usuario.sync({force: true})
 
+
+
 module.exports = Usuario

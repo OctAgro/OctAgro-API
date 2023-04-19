@@ -13,14 +13,103 @@ module.exports = class RelatorioRecebedor {
             textoProduto,
             numeroQuantidade,
             textoUnidadeMedida,
-            checkboxColoracao,
-            checkboxOdor,
-            checkboxAusenciaAnimais,
-            checkboxAusenciaMofo
+            checkboxColoracaoAprovado,
+            checkboxColoracaoReprovado,
+            checkboxOdorAprovado,
+            checkboxOdorReprovado,
+            checkboxAusenciaAnimaisAprovado,
+            checkboxAusenciaAnimaisReprovado,
+            checkboxAusenciaMofoAprovado,
+            checkboxAusenciaMofoReprovado
         } = req.body
 
+
         const listaErros = []
-        if(!)
+        if(!textoNomeFornecedor){
+            listaErros.push('O parametro não pode estar vasio!')
+        }
+
+        if(!textoNomeEntregador){
+            listaErros.push('O parametro não pode estar vasio!')
+        }
+
+        if(!textoPlacaVeiculo){
+            listaErros.push('O parametro não pode estar vasio!')
+        }
+
+        if(!dataDataEntrada){
+            listaErros.push('O parametro não pode estar vasio!')
+        }
+
+        if(!tempoHorarioEntrada){
+            listaErros.push('O parametro não pode estar vasio!')
+        }
+
+        if(!textoProduto){
+            listaErros.push('O parametro não pode estar vasio!')
+        }
+
+        if(!numeroQuantidade){
+            listaErros.push('O parametro não pode estar vasio!')
+        }
+
+        if(! textoUnidadeMedida){
+            listaErros.push('O parametro não pode estar vasio!')
+        }
+
+        if (checkboxColoracaoAprovado && checkboxColoracaoReprovado) {
+            listaErros.push('Escolha apenas uma das opções!')
+        } else if (!checkboxColoracaoAprovado && !checkboxColoracaoReprovado){
+            listaErros.push('Escolha apenas uma das opções!')
+        }
+
+        if (checkboxOdorAprovado && checkboxOdorReprovado) {
+            listaErros.push('Escolha apenas uma das opções!')
+        } else if (!checkboxOdorAprovado && !checkboxOdorReprovado){
+            listaErros.push('Escolha apenas uma das opções!')
+        }
+
+        if (checkboxAusenciaAnimaisAprovado && checkboxAusenciaAnimaisReprovado) {
+            listaErros.push('Escolha apenas uma das opções!')
+        } else if (!checkboxAusenciaAnimaisAprovado && !checkboxAusenciaAnimaisReprovado){
+            listaErros.push('Escolha apenas uma das opções!')
+        }
+
+        if (checkboxAusenciaMofoAprovado && checkboxAusenciaMofoReprovado) {
+            listaErros.push('Escolha apenas uma das opções!')
+        } else if (!checkboxAusenciaMofoAprovado && !checkboxAusenciaMofoReprovado){
+            listaErros.push('Escolha apenas uma das opções!')
+        }
+
+
+        if(listaErros.length > 0){
+            res.status(400).json({erros: listaErros})
+        }
+
+
+        const relatorioRecebedor = new RelatorioRecebedor({
+            nome_fornecedor: textoNomeFornecedor,
+            nome_entragador: textoNomeEntregador,
+            placa_veiculo: textoPlacaVeiculo,
+            data_entrada: dataDataEntrada,
+            horario_entrada: tempoHorarioEntrada,
+            documento_entrada: textoDocmento,
+            produto: textoProduto,
+            quantidade: numeroQuantidade,
+            unidade_medida: textoUnidadeMedida,
+            coloracao: checkboxColoracaoAprovado,
+            odor: checkboxOdorAprovado,
+            ausencia_animais: checkboxAusenciaAnimaisAprovado,
+            ausencia_mofo: checkboxAusenciaMofoAprovado
+        })
+
+
+        try {
+            const novoRelatorioRecebedor = await relatorioRecebedor.save()
+            res.status(201).json({mensagem: 'Relatório aprovado com sucesso!'. novoRelatorioRecebedor})
+        } catch(erro) {
+            res.status(500).jason({mensagem: erro})
+        }
     }
 
 }

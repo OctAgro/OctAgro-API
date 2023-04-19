@@ -1,15 +1,15 @@
-import React from "react";
+import React from "react"
 
 // importando os componentes
-import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador";
-import { HeaderAprovadorVoltar } from "../../../components/header/HeaderAprovadorVoltar/HeaderAprovadorVoltar";
-import { TabelaRelatorios } from "../../../components/TabelaRelatorios/TabelaRelatorios";
+import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador"
+import { TabelaRelatorios } from "../../../components/TabelaRelatorios/TabelaRelatorios"
+import { HeaderAprovador } from "../../../components/header/HeaderAprovador/HeaderAprovador"
 
 // Imagem para simular o Icone do usuário
-import UserImg from "../../../assets/UserImg.webp";
+import UserImg from "../../../assets/UserImg.webp"
 
 // importando o CSS do module.css
-import styles from "./RelatorioAprovador.module.css";
+import styles from "./RelatorioAprovador.module.css"
 
 export const RelatorioAprovador = () => {
   return (
@@ -21,8 +21,11 @@ export const RelatorioAprovador = () => {
       />
 
       <div className={styles.container}>
-        <HeaderAprovadorVoltar link="/aprovador/home" />
-        <div>
+        <div className={styles.header}>
+          <HeaderAprovador arrow="True" link="/aprovador/home" />
+        </div>
+
+        <div className={styles.content}>
           <TabelaRelatorios
             numeroPedido="1001"
             descricao="Café"
@@ -32,5 +35,5 @@ export const RelatorioAprovador = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -5,8 +5,12 @@
     border-radius: 10px;
     font-family: 'Gotham Black';
     z-index: 2;
+    padding: 2rem;
 }
 
 .icon {
     cursor: pointer;
+    font-size: 3rem;
+    float: right;
+    padding: 1rem;
 }

@@ -30,7 +30,7 @@ export const TabelaRelatorios = (props) => {
             <td className={styles.tableData}>{props.situacao}</td>
             <td className={styles.tableData}>{props.funcionario}</td>
             <td className={styles.tableData}>
-              <button>
+              <button className={styles.button}>
                 <Link to={`/aprovador/relatorio/${props.numeroPedido}`}>
                   Analisar <FontAwesomeIcon icon={faClipboardList} />
                 </Link>

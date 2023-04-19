@@ -1,29 +1,32 @@
 .btn {
-    cursor: pointer;
-    background-color: #512C13;
-    color: white;
-    font-family: 'Gotham Black';
-    padding: 0.7rem;
-    font-size: 1rem;
-    border: solid 2px black;
-    border-radius: 7px;
-  }
-  
-  .span:before {
-    content: attr(data-text);
-  }
-  
-  .span:after {
-    content: attr(data-text-after);
-  }
-  
-  .span {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-    white-space: pre-wrap;
-    line-height: 1.5em;
-  }
-  
+  cursor: pointer;
+  background-color: #512c13;
+  color: white;
+  font-family: "Gotham Black";
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: solid 2px black;
+  border-radius: 7px;
+}
+
+.btn:hover {
+  background-color: #68391a;
+}
+
+.span:before {
+  content: attr(data-text);
+}
+
+.span:after {
+  content: attr(data-text-after);
+}
+
+.span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  white-space: pre-wrap;
+  line-height: 1.5em;
+}

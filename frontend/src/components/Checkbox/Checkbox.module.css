@@ -1,0 +1,18 @@
+.input {
+    display: none;
+}
+
+.customCheckbox{
+    text-align: center;
+    font-size: 3rem;
+    min-width: 100%;
+    margin: 0 1rem;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.icon:hover {
+    color: #363636;
+}

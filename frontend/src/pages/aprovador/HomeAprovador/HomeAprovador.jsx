@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 
 // IMPORTANDO COMPONENTES
-import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador";
-import { HeaderAprovador } from "../../../components/header/HeaderAprovador/HeaderAprovador";
-import { RelatoriosPendentes } from "../../../components/RelatoriosPendentes/RelatoriosPendentes";
+import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador"
+import { HeaderAprovador } from "../../../components/header/HeaderAprovador/HeaderAprovador"
+import { RelatoriosPendentes } from "../../../components/RelatoriosPendentes/RelatoriosPendentes"
 
 // IMAGEM USADA PARA FINS DE TESTE (SIDEBAR)
-import UserImg from "../../../assets/UserImg.webp";
+import UserImg from "../../../assets/UserImg.webp"
 
 // IMPORTANDO CSS
-import styles from "./HomeAprovador.module.css";
+import styles from "./HomeAprovador.module.css"
 
 export const HomeAprovador = () => {
-  const [relatoriosPendentes, setRelatoriosPendentes] = useState(null);
+  const [relatoriosPendentes, setRelatoriosPendentes] = useState(null)
 
   useEffect(() => {
     async function fetchRelatoriosPendentes() {
       const response = await fetch(
         "https://api.example.com/relatorios/pendentes"
-      );
-      const data = await response.json();
-      setRelatoriosPendentes(data.quantidade);
+      )
+      const data = await response.json()
+      setRelatoriosPendentes(data.quantidade)
     }
-    fetchRelatoriosPendentes();
-  }, []);
+    fetchRelatoriosPendentes()
+  }, [])
 
   return (
     <div className={styles.main}>
@@ -33,11 +33,12 @@ export const HomeAprovador = () => {
         imagem={UserImg}
       />
 
-      <div className={styles.containerHeader}>
+      <div className={styles.container}>
         <HeaderAprovador />
-
-        <RelatoriosPendentes relatoriosPendentes={relatoriosPendentes} />
+        <div>
+          <RelatoriosPendentes relatoriosPendentes={relatoriosPendentes} />
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}

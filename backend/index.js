@@ -13,6 +13,7 @@ const RelatorioAnalista = require('./models/RelatorioAnalista')
 const AnalistaRotas = require ('./routes/AnalistaRoutes')
 const AprovadorRotas = require('./routes/AprovadorRoutes')
 const UsuarioRotas = require('./routes/UsuarioRoutes')
+const RecebedorRotas = require('./routes/RecebedorRoutes')
 
 //Body Parse
 app.use(bodyParser.urlencoded({extended: true}))
@@ -22,6 +23,7 @@ app.use(bodyParser.json())
 app.use('/analista/', AnalistaRotas)
 app.use('/aprovador', AprovadorRotas)
 app.use('/usuario', UsuarioRotas)
+app.use('/recebedor', RecebedorRotas)
 
 //mensagens com flash
 app.use(flash())

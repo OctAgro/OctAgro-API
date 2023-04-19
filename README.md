@@ -67,11 +67,6 @@ Iremos utilizar a combinação de: MySQL, Express, React e Node.
 |  01    | *   | Documentação do software.                                    | Realizar a documentação do software.                            | Alta
 |  01    | *   | Criação da arquitetura básica e configuração dos arquivos.   | Criação de CRUD básico.                                         | Alta
 
-<h2>📉 Burndown 1<a id="burn1"></a></h2>
-<div align="center">
-      <img src="doc/img/BurnDownSp1.png" width="800"/>
-</div>
-
 <h2>Demonstração - Gifs<a id="Demo1"></a></h2>
 <div align="center">
       <h3>Visão do Admin</h3>

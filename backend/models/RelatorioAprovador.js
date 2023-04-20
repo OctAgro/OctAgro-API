@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const db = require('../db/conexao')
 const Usuario = require('./Usuario')
 
-const RelatorioAprovadores = db.define('RelatorioAprovadores', {
+const RelatorioAprovador = db.define('RelatorioAprovador', {
     id_relatorio_aprovador: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -38,7 +38,7 @@ const RelatorioAprovadores = db.define('RelatorioAprovadores', {
 })
 
 //Criando relação entre tabela RelatorioAprovador e Usuario
-RelatorioAprovadores.belongsTo(Usuario, { foreignKey: 'id_usuario' })
-Usuario.hasMany(RelatorioAprovadores) // vinculo com a tabela usuarios tambem (Gabriel)
+RelatorioAprovador.belongsTo(Usuario, { foreignKey: 'id_usuario' })
+Usuario.hasMany(RelatorioAprovador) // vinculo com a tabela usuarios tambem (Gabriel)
 
-module.exports = RelatorioAprovadores
+module.exports = RelatorioAprovador

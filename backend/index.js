@@ -12,6 +12,7 @@ const RelatorioAprovadores = require('./models/RelatorioAprovador')
 const Fornecedores = require('./models/Fornecedor')
 const Produto = require('./models/Produto')
 const CriteriosAvaliacao = require('./models/CriteriosAvaliacao')
+const Usuario = require('./models/Usuario')
 
 //Rotas - invocando depois usando a rota
 const AnalistaRotas = require ('./routes/AnalistaRoutes')

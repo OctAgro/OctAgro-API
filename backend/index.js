@@ -17,6 +17,7 @@ const CriteriosAvaliacao = require('./models/CriteriosAvaliacao')
 const AnalistaRotas = require ('./routes/AnalistaRoutes')
 const AprovadorRotas = require('./routes/AprovadorRoutes')
 const UsuarioRotas = require('./routes/UsuarioRoutes')
+const RecebedorRotas = require('./routes/RecebedorRoutes')
 
 //Body Parse
 app.use(bodyParser.urlencoded({extended: true}))
@@ -29,6 +30,7 @@ app.use(cors({ credentials: false, origin: 'http://localhost:3000' }))
 app.use('/analista/', AnalistaRotas)
 app.use('/aprovador', AprovadorRotas)
 app.use('/usuario', UsuarioRotas)
+app.use('/recebedor', RecebedorRotas)
 
 //Mensagens com flash
 app.use(flash())

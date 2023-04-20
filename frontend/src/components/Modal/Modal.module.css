@@ -1,16 +1,20 @@
 .external { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #F7F1E5;
     color: black;
     border: 1px solid black;
     border-radius: 10px;
     font-family: 'Gotham Black';
-    z-index: 2;
-    padding: 2rem;
+    z-index: 5;
 }
 
 .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-50%, 50%);
     cursor: pointer;
     font-size: 3rem;
-    float: right;
-    padding: 1rem;
-}
+  }

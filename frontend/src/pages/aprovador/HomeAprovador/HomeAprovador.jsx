@@ -14,7 +14,7 @@ import styles from "./HomeAprovador.module.css"
 export const HomeAprovador = () => {
   const [relatoriosPendentes, setRelatoriosPendentes] = useState(null)
 
-  useEffect(() => {
+ /*  useEffect(() => {
     async function fetchRelatoriosPendentes() {
       const response = await fetch(
         "https://api.example.com/relatorios/pendentes"
@@ -23,7 +23,7 @@ export const HomeAprovador = () => {
       setRelatoriosPendentes(data.quantidade)
     }
     fetchRelatoriosPendentes()
-  }, [])
+  }, []) */
 
   return (
     <div className={styles.main}>

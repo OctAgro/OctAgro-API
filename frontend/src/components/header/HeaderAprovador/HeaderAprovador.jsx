@@ -16,10 +16,7 @@ export const HeaderAprovador = (props) => {
       {arrow ? (
         <div className={styles.arrow}>
           <Link to={link} className={styles.arrow}>
-            <FontAwesomeIcon
-              icon={faCircleChevronLeft}
-              className={styles.iconArrow}
-            />
+            <FontAwesomeIcon icon={faCircleChevronLeft} className={styles.iconArrow} />
           </Link>
         </div>
       ) : null}

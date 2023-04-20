@@ -17,8 +17,10 @@ export const FormAprovador = (props) => {
   const [openModal, setOpenModal] = useState(false)
   const [isAprovado, setIsAprovado] = useState(false)
   const [isRecusado, setIsRecusado] = useState(false)
+
+  // pegar da api se o pedido atual foi recusado ou aprovado, se analista recusou setIsRecusadoWarning(true), se aprovou setIsAprovadoWarning(true)
   const [isAprovadoWarning, setIsAprovadoWarning] = useState(false)
-  const [isRecusadoWarning, setIsRecusadoWarning] = useState(false)
+  const [isRecusadoWarning, setIsRecusadoWarning] = useState(true)
 
   const [checkboxDocumentacaoProdutoAprovado, setCheckboxDocumentacaoProdutoAprovado] = useState(false)
 
@@ -37,14 +39,18 @@ export const FormAprovador = (props) => {
     if (isAprovadoWarning) {
       // useState que trata se foi aprovado ou recusado pelo aprovador vira false,
       // pois ele não pode aprovar ou recusar ainda, tem que ver o WARNING
-      setIsAprovado(false)
+      setIsAprovado(true)
       setIsRecusado(false)
 
       // abre modal (mostra o WARNING)
       setOpenModal(true)
+
+      // seta o warning como falso pois o modal acima já vai ter chamado o warning, sendo assim, a proxima vez que usar o botão confirmar será para executar a ação de fato (vai para o else abaixo)
     } else {
       // se nao tiver warning, pode setar isAprovado para true e mostrar o modal
-      // > implementar logica quando pedido for aceito <
+
+      // > implementar logica do backend quando pedido for aceito <
+      
       setIsAprovado(true)
       setIsRecusado(false)
 
@@ -56,19 +62,31 @@ export const FormAprovador = (props) => {
     e.preventDefault()
     if (isRecusadoWarning) {
       setIsAprovado(false)
-      setIsRecusado(false)
+      setIsRecusado(true)
 
       // abre modal (mostra o WARNING)
       setOpenModal(true)
     } else {
       // se nao tiver warning, pode setar isRecusado para true e mostrar o modal
 
-      // > implementar logica quando pedido for recusado <
+      // > implementar logica do backend quando pedido for recusado <
       setIsAprovado(false)
       setIsRecusado(true)
 
       setOpenModal(true)
     }
+  }
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
+
+  // é chamado após exibir o warning, serve para mudar o modal para o de aprovado/recusado
+  const handleChangeModal = () => {
+    setIsAprovadoWarning(false)
+    setIsRecusadoWarning(false)
+    setOpenModal(false)
+    setOpenModal(true)
   }
 
   const handleCheckboxDocumentacaoAprovar = (e) => {
@@ -225,7 +243,7 @@ export const FormAprovador = (props) => {
         </form>
       </div>
       <div className={styles.divModal}>
-        <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
+        <Modal isOpen={openModal} onClick={handleCloseModal}>
           <div className={styles.clearfix}>
             {isAprovado && !isAprovadoWarning ? (
               <div className={styles.container}>
@@ -243,7 +261,7 @@ export const FormAprovador = (props) => {
                   <Button className={styles.button} value1="CONFIRMAR" />
                 </Link>
               </div>
-            ) : isAprovadoWarning ? (
+            ) : isAprovadoWarning && isAprovado ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faTriangleExclamation} className={styles.iconSmile} />
                 <p className={styles.paragraph}>
@@ -251,11 +269,9 @@ export const FormAprovador = (props) => {
                   <br />
                   Essa mercadoria foi recusada pelo Analista.
                 </p>
-                <Link to="/aprovador/relatorio">
-                  <Button className={styles.button} value1="CONFIRMAR" onClick={handleAceitar} />
-                </Link>
+                <Button className={styles.button} value1="CONFIRMAR" onClick={handleChangeModal} />
               </div>
-            ) : isRecusadoWarning ? (
+            ) : isRecusadoWarning && isRecusado ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faTriangleExclamation} className={styles.iconSmile} />
                 <p className={styles.paragraph}>
@@ -263,11 +279,9 @@ export const FormAprovador = (props) => {
                   <br />
                   Essa mercadoria foi aprovada pelo Analista.
                 </p>
-                <Link to="/aprovador/relatorio">
-                  <Button className={styles.button} value1="CONFIRMAR" onClick={handleRecusar} />
-                </Link>
+                <Button className={styles.button} value1="CONFIRMAR" onClick={handleChangeModal} />
               </div>
-            ) : null}
+            ) : null }
           </div>
         </Modal>
       </div>

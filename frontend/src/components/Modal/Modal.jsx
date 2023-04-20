@@ -9,13 +9,13 @@ import styles from "./Modal.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 
-export function Modal({ isOpen, setModalOpen, children }) {
+export function Modal({ isOpen, onClick, children }) {
   if (isOpen) {
     return (
       <div className={styles.external}>
         <Link>
           <FontAwesomeIcon
-            onClick={setModalOpen}
+            onClick={onClick}
             icon={faCircleXmark}
             className={styles.icon}
           />

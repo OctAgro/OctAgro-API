@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "../TabelaRelatorios/TabelaRelatorios.module.css";
+import styles from "./TabelaRelatorios.module.css";
 
 export const TabelaRelatorios = (props) => {
   return (
@@ -30,7 +30,7 @@ export const TabelaRelatorios = (props) => {
             <td className={styles.tableData}>{props.situacao}</td>
             <td className={styles.tableData}>{props.funcionario}</td>
             <td className={styles.tableData}>
-              <button>
+              <button className={styles.button}>
                 <Link to={`/aprovador/relatorio/${props.numeroPedido}`}>
                   Analisar <FontAwesomeIcon icon={faClipboardList} />
                 </Link>

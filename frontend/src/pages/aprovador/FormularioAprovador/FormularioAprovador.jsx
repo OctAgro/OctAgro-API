@@ -3,7 +3,7 @@ import React from "react";
 // importando os componentes
 import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador";
 import { HeaderAprovadorVoltar } from "../../../components/header/HeaderAprovadorVoltar/HeaderAprovadorVoltar";
-import { FormAprovador } from "../../../components/FormAprovador/FormAprovador";
+import { FormAprovador } from "../../../components/Forms/FormAprovador/FormAprovador";
 
 // Imagem para simular o Icone do usuário
 import UserImg from "../../../assets/UserImg.webp";

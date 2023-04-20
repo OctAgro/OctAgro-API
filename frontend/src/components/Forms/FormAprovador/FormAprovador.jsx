@@ -97,34 +97,59 @@ export const FormAprovador = (props) => {
   };
 
   const handleCheckboxDocumentacaoAprovar = (e) => {
-    setCheckboxDocumentacaoProdutoAprovado(true);
+    if (checkboxDocumentacaoProdutoAprovado) {
+      setCheckboxDocumentacaoProdutoAprovado(false);
+    } else {
+      setCheckboxDocumentacaoProdutoAprovado(true);
+      setCheckboxDocumentacaoProdutoReprovado(false);
+    }
+  };
+
+const handleCheckboxDocumentacaoRecusar = (e) => {
+  if (checkboxDocumentacaoProdutoReprovado) {
     setCheckboxDocumentacaoProdutoReprovado(false);
-  };
-
-  const handleCheckboxDocumentacaoRecusar = (e) => {
-    setCheckboxDocumentacaoProdutoAprovado(false);
+  } else {
     setCheckboxDocumentacaoProdutoReprovado(true);
-  };
+    setCheckboxDocumentacaoProdutoAprovado(false);
+  }
+};
 
-  const handleCheckboxRecebedorAprovar = (e) => {
+const handleCheckboxRecebedorAprovar = (e) => {
+  if (checkboxInfoRecebedorAprovado) {
+    setCheckboxInfoRecebedorAprovado(false);
+  } else {
     setCheckboxInfoRecebedorAprovado(true);
     setCheckboxInfoRecebedorReprovado(false);
-  };
+  }
+};
 
-  const handleCheckboxRecebedorRecusar = (e) => {
-    setCheckboxInfoRecebedorAprovado(false);
+const handleCheckboxRecebedorRecusar = (e) => {
+  if (checkboxInfoRecebedorReprovado) {
+    setCheckboxInfoRecebedorReprovado(false);
+  } else {
     setCheckboxInfoRecebedorReprovado(true);
-  };
+    setCheckboxInfoRecebedorAprovado(false);
+  }
+};
 
-  const handleCheckboxAnalistaAprovar = (e) => {
+const handleCheckboxAnalistaAprovar = (e) => {
+  if (checkboxInfoAnalistaAprovado) {
+    setCheckboxInfoAnalistaAprovado(false);
+  } else {
     setCheckboxInfoAnalistaAprovado(true);
     setCheckboxInfoAnalistaReprovado(false);
-  };
+  }
+};
 
-  const handleCheckboxAnalistaRecusar = (e) => {
-    setCheckboxInfoAnalistaAprovado(false);
+const handleCheckboxAnalistaRecusar = (e) => {
+  if (checkboxInfoAnalistaReprovado) {
+    setCheckboxInfoAnalistaReprovado(false);
+  } else {
     setCheckboxInfoAnalistaReprovado(true);
-  };
+    setCheckboxInfoAnalistaAprovado(false);
+  }
+};
+
 
   return (
     <div className={styles.divMaster}>

@@ -15,7 +15,10 @@
       <a href="#equipe">Equipe</a> 
 </p>
 
-<h3 align="center"><a href="#sprint1">Sprint 1</a></h3>
+<div align="center">
+      <a href="https://github.com/Yetgvg/OctAgro-API/blob/Development/doc/entregas/SPRINT1.md">Sprint 1</a> | 
+      <a href="https://github.com/Yetgvg/OctAgro-API/blob/Development/doc/entregas/SPRINT2.md">Sprint 2</a>
+</div>
 
 ## Aprendizagem por Projetos Integrados <a id="API"></a>
 A API (Aprendizagem por Projetos Integrados) é um projeto semestral realizado pela turma de Desenvolvimento de Software Multiplataforma da Fatec SJC. O objetivo é aprender e aplicar na prática conceitos de desenvolvimento de software utilizando o método Scrum como forma de gerenciamento do projeto.

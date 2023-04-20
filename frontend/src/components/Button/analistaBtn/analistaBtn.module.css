@@ -1,6 +1,6 @@
 .btn {
   cursor: pointer;
-  background-color: #512c13;
+  background-color: #FF8A00;
   color: white;
   font-family: "Gotham Black";
   padding: 0.7rem;
@@ -10,7 +10,7 @@
 }
 
 .btn:hover {
-  background-color: #68391a;
+  background-color: #b9670b;
 }
 
 .span:before {

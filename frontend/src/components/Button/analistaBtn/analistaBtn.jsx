@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from "./Button.module.css"
+import styles from "./analistaBtn.module.css"
 
 export const Button = (props) => {
   return (

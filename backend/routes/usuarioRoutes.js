@@ -2,7 +2,7 @@ const router = require('express').Router()
 
 const UsuarioController = require('../controllers/UsuarioController')
 
-// router.get("/login", usuarioController.login)
+// router.get("/login", UsuarioController.loginUsuario)
 router.post('/loginPost', UsuarioController.loginPost)
 // router.get("/registrarUsuario", usuarioController.registrarUsuario)
 router.post('/registrarUsuarioPost', UsuarioController.registrarUsuarioPost)

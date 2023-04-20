@@ -1,13 +1,15 @@
 import React from "react";
 
-
-
 // importando os componentes
-
+import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador";
+import { HeaderAprovador } from "../../../components/header/HeaderAprovador/HeaderAprovador";
 
 import { InformacoesDocumentos } from "../../../components/Informacoes/InformacoesDocumentos/InformacoesDocumentos";
 import { InformacoesAnalista } from "../../../components/Informacoes/InformacoesAnalista/InformacoesAnalista";
 import { InformacoesRecebedor } from "../../../components/Informacoes/InformacoesRecebedor/InformacoesRecebedor";
+
+// importando foto
+import UserImg from "../../../assets/UserImg.webp";
 
 // importando o css
 import styles from "./DocumentacaoAprovador.module.css";
@@ -19,10 +21,6 @@ export const DocumentacaoAprovador = ({ documentacao, analista, recebedor }) => 
         <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
 
         <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAprovador arrow="True" link="/aprovador/relatorio" />
-          </div>
-
           <div className={styles.content}>
             <InformacoesDocumentos />;
           </div>
@@ -35,10 +33,6 @@ export const DocumentacaoAprovador = ({ documentacao, analista, recebedor }) => 
         <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
 
         <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAprovador arrow="True" link="/aprovador/relatorio" />
-          </div>
-
           <div className={styles.content}>
             <InformacoesAnalista />;
           </div>
@@ -51,10 +45,6 @@ export const DocumentacaoAprovador = ({ documentacao, analista, recebedor }) => 
         <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
 
         <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAprovador arrow="True" link="/aprovador/relatorio" />
-          </div>
-
           <div className={styles.content}>
             <InformacoesRecebedor />;
           </div>

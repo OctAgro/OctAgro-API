@@ -1,10 +1,9 @@
 const Sequelize = require("sequelize")
-const Database = require("../db/conexao")
-const Usuario = require("./usuario")
+const db = require("../db/conexao")
+const Usuario = require("./Usuario")
 
-
-const Recebedor = Database.define("recebedor", {
-    id_relatorio: {
+const RelatorioRecebedor = db.define("RelatorioRecebedor", {
+    id_relatorio_recebedor: {
         type: Sequelize.INTEGER,
         autoIncrement:  true,
         autoNull: false,
@@ -77,4 +76,8 @@ const Recebedor = Database.define("recebedor", {
    }
 })
 
-module.exports = Recebedor
+//Criando relação entre tabela RelatorioAprovador e Usuario
+RelatorioRecebedor.belongsTo(Usuario, { foreignKey: 'id_usuario' })
+Usuario.hasMany(RelatorioRecebedor) // vinculo com a tabela usuarios tambem (Gabriel)
+
+module.exports = RelatorioRecebedor

@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 //CORS
-app.use(cors({ credentials: false, origin: 'http://localhost:3000' }))
+app.use(cors({ credentials: false, origin: 'http://localhost:5173' }))
 
 //Usando Rotas
 app.use('/analista/', AnalistaRotas)
@@ -37,7 +37,7 @@ app.use(flash())
 
 //Conexao com Banco de Dados
 conexao.sync().then(() => {
-    app.listen(5173)
+    app.listen(3000)
 }).catch(erro => {
     console.log('Deu erro: ', erro)
 })

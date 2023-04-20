@@ -3,6 +3,8 @@ import Cookies from "js-cookie";
 import octagroTransparente from "../assets/octagroTransparente.png";
 import styles from "./Login.module.css";
 
+import { fazerLogin } from "../hooks/usarLogin"
+
 export const Login = () => {
   // USA MODULO 'JS-COOKIE' PARA LEMBRAR O USERNAME SE O USUARIO MARCAR A OPÇÃO DE 'LEMBRAR-ME'
   const handleRemember = (event) => {
@@ -13,19 +15,14 @@ export const Login = () => {
       Cookies.remove("rememberedUsername");
     }
   };
-
+  
   // CONST PARA ARMAZENAR OS VALORES DO SCRIPT
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // SCRIPT CRIADO PELO NOSSO CHEFE LEANDRO PARA VALIDAR OS CAMPOS (falta mesclar com o backend)
-  const handleValidation = (e) => {
-    e.preventDefault
-    if (username === "aprovador" && password === "password") {
-      alert("Show!")
-    } else {
-      alert("Login ou senha incorretas! Tente de novo.");
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    await fazerLogin(username, password);
   };
 
   return (
@@ -36,7 +33,9 @@ export const Login = () => {
           src={octagroTransparente}
           alt="Logo da OctAgro"
         />
-        <form className={styles.formsUser}>
+
+
+        <form className={styles.formsUser} onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username" id="username-label" className={styles.label}>
               Login:
@@ -75,9 +74,11 @@ export const Login = () => {
             className={styles.inputLoginAcessar}
             type="submit"
             value="Acessar"
-            onClick={handleValidation}
+            onClick={handleSubmit}
           />
         </form>
+
+
         <div className={styles.bottomBoxLogin}>
           <input
             type="checkbox"

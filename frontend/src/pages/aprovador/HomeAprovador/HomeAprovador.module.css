@@ -4,7 +4,8 @@
   background-color: #F7F1E5;
 }
 
-.containerHeader {
+.container {
   margin: 0 auto;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
 }

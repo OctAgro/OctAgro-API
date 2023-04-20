@@ -59,7 +59,7 @@ A seguir, estão listadas as tecnologias utilizadas no projeto, abrangendo desde
 
 <a href="https://code.visualstudio.com" target="_blank"><img src="https://img.shields.io/badge/VS. Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" target="_blank"></a>
 <a href="https://www.atlassian.com/br/software/jira" target="_blank"><img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white" target="_blank"></a>
-<a href="https://code.visualstudio.com" target="_blank"><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white" target="_blank"></a>
+<a href="www.figma.com" target="_blank"><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white" target="_blank"></a>
 
 ## <img class="emoji" alt="memo" height="20" width="20" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4dd.png"> Organização <a id="org"></a>
 

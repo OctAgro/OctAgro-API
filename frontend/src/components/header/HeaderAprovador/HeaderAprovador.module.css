@@ -5,6 +5,7 @@
 }
 
 .clipboards {
+  cursor: default;
   margin: 0 7rem;
   padding-right: 3rem;
   display: flex;
@@ -44,4 +45,8 @@
 .arrow {
   margin: auto 0;
   font-size: 3.5rem;
+}
+
+.arrow:hover {
+  color: #363636;
 }

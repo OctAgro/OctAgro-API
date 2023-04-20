@@ -1,14 +1,14 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import './index.css'
+import "./index.css";
 
-import { Login } from "./pages/Login"
-import { HomeAprovador } from "./pages/aprovador/HomeAprovador/HomeAprovador"
-import { RelatorioAprovador } from "./pages/aprovador/RelatorioAprovador/RelatorioAprovador"
-import { FormularioAprovador } from "./pages/aprovador/FormularioAprovador/FormularioAprovador"
-import { Checkbox } from "./components/Checkbox/Checkbox"
+import { Login } from "./pages/Login";
+import { HomeAprovador } from "./pages/aprovador/HomeAprovador/HomeAprovador";
+import { RelatorioAprovador } from "./pages/aprovador/RelatorioAprovador/RelatorioAprovador";
+import { FormularioAprovador } from "./pages/aprovador/FormularioAprovador/FormularioAprovador";
+import { DocumentacaoAprovador } from "./pages/aprovador/DocumentacaoAprovador/DocumentacaoAprovador";
 
 const router = createBrowserRouter([
   {
@@ -28,13 +28,21 @@ const router = createBrowserRouter([
     element: <FormularioAprovador />,
   },
   {
-    path: "/debug",
-    element: <Checkbox />,
+    path: "/aprovador/relatorio/:id/documentacao",
+    element: <DocumentacaoAprovador documentacao='True' />,
   },
-])
+  {
+    path: "/aprovador/relatorio/:id/infoRecebedor",
+    element: <DocumentacaoAprovador recebedor='True' />,
+  },
+  {
+    path: "/aprovador/relatorio/:id/infoAnalista",
+    element: <DocumentacaoAprovador analista='True' />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
-)
+);

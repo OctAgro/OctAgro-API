@@ -8,6 +8,9 @@ import { Login } from "./pages/Login"
 import { HomeAprovador } from "./pages/aprovador/HomeAprovador/HomeAprovador"
 import { RelatorioAprovador } from "./pages/aprovador/RelatorioAprovador/RelatorioAprovador"
 import { FormularioAprovador } from "./pages/aprovador/FormularioAprovador/FormularioAprovador"
+import { HomeAnalista } from "./pages/analista/HomeAnalista/HomeAnalista"
+import { MercadoriaAnalista } from "./pages/analista/MercadoriaAnalista/MercadoriaAnalista"
+import { FormularioAnalista } from "./pages/analista/FormularioAnalista/FormularioAnalista"
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
   {
     path: "/aprovador/relatorio/:id",
     element: <FormularioAprovador />,
+  },
+  {
+    path: "/analista/home",
+    element: <HomeAnalista />,
+  },
+  {
+    path: "/analista/mercadoria",
+    element: <MercadoriaAnalista />,
+  },
+  {
+    path: "/analista/mercadoria/:id",
+    element: <FormularioAnalista />,
   },
 ])
 

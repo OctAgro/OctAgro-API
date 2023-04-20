@@ -3,8 +3,11 @@
 }
 
 .tableBackground {
+    filter: drop-shadow(2px 2px 2px #000);
     background-color: #E7E0D1;
     padding: 1rem;
+    width: 60vw;
+    border-radius: 5px;
 }
 
 .title {
@@ -20,4 +23,13 @@
 .tableData {
     text-align: center;
     border: 2px solid black;
+}
+
+.button {
+    width: 100%;
+    font-family: 'Gotham Black';
+    font-size: 1rem;
+    background-color: #E7E0D1;
+    border: none;
+    cursor: pointer;
 }

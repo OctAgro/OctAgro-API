@@ -1,9 +1,12 @@
 .external {
   font-family: "Gotham Black";
   display: flex;
+  justify-content: space-between;
 }
 
 .clipboards {
+  margin: 0 7rem;
+  padding-right: 3rem;
   display: flex;
 }
 
@@ -33,16 +36,12 @@
   margin-left: 0.5rem;
 }
 
-.rightSideA h2,
-.rightSideB h2 {
-  display: inline-block;
-}
-
 .rightSideA h3,
 .rightSideB h3 {
   font-size: 16px;
 }
 
 .arrow {
+  margin: auto 0;
   font-size: 3.5rem;
 }

@@ -7,8 +7,8 @@ import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 // IMPORTANDO CSS
 import styles from "./RelatoriosPendentes.module.css";
 
-export const RelatoriosPendentes = (relatoriosPendentes) => {
-  if (relatoriosPendentes) {
+export const RelatoriosPendentes = ({ relatoriosPendentes }) => {
+  if (relatoriosPendentes === 0) {
     return (
       <div className={styles.external}>
         <FontAwesomeIcon icon={faCheckDouble} className={styles.icon} />
@@ -16,6 +16,6 @@ export const RelatoriosPendentes = (relatoriosPendentes) => {
       </div>
     );
   } else {
-    null;
+    return null;
   }
 };

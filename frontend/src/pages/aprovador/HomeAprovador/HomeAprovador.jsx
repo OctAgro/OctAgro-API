@@ -12,18 +12,7 @@ import UserImg from "../../../assets/UserImg.webp"
 import styles from "./HomeAprovador.module.css"
 
 export const HomeAprovador = () => {
-  const [relatoriosPendentes, setRelatoriosPendentes] = useState(null)
-
- /*  useEffect(() => {
-    async function fetchRelatoriosPendentes() {
-      const response = await fetch(
-        "https://api.example.com/relatorios/pendentes"
-      )
-      const data = await response.json()
-      setRelatoriosPendentes(data.quantidade)
-    }
-    fetchRelatoriosPendentes()
-  }, []) */
+  const [relatoriosPendentes, setRelatoriosPendentes] = useState(1)
 
   return (
     <div className={styles.main}>

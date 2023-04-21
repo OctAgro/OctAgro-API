@@ -6,7 +6,7 @@ import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "../TabelaRelatorios/TabelaRelatorios.module.css";
 
-export const TabelaRelatorios = (props) => {
+export const TabelaRelatorios = ({numeroPedido, descricao, situacao, funcionario}) => {
   return (
     <div className={styles.table}>
       <div className={styles.title}>
@@ -25,13 +25,13 @@ export const TabelaRelatorios = (props) => {
         </thead>
         <tbody>
           <tr className={styles.tableRow}>
-            <td className={styles.tableData}>{props.numeroPedido}</td>
-            <td className={styles.tableData}>{props.descricao}</td>
-            <td className={styles.tableData}>{props.situacao}</td>
-            <td className={styles.tableData}>{props.funcionario}</td>
+            <td className={styles.tableData}>{numeroPedido}</td>
+            <td className={styles.tableData}>{descricao}</td>
+            <td className={styles.tableData}>{situacao}</td>
+            <td className={styles.tableData}>{funcionario}</td>
             <td className={styles.tableData}>
               <button className={styles.button}>
-                <Link to={`/aprovador/relatorio/${props.numeroPedido}`}>
+                <Link to={`/aprovador/relatorio/${numeroPedido}`}>
                   Analisar <FontAwesomeIcon icon={faClipboardList} />
                 </Link>
               </button>

@@ -1,11 +1,18 @@
-import React from 'react'
+import React from 'react';
+import styles from "./Button.module.css";
 
-import styles from "./Button.module.css"
-
-export const Button = (props) => {
-  return (
-    <button className={`${styles.btn} ${props.className}`} type="button" onClick={props.onClick}>
-      <span className={`${styles.span}`} data-text={props.value1} data-text-after={props.value2}></span>
-    </button>
-  )
+export const Button = ({ className, type, onClick, value1, value2 }) => {
+  if (type) {
+    return (
+      <button className={`${styles.btn} ${className}`} type="submit" onClick={onClick}>
+        <span className={`${styles.span}`} data-text={value1} data-text-after={value2}></span>
+      </button>
+    );
+  } else {
+    return (
+      <button className={`${styles.btn} ${className}`} type="button" onClick={onClick}>
+        <span className={`${styles.span}`} data-text={value1} data-text-after={value2}></span>
+      </button>
+    );
+  }
 }

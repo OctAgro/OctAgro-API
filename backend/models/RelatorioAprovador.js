@@ -39,6 +39,27 @@ const RelatorioAprovador = db.define('RelatorioAprovador', {
 
 //Criando relação entre tabela RelatorioAprovador e Usuario
 RelatorioAprovador.belongsTo(Usuario, { foreignKey: 'id_usuario' })
-Usuario.hasMany(RelatorioAprovador) // vinculo com a tabela usuarios tambem (Gabriel)
+//Usuario.hasMany(RelatorioAprovador) // vinculo com a tabela usuarios tambem (Gabriel)
+
+async function verificarUsuario(){
+
+    const relatorioAprovadorUsuario = await Usuario.findByPk(1)
+    return relatorioAprovadorUsuario
+}
+
+verificarUsuario().then(function(relatorioAprovadorUsuario) {
+
+    RelatorioAprovador.create({
+        doc_status: true,
+        info_recebedor_status: false,
+        info_analista_status: true,
+        revisao_aprovador: 'Gostei!',
+        status_final_aprovacao: true,
+        id_usuario: relatorioAprovadorUsuario.id_usuario
+    })
+
+}).catch(function(erro) {
+    console.log('Erro', erro)
+})
 
 module.exports = RelatorioAprovador

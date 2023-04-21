@@ -5,36 +5,32 @@ module.exports = class AprovadorController {
     //Função de criação do Relatorio de Aprovação a partir das informacoes providas pelo usuario
     static async criarRelatorioAprovacao(req, res) {
         //trazendo as informações preenchidas pelo usuario Aprovador através do "req.body"
-        const { 
-            checkboxDocumentacaoProdutoAprovado, 
-            checkboxDocumentacaoProdutoReprovado,
-            checkboxInfoRecebedorAprovado,
-            checkboxInfoRecebedorReprovado,
-            checkboxInfoAnalistaAprovado,
-            checkboxInfoAnalistaReprovado,
-            textoRevisaoFinalAprovador,
-            statusFinalAprovacao } = req.body
+        const data = req.body
+
+        console.log(data)
 
         //checando se as checkboxs/caixas de seleção estão corretamente preenchidas
         const listaErros = []
 
-        if (checkboxDocumentacaoProdutoAprovado && checkboxDocumentacaoProdutoReprovado) {
+        if (data.checkboxDocumentacaoProdutoAprovado && data.checkboxDocumentacaoProdutoReprovado) {
             listaErros.push('Não é possível marcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!')
-        } else if (!checkboxInfoRecebedorAprovado && !checkboxInfoRecebedorReprovado){
+        } else if (!data.checkboxInfoRecebedorAprovado && !data.checkboxInfoRecebedorReprovado){
             listaErros.push('Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!')
         }
 
-        if (checkboxInfoRecebedorAprovado && checkboxInfoRecebedorReprovado) {
+        if (data.checkboxInfoRecebedorAprovado && data.checkboxInfoRecebedorReprovado) {
             listaErros.push('Não é possível marcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!')
-        } else if (!checkboxInfoRecebedorAprovado && !checkboxInfoRecebedorReprovado){
+        } else if (!data.checkboxInfoRecebedorAprovado && !data.checkboxInfoRecebedorReprovado){
             listaErros.push('Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!')
         }
 
-        if (checkboxInfoAnalistaAprovado && checkboxInfoAnalistaReprovado) {
+        if (data.checkboxInfoAnalistaAprovado && data.checkboxInfoAnalistaReprovado) {
             listaErros.push('Não é possível marcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!')
-        } else if (!checkboxInfoAnalistaAprovado && !checkboxInfoAnalistaReprovado){
+        } else if (!data.checkboxInfoAnalistaAprovado && !data.checkboxInfoAnalistaReprovado){
             listaErros.push('Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!')
         }
+
+        console.log(data.checkboxDocumentacaoProdutoAprovado)
 
         /* //OBS: O campo de texto do "req.body.textoRevisaoFinalAprovador" pode ser preenchido ou não, por isso não está sendo verificado! Apenas irá ser encaminado com '' se nada for preenchido
         if (!textoRevisaoFinalAprovador) {
@@ -50,14 +46,14 @@ module.exports = class AprovadorController {
         //Salvando dados na Tabela do Banco de Dados
         const relatorioAprovador = new RelatorioAprovador({
 
-            doc_status: checkboxDocumentacaoProdutoAprovado, 
+            doc_status: data.checkboxDocumentacaoProdutoAprovado, 
             /* checkboxDocumentacaoProdutoReprovado, */
-            info_recebedor_status: checkboxInfoRecebedorAprovado,
+            info_recebedor_status: data.checkboxInfoRecebedorAprovado,
             /* checkboxInfoRecebedorReprovado, */
-            info_analista_status: checkboxInfoAnalistaAprovado,
+            info_analista_status: data.checkboxInfoAnalistaAprovado,
             /* checkboxInfoAnalistaReprovado, */
-            revisao_aprovador: textoRevisaoFinalAprovador,
-            status_final_aprovacao: statusFinalAprovacao
+            revisao_aprovador: data.textoRevisaoFinalAprovador,
+            status_final_aprovacao: data.statusFinalAprovacao
         })
 
         try {

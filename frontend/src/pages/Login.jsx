@@ -3,13 +3,13 @@ import Cookies from "js-cookie";
 import octagroTransparente from "../assets/octagroTransparente.png";
 import styles from "./Login.module.css";
 import { useNavigate } from 'react-router-dom';
-import { fazerLogin } from "../hooks/usarLogin"
+import { fazerLogin } from "../hooks/usarLogin";
 
 export const Login = () => {
+  // USA MODULO 'JS-COOKIE' PARA LEMBRAR O USERNAME SE O USUARIO MARCAR A OPÇÃO DE 'LEMBRAR-ME'
 
   const navigate = useNavigate();
-
-  // USA MODULO 'JS-COOKIE' PARA LEMBRAR O USERNAME SE O USUARIO MARCAR A OPÇÃO DE 'LEMBRAR-ME'
+  
   const handleRemember = (event) => {
     if (event.target.checked) {
       const username = document.getElementById("username").value;
@@ -40,8 +40,6 @@ export const Login = () => {
         navigate("/analista/home");
       } else if (tipoFuncao === "Recebedor"){
         navigate("/recebedor/home");
-      } else {
-        alert("Usuário sem função!");
       }
 
     } catch (erro) {

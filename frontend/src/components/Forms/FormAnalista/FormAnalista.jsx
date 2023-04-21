@@ -6,6 +6,8 @@ import { Link } from "react-router-dom"
 import { Button } from "../../Button/analistaBtn/analistaBtn"
 import { Checkbox } from "../../Checkbox/Checkbox"
 import { Modal } from "../../Modal/Modal"
+import { CheckboxDupla } from "../../Checkbox/CheckboxDupla/CheckboxDupla"
+
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -24,28 +26,6 @@ export const FormAnalista = (props) => {
   const [isRecusado, setIsRecusado] = useState(false)
   const [isAprovadoWarning, setIsAprovadoWarning] = useState(false)
   const [isRecusadoWarning, setIsRecusadoWarning] = useState(false)
-
-  const [
-    checkboxDocumentacaoProdutoAprovado,
-    setCheckboxDocumentacaoProdutoAprovado,
-  ] = useState(false)
-
-  const [
-    checkboxDocumentacaoProdutoReprovado,
-    setCheckboxDocumentacaoProdutoReprovado,
-  ] = useState(false)
-
-  const [checkboxInfoRecebedorAprovado, setCheckboxInfoRecebedorAprovado] =
-    useState(false)
-
-  const [checkboxInfoRecebedorReprovado, setCheckboxInfoRecebedorReprovado] =
-    useState(false)
-
-  const [checkboxInfoAnalistaAprovado, setCheckboxInfoAnalistaAprovado] =
-    useState(false)
-
-  const [checkboxInfoAnalistaReprovado, setCheckboxInfoAnalistaReprovado] =
-    useState(false)
 
   const handleAceitar = (e) => {
     e.preventDefault()
@@ -88,38 +68,9 @@ export const FormAnalista = (props) => {
     }
   }
 
-  const handleCheckboxDocumentacaoAprovar = (e) => {
-    setCheckboxDocumentacaoProdutoAprovado(true)
-    setCheckboxDocumentacaoProdutoReprovado(false)
-  }
-
-  const handleCheckboxDocumentacaoRecusar = (e) => {
-    setCheckboxDocumentacaoProdutoAprovado(false)
-    setCheckboxDocumentacaoProdutoReprovado(true)
-  }
-
-  const handleCheckboxRecebedorAprovar = (e) => {
-    setCheckboxInfoRecebedorAprovado(true)
-    setCheckboxInfoRecebedorReprovado(false)
-  }
-
-  const handleCheckboxRecebedorRecusar = (e) => {
-    setCheckboxInfoRecebedorAprovado(false)
-    setCheckboxInfoRecebedorReprovado(true)
-  }
-
-  const handleCheckboxAnalistaAprovar = (e) => {
-    setCheckboxInfoAnalistaAprovado(true)
-    setCheckboxInfoAnalistaReprovado(false)
-  }
-
-  const handleCheckboxAnalistaRecusar = (e) => {
-    setCheckboxInfoAnalistaAprovado(false)
-    setCheckboxInfoAnalistaReprovado(true)
-  }
-
   return (
     <div>
+      <h1 className={styles.mercadoria}>Entrada de Mercadoria</h1>
       <div className={styles.divForm}>
         <div className={styles.formTop}>
           <label className={styles.label} htmlFor="FormAnalista">
@@ -127,125 +78,77 @@ export const FormAnalista = (props) => {
           </label>
         </div>
 
-        <form name="FormAnalista" className={styles.form}>
-          <div className={styles.leftSide}>
-            <fieldset className={styles.documentacao}>
-              <div>
-                <legend className={styles.legend}>Documentação</legend>
-                <hr className={styles.row} />
-              </div>
-              <div>
-                <label className={styles.label} htmlFor="checkboxDocumentos" />
-                Documentos (RC/NF):
-              </div>
-              <div className={styles.inputBlock}>
-                <button className={styles.btn}>
-                  <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
-                  Visualizar
-                </button>
-                <Checkbox
-                  fill={checkboxDocumentacaoProdutoAprovado}
-                  check="True"
-                  name="checkboxDocumentacaoProdutoAprovado"
-                  onClick={handleCheckboxDocumentacaoAprovar}
-                />
-                <Checkbox
-                  fill={checkboxDocumentacaoProdutoReprovado}
-                  check=""
-                  name="checkboxDocumentacaoProdutoReprovado"
-                  onClick={handleCheckboxDocumentacaoRecusar}
-                />
-              </div>
-            </fieldset>
+        <form name="FormAnalista">
+          <div className={styles.formMain}>
+            <div className={styles.leftSide}>
+              <fieldset>
+                <div>
+                  <legend className={styles.legend}>Regras de Aceitação</legend>
+                  <hr className={styles.row} />
+                </div>
+                <div>
+                  <CheckboxDupla
+                    regra="Qualidade dos Grãos" readOnly />
+                </div>
+                <div>
+                  <CheckboxDupla
+                    regra="Formato do Grão" readOnly />
+                </div>
+                <div>
+                  <CheckboxDupla
+                    regra="Nível de Agrotóxicos" readOnly />
+                </div>
+                <div>
+                  <CheckboxDupla
+                    regra="Limpeza dos Grãos" readOnly />
+                </div>
+              </fieldset>
+            </div>
+            <div className={styles.rightSide}>              
+                <div>
+                  <legend className={styles.legend}>Mercadoria</legend>
+                  <hr className={styles.row} />
+                </div>
+                <div>
+                  <label className={styles.label} htmlFor="infRecebedor">
+                    Documentos (RC/NF):
+                  </label>
+                  <div>
+                    <CheckboxDupla btnVisualizar />
+                  </div>
+                </div>
+                <div>                  
+                    <label className={styles.label} htmlFor="infAnalista">
+                      Inf. do Recebedor
+                    </label>                  
+                  <div>
+                    <CheckboxDupla btnVisualizar />
+                  </div>
+                </div>
+            </div>
+          </div>
 
-            <fieldset className={styles.revisao}>
+          <div className={styles.formDown}>
+            <fieldset className={styles.comentario}>
               <div>
-                <legend className={styles.legend}>Sua revisão</legend>
-                <hr className={styles.row} />
-              </div>
-              <div>
+                <legend className={styles.legend}>Comentários:</legend>
                 <textarea
                   className={styles.textoRevisao}
                   name="textoRevisaoFinalAprovador"
                   id="textoRevisaoFinalAprovador"
-                  rows="8"
-                  cols="35"
+                  rows="3"
+                  cols="20"
                 />
-              </div>
-            </fieldset>
-          </div>
-
-          <div className={styles.rightSide}>
-            <fieldset className={styles.analise}>
-              <div>
-                <legend className={styles.legend}>Análises e Inspeções</legend>
-                <hr className={styles.row} />
-              </div>
-              <div>
-                <div>
-                  <label className={styles.label} htmlFor="infRecebedor">
-                    Inf. do Recebedor
-                  </label>
-                </div>
-                <div className={styles.inputBlock}>
-                  <button className={styles.btn}>
-                    <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
-                    Visualizar
-                  </button>
-                  <Checkbox
-                    fill={checkboxInfoRecebedorAprovado}
-                    check="True"
-                    name="checkboxDocumentacaoProdutoAprovado"
-                    onClick={handleCheckboxRecebedorAprovar}
-                  />
-                  <Checkbox
-                    fill={checkboxInfoRecebedorReprovado}
-                    check=""
-                    name="checkboxDocumentacaoProdutoReprovado"
-                    onClick={handleCheckboxRecebedorRecusar}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <div>
-                  <label className={styles.label} htmlFor="infAnalista">
-                    Inf. do Analista
-                  </label>
-                </div>
-                <div className={styles.inputBlock}>
-                  <button className={styles.btn}>
-                    <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
-                    Visualizar
-                  </button>
-                  <Checkbox
-                    fill={checkboxInfoAnalistaAprovado}
-                    check="True"
-                    name="checkboxDocumentacaoProdutoAprovado"
-                    onClick={handleCheckboxAnalistaAprovar}
-                  />
-                  <Checkbox
-                    fill={checkboxInfoAnalistaReprovado}
-                    check=""
-                    name="checkboxDocumentacaoProdutoReprovado"
-                    onClick={handleCheckboxAnalistaRecusar}
+                <div className={styles.btnConfirmar}>
+                  <Button
+                    value1="CONFIRMAR"
+                    /* value2="MERCADORIA" */
+                    onClick={handleAceitar}
                   />
                 </div>
               </div>
             </fieldset>
 
-            <div className={styles.buttons}>
-{/*               <Button
-                value1="RECUSAR"
-                value2="MERCADORIA"
-                onClick={handleRecusar}
-              /> */}
-              <Button
-                value1="CONFIRMAR"
-                /* value2="MERCADORIA" */
-                onClick={handleAceitar}
-              />
-            </div>
           </div>
         </form>
       </div>

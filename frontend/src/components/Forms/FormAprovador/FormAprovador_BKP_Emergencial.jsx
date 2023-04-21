@@ -1,10 +1,10 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 
 //IMPORTANDO COMPONENTES
 import { Button } from "../../Button/Button"
+import { Checkbox } from "../../Checkbox/Checkbox"
 import { Modal } from "../../Modal/Modal"
 
 // IMPORTANDO ICONES
@@ -12,13 +12,80 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faFaceSmileBeam, faFaceFrown, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormAprovador.module.css"
-import axios from 'axios'
 
 export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
-
   const [openModal, setOpenModal] = useState(false)
   const [isAprovado, setIsAprovado] = useState(false)
   const [isRecusado, setIsRecusado] = useState(false)
+
+  // USE STATE DOS 6 CHECKBOX
+  const [checkboxDocumentacaoProdutoAprovado, setCheckboxDocumentacaoProdutoAprovado] = useState(false)
+  const [checkboxDocumentacaoProdutoReprovado, setCheckboxDocumentacaoProdutoReprovado] = useState(false)
+
+  const [checkboxInfoRecebedorAprovado, setCheckboxInfoRecebedorAprovado] = useState(false)
+  const [checkboxInfoRecebedorReprovado, setCheckboxInfoRecebedorReprovado] = useState(false)
+
+  const [checkboxInfoAnalistaAprovado, setCheckboxInfoAnalistaAprovado] = useState(false)
+  const [checkboxInfoAnalistaReprovado, setCheckboxInfoAnalistaReprovado] = useState(false)
+
+  // DEBUG CONSOLE.LOG STATE
+  console.log(checkboxDocumentacaoProdutoAprovado)
+
+  // HANDLE DOS 6 CHECKBOXS
+
+  const handleCheckboxDocumentacaoAprovar = (e) => {
+    if (checkboxDocumentacaoProdutoAprovado) {
+      setCheckboxDocumentacaoProdutoAprovado(false)
+    } else {
+      setCheckboxDocumentacaoProdutoAprovado(true)
+      setCheckboxDocumentacaoProdutoReprovado(false)
+    }
+  }
+
+  const handleCheckboxDocumentacaoRecusar = (e) => {
+    if (checkboxDocumentacaoProdutoReprovado) {
+      setCheckboxDocumentacaoProdutoReprovado(false)
+    } else {
+      setCheckboxDocumentacaoProdutoReprovado(true)
+      setCheckboxDocumentacaoProdutoAprovado(false)
+    }
+  }
+
+  const handleCheckboxRecebedorAprovar = (e) => {
+    if (checkboxInfoRecebedorAprovado) {
+      setCheckboxInfoRecebedorAprovado(false)
+    } else {
+      setCheckboxInfoRecebedorAprovado(true)
+      setCheckboxInfoRecebedorReprovado(false)
+    }
+  }
+
+  const handleCheckboxRecebedorRecusar = (e) => {
+    if (checkboxInfoRecebedorReprovado) {
+      setCheckboxInfoRecebedorReprovado(false)
+    } else {
+      setCheckboxInfoRecebedorReprovado(true)
+      setCheckboxInfoRecebedorAprovado(false)
+    }
+  }
+
+  const handleCheckboxAnalistaAprovar = (e) => {
+    if (checkboxInfoAnalistaAprovado) {
+      setCheckboxInfoAnalistaAprovado(false)
+    } else {
+      setCheckboxInfoAnalistaAprovado(true)
+      setCheckboxInfoAnalistaReprovado(false)
+    }
+  }
+
+  const handleCheckboxAnalistaRecusar = (e) => {
+    if (checkboxInfoAnalistaReprovado) {
+      setCheckboxInfoAnalistaReprovado(false)
+    } else {
+      setCheckboxInfoAnalistaReprovado(true)
+      setCheckboxInfoAnalistaAprovado(false)
+    }
+  }
 
   // pegar da api se o pedido atual foi recusado ou aprovado,
   // se analista recusou setIsAprovadoWarning(true), se o analista aprovou então setIsRecusadoWarning(true)
@@ -26,54 +93,45 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
   const [isAprovadoWarning, setIsAprovadoWarning] = useState(false)
   const [isRecusadoWarning, setIsRecusadoWarning] = useState(true)
 
-  //variaveis para mandar para o banco de dados
-  const [revisao, setRevisao] = useState("")
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
-
-  const onSubmit = (data) => {
-    handleAprovacao()
-    enviarDados(data)
-  }
-
-  //fazendo o post
-  const enviarDados = async (data) => {
-
-    const dados = {
-      textoRevisaoFinalAprovador: revisao,
-      statusFinalAprovacao: true,
-      ...data
-    }
-
-    console.log(dados)
-  
-    try {
-      const resposta = await axios.post('http://localhost:3000/aprovador/relatorios', dados)
-      console.log(resposta)
-    } catch (erro) {
-      console.error(erro)
-    }
-  }
-
-  const handleAprovacao = () => {
+  const handleAceitar = (e) => {
+    e.preventDefault()
     if (isAprovadoWarning) {
+      // useState que trata se foi aprovado ou recusado pelo aprovador vira false,
+      // pois ele não pode aprovar ou recusar ainda, tem que ver o WARNING
+      setIsAprovado(true)
+      setIsRecusado(false)
+
+      // abre modal (mostra o WARNING)
+      setOpenModal(true)
+
+      // seta o warning como falso pois o modal acima já vai ter chamado o warning, sendo assim, a proxima vez que usar o botão confirmar será para executar a ação de fato (vai para o else abaixo)
+    } else {
+      // se nao tiver warning, pode setar isAprovado para true e mostrar o modal
+
+      // > implementar logica do backend quando pedido for aceito <
+
       setIsAprovado(true)
       setIsRecusado(false)
 
       setOpenModal(true)
-    } else if (isRecusadoWarning) {
+    }
+  }
+
+  const handleRecusar = (e) => {
+    e.preventDefault()
+    if (isRecusadoWarning) {
       setIsAprovado(false)
       setIsRecusado(true)
 
+      // abre modal (mostra o WARNING)
       setOpenModal(true)
     } else {
-      setIsAprovado(true)
-      setIsRecusado(false)
+      // se nao tiver warning, pode setar isRecusado para true e mostrar o modal
 
+      // > implementar logica do backend quando pedido for recusado <
+      setIsAprovado(false)
+      setIsRecusado(true)
+      console.log(e)
       setOpenModal(true)
     }
   }
@@ -98,7 +156,8 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
             Relatório do Pedido {numeroPedido} - {nomeAnalista}
           </label>
         </div>
-        <form name="formAprovador" className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+
+        <form name="formAprovador" className={styles.form}>
           <div className={styles.leftSide}>
             <fieldset className={styles.documentacao}>
               <div>
@@ -110,24 +169,22 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                 Documentos (RC/NF):
               </div>
               <div className={styles.inputBlock}>
-                <Link to={`/aprovador/relatorio/${numeroPedido}/documentacao`}>
-                  <button className={styles.btn}>
-                    <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
-                    Visualizar
-                  </button>
-                </Link>
-                <input
-                  type="checkbox"
-                  id="checkboxDocumentacaoProdutoAprovado"
-                  {...register("checkboxDocumentacaoProdutoAprovado")}
+                <button className={styles.btn}>
+                  <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
+                  Visualizar
+                </button>
+                <Checkbox
+                  fill={checkboxDocumentacaoProdutoAprovado}
+                  check="True"
+                  name="checkboxDocumentacaoProdutoAprovado"
+                  onClick={handleCheckboxDocumentacaoAprovar}
                 />
-                <label htmlFor="checkboxDocumentacaoProdutoAprovado">Aprovado</label>
-                <input
-                  type="checkbox"
-                  id="checkboxDocumentacaoProdutoRecusado"
-                  {...register("checkboxDocumentacaoProdutoRecusado")}
+                <Checkbox
+                  fill={checkboxDocumentacaoProdutoReprovado}
+                  check=""
+                  name="checkboxDocumentacaoProdutoReprovado"
+                  onClick={handleCheckboxDocumentacaoRecusar}
                 />
-                <label htmlFor="checkboxDocumentacaoProdutoRecusado">Recusado</label>
               </div>
             </fieldset>
 
@@ -143,8 +200,6 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                   id="textoRevisaoFinalAprovador"
                   rows="8"
                   cols="35"
-                  value={revisao}
-                  onChange={(event) => setRevisao(event.target.value)}
                 />
               </div>
             </fieldset>
@@ -163,24 +218,22 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                   </label>
                 </div>
                 <div className={styles.inputBlock}>
-                  <Link to={`/aprovador/relatorio/${numeroPedido}/infoRecebedor`}>
-                    <button className={styles.btn}>
-                      <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
-                      Visualizar
-                    </button>
-                  </Link>
-                  <input
-                    type="checkbox"
-                    id="checkboxInfoRecebedorAprovado"
-                    {...register("checkboxInfoRecebedorAprovado")}
+                  <button className={styles.btn}>
+                    <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
+                    Visualizar
+                  </button>
+                  <Checkbox
+                    fill={checkboxInfoRecebedorAprovado}
+                    check="True"
+                    name="checkboxDocumentacaoProdutoAprovado"
+                    onClick={handleCheckboxRecebedorAprovar}
                   />
-                  <label htmlFor="checkboxInfoRecebedorAprovado">Aprovado</label>
-                  <input
-                    type="checkbox"
-                    id="checkboxInfoRecebedorRecusado"
-                    {...register("checkboxInfoRecebedorRecusado")}
+                  <Checkbox
+                    fill={checkboxInfoRecebedorReprovado}
+                    check=""
+                    name="checkboxDocumentacaoProdutoReprovado"
+                    onClick={handleCheckboxRecebedorRecusar}
                   />
-                  <label htmlFor="checkboxInfoRecebedorRecusado">Recusado</label>
                 </div>
               </div>
 
@@ -191,31 +244,29 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                   </label>
                 </div>
                 <div className={styles.inputBlock}>
-                  <Link to={`/aprovador/relatorio/${numeroPedido}/infoAnalista`}>
-                    <button className={styles.btn}>
-                      <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
-                      Visualizar
-                    </button>
-                  </Link>
-                  <input
-                    type="checkbox"
-                    id="checkboxInfoAnalistaAprovado"
-                    {...register("checkboxInfoAnalistaAprovado")}
+                  <button className={styles.btn}>
+                    <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
+                    Visualizar
+                  </button>
+                  <Checkbox
+                    fill={checkboxInfoAnalistaAprovado}
+                    check="True"
+                    name="checkboxDocumentacaoProdutoAprovado"
+                    onClick={handleCheckboxAnalistaAprovar}
                   />
-                  <label htmlFor="checkboxInfoAnalistaAprovado">Aprovado</label>
-                  <input
-                    type="checkbox"
-                    id="checkboxInfoAnalistaRecusado"
-                    {...register("checkboxInfoAnalistaRecusado")}
+                  <Checkbox
+                    fill={checkboxInfoAnalistaReprovado}
+                    check=""
+                    name="checkboxDocumentacaoProdutoReprovado"
+                    onClick={handleCheckboxAnalistaRecusar}
                   />
-                  <label htmlFor="checkboxInfoAnalistaRecusado">Recusado</label>
                 </div>
               </div>
             </fieldset>
 
             <div className={styles.buttons}>
-              <Button value1="RECUSAR" value2="MERCADORIA" type="submit" /* onClick={handleAprovacao}  */ />
-              <Button value1="ACEITAR" value2="MERCADORIA" type="submit" /* onClick={handleAprovacao} */ />
+              <Button value1="RECUSAR" value2="MERCADORIA" onClick={handleRecusar} />
+              <Button value1="ACEITAR" value2="MERCADORIA" onClick={handleAceitar} />
             </div>
           </div>
         </form>

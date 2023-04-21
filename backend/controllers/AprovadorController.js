@@ -1,4 +1,4 @@
-const RelatorioAprovadores = require('../models/RelatorioAprovador')
+const RelatorioAprovador = require('../models/RelatorioAprovador')
 
 module.exports = class AprovadorController {
 

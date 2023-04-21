@@ -15,7 +15,7 @@ export const CheckboxDupla = ({
   btnVisualizar,
   readOnly,
   regra,
-  numeroPedido,
+  numeroPedido
 }) => {
   const [checkboxAprovado, setCheckboxAprovado] = useState(false)
   const [checkboxReprovado, setCheckboxReprovado] = useState(false)
@@ -51,8 +51,8 @@ export const CheckboxDupla = ({
             Visualizar
           </button>
         </Link>
-        <Checkbox fill={checkboxAprovado} check="True" name={nameAprovado} onClick={handleCheckboxAprovar} />
-        <Checkbox fill={checkboxReprovado} check="" name={nameRecusado} onClick={handleCheckboxRecusar} />
+        <Checkbox fill={checkboxAprovado} check={true} name={nameAprovado} onClick={handleCheckboxAprovar}/>
+        <Checkbox fill={checkboxReprovado} check={false} name={nameRecusado} onClick={handleCheckboxRecusar}/>
       </div>
     )
   } else if (readOnly) {

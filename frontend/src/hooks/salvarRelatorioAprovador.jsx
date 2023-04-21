@@ -1,11 +1,7 @@
 import api from '../utils/api';
 
-export async function salvarRelatorio(){
+export async function salvarRelatorio(revisao){
     try{
-        const dados = await api.post('/aprovador/relatorios', {});
-        return dados.data;
     } catch(erro){
-        const msgErro = erro.response.data.message;
-        console.log(erro);
     }
 }

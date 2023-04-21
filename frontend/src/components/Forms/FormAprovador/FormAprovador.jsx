@@ -14,6 +14,7 @@ import { faFaceSmileBeam, faFaceFrown, faTriangleExclamation } from "@fortawesom
 import styles from "./FormAprovador.module.css"
 
 export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
+
   const [openModal, setOpenModal] = useState(false)
   const [isAprovado, setIsAprovado] = useState(false)
   const [isRecusado, setIsRecusado] = useState(false)
@@ -23,6 +24,7 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
 
   const [isAprovadoWarning, setIsAprovadoWarning] = useState(false)
   const [isRecusadoWarning, setIsRecusadoWarning] = useState(true)
+
 
   const handleAceitar = (e) => {
     e.preventDefault()
@@ -59,8 +61,8 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
     } else {
       // se nao tiver warning, pode setar isRecusado para true e mostrar o modal
 
-      
       // > implementar logica do backend quando pedido for recusado <
+
       setIsAprovado(false)
       setIsRecusado(true)
 
@@ -175,17 +177,16 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {numeroPedido} foi aprovado!</p>
-                <Link to="/aprovador/relatorio">
-                  <Button className={styles.buttonConfirm} value1="CONFIRMAR" />
-                </Link>
+                {/* <Link to="/aprovador/relatorio"></Link> */}
+                <Button className={styles.buttonConfirm} value1="CONFIRMAR" />
               </div>
             ) : isRecusado && !isRecusadoWarning ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceFrown} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {numeroPedido} foi recusado!</p>
-                <Link to="/aprovador/relatorio">
-                  <Button className={styles.button} value1="CONFIRMAR" />
-                </Link>
+                {/* <Link to="/aprovador/relatorio"></Link> */}
+                <Button className={styles.button} value1="CONFIRMAR" />
+
               </div>
             ) : isAprovadoWarning && isAprovado ? (
               <div className={styles.container}>

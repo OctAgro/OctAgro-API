@@ -15,7 +15,7 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
         allowNull: false
     },
 
-    nome_entragador: {
+    nome_entregador: {
         type: Sequelize.STRING,
         allowNull: false
     },

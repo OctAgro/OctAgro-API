@@ -54,7 +54,7 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 
 <h2>BurnDown<a id="burndown"></a></h2>
 
-<img src="../img/BurnDownSp1.png" alt='BurnDown'/>
+<img src="../BurnDownSp1.png" alt='BurnDown'/>
 
 ## :mortar_board: Equipe <a id="equipe"></a>
 

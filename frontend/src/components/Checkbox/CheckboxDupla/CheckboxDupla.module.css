@@ -1,0 +1,35 @@
+.inputBlock {
+  display: flex;
+}
+
+.btnView {
+  text-align: center;
+  cursor: pointer;
+  background-color: #d9d9d9;
+  height: 3rem;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  font-family: "Gotham Black";
+  display: flex;
+  padding: 0.5rem 5rem;
+  margin-top: 0.2rem;
+  justify-content: center;
+}
+
+.btnReadOnly {
+  text-align: center;
+  cursor:default;
+  background-color: #d9d9d9;
+  height: 3rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: "Gotham Black";
+  display: flex;
+  padding: 0.5rem 3rem;
+  margin: 0.2rem 0;
+  justify-content: center;
+}
+
+.iconEye {
+  padding-right: 0.5rem;
+}

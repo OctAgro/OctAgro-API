@@ -7,15 +7,10 @@
       <h3 align="center">🌾 OctAgro 🐮</h3>
 <hr>
 
-<p align="center">
-      <a href="#sobre">Sobre</a> •
-      <a href="#backlog">Backlog do produto</a> •
-      <a href="#demo">Demonstração</a> •
-      <a href="#burndown">BurnDown</a> •
-      <a href="#equipe">Equipe</a> 
-</p>
 
-## Sobre o Projeto <a id="sobre"></a>
+## Processo de Utilização
 
-No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia.software/"> Jaia Software</a>, e nos fora proposto "Desenvolver um sistema de Inspeção de entrada para controle de recebimento de grãos".
+```
+```
 
+O servidor do site iniciará localmente na porta 3000. Podendo ser acesseçado pelo link https://localhost:3000.

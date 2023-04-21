@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 //CORS
-app.use(cors({ credentials: false, origin: 'http://localhost:5173' }))
+app.use(cors({ credentials: false, origin: 'http://localhost:5000' }))
 
 //Usando Rotas
 app.use('/analista/', AnalistaRotas)

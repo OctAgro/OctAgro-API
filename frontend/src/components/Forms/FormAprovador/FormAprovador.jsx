@@ -59,6 +59,7 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
     } else {
       // se nao tiver warning, pode setar isRecusado para true e mostrar o modal
 
+      
       // > implementar logica do backend quando pedido for recusado <
       setIsAprovado(false)
       setIsRecusado(true)

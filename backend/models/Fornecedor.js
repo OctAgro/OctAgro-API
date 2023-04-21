@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db/conexao')
 
-const Fornecedores = db.define('fornecedores', {
+const Fornecedor = db.define('fornecedor', {
     id_fornecedor: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -33,33 +33,46 @@ const Fornecedores = db.define('fornecedores', {
     }
 })
 
-/* //INPUT DOS FORNECEDOR
-Fornecedores.create({
-    nome_fornecedor: 'Trigostoso',
-    nome_motorista: 'Adenilson Pereira',
-    placa_veiculo: 'ABC1A23',
-    documentos_anexos: 'DocumentoA.pdf'
+//INPUT DOS FORNECEDOR
+
+//adicionei---------------------------------------------------
+async function contar(){
+    const fornecedores = await Fornecedor.count(Fornecedor.id_fornecedor)
+    return fornecedores;
+}
+contar().then(function(valor) {
+    console.log('Quantidade', valor);
+    if (valor === 0) {
+        Fornecedor.create({
+            nome_fornecedor: 'Trigostoso',
+            nome_motorista: 'Adenilson Pereira',
+            placa_veiculo: 'ABC1A23',
+            documentos_anexos: 'DocumentoA.pdf'
+        })
+
+        Fornecedor.create({
+            nome_fornecedor: 'Fornecedor Agrícola S/A',
+            nome_motorista: 'João da Silva',
+            placa_veiculo: 'DEF5678',
+            documentos_anexos: 'DocumentoB.pdf'
+        })
+
+        Fornecedor.create({
+            nome_fornecedor: 'Fornecedor Grãos Export',
+            nome_motorista: 'Dirlei Vasconcelos de Almeida',
+            placa_veiculo: 'GHI9101',
+            documentos_anexos: 'DocumentoC.pdf'
+        })
+
+        Fornecedor.create({
+            nome_fornecedor: 'Fornecedor Cereal Farmers',
+            nome_motorista: 'Maria Aparecida Ramos',
+            placa_veiculo: 'JKL2345',
+            documentos_anexos: 'DocumentoD.pdf'
+        })
+    }
+}).catch(function(erro) {
+    console.log('Erro', erro)
 })
 
-Fornecedores.create({
-    nome_fornecedor: 'Fornecedor Agrícola S/A',
-    nome_motorista: 'João da Silva',
-    placa_veiculo: 'DEF5678',
-    documentos_anexos: 'DocumentoB.pdf'
-})
-
-Fornecedores.create({
-    nome_fornecedor: 'Fornecedor Grãos Export',
-    nome_motorista: 'Dirlei Vasconcelos de Almeida',
-    placa_veiculo: 'GHI9101',
-    documentos_anexos: 'DocumentoC.pdf'
-})
-
-Fornecedores.create({
-    nome_fornecedor: 'Fornecedor Cereal Farmers',
-    nome_motorista: 'Maria Aparecida Ramos',
-    placa_veiculo: 'JKL2345',
-    documentos_anexos: 'DocumentoD.pdf'
-}) */
-
-module.exports = Fornecedores
+module.exports = Fornecedor

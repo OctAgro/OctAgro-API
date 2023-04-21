@@ -15,7 +15,10 @@
       <a href="#equipe">Equipe</a> 
 </p>
 
-<h3 align="center"><a href="#sprint1">Sprint 1</a></h3>
+<div align="center">
+      <a href="https://github.com/Yetgvg/OctAgro-API/blob/Development/doc/entregas/SPRINT1.md">Sprint 1</a> | 
+      <a href="https://github.com/Yetgvg/OctAgro-API/blob/Development/doc/entregas/SPRINT2.md">Sprint 2</a>
+</div>
 
 ## Aprendizagem por Projetos Integrados <a id="API"></a>
 A API (Aprendizagem por Projetos Integrados) é um projeto semestral realizado pela turma de Desenvolvimento de Software Multiplataforma da Fatec SJC. O objetivo é aprender e aplicar na prática conceitos de desenvolvimento de software utilizando o método Scrum como forma de gerenciamento do projeto.
@@ -59,7 +62,7 @@ A seguir, estão listadas as tecnologias utilizadas no projeto, abrangendo desde
 
 <a href="https://code.visualstudio.com" target="_blank"><img src="https://img.shields.io/badge/VS. Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" target="_blank"></a>
 <a href="https://www.atlassian.com/br/software/jira" target="_blank"><img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white" target="_blank"></a>
-<a href="https://code.visualstudio.com" target="_blank"><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white" target="_blank"></a>
+<a href="www.figma.com" target="_blank"><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white" target="_blank"></a>
 
 ## <img class="emoji" alt="memo" height="20" width="20" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4dd.png"> Organização <a id="org"></a>
 

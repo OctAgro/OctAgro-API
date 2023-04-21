@@ -12,6 +12,7 @@ const RelatorioAprovadores = require('./models/RelatorioAprovador')
 const Fornecedores = require('./models/Fornecedor')
 const Produto = require('./models/Produto')
 const CriteriosAvaliacao = require('./models/CriteriosAvaliacao')
+const Usuario = require('./models/Usuario')
 
 //Rotas - invocando depois usando a rota
 const AnalistaRotas = require ('./routes/AnalistaRoutes')
@@ -24,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 //CORS
-app.use(cors({ credentials: false, origin: 'http://localhost:3000' }))
+app.use(cors({ credentials: false, origin: 'http://localhost:5173' }))
 
 //Usando Rotas
 app.use('/analista/', AnalistaRotas)
@@ -37,7 +38,7 @@ app.use(flash())
 
 //Conexao com Banco de Dados
 conexao.sync().then(() => {
-    app.listen(5173)
+    app.listen(3000)
 }).catch(erro => {
     console.log('Deu erro: ', erro)
 })

@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs')
 //--------------------------------
 
 const Usuario = db.define('usuario', {
-    id: {
+    id_usuario: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -45,7 +45,7 @@ const Usuario = db.define('usuario', {
 
 //adicionei---------------------------------------------------
 async function contar(){
-    const usuarios = await Usuario.count(Usuario.id)
+    const usuarios = await Usuario.count(Usuario.id_usuario)
     return usuarios;
 }
 contar().then(function(valor) {

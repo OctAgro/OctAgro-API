@@ -46,7 +46,9 @@ export const CheckboxDupla = ({
             state: { numeroPedido: numeroPedido },
           }}
         >
+
           <button className={styles.btnView}>
+
             <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
             Visualizar
           </button>

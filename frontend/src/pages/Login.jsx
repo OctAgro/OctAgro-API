@@ -5,7 +5,7 @@ import styles from "./Login.module.css";
 
 import { fazerLogin } from "../hooks/usarLogin"
 
-export const Login = () => {
+export const Login = () => { 
   // USA MODULO 'JS-COOKIE' PARA LEMBRAR O USERNAME SE O USUARIO MARCAR A OPÇÃO DE 'LEMBRAR-ME'
   const handleRemember = (event) => {
     if (event.target.checked) {

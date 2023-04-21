@@ -12,6 +12,7 @@ import { DocumentacaoAprovador } from "./pages/aprovador/DocumentacaoAprovador/D
 import { HomeAnalista } from "./pages/analista/HomeAnalista/HomeAnalista"
 import { MercadoriaAnalista } from "./pages/analista/MercadoriaAnalista/MercadoriaAnalista"
 import { FormularioAnalista } from "./pages/analista/FormularioAnalista/FormularioAnalista"
+import { CheckboxDupla } from "./components/Checkbox/CheckboxDupla/CheckboxDupla";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/aprovador/relatorio/:id/documentacao",
-    element: <DocumentacaoAprovador documentacao='True' />,
+    element: <DocumentacaoAprovador documentacao='True'/>,
   },
   {
     path: "/aprovador/relatorio/:id/infoRecebedor",
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/analista/mercadoria/:id",
     element: <FormularioAnalista />,
+  },
+  {
+    path: "/debug",
+    element: <CheckboxDupla btnVisualizar='True' nameAprovado='' nameRecusado='' link='/aprovador/home'/>,
   },
 ])
 

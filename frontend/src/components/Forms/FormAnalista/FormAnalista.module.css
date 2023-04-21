@@ -1,15 +1,13 @@
 .divForm {
-  margin: 2rem auto;
+  margin: 0.5rem auto;
   background-color: #e7e0d1;
   border-radius: 10px;
   font-family: "Gotham Black";
   width: 85%;
-  height: 70vh;
   filter: drop-shadow(2px 2px 2px #000);
 }
 
 .formTop {
-  padding: 0.5rem;
   text-align: center;
   font-size: 1.7rem;
 }
@@ -29,18 +27,13 @@
   clear: both;
 }
 
-.form {
+.formMain {
   display: flex;
 }
 
-.leftSide {
-  margin: 2%;
-  width: 45%;
-}
-
-.rightSide {
-  margin: 2%;
-  width: 45%;
+.leftSide, .rightSide {
+  margin: 0 1%;
+  width: 50%;
 }
 
 .btn {
@@ -75,14 +68,19 @@
 .inputBlock{
   display: flex;
 }
+.formDown{
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+}
 
 .textoRevisao {
   font-family: 'Gotham Black';
   background-color: #D9D9D9;
   color: black;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   resize: none;
   padding: 0.5rem;
   font-size: 1.2rem;
@@ -95,12 +93,22 @@
 
 .legend {
   font-size: 1.4rem;
-  margin-bottom: 0.8rem;
+  margin: 0.5rem 0;
+  text-align: left;
 }
 
 .label {
   display: block;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
+}
+
+.mercadoria {
+  display: block;
+  text-align: center;
+  padding-top: 1%;
+  font-family: "Gotham Black";
+  font-size: 1.7rem;
+
 }
 
 .divModal {
@@ -112,4 +120,8 @@
 
 .container {
   text-align: center;
+}
+
+.btnConfirmar {
+  margin-bottom: 1rem;
 }

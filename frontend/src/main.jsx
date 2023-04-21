@@ -13,6 +13,7 @@ import { HomeAnalista } from "./pages/analista/HomeAnalista/HomeAnalista"
 import { MercadoriaAnalista } from "./pages/analista/MercadoriaAnalista/MercadoriaAnalista"
 import { FormularioAnalista } from "./pages/analista/FormularioAnalista/FormularioAnalista"
 import { CheckboxDupla } from "./components/Checkbox/CheckboxDupla/CheckboxDupla";
+import CheckboxBibioteca from "./components/CheckboxBiblioteca/CheckboxBiblioteca";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/debug",
-    element: <CheckboxDupla readOnly='True' regra='Sexo' nameAprovado='' nameRecusado='' link='/aprovador/home'/>,
+    element: <CheckboxBibioteca/>,
   },
 ])
 

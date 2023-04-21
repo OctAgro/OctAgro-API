@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Cookies from "js-cookie";
 import octagroTransparente from "../assets/octagroTransparente.png";
 import styles from "./Login.module.css";
-
+import { useNavigate } from 'react-router-dom';
 import { fazerLogin } from "../hooks/usarLogin"
 
 export const Login = () => {
+
+  const navigate = useNavigate();
+
   // USA MODULO 'JS-COOKIE' PARA LEMBRAR O USERNAME SE O USUARIO MARCAR A OPÇÃO DE 'LEMBRAR-ME'
   const handleRemember = (event) => {
     if (event.target.checked) {
@@ -19,10 +22,32 @@ export const Login = () => {
   // CONST PARA ARMAZENAR OS VALORES DO SCRIPT
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    await fazerLogin(username, password);
+    event.preventDefault();
+    try {
+      const dados = await fazerLogin(username, password);
+      alert(dados.message);
+
+      //capturando a funcao do usuario
+      const tipoFuncao = dados.funcao;
+
+      //redirecionamento do usuário para a página "home" com base no tipo de função
+      if (tipoFuncao === "Aprovador") {
+        navigate("/aprovador/home");
+      } else if (tipoFuncao === "Analista"){
+        navigate("/analista/home");
+      } else if (tipoFuncao === "Recebedor"){
+        navigate("/recebedor/home");
+      } else {
+        alert("Usuário sem função!");
+      }
+
+    } catch (erro) {
+      setErrorMessage(erro.response.data.message);
+      alert(errorMessage);
+    }
   };
 
   return (
@@ -78,6 +103,7 @@ export const Login = () => {
           />
         </form>
 
+        <p>{errorMessage}</p>
 
         <div className={styles.bottomBoxLogin}>
           <input

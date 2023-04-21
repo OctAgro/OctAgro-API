@@ -1,8 +1,8 @@
 import api from '../utils/api';
 
-export async function fazerLogin(email, senha){
+export async function salvarRelatorio(){
     try{
-        const dados = await api.post('/usuario/loginPost', { email: email, senha: senha });
+        const dados = await api.post('/aprovador/relatorios', {});
         return dados.data;
     } catch(erro){
         const msgErro = erro.response.data.message;

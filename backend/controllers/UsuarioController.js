@@ -130,7 +130,11 @@ module.exports = class UsuarioControllers {
             return res.json({message: "A senha digitada está inválida!", status: 500}).status(500)
         }
 
-        res.json({message: "Login feito com sucesso!", status: 201}).status(201)
+        /* res.json({message: "Login feito com sucesso!", status: 201}).status(201) */
+        
+        if (checarUsuario) {
+            res.json({message: "Login feito com sucesso!", status: 201, funcao: checarUsuario.funcao}).status(201)
+        }
 
     }
 

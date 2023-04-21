@@ -3,8 +3,24 @@
 }
 
 .btn {
+  text-align: center;
   cursor: pointer;
   background-color: #d9d9d9;
+  height: 3rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-family: "Gotham Black";
+  display: flex;
+  padding: 0.5rem 8rem;
+  margin-top: 0.2rem;
+  justify-content: center;
+}
+
+.btnReadOnly {
+  text-align: center;
+  cursor: pointer;
+  background-color: #d9d9d9;
+  width: 65%;
   height: 3rem;
   border-radius: 5px;
   font-size: 1.5rem;

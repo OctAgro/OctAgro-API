@@ -57,7 +57,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/debug",
-    element: <CheckboxDupla btnVisualizar='True' nameAprovado='' nameRecusado='' link='/aprovador/home'/>,
+    element: <CheckboxDupla readOnly='True' regra='Sexo' nameAprovado='' nameRecusado='' link='/aprovador/home'/>,
   },
 ])
 

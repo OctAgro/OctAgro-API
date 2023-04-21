@@ -8,7 +8,15 @@ import { faEye } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "../CheckboxDupla/CheckboxDupla.module.css"
 
-export const CheckboxDupla = ({ nameAprovado, nameRecusado, link, btnVisualizar, readOnly, numeroPedido }) => {
+export const CheckboxDupla = ({
+  nameAprovado,
+  nameRecusado,
+  link,
+  btnVisualizar,
+  readOnly,
+  regra,
+  numeroPedido,
+}) => {
   const [checkboxAprovado, setCheckboxAprovado] = useState(false)
   const [checkboxReprovado, setCheckboxReprovado] = useState(false)
 
@@ -48,7 +56,23 @@ export const CheckboxDupla = ({ nameAprovado, nameRecusado, link, btnVisualizar,
       </div>
     )
   } else if (readOnly) {
-    // codigo que o thiago ta usando aqui
+    return (
+      <div className={styles.inputBlock}>
+        <input className={styles.btnReadOnly} value={regra} readOnly />
+        <Checkbox
+          fill={checkboxAprovado}
+          check="True"
+          name={nameAprovado}
+          onClick={handleCheckboxAprovar}
+        />
+        <Checkbox
+          fill={checkboxReprovado}
+          check=""
+          name={nameRecusado}
+          onClick={handleCheckboxRecusar}
+        />
+      </div>
+    )
   } else {
     return null
   }

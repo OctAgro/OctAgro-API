@@ -19,6 +19,7 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
   const [openModal, setOpenModal] = useState(false)
   const [isAprovado, setIsAprovado] = useState(false)
   const [isRecusado, setIsRecusado] = useState(false)
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   // pegar da api se o pedido atual foi recusado ou aprovado,
   // se analista recusou setIsAprovadoWarning(true), se o analista aprovou então setIsRecusadoWarning(true)
@@ -28,6 +29,7 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
 
   //variaveis para mandar para o banco de dados
   const [revisao, setRevisao] = useState("")
+  const [mensagemErro, setMensagemErro] = useState(null);
 
   const {
     register,
@@ -53,9 +55,13 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
   
     try {
       const resposta = await axios.post('http://localhost:3000/aprovador/relatorios', dados)
-      console.log(resposta)
+      //esse console.log retorna respostas json do backend de erros de validacao
+      console.log(resposta.data.message)
+      setMensagemErro(resposta.data.message)
     } catch (erro) {
-      console.error(erro)
+      //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
+      console.log(erro.message)
+      /* setMensagemErro(erro) */
     }
   }
 
@@ -221,9 +227,15 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
         </form>
       </div>
       <div className={styles.divModal}>
+
         <Modal isOpen={openModal} onClick={handleCloseModal}>
           <div className={styles.clearfix}>
-            {isAprovado && !isAprovadoWarning ? (
+            {mensagemErro ? (
+              <div className={styles.container}>
+                <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
+                <p className={styles.paragraph}>{mensagemErro}</p>
+              </div>
+            ) : isAprovado && !isAprovadoWarning ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {numeroPedido} foi aprovado!</p>
@@ -262,6 +274,8 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
             ) : null}
           </div>
         </Modal>
+
+        
       </div>
     </div>
   )

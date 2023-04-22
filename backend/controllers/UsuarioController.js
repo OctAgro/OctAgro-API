@@ -3,13 +3,6 @@ const Usuario = require('../models/Usuario')
 const bcrypt = require('bcryptjs')
 
 module.exports = class UsuarioControllers {
-    // static loginUsuario(req, res) {
-    //     res.render('usuario/loginUsuario')
-    // }
-
-    // static registrarUsuario(req,res) {
-    //     res.render('usuario/registroUsuario')
-    // }
 
     static async registrarUsuarioPost(req, res) {
         const {nome, email, senha, confirmarSenha, funcao, dataAdmissao, CPF, RG, dataNascimento, genero} = req.body
@@ -133,7 +126,27 @@ module.exports = class UsuarioControllers {
         /* res.json({message: "Login feito com sucesso!", status: 201}).status(201) */
         
         if (checarUsuario) {
-            res.json({message: "Login feito com sucesso!", status: 201, funcao: checarUsuario.funcao}).status(201)
+            res.json({
+                message: "Login feito com sucesso!",
+                status: 201,
+                id_usuario: checarUsuario.id_usuario,
+                nome: checarUsuario.nome,
+                sobrenome: checarUsuario.sobrenome,
+                email: checarUsuario.email,
+                funcao: checarUsuario.funcao
+            }).status(201)
+        }
+    }
+
+    static async buscarUsuarioByEmail(req, res) {
+        const email = req.body
+
+        const checarUsuario = await Usuario.findOne({where: {email: email}})
+
+        if (!checarUsuario) {
+            return res.json({message: "Usuário não encontrado!", status: 500}).status(500)
+        } else {
+            res.json({checarUsuario: checarUsuario}).status(201)
         }
 
     }

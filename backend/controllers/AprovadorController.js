@@ -31,12 +31,6 @@ module.exports = class AprovadorController {
 
         console.log(data.checkboxDocumentacaoProdutoAprovado)
 
-        /* //OBS: O campo de texto do "req.body.textoRevisaoFinalAprovador" pode ser preenchido ou não, por isso não está sendo verificado! Apenas irá ser encaminado com '' se nada for preenchido
-        if (!textoRevisaoFinalAprovador) {
-            req.body.textoRevisaoFinalAprovador = ''
-            res.status(200).json({mensagem: 'passou!'})
-        } */
-
         //Salvando dados na Tabela do Banco de Dados
         const relatorioAprovador = new RelatorioAprovador({
 
@@ -52,78 +46,64 @@ module.exports = class AprovadorController {
 
         try {
             const novoRelatorioAprovador = await relatorioAprovador.save()
-            res.status(201).json({mensagem: 'Relatório salvo com sucesso!', novoRelatorioAprovador})
+            res.status(201).json({message: 'Relatório salvo com sucesso!'})
         } catch(erro) {
-            res.status(500).json({mensagem: erro})
+            res.status(500).json({message: erro})
         }
     }
 
     //Função de encontrar Relatório pelo Id
     static async encontrarRelatorioPorId(req,res) {
         const idRelatorio = req.params.id
-        const relatorioProcurado = await RelatorioAprovador.findByPk(idRelatorio)
+
+        const relatorioProcurado = await RelatorioAprovadores.findByPk(idRelatorio)
 
         if (!relatorioProcurado) {
-            res.status(422).json({mensagem: "Relatório não encontrado!"})
+            res.status(422).json({message: "Relatório não encontrado!"})
         }
 
-        res.status(200).json({mensagem: relatorioProcurado})
+        res.status(200).json({message: relatorioProcurado})
 
     }
 
     // Função para atualizar um relatório de aprovação pelo ID
     static async atualizarRelatorioAprovacao(req, res) {
         const idRelatorio = req.params.id
-        const { 
-            checkboxDocumentacaoProdutoAprovado, 
-            checkboxDocumentacaoProdutoReprovado,
-            checkboxInfoRecebedorAprovado,
-            checkboxInfoRecebedorReprovado,
-            checkboxInfoAnalistaAprovado,
-            checkboxInfoAnalistaReprovado,
-            textoRevisaoFinalAprovador,
-            statusFinalAprovacao } = req.body
+        const data = req.body
 
-        //checando se as checkboxs/caixas de seleção estão corretamente preenchidas
-        const listaErros = []
-
-        if (checkboxDocumentacaoProdutoAprovado && checkboxDocumentacaoProdutoReprovado) {
-            listaErros.push('Não é possível marcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!')
-        } else if (!checkboxInfoRecebedorAprovado && !checkboxInfoRecebedorReprovado){
-            listaErros.push('Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!')
+        if (data.checkboxDocumentacaoProdutoAprovado && data.checkboxDocumentacaoProdutoReprovado) {
+            return res.json({message: "Não é possível marcar as duas opções ao mesmo tempo! A informação da Documentação deve ser aprovada ou reprovada!", status: 500}).status(500)
+        } else if (!data.checkboxDocumentacaoProdutoAprovado && !data.checkboxDocumentacaoProdutoAprovado){
+            return res.json({message: "Não é possível desmarcar as duas opções ao mesmo tempo! A informação da Documentação deve ser aprovada ou reprovada!", status: 500}).status(500)
         }
 
-        if (checkboxInfoRecebedorAprovado && checkboxInfoRecebedorReprovado) {
-            listaErros.push('Não é possível marcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!')
-        } else if (!checkboxInfoRecebedorAprovado && !checkboxInfoRecebedorReprovado){
-            listaErros.push('Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!')
+        if (data.checkboxInfoRecebedorAprovado && data.checkboxInfoRecebedorReprovado) {
+            return res.json({message: "Não é possível marcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!", status: 500}).status(500)
+        } else if (!data.checkboxInfoRecebedorAprovado && !data.checkboxInfoRecebedorReprovado){
+            return res.json({message: "Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!", status: 500}).status(500)
         }
 
-        if (checkboxInfoAnalistaAprovado && checkboxInfoAnalistaReprovado) {
-            listaErros.push('Não é possível marcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!')
-        } else if (!checkboxInfoAnalistaAprovado && !checkboxInfoAnalistaReprovado){
-            listaErros.push('Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!')
-        }
-
-        if (listaErros.length > 0) {
-            res.status(400).json({ erros: listaErros })
+        if (data.checkboxInfoAnalistaAprovado && data.checkboxInfoAnalistaReprovado) {
+            return res.json({message: "Não é possível marcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!", status: 500}).status(500)
+        } else if (!data.checkboxInfoAnalistaAprovado && !data.checkboxInfoAnalistaReprovado){
+            return res.json({message: "Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!", status: 500}).status(500)
         }
 
         try {
-            const relatorioAtualizado = await RelatorioAprovador.update({
-                doc_status: checkboxDocumentacaoProdutoAprovado, 
-                info_recebedor_status: checkboxInfoRecebedorAprovado,
-                info_analista_status: checkboxInfoAnalistaAprovado,
-                revisao_aprovador: textoRevisaoFinalAprovador,
-                status_final_aprovacao: statusFinalAprovacao
+            const relatorioAtualizado = await RelatorioAprovadores.update({
+                doc_status: data.heckboxDocumentacaoProdutoAprovado, 
+                info_recebedor_status: data.checkboxInfoRecebedorAprovado,
+                info_analista_status: data.checkboxInfoAnalistaAprovado,
+                revisao_aprovador: data.textoRevisaoFinalAprovador,
+                status_final_aprovacao: data.statusFinalAprovacao
             }, {
                 where: {
                     id_relatorio_aprovador: idRelatorio
                 }
             })
-            res.status(200).json({mensagem: 'Relatório atualizado com sucesso!', relatorioAtualizado})
+            res.status(200).json({message: 'Relatório atualizado com sucesso!'})
         } catch(erro) {
-            res.status(500).json({mensagem: erro})
+            res.status(500).json({message: erro})
         }
     }
 
@@ -133,8 +113,7 @@ module.exports = class AprovadorController {
             const relatorios = await RelatorioAprovador.findAll();
             res.status(200).json(relatorios);
         } catch (erro) {
-            console.log(erro)
-            res.status(500).json({ mensagem: "Deu rui ai caraio" });
+            res.status(500).json({ message: erro });
         }
     }
 
@@ -147,12 +126,12 @@ module.exports = class AprovadorController {
                 where: { id_relatorio_aprovador: idRelatorio }
             });
             if (relatorioAtualizado[0] === 0) {
-                res.status(422).json({ mensagem: "Relatório não encontrado!" });
+                res.status(422).json({ message: "Relatório não encontrado!" });
             } else {
-                res.status(200).json({ mensagem: "Relatório atualizado com sucesso!" });
+                res.status(200).json({ message: "Relatório atualizado com sucesso!" });
             }
         } catch (erro) {
-            res.status(500).json({ mensagem: erro });
+            res.status(500).json({ message: erro });
         }
     }
 

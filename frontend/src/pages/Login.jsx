@@ -28,6 +28,7 @@ export const Login = () => {
     event.preventDefault();
     try {
       const dados = await fazerLogin(username, password);
+      console.log(dados)
       alert(dados.message);
 
       //capturando a funcao do usuario
@@ -35,11 +36,11 @@ export const Login = () => {
 
       //redirecionamento do usuário para a página "home" com base no tipo de função
       if (tipoFuncao === "Aprovador") {
-        navigate("/aprovador/home");
+        navigate("/aprovador/home", {state: {dados: dados} });
       } else if (tipoFuncao === "Analista"){
-        navigate("/analista/home");
+        navigate("/analista/home", {state: {dados: dados} });
       } else if (tipoFuncao === "Recebedor"){
-        navigate("/recebedor/home");
+        navigate("/recebedor/home", {state: {dados: dados} });
       }
 
     } catch (erro) {

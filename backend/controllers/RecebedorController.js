@@ -2,110 +2,85 @@ const RelatorioRecebedor = require("../models/RelatorioRecebedor")
 
 module.exports = class RelatorioRecebedor {
     static async criarRelatorio(req, res){
-        const {
-            textoNomeFornecedor,
-            textoNomeEntregador,
-            textoPlacaVeiculo,
-            dataDataEntrada,
-            tempoHorarioEntrada,
-            textoDocmento,
-            textoProduto,
-            numeroQuantidade,
-            textoUnidadeMedida,
-            checkboxColoracaoAprovado,
-            checkboxColoracaoReprovado,
-            checkboxOdorAprovado,
-            checkboxOdorReprovado,
-            checkboxAusenciaAnimaisAprovado,
-            checkboxAusenciaAnimaisReprovado,
-            checkboxAusenciaMofoAprovado,
-            checkboxAusenciaMofoReprovado
-        } = req.body
+        const data = req.body
 
-
-        const listaErros = []
-        if(!textoNomeFornecedor){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoNomeFornecedor){
+            return res.json({message: 'O parametro Nome do Fornecedor não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!textoNomeEntregador){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoNomeEntregador){
+            return res.json({message: 'O parametro Nome do Entregador não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!textoPlacaVeiculo){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoPlacaVeiculo){
+            return res.json({message: 'O parametro Placa do Veículo não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!dataDataEntrada){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.dataDataEntrada){
+            return res.json({message: 'O parametro Data de Entrada não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!tempoHorarioEntrada){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.tempoHorarioEntrada){
+            return res.json({message: 'O parametro Horario de Entrada não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!textoProduto){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoProduto){
+            return res.json({message: 'O parametro Nome do Produto não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!numeroQuantidade){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.numeroQuantidade){
+            return res.json({message: 'O parametro Quantidade não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(! textoUnidadeMedida){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoUnidadeMedida){
+            return res.json({message: 'O parametro Unidade de Medida não pode estar vazio', status: 500}).status(500)
         }
 
-        if (checkboxColoracaoAprovado && checkboxColoracaoReprovado) {
-            listaErros.push('Escolha apenas uma das opções!')
-        } else if (!checkboxColoracaoAprovado && !checkboxColoracaoReprovado){
-            listaErros.push('Escolha apenas uma das opções!')
+        if (data.checkboxColoracaoAprovado && data.checkboxColoracaoReprovado) {
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
+        } else if (!data.checkboxColoracaoAprovado && !data.checkboxColoracaoReprovado){
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
         }
 
-        if (checkboxOdorAprovado && checkboxOdorReprovado) {
-            listaErros.push('Escolha apenas uma das opções!')
-        } else if (!checkboxOdorAprovado && !checkboxOdorReprovado){
-            listaErros.push('Escolha apenas uma das opções!')
+        if (data.checkboxOdorAprovado && data.checkboxOdorReprovado) {
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
+        } else if (!data.checkboxOdorAprovado && !data.checkboxOdorReprovado){
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
         }
 
-        if (checkboxAusenciaAnimaisAprovado && checkboxAusenciaAnimaisReprovado) {
-            listaErros.push('Escolha apenas uma das opções!')
-        } else if (!checkboxAusenciaAnimaisAprovado && !checkboxAusenciaAnimaisReprovado){
-            listaErros.push('Escolha apenas uma das opções!')
+        if (data.checkboxAusenciaAnimaisAprovado && data.checkboxAusenciaAnimaisReprovado) {
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
+        } else if (!data.checkboxAusenciaAnimaisAprovado && !data.checkboxAusenciaAnimaisReprovado){
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
         }
 
-        if (checkboxAusenciaMofoAprovado && checkboxAusenciaMofoReprovado) {
-            listaErros.push('Escolha apenas uma das opções!')
-        } else if (!checkboxAusenciaMofoAprovado && !checkboxAusenciaMofoReprovado){
-            listaErros.push('Escolha apenas uma das opções!')
-        }
-
-
-        if(listaErros.length > 0){
-            res.status(400).json({erros: listaErros})
+        if (data.checkboxAusenciaMofoAprovado && data.checkboxAusenciaMofoReprovado) {
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
+        } else if (!data.checkboxAusenciaMofoAprovado && !data.checkboxAusenciaMofoReprovado){
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
         }
 
 
         const relatorioRecebedor = new RelatorioRecebedor({
-            nome_fornecedor: textoNomeFornecedor,
-            nome_entragador: textoNomeEntregador,
-            placa_veiculo: textoPlacaVeiculo,
-            data_entrada: dataDataEntrada,
-            horario_entrada: tempoHorarioEntrada,
-            documento_entrada: textoDocmento,
-            produto: textoProduto,
-            quantidade: numeroQuantidade,
-            unidade_medida: textoUnidadeMedida,
-            coloracao: checkboxColoracaoAprovado,
-            odor: checkboxOdorAprovado,
-            ausencia_animais: checkboxAusenciaAnimaisAprovado,
-            ausencia_mofo: checkboxAusenciaMofoAprovado
+            nome_fornecedor: data.textoNomeFornecedor,
+            nome_entragador: data.textoNomeEntregador,
+            placa_veiculo: data.textoPlacaVeiculo,
+            data_entrada: data.dataDataEntrada,
+            horario_entrada: data.tempoHorarioEntrada,
+            documento_entrada: data.textoDocmento,
+            produto: data.textoProduto,
+            quantidade: data.numeroQuantidade,
+            unidade_medida: data.textoUnidadeMedida,
+            coloracao: data.checkboxColoracaoAprovado,
+            odor: data.checkboxOdorAprovado,
+            ausencia_animais: data.checkboxAusenciaAnimaisAprovado,
+            ausencia_mofo: data.checkboxAusenciaMofoAprovado
         })
 
 
         try {
             const novoRelatorioRecebedor = await relatorioRecebedor.save()
-            res.status(201).json({mensagem: 'Relatório aprovado com sucesso!', novoRelatorioRecebedor})
+            res.status(201).json({mensagem: 'Relatório aprovado com sucesso!'})
         } catch(erro) {
             res.status(500).jason({mensagem: erro})
         }
@@ -114,105 +89,80 @@ module.exports = class RelatorioRecebedor {
     static async encontrarRelator(req, res){
         const idRelatorio = req.params.idRelatorio
 
-        const {
-            textoNomeFornecedor,
-            textoNomeEntregador,
-            textoPlacaVeiculo,
-            dataDataEntrada,
-            tempoHorarioEntrada,
-            textoDocmento,
-            textoProduto,
-            numeroQuantidade,
-            textoUnidadeMedida,
-            checkboxColoracaoAprovado,
-            checkboxColoracaoReprovado,
-            checkboxOdorAprovado,
-            checkboxOdorReprovado,
-            checkboxAusenciaAnimaisAprovado,
-            checkboxAusenciaAnimaisReprovado,
-            checkboxAusenciaMofoAprovado,
-            checkboxAusenciaMofoReprovado
-        } = req.body
+        const data = req.body
 
 
-        const listaErros = []
-        if(!textoNomeFornecedor){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoNomeFornecedor){
+            return res.json({message: 'O parametro Nome do Fornecedor não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!textoNomeEntregador){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoNomeEntregador){
+            return res.json({message: 'O parametro Nome do Entregador não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!textoPlacaVeiculo){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoPlacaVeiculo){
+            return res.json({message: 'O parametro Placa do Veículo não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!dataDataEntrada){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.dataDataEntrada){
+            return res.json({message: 'O parametro Data de Entrada não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!tempoHorarioEntrada){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.tempoHorarioEntrada){
+            return res.json({message: 'O parametro Horario de Entrada não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!textoProduto){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoProduto){
+            return res.json({message: 'O parametro Nome do Produto não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(!numeroQuantidade){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.numeroQuantidade){
+            return res.json({message: 'O parametro Quantidade não pode estar vazio!', status: 500}).status(500)
         }
 
-        if(! textoUnidadeMedida){
-            listaErros.push('O parametro não pode estar vasio!')
+        if(!data.textoUnidadeMedida){
+            return res.json({message: 'O parametro Unidade de Medida não pode estar vazio', status: 500}).status(500)
         }
 
-        if (checkboxColoracaoAprovado && checkboxColoracaoReprovado) {
-            listaErros.push('Escolha apenas uma das opções!')
-        } else if (!checkboxColoracaoAprovado && !checkboxColoracaoReprovado){
-            listaErros.push('Escolha apenas uma das opções!')
+        if (data.checkboxColoracaoAprovado && data.checkboxColoracaoReprovado) {
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
+        } else if (!data.checkboxColoracaoAprovado && !data.checkboxColoracaoReprovado){
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
         }
 
-        if (checkboxOdorAprovado && checkboxOdorReprovado) {
-            listaErros.push('Escolha apenas uma das opções!')
-        } else if (!checkboxOdorAprovado && !checkboxOdorReprovado){
-            listaErros.push('Escolha apenas uma das opções!')
+        if (data.checkboxOdorAprovado && data.checkboxOdorReprovado) {
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
+        } else if (!data.checkboxOdorAprovado && !data.checkboxOdorReprovado){
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
         }
 
-        if (checkboxAusenciaAnimaisAprovado && checkboxAusenciaAnimaisReprovado) {
-            listaErros.push('Escolha apenas uma das opções!')
-        } else if (!checkboxAusenciaAnimaisAprovado && !checkboxAusenciaAnimaisReprovado){
-            listaErros.push('Escolha apenas uma das opções!')
+        if (data.checkboxAusenciaAnimaisAprovado && data.checkboxAusenciaAnimaisReprovado) {
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
+        } else if (!data.checkboxAusenciaAnimaisAprovado && !data.checkboxAusenciaAnimaisReprovado){
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
         }
 
-        if (checkboxAusenciaMofoAprovado && checkboxAusenciaMofoReprovado) {
-            listaErros.push('Escolha apenas uma das opções!')
-        } else if (!checkboxAusenciaMofoAprovado && !checkboxAusenciaMofoReprovado){
-            listaErros.push('Escolha apenas uma das opções!')
+        if (data.checkboxAusenciaMofoAprovado && data.checkboxAusenciaMofoReprovado) {
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
+        } else if (!data.checkboxAusenciaMofoAprovado && !data.checkboxAusenciaMofoReprovado){
+            return res.json({message: 'Escolha apenas uma das opções!', status: 500}).status(500)
         }
-
-
-        if(listaErros.length > 0){
-            res.status(400).json({erros: listaErros})
-        }
-
 
         try {
             const relatorioRecebedorAtualizado = await relatorioRecebedor.update({
-                nome_fornecedor: textoNomeFornecedor,
-                nome_entragador: textoNomeEntregador,
-                placa_veiculo: textoPlacaVeiculo,
-                data_entrada: dataDataEntrada,
-                horario_entrada: tempoHorarioEntrada,
-                documento_entrada: textoDocmento,
-                produto: textoProduto,
-                quantidade: numeroQuantidade,
-                unidade_medida: textoUnidadeMedida,
-                coloracao: checkboxColoracaoAprovado,
-                odor: checkboxOdorAprovado,
-                ausencia_animais: checkboxAusenciaAnimaisAprovado,
-                ausencia_mofo: checkboxAusenciaMofoAprovado
+                nome_fornecedor: data.textoNomeFornecedor,
+                nome_entregador: data.textoNomeEntregador,
+                placa_veiculo: data.textoPlacaVeiculo,
+                data_entrada: data.dataDataEntrada,
+                horario_entrada: data.tempoHorarioEntrada,
+                documento_entrada: data.textoDocmento,
+                produto: data.textoProduto,
+                quantidade: data.numeroQuantidade,
+                unidade_medida: data.textoUnidadeMedida,
+                coloracao: data.checkboxColoracaoAprovado,
+                odor: data.checkboxOdorAprovado,
+                ausencia_animais: data.checkboxAusenciaAnimaisAprovado,
+                ausencia_mofo: data.checkboxAusenciaMofoAprovado
             }, {
                 where: {
                     id_relatorio: idRelatorio
@@ -220,7 +170,7 @@ module.exports = class RelatorioRecebedor {
             })
 
             
-            res.status(200).json({mensagem: 'Relatório atualizado com sucesso!', relatorioRecebedorAtualizado})
+            res.status(200).json({mensagem: 'Relatório atualizado com sucesso!'})
         } catch(erro) {
             res.status(500).json({mensagem: erro})
         }

@@ -19,6 +19,7 @@
 .paragraph {
   font-size: 1.2rem;
   text-align: center;
+  margin: 3rem 0;
 }
 
 .clearfix::after {
@@ -92,6 +93,7 @@
 }
 
 .legend {
+  cursor: default;
   font-size: 1.4rem;
   margin: 0.5rem 0;
   text-align: left;
@@ -99,29 +101,33 @@
 
 .label {
   display: block;
-  margin: 1rem 0;
+  margin-top: 0.5rem;  
 }
 
 .mercadoria {
-  display: block;
+  cursor: default;
   text-align: center;
-  padding-top: 1%;
+  padding: 0.5%;
   font-family: "Gotham Black";
-  font-size: 1.7rem;
-
+  font-size: 1rem;
 }
 
 .divModal {
   position: absolute;
-  left: 25%;
-  top: 10%;
-  width: 70%;
 }
 
 .container {
   text-align: center;
+  padding: 2vw;
+  margin:auto;
 }
 
 .btnConfirmar {
   margin-bottom: 1rem;
+}
+
+.divMaster {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
 }

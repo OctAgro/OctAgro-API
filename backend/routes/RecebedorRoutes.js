@@ -2,9 +2,9 @@ const router = require("express").Router()
 
 const RecebedorController = require('../controllers/RecebedorController')
 
-router.get('/home')
+router.get('/home', RecebedorController.listarRelatorios)
 router.post('/entrada-mercadoria', RecebedorController.criarRelatorio)
-router.post('/relatorios/:id', RecebedorController.encontrarRelator)
-/* router.post('/relatorios/editar/:id', RecebedorController.atualizarRelatorio) */
+router.post('/relatorios/apagar/:id', RecebedorController.apagarRelatorio)
+/router.post('/relatorios/editar/:id', RecebedorController.atualizarRelatorio)
 
 module.exports = router

@@ -114,7 +114,7 @@ module.exports = class RelatorioAnalista {
 
     }
 
-    static async listaRelatorios (req,res) {
+    static async listarRelatorios (req,res) {
         try {
             const relatorios = await RelatorioAnalista.findAll();
             res.status(200).json(relatorios);

@@ -14,6 +14,8 @@ import { MercadoriaAnalista } from "./pages/analista/MercadoriaAnalista/Mercador
 import { FormularioAnalista } from "./pages/analista/FormularioAnalista/FormularioAnalista"
 import { CheckboxDupla } from "./components/Checkbox/CheckboxDupla/CheckboxDupla";
 import CheckboxBibioteca from "./components/CheckboxBiblioteca/CheckboxBiblioteca";
+import { DocumentacaoAnalista } from "./pages/analista/DocumentacaoAnalista/DocumentacaoAnalista";
+import { DocumentacaoAnalistaRecebedor } from "./pages/analista/DocumentacaoAnalistaRecebedor/DocumentacaoAnalistaRecebedor";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
   {
     path: "/analista/mercadoria/:id",
     element: <FormularioAnalista />,
+  },
+  {
+    path: "/analista/documentacao/:id",
+    element: <DocumentacaoAnalista recebedor='True' />,
+  },
+  {
+    path: "/analista/documentacaoRecebedor/:id",
+    element: <DocumentacaoAnalistaRecebedor recebedor='True'/>,
   },
   {
     path: "/debug",

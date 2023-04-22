@@ -12,6 +12,9 @@ import UserImg from "../../../assets/UserImg.webp"
 import styles from "./RelatorioAprovador.module.css"
 
 export const RelatorioAprovador = () => {
+
+  
+
   return (
     <div className={styles.main}>
       <SidebarAprovador
@@ -27,7 +30,7 @@ export const RelatorioAprovador = () => {
 
         <div className={styles.content}>
           <TabelaRelatorios
-            numeroPedido="1001"
+            numeroPedido="1002"
             descricao="Café"
             situacao="Aceito"
             funcionario="Thiago Zani"

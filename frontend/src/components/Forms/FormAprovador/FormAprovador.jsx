@@ -12,18 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faFaceSmileBeam, faFaceFrown, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormAprovador.module.css"
+import axios from 'axios'
 
 export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
-
-  const onSubmit = (data) => {
-    console.log(data)
-    handleAprovacao()
-  }
 
   const [openModal, setOpenModal] = useState(false)
   const [isAprovado, setIsAprovado] = useState(false)
@@ -34,6 +25,39 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
 
   const [isAprovadoWarning, setIsAprovadoWarning] = useState(false)
   const [isRecusadoWarning, setIsRecusadoWarning] = useState(true)
+
+  //variaveis para mandar para o banco de dados
+  const [revisao, setRevisao] = useState("")
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = (data) => {
+    handleAprovacao()
+    enviarDados(data)
+  }
+
+  //fazendo o post
+  const enviarDados = async (data) => {
+
+    const dados = {
+      textoRevisaoFinalAprovador: revisao,
+      statusFinalAprovacao: true,
+      ...data
+    }
+
+    console.log(dados)
+  
+    try {
+      const resposta = await axios.post('http://localhost:3000/aprovador/relatorios', dados)
+      console.log(resposta)
+    } catch (erro) {
+      console.error(erro)
+    }
+  }
 
   const handleAprovacao = () => {
     if (isAprovadoWarning) {
@@ -119,6 +143,8 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                   id="textoRevisaoFinalAprovador"
                   rows="8"
                   cols="35"
+                  value={revisao}
+                  onChange={(event) => setRevisao(event.target.value)}
                 />
               </div>
             </fieldset>
@@ -201,15 +227,17 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {numeroPedido} foi aprovado!</p>
-                {/*                 <Link to="/aprovador/relatorio"></Link> */}
-                <Button className={styles.buttonConfirm} value1="CONFIRMAR" />
+                <Link to="/aprovador/relatorio">
+                  <Button className={styles.buttonConfirm} value1="CONFIRMAR" />
+                </Link>
               </div>
             ) : isRecusado && !isRecusadoWarning ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceFrown} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {numeroPedido} foi recusado!</p>
-                {/*                 <Link to="/aprovador/relatorio"></Link> */}
-                <Button className={styles.button} value1="CONFIRMAR" />
+                <Link to="/aprovador/relatorio">
+                  <Button className={styles.button} value1="CONFIRMAR" />
+                </Link>
               </div>
             ) : isAprovadoWarning && isAprovado ? (
               <div className={styles.container}>

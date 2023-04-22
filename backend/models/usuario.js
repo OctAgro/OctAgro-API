@@ -1,9 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../db/conexao')
 
-//adicionei-----------------------
 const bcrypt = require('bcryptjs')
-//--------------------------------
+
 
 const Usuario = db.define('usuario', {
     id_usuario: {
@@ -36,9 +35,12 @@ const Usuario = db.define('usuario', {
 
     dataNascimento: Sequelize.DATE,
 
-    genero: Sequelize.STRING(1)
+    genero: Sequelize.STRING(1),
 
-    
+    foto: {
+        type: Sequelize.STRING
+    }
+
 }, {
     timestamp: false
 })

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useLocation } from 'react-router-dom';
 
 // IMPORTANDO COMPONENTES
 import { SidebarAprovador } from "../../../components/sidebar/SidebarAprovador/SidebarAprovador"
@@ -12,13 +13,17 @@ import UserImg from "../../../assets/UserImg.webp"
 import styles from "./HomeAprovador.module.css"
 
 export const HomeAprovador = () => {
+    const location = useLocation();
+    const dados = location.state.dados;
+    console.log(dados.id_usuario)
+
   const [relatoriosPendentes, setRelatoriosPendentes] = useState(1)
 
   return (
     <div className={styles.main}>
       <SidebarAprovador
-        nome="Thiago Zani"
-        funcao="Aprovador"
+        nome={dados.nome}
+        funcao={dados.funcao}
         imagem={UserImg}
       />
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useLocation } from 'react-router-dom';
 
 // IMPORTANDO COMPONENTES
 import { SidebarRecebedor } from "../../../components/sidebar/SidebarRecebedor/SidebarRecebedor"
@@ -12,13 +13,19 @@ import UserImg from "../../../assets/UserImg.webp"
 import styles from "./HomeRecebedor.module.css"
 
 export const HomeRecebedor = () => {
+  const location = useLocation();
+  const dados = location.state.dados;
+  console.log(dados.id_usuario)
+
+  
+
   const [mercadoriasPendentes, setRelatoriosPendentes] = useState(1)
 
   return (
     <div className={styles.main}>
       <SidebarRecebedor
-        nome="Leandro Luz"
-        funcao="Recebedor"
+        nome={dados.nome}
+        funcao={dados.funcao}
         imagem={UserImg}
       />
 

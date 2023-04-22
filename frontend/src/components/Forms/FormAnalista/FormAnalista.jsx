@@ -68,43 +68,49 @@ export const FormAnalista = (props) => {
     }
   }
 
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
+
   return (
     <div>
-      <h1 className={styles.mercadoria}>Entrada de Mercadoria</h1>
-      <div className={styles.divForm}>
-        <div className={styles.formTop}>
-          <label className={styles.label} htmlFor="FormAnalista">
-            Pedido #{props.numeroPedido} - {props.nomeProduto}
-          </label>
-        </div>
-
-        <form name="FormAnalista">
-          <div className={styles.formMain}>
-            <div className={styles.leftSide}>
-              <fieldset>
-                <div>
-                  <legend className={styles.legend}>Regras de Aceitação</legend>
-                  <hr className={styles.row} />
-                </div>
-                <div>
-                  <CheckboxDupla
-                    regra="Qualidade dos Grãos" readOnly />
-                </div>
-                <div>
-                  <CheckboxDupla
-                    regra="Formato do Grão" readOnly />
-                </div>
-                <div>
-                  <CheckboxDupla
-                    regra="Nível de Agrotóxicos" readOnly />
-                </div>
-                <div>
-                  <CheckboxDupla
-                    regra="Limpeza dos Grãos" readOnly />
-                </div>
-              </fieldset>
-            </div>
-            <div className={styles.rightSide}>              
+      <div className={styles.mercadoria}>
+        <h1>Entrada de Mercadoria</h1>
+      </div>
+      <div className={styles.divMaster}>      
+        <div className={styles.divForm}>
+          <div className={styles.formTop}>
+            <label className={styles.label} htmlFor="FormAnalista">
+              Pedido #{props.numeroPedido} - {props.nomeProduto}
+            </label>
+          </div>
+          <form name="FormAnalista">
+            <div className={styles.formMain}>
+              <div className={styles.leftSide}>
+                <fieldset>
+                  <div>
+                    <legend className={styles.legend}>Regras de Aceitação</legend>
+                    <hr className={styles.row} />
+                  </div>
+                  <div>
+                    <CheckboxDupla
+                      regra="Qualidade dos Grãos" readOnly />
+                  </div>
+                  <div>
+                    <CheckboxDupla
+                      regra="Formato do Grão" readOnly />
+                  </div>
+                  <div>
+                    <CheckboxDupla
+                      regra="Nível de Agrotóxicos" readOnly />
+                  </div>
+                  <div>
+                    <CheckboxDupla
+                      regra="Limpeza dos Grãos" readOnly />
+                  </div>
+                </fieldset>
+              </div>
+              <div className={styles.rightSide}>
                 <div>
                   <legend className={styles.legend}>Mercadoria</legend>
                   <hr className={styles.row} />
@@ -114,117 +120,62 @@ export const FormAnalista = (props) => {
                     Documentos (RC/NF):
                   </label>
                   <div>
-                    <CheckboxDupla btnVisualizar />
+                    <CheckboxDupla btnVisualizar link="/analista/documentacao/:id"/>
                   </div>
                 </div>
-                <div>                  
-                    <label className={styles.label} htmlFor="infAnalista">
-                      Inf. do Recebedor
-                    </label>                  
+                <div>
+                  <label className={styles.label} htmlFor="infAnalista">
+                    Inf. do Recebedor
+                  </label>
                   <div>
-                    <CheckboxDupla btnVisualizar />
+                    <CheckboxDupla btnVisualizar link="/analista/documentacaoRecebedor/:id"/>
                   </div>
                 </div>
+              </div>
             </div>
-          </div>
-
-          <div className={styles.formDown}>
-            <fieldset className={styles.comentario}>
-              <div>
-                <legend className={styles.legend}>Comentários:</legend>
-                <textarea
-                  className={styles.textoRevisao}
-                  name="textoRevisaoFinalAprovador"
-                  id="textoRevisaoFinalAprovador"
-                  rows="3"
-                  cols="20"
-                />
-                <div className={styles.btnConfirmar}>
-                  <Button
-                    value1="CONFIRMAR"
-                    /* value2="MERCADORIA" */
-                    onClick={handleAceitar}
+            <div className={styles.formDown}>
+              <fieldset className={styles.comentario}>
+                <div>
+                  <legend className={styles.legend}>Comentários:</legend>
+                  <textarea
+                    className={styles.textoRevisao}
+                    name="textoRevisaoFinalAprovador"
+                    id="textoRevisaoFinalAprovador"
+                    rows="3"
+                    cols="20"
                   />
+                  <div className={styles.btnConfirmar}>
+                    <Button
+                      value1="CONFIRMAR"
+                      /* value2="MERCADORIA" */
+                      onClick={handleAceitar}
+                    />
+                  </div>
                 </div>
-              </div>
-            </fieldset>
-
-          </div>
-        </form>
-      </div>
-      <div className={styles.divModal}>
-        <Modal
-          isOpen={openModal}
-          setModalOpen={() => setOpenModal(!openModal)}
-        >
-          <div className={styles.clearfix}>
-            {isAprovado && !isAprovadoWarning ? (
-              <div className={styles.container}>
-                <FontAwesomeIcon
-                  icon={faFaceSmileBeam}
-                  className={styles.iconSmile}
-                />
-                <p className={styles.paragraph}>
-                  O Pedido {props.numeroPedido} foi aprovado!
-                </p>
-                <Link to="/aprovador/relatorio">
-                  <Button className={styles.button} value1="CONFIRMAR" />
-                </Link>
-              </div>
-            ) : isRecusado && !isRecusadoWarning ? (
-              <div className={styles.container}>
-                <FontAwesomeIcon
-                  icon={faFaceFrown}
-                  className={styles.iconSmile}
-                />
-                <p className={styles.paragraph}>
-                  O Pedido {props.numeroPedido} foi recusado!
-                </p>
-                <Link to="/aprovador/relatorio">
-                  <Button className={styles.button} value1="CONFIRMAR" />
-                </Link>
-              </div>
-            ) : isAprovadoWarning ? (
-              <div className={styles.container}>
-                <FontAwesomeIcon
-                  icon={faTriangleExclamation}
-                  className={styles.iconSmile}
-                />
-                <p className={styles.paragraph}>
-                  Tem certeza que deseja aceitar?
-                  <br />
-                  Essa mercadoria foi recusada pelo Analista.
-                </p>
-                <Link to="/analista/mercadoria">
-                  <Button
-                    className={styles.button}
-                    value1="CONFIRMAR"
-                    onClick={handleAceitar}
+              </fieldset>
+            </div>
+          </form>
+        </div>
+        <div className={styles.divModal}>
+          <Modal isOpen={openModal} onClick={handleCloseModal}>
+            <div className={styles.clearfix}>
+              {isAprovado ? (
+                <div className={styles.container}>
+                  <FontAwesomeIcon
+                    icon={faFaceSmileBeam}
+                    className={styles.iconSmile}
                   />
-                </Link>
-              </div>
-            ) : isRecusadoWarning ? (
-              <div className={styles.container}>
-                <FontAwesomeIcon
-                  icon={faTriangleExclamation}
-                  className={styles.iconSmile}
-                />
-                <p className={styles.paragraph}>
-                  Tem certeza que deseja recusar?
-                  <br />
-                  Essa mercadoria foi aprovada pelo Analista.
-                </p>
-                <Link to="/analista/mercadoria">
-                  <Button
-                    className={styles.button}
-                    value1="CONFIRMAR"
-                    onClick={handleRecusar}
-                  />
-                </Link>
-              </div>
-            ) : null}
-          </div>
-        </Modal>
+                  <p className={styles.paragraph}>
+                    Mercadoria cadastrada com sucesso!
+                  </p>
+                  <Link to="/analista/mercadoria">
+                    <Button className={styles.button} value1="CONFIRMAR" />
+                  </Link>
+                </div>
+              ) : null}
+            </div>
+          </Modal>
+        </div>
       </div>
     </div>
   )

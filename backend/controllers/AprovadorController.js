@@ -61,7 +61,7 @@ module.exports = class AprovadorController {
     //Função de encontrar Relatório pelo Id
     static async encontrarRelatorioPorId(req,res) {
         const idRelatorio = req.params.id
-        const relatorioProcurado = await RelatorioAprovadores.findByPk(idRelatorio)
+        const relatorioProcurado = await RelatorioAprovador.findByPk(idRelatorio)
 
         if (!relatorioProcurado) {
             res.status(422).json({mensagem: "Relatório não encontrado!"})
@@ -110,7 +110,7 @@ module.exports = class AprovadorController {
         }
 
         try {
-            const relatorioAtualizado = await RelatorioAprovadores.update({
+            const relatorioAtualizado = await RelatorioAprovador.update({
                 doc_status: checkboxDocumentacaoProdutoAprovado, 
                 info_recebedor_status: checkboxInfoRecebedorAprovado,
                 info_analista_status: checkboxInfoAnalistaAprovado,
@@ -130,9 +130,10 @@ module.exports = class AprovadorController {
     // Função para listar todos os relatórios de aprovação
     static async listarRelatorios(req, res) {
         try {
-            const relatorios = await RelatorioAprovadores.findAll();
+            const relatorios = await RelatorioAprovador.findAll();
             res.status(200).json(relatorios);
         } catch (erro) {
+            console.log(erro)
             res.status(500).json({ mensagem: "Deu rui ai caraio" });
         }
     }
@@ -142,7 +143,7 @@ module.exports = class AprovadorController {
         const idRelatorio = req.params.id;
         const dadosAtualizados = req.body;
         try {
-            const relatorioAtualizado = await RelatorioAprovadores.update(dadosAtualizados, {
+            const relatorioAtualizado = await RelatorioAprovador.update(dadosAtualizados, {
                 where: { id_relatorio_aprovador: idRelatorio }
             });
             if (relatorioAtualizado[0] === 0) {

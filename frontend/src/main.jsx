@@ -8,6 +8,8 @@ import CheckboxBibioteca from "./components/CheckboxBiblioteca/CheckboxBibliotec
 
 import { Login } from "./pages/Login"
 
+import { UserProvider } from "./context/usuarioContext";
+
 // RECEBEDOR
 import { HomeRecebedor } from "./pages/recebedor/HomeRecebedor/HomeRecebedor"
 import { MercadoriaRecebedor } from "./pages/recebedor/MercadoriaRecebedor/MercadoriaRecebedor"
@@ -105,6 +107,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 )

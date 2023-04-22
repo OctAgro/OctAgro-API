@@ -14,10 +14,27 @@
 
 ## Processo de Utilização <a id="utilizao"></a>
 
-```
+Clone o repositório
+```console
+git clone https://github.com/OctAgro/OctAgro-API.git
 ```
 
-O servidor do site iniciará localmente na porta 3000. Podendo ser acesseçado pelo link https://localhost:3000.
+Abra o terminal e entre na pasta do FrontEnd
+```console
+cd frontend
+```
+
+Baixe as dependências
+```console
+npm install
+```
+
+Rode o projeto
+```console
+npm run dev
+```
+
+O servidor do site iniciará localmente na porta 5000. Podendo ser acesseçado pelo link https://localhost:5000.
 
 ## Descrição das pastas <a id="descpast"></a>
 

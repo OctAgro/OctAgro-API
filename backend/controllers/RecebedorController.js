@@ -1,6 +1,6 @@
 const RelatorioRecebedor = require("../models/RelatorioRecebedor")
 
-module.exports = class RelatorioRecebedor {
+module.exports = class RelatorioController {
     static async criarRelatorio(req, res){
         const data = req.body
 
@@ -63,12 +63,12 @@ module.exports = class RelatorioRecebedor {
 
         const relatorioRecebedor = new RelatorioRecebedor({
             nome_fornecedor: data.textoNomeFornecedor,
-            nome_entragador: data.textoNomeEntregador,
+            nome_entregador: data.textoNomeEntregador,
             placa_veiculo: data.textoPlacaVeiculo,
             data_entrada: data.dataDataEntrada,
             horario_entrada: data.tempoHorarioEntrada,
             documento_entrada: data.textoDocmento,
-            produto: data.textoProduto,
+            produtof: data.textoProduto,
             quantidade: data.numeroQuantidade,
             unidade_medida: data.textoUnidadeMedida,
             coloracao: data.checkboxColoracaoAprovado,
@@ -82,11 +82,12 @@ module.exports = class RelatorioRecebedor {
             const novoRelatorioRecebedor = await relatorioRecebedor.save()
             res.status(201).json({mensagem: 'Relatório aprovado com sucesso!'})
         } catch(erro) {
-            res.status(500).jason({mensagem: erro})
+            console.log(erro)
+            res.status(500).json(erro)
         }
     }
 
-    static async encontrarRelator(req, res){
+    static async atualizarRelatorio(req, res){
         const idRelatorio = req.params.idRelatorio
 
         const data = req.body
@@ -173,6 +174,32 @@ module.exports = class RelatorioRecebedor {
             res.status(200).json({mensagem: 'Relatório atualizado com sucesso!'})
         } catch(erro) {
             res.status(500).json({mensagem: erro})
+        }
+    }
+
+    static async listarRelatorios(req,res){
+        try {
+            const relatoriosRecebedor = await RelatorioRecebedor.findAll();
+            res.status(200).json(relatoriosRecebedor);
+        } catch (erro) {
+            res.status(500).json({ message: "Não há relatórios disponíveis no momento!" });
+        }
+    }
+
+    static async apagarRelatorio(req,res){
+        const idRelatorio = req.params.id;
+        try {
+            const relatorioAtualizado = await RelatorioRecebedor.destroy({
+                where: { id_relatorio_recebedor: idRelatorio }
+            });
+            if (relatorioAtualizado != undefined) {
+                res.status(422).json({ message: "Relatório excluido com sucesso!" });
+            } else {
+                res.status(200).json({ message: "Relatório não excluido!" });
+            }
+        } catch (erro) {
+            console.log(erro)
+            res.status(500).json({ message: erro });
         }
     }
 }

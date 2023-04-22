@@ -13,25 +13,28 @@ const Fornecedores = require('./models/Fornecedor')
 const Produto = require('./models/Produto')
 const CriteriosAvaliacao = require('./models/CriteriosAvaliacao')
 const Usuario = require('./models/Usuario')
+const Pedido = require('./models/Pedido')
 
 //Rotas - invocando depois usando a rota
 const AnalistaRotas = require ('./routes/AnalistaRoutes')
 const AprovadorRotas = require('./routes/AprovadorRoutes')
 const UsuarioRotas = require('./routes/UsuarioRoutes')
 const RecebedorRotas = require('./routes/RecebedorRoutes')
+const PedidoRotas = require('./routes/PedidoRoutes')
 
 //Body Parse
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 //CORS
-app.use(cors({ credentials: false, origin: 'http://localhost:5173' }))
+app.use(cors({ credentials: false, origin: 'http://localhost:5000' }))
 
 //Usando Rotas
 app.use('/analista/', AnalistaRotas)
 app.use('/aprovador', AprovadorRotas)
 app.use('/usuario', UsuarioRotas)
 app.use('/recebedor', RecebedorRotas)
+app.use('/pedido', PedidoRotas)
 
 //Mensagens com flash
 app.use(flash())

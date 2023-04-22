@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import Logo from "../../../assets/Logo.png"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
@@ -8,7 +8,12 @@ import { faReceipt, faRightToBracket } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./SidebarAprovador.module.css"
 
-export const SidebarAprovador = (props) => {
+// importando contexto
+import { UserContext } from "../../../context/usuarioContext"
+
+export const SidebarAprovador = () => {
+  const { usuario } = useContext(UserContext)
+
   return (
     <nav className={styles.navbar}>
       <Link to="/aprovador/home">
@@ -29,28 +34,20 @@ export const SidebarAprovador = (props) => {
       <div className={styles.botItems}>
         <ul className={styles.usuario}>
           <div className={styles.molduraFoto}>
-            <img
-              className={styles.molduraOctagonal}
-              src={MolduraOctagonal}
-              alt="Moldura Octagonal"
-            />
-            <img
-              className={styles.fotoUsuario}
-              src={props.imagem}
-              alt="Foto de perfil do usuário"
-            />
+            <img className={styles.molduraOctagonal} src={MolduraOctagonal} alt="Moldura Octagonal" />
+{/*             <img className={styles.fotoUsuario} src={usuario.imagem} alt="Foto de perfil do usuário" /> */}
           </div>
           <div className={styles.infoUsuario}>
-            <h3 className={styles.nomeUsuario}>{props.nome}</h3>
-            <h4 className={styles.funcaoUsuario}>{props.funcao}</h4>
+            <h3 className={styles.nomeUsuario}>{usuario.nome}</h3>
+            <h4 className={styles.funcaoUsuario}>{usuario.funcao}</h4>
           </div>
         </ul>
         <ul className={styles.sair}>
           <li>
-            <FontAwesomeIcon icon={faRightToBracket} />
-            <a className={styles.sairTexto} href="/">
-              Sair
-            </a>
+            <button>
+              <FontAwesomeIcon icon={faRightToBracket} />
+              <a className={styles.sairTexto}>Sair</a>
+            </button>
           </li>
         </ul>
       </div>

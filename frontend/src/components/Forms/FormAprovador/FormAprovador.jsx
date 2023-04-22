@@ -1,6 +1,8 @@
 import React from "react"
 import { useState, useEffect } from "react"
+
 import { useForm } from "react-hook-form"
+
 import { Link } from "react-router-dom"
 
 //IMPORTANDO COMPONENTES
@@ -12,14 +14,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faFaceSmileBeam, faFaceFrown, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormAprovador.module.css"
-import axios from 'axios'
+import axios from "axios"
 
 export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
+
+  useEffect(() => {
+
+  }, [])
 
   const [openModal, setOpenModal] = useState(false)
   const [isAprovado, setIsAprovado] = useState(false)
   const [isRecusado, setIsRecusado] = useState(false)
-  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false)
 
   // pegar da api se o pedido atual foi recusado ou aprovado,
   // se analista recusou setIsAprovadoWarning(true), se o analista aprovou então setIsRecusadoWarning(true)
@@ -29,7 +35,7 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
 
   //variaveis para mandar para o banco de dados
   const [revisao, setRevisao] = useState("")
-  const [mensagemErro, setMensagemErro] = useState(null);
+  const [mensagemErro, setMensagemErro] = useState(null)
 
   const {
     register,
@@ -44,17 +50,16 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
 
   //fazendo o post
   const enviarDados = async (data) => {
-
     const dados = {
       textoRevisaoFinalAprovador: revisao,
       statusFinalAprovacao: true,
-      ...data
+      ...data,
     }
 
     console.log(dados)
-  
+
     try {
-      const resposta = await axios.post('http://localhost:3000/aprovador/relatorios', dados)
+      const resposta = await axios.post("http://localhost:3000/aprovador/relatorios", dados)
       //esse console.log retorna respostas json do backend de erros de validacao
       console.log(resposta.data.message)
       setMensagemErro(resposta.data.message)
@@ -227,7 +232,6 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
         </form>
       </div>
       <div className={styles.divModal}>
-
         <Modal isOpen={openModal} onClick={handleCloseModal}>
           <div className={styles.clearfix}>
             {mensagemErro ? (
@@ -274,8 +278,6 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
             ) : null}
           </div>
         </Modal>
-
-        
       </div>
     </div>
   )

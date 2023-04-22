@@ -110,7 +110,7 @@ module.exports = class AprovadorController {
     // Função para listar todos os relatórios de aprovação
     static async listarRelatorios(req, res) {
         try {
-            const relatorios = await RelatorioAprovadores.findAll();
+            const relatorios = await RelatorioAprovador.findAll();
             res.status(200).json(relatorios);
         } catch (erro) {
             res.status(500).json({ message: erro });
@@ -122,7 +122,7 @@ module.exports = class AprovadorController {
         const idRelatorio = req.params.id;
         const dadosAtualizados = req.body;
         try {
-            const relatorioAtualizado = await RelatorioAprovadores.update(dadosAtualizados, {
+            const relatorioAtualizado = await RelatorioAprovador.update(dadosAtualizados, {
                 where: { id_relatorio_aprovador: idRelatorio }
             });
             if (relatorioAtualizado[0] === 0) {

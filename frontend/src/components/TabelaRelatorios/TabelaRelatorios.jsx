@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from "react"
+import { React, useEffect, useState, useContext } from "react"
 import { Link } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -6,19 +6,19 @@ import { faClipboardList } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "../TabelaRelatorios/TabelaRelatorios.module.css"
 
-import { encontrarPedidos } from "../../hooks/encontrarPedidos"
+// IMPORTANDO O CONTEXTO
+import { RelatoriosAprovadorContext } from "../../context/RelatoriosAprovadorContext"
 
 export const TabelaRelatorios = () => {
-  console.log(encontrarPedidos())
+  const [listaRelatorios, setListaRelatorios] = useState(['Loading'])
 
-  const [pedidos, setPedidos] = useState([])
+  const dados = useContext(RelatoriosAprovadorContext)
+
   useEffect(() => {
-    async function fetchPedidos() {
-      const dadosPedidos = await encontrarPedidos()
-      setPedidos(dadosPedidos)
-    }
-    fetchPedidos()
-  }, [])
+    const lista = dados[0]
+    setListaRelatorios(lista)
+  }, [dados])
+
   return (
     <div className={styles.table}>
       <div className={styles.title}>
@@ -30,29 +30,33 @@ export const TabelaRelatorios = () => {
           <tr>
             <th>Nº Pedido</th>
             <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Unidade Medida</th>
-            <th>Fornecedor</th>
+            <th>Situação</th>
+            <th>Funcionário</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-        {pedidos.map((pedido) => (
-            <tr key={pedido.id_pedido}>
-              <td className={styles.tableData}>{pedido.id_pedido}</td>
-              <td className={styles.tableData}>{pedido.produto}</td>
-              <td className={styles.tableData}>{pedido.quantidade}</td>
-              <td className={styles.tableData}>{pedido.unidade_medida}</td>
-              <td className={styles.tableData}>{pedido.fornecedor}</td>
-              <td className={styles.tableData}>
-                <button className={styles.button}>
-                  <Link to={`/aprovador/relatorio/${pedido.id_pedido}`}>
-                    Analisar <FontAwesomeIcon icon={faClipboardList} />
-                  </Link>
-                </button>
-              </td>
+          {(listaRelatorios != []) ? (
+            listaRelatorios.map((listaRelatorios) => (
+              <tr key={listaRelatorios.id_pedido}>
+                <td className={styles.tableData}>{listaRelatorios.id_relatorio_aprovador}</td>
+                <td className={styles.tableData}>{listaRelatorios.descricaoFuturaDoPedido}</td>
+                <td className={styles.tableData}>{listaRelatorios.info_analista_status ? "ACEITO" : "RECUSADO"}</td>
+                <td className={styles.tableData}>{listaRelatorios.id_usuario}</td>
+                <td className={styles.tableData}>
+                  <button className={styles.button}>
+                    <Link to={`/aprovador/relatorio/${listaRelatorios.id_relatorio_aprovador}`}>
+                      Analisar <FontAwesomeIcon icon={faClipboardList} />
+                    </Link>
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={5}>Carregando...</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

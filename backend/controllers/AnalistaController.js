@@ -1,7 +1,8 @@
 const RelatorioAnalista = require('../models/RelatorioAnalista')
+const Pedido = require('../models/Pedido')
 
 
-module.exports = class RelatorioAnalista {
+module.exports = class RelatorioController{
 
     static async criarRelatorioAnalista (req,res) {
 
@@ -116,9 +117,18 @@ module.exports = class RelatorioAnalista {
 
     static async listarRelatorios (req,res) {
         try {
-            const relatorios = await RelatorioAnalista.findAll();
+            const relatorios = await RelatorioAnalista.findAll({
+                include: [
+                    {
+                      model: Pedido,
+                      as: "pedido",
+                      attributes: ["id_pedido","produto", "quantidade", "unidade_medida"],
+                    },
+                  ],});
+            console.log(relatorios)
             res.status(200).json(relatorios);
         } catch (erro) {
+            console.log(erro)
             res.status(500).json({ message: erro });
         }
     }
@@ -140,24 +150,3 @@ module.exports = class RelatorioAnalista {
         }
     }
 }
-
-            
-
-
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-    
-
-
-

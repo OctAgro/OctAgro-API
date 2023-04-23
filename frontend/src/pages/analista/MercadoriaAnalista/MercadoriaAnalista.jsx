@@ -26,12 +26,7 @@ export const MercadoriaAnalista = () => {
         </div>
 
         <div className={styles.content}>
-          <TabelaMercadorias
-            numeroPedido="1001"
-            descricao="Café"
-            data="19/04/2023"
-            funcionario="Thiago Zani"
-          />
+          <TabelaMercadorias/>
         </div>
       </div>
     </div>

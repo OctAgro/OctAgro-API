@@ -1,9 +1,9 @@
 const { DataTypes } = require('sequelize')
 const db = require('../db/conexao')
 const Usuario = require('./Usuario')
-const Produto = require('./Produto')
+const Pedido = require('./Pedido')
 
-const RelatorioAnalista = db.define ('RelatorioAnalista', {
+const RelatorioAnalista = db.define('RelatorioAnalista', {
 
     id_relatorio_analista: {
         type: DataTypes.INTEGER,
@@ -41,8 +41,9 @@ const RelatorioAnalista = db.define ('RelatorioAnalista', {
     }
 
 })
-RelatorioAnalista.belongsTo(Usuario,{foreignKey: 'id_usuario'})
-RelatorioAnalista.belongsTo(Produto,{foreignKey: 'id_produto'})
 
+Pedido.hasMany(RelatorioAnalista, { foreignKey: 'id_pedido' });
+RelatorioAnalista.belongsTo(Usuario,{foreignKey: 'id_usuario'})
+RelatorioAnalista.belongsTo(Pedido,{foreignKey: 'id_pedido'})
 
 module.exports = RelatorioAnalista

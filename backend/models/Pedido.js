@@ -56,6 +56,13 @@ contar().then(function(valor){
             unidade_medida: 'Kg',
             fornecedor: 'Fatec Graos'
         })
+
+        Pedido.create({
+            produto: 'Café',
+            quantidade: 20,
+            unidade_medida: 'Kg',
+            fornecedor: 'Fatec Graos'
+        })
     }
 
 }).catch(function(erro){

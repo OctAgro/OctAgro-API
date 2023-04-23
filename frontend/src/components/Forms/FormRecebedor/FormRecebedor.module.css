@@ -1,140 +1,220 @@
 .divForm {
-    margin: 2rem auto;
-    background-color: #e7e0d1;
-    border-radius: 10px;
-    font-family: "Gotham Black";
-    width: 85%;
-    height: 70vh;
-    filter: drop-shadow(2px 2px 2px #000);
-  }
-  
-  @media only screen and (min-height: 900px) {
-    .divForm {
-      margin: 4rem auto;
-      padding-top: 2rem;
-      background-color: #e7e0d1;
-      border-radius: 10px;
-      font-family: "Gotham Black";
-      width: 85%;
-      height: 60vh;
-      filter: drop-shadow(2px 2px 2px #000);
-    }
-  }
-  
-  .formTop {
-    padding: 0.5rem;
-    text-align: center;
-    font-size: 1.7rem;
-  }
-  
-  .iconSmile {
-    font-size: 4rem;
-    margin-bottom: 2rem;
-  }
-  
-  .paragraph {
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  .form {
-    display: flex;
-  }
-  
-  .leftSide {
-    margin: 2.5%;
-    width: 45%;
-  }
-  
-  .rightSide {
-    margin: 2.5%;
-    width: 45%;
-  }
-  
-  .btn {
-    cursor: pointer;
-    background-color: #d9d9d9;
-    height: 3rem;
-    border-radius: 5px;
-    font-size: 1.5rem;
-    font-family: "Gotham Black";
-    display: flex;
-    padding: 0.5rem 8rem;
-    margin-top: 0.2rem;
-    justify-content: center;
-  }
-  
-  .btn:hover {
-    background-color: #c4c4c4;
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 2rem;
-    padding: 2rem;
-    filter: drop-shadow(2px 2px 2px #000);
-  }
-  
-  .iconEye {
-    padding-right: 0.5rem;
-  }
-  
-  input {
-    text-align: center;
-  }
+  margin: 0.5rem auto;
+  background-color: #e7e0d1;
+  border-radius: 10px;
+  font-family: "Gotham Black";
+  width: 85%;
+  filter: drop-shadow(2px 2px 2px #000);
+}
 
-  .inputBlock {
-    display: flex;
-  }
+.formTop {
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+.iconSmile {
+  font-size: 3rem;
+}
+
+.paragraph {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.formMain {
+  display: flex;
+}
+
+.leftSide{
+  margin: 0 3% 0 1%;
+  width: 40%;
+}
+.rightSide {
+  margin: 0 1%;
+  width: 70%;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: #D9D9D9;
+  width: 60%;
+  height: 3rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-family: 'Gotham Black';
+  display: flex;
+  padding-top: 0.5rem;
+  justify-content: center;
+}
+
+.btn:hover {
+  background-color: #c4c4c4;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  filter: drop-shadow(2px 2px 2px #000);  
+}
+
+.iconEye {
+  padding-right: 0.5rem;
+}
+
+.inputBlock{
+  display: flex;
+}
+
+.customSelect{
+  background-color: #D9D9D9;
+  width: 16rem;
+  height: 2rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: 'Gotham Black';
+  display: flex;
+  text-align: center;
+  margin: 0.5rem auto;
+}
+
+.formDown{
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.textoRevisao {
+  font-family: 'Gotham Black';
+  background-color: #D9D9D9;
+  color: black;
+  margin: 0.5rem 0;
+  width: 100%;
+  border-radius: 5px;
+  resize: none;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.row {
+  border: 1px solid black;
+  filter: drop-shadow(2px 0px 10px #000);
+}
+
+.legend {
+  cursor: default;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  text-align: left;
+}
+
+.label {
+  display: block;
+  margin-top: 0.5rem;  
+}
+
+.mercadoria {
+  cursor: default;
+  text-align: center;
+  padding: 0.5%;
+  font-family: "Gotham Black";
+  font-size: 1rem;
+}
+
+.divModal {
+  position: absolute;
+}
+
+.container {
+  text-align: center;
+  padding: 2vw;
+  margin:auto;
+}
+
+.btnConfirmar {
+  margin-bottom: 1rem;
+}
+
+.divMaster {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.idProduto{
+  display: flex;
+}
+
+.SelectProduto{
+  background-color: #D9D9D9;
+  width: 10rem;
+  height: 2rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: 'Gotham Black';
+  display: flex;
+  text-align: center;
+  margin: 0.5rem auto;
+}
+
+.divProduto{
+  margin-right: 1rem;
+}
+
+.quantidade{
+  background-color: #D9D9D9;
+  width: 4rem;
+  height: 2rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: 'Gotham Black';
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.selectMedida{
+  background-color: #D9D9D9;
+  width: 12rem;
+  height: 2rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: 'Gotham Black';
+  text-align: center;
+  margin: 0.5rem 1rem;
+}
+
+.btnsRN {
+  cursor: default;
+  background-color: #D9D9D9;
+  width: 60%;
+  height: 2rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: 'Gotham Black';
+  display: flex;
+  text-align: center;
+  margin: 0.5rem 0;
+  margin-right: 1rem;
+}
+
+.anexarBTN{
+  cursor: pointer;
+  text-align: center;
+  font-size: 3rem;
+  min-width: 10%;
+  padding: 0 1rem;
+  margin: 1rem 0rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  background-color: #D9D9D9;
+  font-family: 'Gotham';
+  filter: drop-shadow(2px 2px 2px #000);
   
-  .textoRevisao {
-    font-family: "Gotham Black";
-    background-color: #d9d9d9;
-    color: black;
-    margin: 1rem 0;
-    width: 100%;
-    border-radius: 10px;
-    resize: none;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-  }
-  
-  .row {
-    border: 1px solid black;
-    filter: drop-shadow(2px 0px 10px #000);
-  }
-  
-  .legend {
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
-  }
-  
-  .label {
-    display: block;
-    margin: 0.5rem 0;
-  }
-  
-  .divModal {
-    position: absolute;
-  
-  }
-  
-  .container {
-    text-align: center;
-    padding: 2vw;
-  }
-  
-  .divMaster {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+}

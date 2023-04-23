@@ -57,8 +57,7 @@
 .buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 2rem;
-  padding: 2rem;
+  margin-bottom: 1rem;
   filter: drop-shadow(2px 2px 2px #000);
 }
 

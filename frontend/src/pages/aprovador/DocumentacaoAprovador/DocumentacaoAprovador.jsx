@@ -13,52 +13,43 @@ import UserImg from "../../../assets/UserImg.webp"
 // importando o css
 import styles from "./DocumentacaoAprovador.module.css"
 
-// Importando o Provider
-import { RelatoriosProvider } from "../../../context/RelatoriosAprovadorContext"
+let numeroPedido = '1001'
 
-let numeroPedido = "1001"
-
-export const DocumentacaoAprovador = ({ documentacao, analista, recebedor /* , numeroPedido */ }) => {
+export const DocumentacaoAprovador = ({ documentacao, analista, recebedor/* , numeroPedido */ }) => {
   if (documentacao) {
     return (
-      <RelatoriosProvider>
-        <div className={styles.main}>
-          <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
-          <div className={styles.container}>
-            <div className={styles.content}>
-              <InformacoesDocumentos numeroPedido={numeroPedido} />
-            </div>
+      <div className={styles.main}>
+        <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <InformacoesDocumentos numeroPedido={numeroPedido} />
           </div>
         </div>
-      </RelatoriosProvider>
+      </div>
     )
   } else if (analista) {
     return (
-      <RelatoriosProvider>
-        <div className={styles.main}>
-          <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
+      <div className={styles.main}>
+        <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
 
-          <div className={styles.container}>
-            <div className={styles.content}>
-              <InformacoesAnalista />;
-            </div>
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <InformacoesAnalista />;
           </div>
         </div>
-      </RelatoriosProvider>
+      </div>
     )
   } else if (recebedor) {
     return (
-      <RelatoriosProvider>
-        <div className={styles.main}>
-          <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
+      <div className={styles.main}>
+        <SidebarAprovador nome="Thiago Zani" funcao="Aprovador" imagem={UserImg} />
 
-          <div className={styles.container}>
-            <div className={styles.content}>
-              <InformacoesRecebedor />;
-            </div>
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <InformacoesRecebedor />;
           </div>
         </div>
-      </RelatoriosProvider>
+      </div>
     )
   }
 }

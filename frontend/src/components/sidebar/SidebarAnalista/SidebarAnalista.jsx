@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import Logo from "../../../assets/Logo.png"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
@@ -8,13 +8,7 @@ import { faRightToBracket, faListCheck } from "@fortawesome/free-solid-svg-icons
 
 import styles from "./SidebarAnalista.module.css"
 
-// importando contexto
-import { UserContext } from "../../../context/usuarioContext"
-
-export const SidebarAnalista = () => {
-
-    const { usuario } = useContext(UserContext)
-
+export const SidebarAnalista = (props) => {
     return (
         <nav className={styles.navbar}>
             <Link to="/analista/home">
@@ -42,13 +36,13 @@ export const SidebarAnalista = () => {
                         />
                         <img
                             className={styles.fotoUsuario}
-/*                             src={usuario.imagem} */
+                            src={props.imagem}
                             alt="Foto de perfil do usuário"
                         />
                     </div>
                     <div className={styles.infoUsuario}>
-                        <h3 className={styles.nomeUsuario}>{usuario.nome}</h3>
-                        <h4 className={styles.funcaoUsuario}>{usuario.funcao}</h4>
+                        <h3 className={styles.nomeUsuario}>{props.nome}</h3>
+                        <h4 className={styles.funcaoUsuario}>{props.funcao}</h4>
                     </div>
                 </ul>
                 <ul className={styles.sair}>

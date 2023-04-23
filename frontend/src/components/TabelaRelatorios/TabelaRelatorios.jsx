@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from "react"
+import {React, useContext } from "react"
 import { Link } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -6,19 +6,14 @@ import { faClipboardList } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "../TabelaRelatorios/TabelaRelatorios.module.css"
 
-import { encontrarPedidos } from "../../hooks/encontrarPedidos"
+import { RelatoriosAprovadorContext } from "../../context/RelatoriosAprovadorContext"
 
 export const TabelaRelatorios = () => {
-  console.log(encontrarPedidos())
+  const dados = useContext(RelatoriosAprovadorContext)
 
-  const [pedidos, setPedidos] = useState([])
-  useEffect(() => {
-    async function fetchPedidos() {
-      const dadosPedidos = await encontrarPedidos()
-      setPedidos(dadosPedidos)
-    }
-    fetchPedidos()
-  }, [])
+  const listaRelatorios = dados[0]
+  console.log(listaRelatorios)
+
   return (
     <div className={styles.table}>
       <div className={styles.title}>
@@ -30,23 +25,21 @@ export const TabelaRelatorios = () => {
           <tr>
             <th>Nº Pedido</th>
             <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Unidade Medida</th>
-            <th>Fornecedor</th>
+            <th>Situação</th>
+            <th>Funcionário</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-        {pedidos.map((pedido) => (
+        {listaRelatorios.map((pedido) => (
             <tr key={pedido.id_pedido}>
-              <td className={styles.tableData}>{pedido.id_pedido}</td>
-              <td className={styles.tableData}>{pedido.produto}</td>
-              <td className={styles.tableData}>{pedido.quantidade}</td>
-              <td className={styles.tableData}>{pedido.unidade_medida}</td>
-              <td className={styles.tableData}>{pedido.fornecedor}</td>
+              <td className={styles.tableData}>{pedido.id_relatorio_aprovador}</td>
+              <td className={styles.tableData}>{pedido.descricao}</td>
+              <td className={styles.tableData}>{pedido.info_analista_status ? 'Aprovado' : 'Recusado'} </td>
+              <td className={styles.tableData}>{pedido.id_usuario}</td>
               <td className={styles.tableData}>
                 <button className={styles.button}>
-                  <Link to={`/aprovador/relatorio/${pedido.id_pedido}`}>
+                  <Link to={`/aprovador/relatorio/${pedido.id_relatorio_aprovador}`}>
                     Analisar <FontAwesomeIcon icon={faClipboardList} />
                   </Link>
                 </button>

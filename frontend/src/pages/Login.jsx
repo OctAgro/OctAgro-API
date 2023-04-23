@@ -1,68 +1,64 @@
-import React, { useState, useContext } from "react";
-import Cookies from "js-cookie";
-import octagroTransparente from "../assets/octagroTransparente.png";
-import styles from "./Login.module.css";
-import { useNavigate } from 'react-router-dom';
-import { fazerLogin } from "../hooks/usarLogin";
+import React, { useState, useContext } from "react"
+import Cookies from "js-cookie"
+import octagroTransparente from "../assets/octagroTransparente.png"
+import styles from "./Login.module.css"
+import { useNavigate } from "react-router-dom"
+import { fazerLogin } from "../hooks/usarLogin"
 import { UserContext } from "../context/usuarioContext"
 
 export const Login = () => {
   // USA MODULO 'JS-COOKIE' PARA LEMBRAR O USERNAME SE O USUARIO MARCAR A OPÇÃO DE 'LEMBRAR-ME'
-  const { setUsuario } = useContext(UserContext);
-  const navigate = useNavigate();
-  
+  const { setUsuario } = useContext(UserContext)
+  const navigate = useNavigate()
+
   const handleRemember = (event) => {
     if (event.target.checked) {
-      const username = document.getElementById("username").value;
-      Cookies.set("rememberedUsername", username, { expires: 30 });
+      const username = document.getElementById("username").value
+      Cookies.set("rememberedUsername", username, { expires: 30 })
     } else {
-      Cookies.remove("rememberedUsername");
+      Cookies.remove("rememberedUsername")
     }
-  };
-  
-  // CONST PARA ARMAZENAR OS VALORES DO SCRIPT
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  }
 
+  // CONST PARA ARMAZENAR OS VALORES DO SCRIPT
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      const dados = await fazerLogin(username, password);
+      const dados = await fazerLogin(username, password)
       console.log(dados)
-      alert(dados.message);
+      alert(dados.message)
 
       //setando dados para dentro do context de usuario
-      setUsuario(dados);
+      setUsuario(dados)
+
+      // Salvando o usuário no localStorage
+      localStorage.setItem("usuario", JSON.stringify(dados))
 
       //capturando a funcao do usuario
-      const tipoFuncao = dados.funcao;
+      const tipoFuncao = dados.funcao
 
       //redirecionamento do usuário para a página "home" com base no tipo de função
       if (tipoFuncao === "Aprovador") {
-        navigate("/aprovador/home");
-      } else if (tipoFuncao === "Analista"){
-        navigate("/analista/home");
-      } else if (tipoFuncao === "Recebedor"){
-        navigate("/recebedor/home");
+        navigate("/aprovador/home")
+      } else if (tipoFuncao === "Analista") {
+        navigate("/analista/home")
+      } else if (tipoFuncao === "Recebedor") {
+        navigate("/recebedor/home")
       }
-
     } catch (erro) {
-      setErrorMessage(erro.response.data.message);
-      alert(errorMessage);
+      setErrorMessage(erro.response.data.message)
+      alert(errorMessage)
     }
-  };
+  }
 
   return (
     <div className={styles.fundoLogin}>
       <div className={styles.boxLogin}>
-        <img
-          className={styles.logoTop}
-          src={octagroTransparente}
-          alt="Logo da OctAgro"
-        />
-
+        <img className={styles.logoTop} src={octagroTransparente} alt="Logo da OctAgro" />
 
         <form className={styles.formsUser} onSubmit={handleSubmit}>
           <div>
@@ -99,23 +95,13 @@ export const Login = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          <input
-            className={styles.inputLoginAcessar}
-            type="submit"
-            value="Acessar"
-            onClick={handleSubmit}
-          />
+          <input className={styles.inputLoginAcessar} type="submit" value="Acessar" onClick={handleSubmit} />
         </form>
 
         <p>{errorMessage}</p>
 
         <div className={styles.bottomBoxLogin}>
-          <input
-            type="checkbox"
-            name="remember"
-            id="remember"
-            onChange={handleRemember}
-          />
+          <input type="checkbox" name="remember" id="remember" onChange={handleRemember} />
           <label htmlFor="remember" id="remember-label" className={styles.label}>
             Lembrar-me
           </label>
@@ -125,5 +111,5 @@ export const Login = () => {
         </a>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -5,19 +5,12 @@ import { SidebarRecebedor } from "../../../components/sidebar/SidebarRecebedor/S
 import { HeaderRecebedor } from "../../../components/header/HeaderRecebedor/HeaderRecebedor"
 import { FormRecebedor } from "../../../components/Forms/FormRecebedor/FormRecebedor"
 
-// Imagem para simular o Icone do usuário
-import UserImg from "../../../assets/UserImg.webp"
-
 import styles from "./FormularioRecebedor.module.css"
 
 export const FormularioRecebedor = () => {
   return (
     <div className={styles.main}>
-      <SidebarRecebedor
-        nome="Leandro Luz"
-        funcao="Recebedor"
-        imagem={UserImg}
-      />
+      <SidebarRecebedor />
 
       <div className={styles.container}>
         <div className={styles.header}>

@@ -11,24 +11,25 @@
 .inside {
   text-align: center;
   width: 100%;
-  height: 80%;
+  height: 100%;
   margin: 3%;
 }
 
 .insideLeft {
-  margin-top: 1rem;
   border-radius: 15px;
   border: 1px solid black;
-  height: 100%;
-  margin: 2%;
+  margin: auto;
+  padding: 0.5rem;
 }
 
 .insideRight {
-  margin-top: 1rem;
   border-radius: 15px;
   border: 1px solid black;
-  height: 100%;
-  margin: 2%;
+  padding: 0.5rem;
+}
+
+.relatorioCompra {
+  max-width: 100%;
 }
 
 .icon {

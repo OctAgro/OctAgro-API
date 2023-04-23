@@ -4,8 +4,6 @@ export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null);
-
-
   
   useEffect(() => {
     const usuarioSalvo = localStorage.getItem('usuario');

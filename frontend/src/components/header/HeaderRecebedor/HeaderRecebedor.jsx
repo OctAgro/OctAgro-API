@@ -4,7 +4,7 @@ import styles from "./HeaderRecebedor.module.css"
 import { Link } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faClipboard } from "@fortawesome/free-regular-svg-icons"
+import { faTruck } from "@fortawesome/free-solid-svg-icons"
 import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
 export const HeaderRecebedor = (props) => {
@@ -24,19 +24,19 @@ export const HeaderRecebedor = (props) => {
       <div className={styles.clipboards}>
         <div className={styles.clipboardA}>
           <div className={styles.leftSideA}>
-            <FontAwesomeIcon className="icon" icon={faClipboard} />
+            <FontAwesomeIcon className="icon" icon={faTruck} />
           </div>
           <div className={styles.rightSideA}>
             <h2>0</h2>
             <h3>
-              Mercadorias <br /> em Caminho
+              Mercadorias <br /> à Caminho
             </h3>
           </div>
         </div>
 
         <div className={styles.clipboardB}>
           <div className={styles.leftSideB}>
-            <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
+            <FontAwesomeIcon className={styles.icon} icon={faTruck} />
           </div>
           <div className={styles.rightSideB}>
             <h2>0</h2>

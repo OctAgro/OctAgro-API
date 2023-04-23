@@ -77,7 +77,8 @@ export const FormAnalista = (props) => {
       <div className={styles.mercadoria}>
         <h1>Entrada de Mercadoria</h1>
       </div>
-      <div className={styles.divMaster}>      
+
+      <div className={styles.divMaster}>
         <div className={styles.divForm}>
           <div className={styles.formTop}>
             <label className={styles.label} htmlFor="FormAnalista">
@@ -120,7 +121,7 @@ export const FormAnalista = (props) => {
                     Documentos (RC/NF):
                   </label>
                   <div>
-                    <CheckboxDupla btnVisualizar link="/analista/documentacao/:id"/>
+                    <CheckboxDupla btnVisualizar link="/analista/documentacao/:id" />
                   </div>
                 </div>
                 <div>
@@ -128,7 +129,7 @@ export const FormAnalista = (props) => {
                     Inf. do Recebedor
                   </label>
                   <div>
-                    <CheckboxDupla btnVisualizar link="/analista/documentacaoRecebedor/:id"/>
+                    <CheckboxDupla btnVisualizar link="/analista/documentacaoRecebedor/:id" />
                   </div>
                 </div>
               </div>
@@ -144,7 +145,7 @@ export const FormAnalista = (props) => {
                     rows="3"
                     cols="20"
                   />
-                  <div className={styles.btnConfirmar}>
+                  <div className={styles.buttons}>
                     <Button
                       value1="CONFIRMAR"
                       /* value2="MERCADORIA" */

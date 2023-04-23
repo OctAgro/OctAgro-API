@@ -13,6 +13,7 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    border-bottom: #000 solid;
   }
   
   /* @media screen and (max-width: 1400px) {
@@ -130,18 +131,18 @@
   
   .infoUsuario {
     align-self: flex-end;
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
   }
   
   .nomeUsuario {
     display: inline;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-family: 'Gotham Black';
   }
   
   .funcaoUsuario {
     font-size: 1rem;
-    font-family: 'Gotham Book';
+    font-family: 'Gotham';
   }
   
   .relatorio {

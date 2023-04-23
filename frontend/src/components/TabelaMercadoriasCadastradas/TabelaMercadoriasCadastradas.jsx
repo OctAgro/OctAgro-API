@@ -7,6 +7,8 @@ import { faTrash, faPencil } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./TabelaMercadoriasCadastradas.module.css"
 
+// TABELA DO RECEBEDOR (2 OPÇÃO DA SIDEBAR, MERCADORIAS JÁ CADASTRADAS POR ELE)
+
 export const TabelaMercadoriasCadastradas = ({ numeroPedido, fornecedor, tipoCarga, statusAnalise }) => {
   const handleExclusao = () => {
     // logica de exclusao + modal

@@ -67,7 +67,8 @@ contar().then(function(valor) {
             CPF: '123',
             RG: '321',
             dataNascimento: '10-03-1998',
-            genero: 'M'
+            genero: 'M',
+            foto: 'gabriel.png'
     
         })
     
@@ -80,7 +81,8 @@ contar().then(function(valor) {
             CPF: '1234',
             RG: '4321',
             dataNascimento: '10-03-1998',
-            genero: 'M'
+            genero: 'M',
+            foto: 'jean.png'
     
         })
     
@@ -93,7 +95,8 @@ contar().then(function(valor) {
             CPF: '12345',
             RG: '54321',
             dataNascimento: '10-03-1998',
-            genero: 'M'
+            genero: 'M',
+            foto: 'jonas.png'
     
         })
     
@@ -106,12 +109,13 @@ contar().then(function(valor) {
             CPF: '12345',
             RG: '54321',
             dataNascimento: '10-03-1998',
-            genero: 'M'
+            genero: 'M',
+            foto: 'felipe.png'
     
         })
     
         Usuario.create({
-            nome: 'Tiago',
+            nome: 'Thiago',
             senha: hashedSenha,
             email: 'tiago@live.com',
             funcao: 'Recebedor',
@@ -119,7 +123,22 @@ contar().then(function(valor) {
             CPF: '12345',
             RG: '54321',
             dataNascimento: '10-03-1998',
-            genero: 'M'
+            genero: 'M',
+            foto: 'thiago.png'
+    
+        })
+
+        Usuario.create({
+            nome: 'Leandro',
+            senha: hashedSenha,
+            email: 'leandro@live.com',
+            funcao: 'Recebedor',
+            dataAdmissao: '10-01-2010',
+            CPF: '12345',
+            RG: '54321',
+            dataNascimento: '10-03-1998',
+            genero: 'M',
+            foto: 'leandro.png'
     
         })
 
@@ -132,7 +151,8 @@ contar().then(function(valor) {
             CPF: '12345',
             RG: '54321',
             dataNascimento: '10-03-1998',
-            genero: 'M'
+            genero: 'M',
+            foto: 'kenzo.png'
     
         })
 
@@ -145,7 +165,8 @@ contar().then(function(valor) {
             CPF: '12345',
             RG: '54321',
             dataNascimento: '10-03-1998',
-            genero: 'M'
+            genero: 'M',
+            foto: 'igor.png'
     
         })
     }

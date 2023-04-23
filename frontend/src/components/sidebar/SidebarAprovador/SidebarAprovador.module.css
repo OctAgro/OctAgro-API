@@ -1,12 +1,19 @@
 .navbar {
   position: relative;
   min-width: 200px;
-  max-width: 20vw;
+  max-width: 15vw;
   max-height: 100vh;
   min-height: 100vh;
   background-color: #512c13;
   font-size: 1.5rem;
   filter: drop-shadow(2px 2px 2px #000);
+}
+
+
+.logo{
+  max-width: 80%;
+  margin: 1rem auto;
+  filter: drop-shadow(0px 2px 5px #000);
 }
 
 .actionItems {
@@ -33,17 +40,7 @@
   cursor: pointer;
 }
 
-.logo{
-  align-self: flex-start;
-}
 
-.textoLogo {
-  font-family: 'Gotham Black';
-  font-size: 2rem;
-  color: #f7f1e5;
-  align-self: flex-end;
-  padding: 1rem 2rem;
-}
 
 .botItems {
   width: 100%;

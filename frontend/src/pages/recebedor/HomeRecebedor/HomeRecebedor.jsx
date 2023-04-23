@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { useLocation } from 'react-router-dom';
+import React, { useState } from "react"
 
 // IMPORTANDO COMPONENTES
 import { SidebarRecebedor } from "../../../components/sidebar/SidebarRecebedor/SidebarRecebedor"
 import { HeaderRecebedor } from "../../../components/header/HeaderRecebedor/HeaderRecebedor"
 import { MercadoriasPendentes } from "../../../components/MercadoriasPendentes/MercadoriasPendentes"
-
-// IMAGEM USADA PARA FINS DE TESTE (SIDEBAR)
-import UserImg from "../../../assets/UserImg.webp"
 
 // IMPORTANDO CSS
 import styles from "./HomeRecebedor.module.css"
@@ -19,9 +15,6 @@ export const HomeRecebedor = () => {
   return (
     <div className={styles.main}>
       <SidebarRecebedor
-        nome='Thiago Zani'
-        funcao='Recebedor'
-        imagem={UserImg}
       />
 
       <div className={styles.container}>

@@ -20,9 +20,19 @@ const Produto = db.define('produto', {
         require: true,
         allowNull: false
     },
+    
+    unidade_medida: {
+        type: Sequelize.DataTypes.STRING,
+        require: true
+    },
+
+    descricao:{
+        type: Sequelize.DataTypes.STRING,
+        require: true
+    },
 
     data_entrada_empresa: {
-        type:Sequelize.DATE,
+        type:Sequelize.DATEONLY,
         require: true,
         allowNull: false
     },
@@ -46,30 +56,38 @@ contar().then(function(valor) {
 
         Produto.create({
             nome_produto: 'Milho',
-            quantidade_produto: 100.5,
+            quantidade_produto: 100,
+            unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-18',
-            hora_entrada_empresa: '08:30:00'
+            hora_entrada_empresa: '08:30:00',
+            descricao: '100 Sacas de Milho'
         });
 
         Produto.create({
             nome_produto: 'Soja',
-            quantidade_produto: 75.2,
+            quantidade_produto: 70,
+            unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-17',
-            hora_entrada_empresa: '14:45:00'
+            hora_entrada_empresa: '14:45:00',
+            descricao: '70 Sacas de Milho'
         });
 
         Produto.create({
             nome_produto: 'Trigo',
-            quantidade_produto: 50.0,
+            quantidade_produto: 50,
+            unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-16',
-            hora_entrada_empresa: '11:20:00'
+            hora_entrada_empresa: '11:20:00',
+            descricao: '50 Sacas de Milho'
         });
 
         Produto.create({
             nome_produto: 'Arroz',
-            quantidade_produto: 30.8,
+            quantidade_produto: 30,
+            unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-15',
-            hora_entrada_empresa: '09:10:00'
+            hora_entrada_empresa: '09:10:00',
+            descricao: '30 Sacas de Milho'
         })
 
     }

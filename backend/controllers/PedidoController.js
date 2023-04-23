@@ -1,4 +1,6 @@
 const Pedido = require('../models/Pedido')
+const Fornecedor = require('../models/Fornecedor')
+const Produto = require('../models/Produto')
 
 module.exports = class PedidoController {
     static async criarPedido(req,res) {
@@ -68,15 +70,50 @@ module.exports = class PedidoController {
 
     static async listarPedidos(req,res) {
          try{ 
-            const pedidos = await Pedido.findAll()
+            const pedidos = await Pedido.findAll({
+                include: [
+                    {
+                      model: Produto,
+                      as: "produto",
+                    },
+                    {
+                        model: Fornecedor,
+                        as: "fornecedor",
+                    },
+                  ],});
+            console.log(pedidos)
             res.status(200).json(pedidos)
          } catch(erro) {
             res.status(500).json({mensagem: erro})
          }
-
-
-        
     }
+
+    static async listarPedidosById(req,res) {
+        const id = req.params.id
+        try{ 
+           const pedidos = await Pedido.findOne({
+            where: { id_pedido: id },
+            include: [
+                {
+                    model: Produto,
+                    as: "produto",
+                },
+                {
+                    model: Fornecedor,
+                    as: "fornecedor",
+                },
+                ],});
+
+           console.log(pedidos)
+
+           if (!pedidos) {
+            return res.status(404).json({ mensagem: 'Pedido não encontrado' });
+          }
+           res.status(200).json(pedidos)
+        } catch(erro) {
+           res.status(500).json({mensagem: erro})
+        }
+   }
 
     static async atualizarpedidoPorId(req, res) {
         const idPedido = req.params.id;

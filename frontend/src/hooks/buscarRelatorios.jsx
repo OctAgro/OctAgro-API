@@ -18,3 +18,13 @@ export async function buscarRelatoriosAnalista() {
         console.log(erro) 
     }
 }
+
+export async function buscarRelatoriosRecebedor() {
+    try{
+        const relatoriosRecebedor = await api.get('/recebedor/home') 
+        console.log(relatoriosRecebedor)
+        return relatoriosRecebedor.data
+    }catch (erro) {
+        console.log(erro)
+    }
+}

@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 //IMPORTANDO COMPONENTES
 import { Button } from "../../Button/Button"
@@ -11,25 +11,40 @@ import { Modal } from "../../Modal/Modal"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faFaceSmileBeam, faFaceFrown, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
 
+// CSS
 import styles from "./FormAprovador.module.css"
-import axios from 'axios'
 
-export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
+// OUTROS IMPORTS
+import axios from "axios"
+import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
+
+export const FormAprovador = () => {
+  const { id } = useParams()
+  const pedidoId = parseInt(id)
+
+  const [pedidos, setPedidos] = useState([])
+
+  useEffect(() => {
+    async function fetchPedidos() {
+      const dadosPedidos = await encontrarPedidosById(pedidoId)
+      setPedidos(dadosPedidos)
+      pedidos.produto.status_aprovacao ? setIsRecusadoWarning(true) : setIsAprovadoWarning(true)
+    }
+    fetchPedidos()
+  }, [pedidoId])
 
   const [openModal, setOpenModal] = useState(false)
   const [isAprovado, setIsAprovado] = useState(false)
   const [isRecusado, setIsRecusado] = useState(false)
-  const [showErrorModal, setShowErrorModal] = useState(false);
-
   // pegar da api se o pedido atual foi recusado ou aprovado,
   // se analista recusou setIsAprovadoWarning(true), se o analista aprovou então setIsRecusadoWarning(true)
 
   const [isAprovadoWarning, setIsAprovadoWarning] = useState(false)
-  const [isRecusadoWarning, setIsRecusadoWarning] = useState(true)
+  const [isRecusadoWarning, setIsRecusadoWarning] = useState(false)
 
   //variaveis para mandar para o banco de dados
   const [revisao, setRevisao] = useState("")
-  const [mensagemErro, setMensagemErro] = useState(null);
+  const [mensagemErro, setMensagemErro] = useState(null)
 
   const {
     register,
@@ -44,17 +59,14 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
 
   //fazendo o post
   const enviarDados = async (data) => {
-
     const dados = {
       textoRevisaoFinalAprovador: revisao,
       statusFinalAprovacao: true,
-      ...data
+      ...data,
     }
 
-    console.log(dados)
-  
     try {
-      const resposta = await axios.post('http://localhost:3000/aprovador/relatorios', dados)
+      const resposta = await axios.post("http://localhost:3000/aprovador/relatorios", dados)
       //esse console.log retorna respostas json do backend de erros de validacao
       console.log(resposta.data.message)
       setMensagemErro(resposta.data.message)
@@ -101,7 +113,8 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
       <div className={styles.divForm}>
         <div className={styles.formTop}>
           <label className={styles.label} htmlFor="formAprovador">
-            Relatório do Pedido {numeroPedido} - {nomeAnalista}
+            Relatório do Pedido {pedidoId} -{" "}
+            {pedidos && pedidos.produto ? pedidos.produto.nome_produto : "..."}
           </label>
         </div>
         <form name="formAprovador" className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -116,24 +129,24 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                 Documentos (RC/NF):
               </div>
               <div className={styles.inputBlock}>
-                <Link to={`/aprovador/relatorio/${numeroPedido}/documentacao`}>
+                <Link to={`/aprovador/relatorio/${pedidoId}/documentacao`}>
                   <button className={styles.btn}>
                     <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
                     Visualizar
                   </button>
                 </Link>
                 <input
+                  className={styles.aprovar}
                   type="checkbox"
                   id="checkboxDocumentacaoProdutoAprovado"
                   {...register("checkboxDocumentacaoProdutoAprovado")}
                 />
-                <label htmlFor="checkboxDocumentacaoProdutoAprovado">Aprovado</label>
                 <input
+                  className={styles.recusar}
                   type="checkbox"
                   id="checkboxDocumentacaoProdutoRecusado"
                   {...register("checkboxDocumentacaoProdutoRecusado")}
                 />
-                <label htmlFor="checkboxDocumentacaoProdutoRecusado">Recusado</label>
               </div>
             </fieldset>
 
@@ -151,6 +164,7 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                   cols="35"
                   value={revisao}
                   onChange={(event) => setRevisao(event.target.value)}
+                  required
                 />
               </div>
             </fieldset>
@@ -169,24 +183,24 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                   </label>
                 </div>
                 <div className={styles.inputBlock}>
-                  <Link to={`/aprovador/relatorio/${numeroPedido}/infoRecebedor`}>
+                  <Link to={`/aprovador/relatorio/${pedidoId}/infoRecebedor`}>
                     <button className={styles.btn}>
                       <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
                       Visualizar
                     </button>
                   </Link>
                   <input
+                    className={styles.aprovar}
                     type="checkbox"
                     id="checkboxInfoRecebedorAprovado"
                     {...register("checkboxInfoRecebedorAprovado")}
                   />
-                  <label htmlFor="checkboxInfoRecebedorAprovado">Aprovado</label>
                   <input
+                    className={styles.recusar}
                     type="checkbox"
                     id="checkboxInfoRecebedorRecusado"
                     {...register("checkboxInfoRecebedorRecusado")}
                   />
-                  <label htmlFor="checkboxInfoRecebedorRecusado">Recusado</label>
                 </div>
               </div>
 
@@ -197,24 +211,24 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                   </label>
                 </div>
                 <div className={styles.inputBlock}>
-                  <Link to={`/aprovador/relatorio/${numeroPedido}/infoAnalista`}>
+                  <Link to={`/aprovador/relatorio/${pedidoId}/infoAnalista`}>
                     <button className={styles.btn}>
                       <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
                       Visualizar
                     </button>
                   </Link>
                   <input
+                    className={styles.aprovar}
                     type="checkbox"
                     id="checkboxInfoAnalistaAprovado"
                     {...register("checkboxInfoAnalistaAprovado")}
                   />
-                  <label htmlFor="checkboxInfoAnalistaAprovado">Aprovado</label>
                   <input
+                    className={styles.recusar}
                     type="checkbox"
                     id="checkboxInfoAnalistaRecusado"
                     {...register("checkboxInfoAnalistaRecusado")}
                   />
-                  <label htmlFor="checkboxInfoAnalistaRecusado">Recusado</label>
                 </div>
               </div>
             </fieldset>
@@ -227,7 +241,6 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
         </form>
       </div>
       <div className={styles.divModal}>
-
         <Modal isOpen={openModal} onClick={handleCloseModal}>
           <div className={styles.clearfix}>
             {mensagemErro ? (
@@ -235,23 +248,23 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                 <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                 <p className={styles.paragraph}>{mensagemErro}</p>
               </div>
-            ) : isAprovado && !isAprovadoWarning ? (
+            ) : isAprovado && !isAprovadoWarning && !mensagemErro ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
-                <p className={styles.paragraph}>O Pedido {numeroPedido} foi aprovado!</p>
+                <p className={styles.paragraph}>O Pedido {pedidoId} foi aprovado!</p>
                 <Link to="/aprovador/relatorio">
                   <Button className={styles.buttonConfirm} value1="CONFIRMAR" />
                 </Link>
               </div>
-            ) : isRecusado && !isRecusadoWarning ? (
+            ) : isRecusado && !isRecusadoWarning && !mensagemErro ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceFrown} className={styles.iconSmile} />
-                <p className={styles.paragraph}>O Pedido {numeroPedido} foi recusado!</p>
+                <p className={styles.paragraph}>O Pedido {pedidoId} foi recusado!</p>
                 <Link to="/aprovador/relatorio">
                   <Button className={styles.button} value1="CONFIRMAR" />
                 </Link>
               </div>
-            ) : isAprovadoWarning && isAprovado ? (
+            ) : isAprovadoWarning && isAprovado && !mensagemErro ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faTriangleExclamation} className={styles.iconSmile} />
                 <p className={styles.paragraph}>
@@ -261,7 +274,7 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
                 </p>
                 <Button className={styles.button} value1="CONFIRMAR" onClick={handleChangeModal} />
               </div>
-            ) : isRecusadoWarning && isRecusado ? (
+            ) : isRecusadoWarning && isRecusado && !mensagemErro ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faTriangleExclamation} className={styles.iconSmile} />
                 <p className={styles.paragraph}>
@@ -274,8 +287,6 @@ export const FormAprovador = ({ numeroPedido, nomeAnalista }) => {
             ) : null}
           </div>
         </Modal>
-
-        
       </div>
     </div>
   )

@@ -22,7 +22,7 @@ export const FormularioAprovador = () => {
           </div>
 
           <div className={styles.content}>
-            <FormAprovador numeroPedido="1001" nomeAnalista="Thiago Zani" />
+            <FormAprovador />
           </div>
         </div>
       </div>

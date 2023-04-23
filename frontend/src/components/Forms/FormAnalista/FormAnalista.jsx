@@ -1,6 +1,8 @@
 import React from "react"
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect, useContext } from "react"
+import { useForm } from "react-hook-form"
+import { Link, useParams } from "react-router-dom"
+import { UserContext } from "../../../context/usuarioContext"
 
 //IMPORTANDO COMPONENTES
 import { Button } from "../../Button/analistaBtn/analistaBtn"
@@ -19,8 +21,67 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormAnalista.module.css"
+import axios from 'axios'
+
+import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 
 export const FormAnalista = (props) => {
+
+  //incluindo trecho de contexto de usuario e salvar dados
+
+  const { usuario } = useContext(UserContext)
+
+  const usuarioCarregado = (usuario ? usuario.id_usuario : null)
+
+  //Para encontrar pedidos por ID
+  const { id } = useParams()
+  const pedidoId = parseInt(id)
+
+  const [revisao, setRevisao] = useState("")
+
+  const [pedidos, setPedidos] = useState([])
+  useEffect(() => {
+    async function fetchPedidos() {
+      const dadosPedidos = await encontrarPedidosById(pedidoId)
+      setPedidos(dadosPedidos)
+    }
+    fetchPedidos()
+  }, [])
+
+  /* const onSubmit = (data) => {
+    //chamando a funcao de enviar dados
+    enviarDados(data)
+
+    handleCadastrarMercadoria()
+    handleAprovacao()
+    
+  } // enviando os dados pro banco de dados atraves do clique
+
+  //conectando os dados do usuario para enviar ao banco de dados
+  const enviarDados = async (data) => {
+
+    const dados = {
+      comentarioAnalista: revisao,
+      idPedido: pedidos.id_pedido,
+      idUsuario: usuarioCarregado,
+      ...data
+    }
+
+    console.log("aqui: " + dados)
+  
+    try {
+      const resposta = await axios.post('http://localhost:3000/analista/relatorios', dados)
+      //esse console.log retorna respostas json do backend de erros de validacao
+      console.log(resposta.data.message)
+      setMensagemErro(resposta.data.message)
+    } catch (erro) {
+      //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
+      console.log(erro.message)
+    }
+  } */
+
+  // fechando incluindo trecho de contexto de usuario e salvar dados
+
   const [openModal, setOpenModal] = useState(false)
   const [isAprovado, setIsAprovado] = useState(false)
   const [isRecusado, setIsRecusado] = useState(false)
@@ -82,7 +143,7 @@ export const FormAnalista = (props) => {
         <div className={styles.divForm}>
           <div className={styles.formTop}>
             <label className={styles.label} htmlFor="FormAnalista">
-              Pedido #{props.numeroPedido} - {props.nomeProduto}
+              Pedido #{pedidos?.id_pedido} - {pedidos?.produto?.nome_produto}
             </label>
           </div>
           <form name="FormAnalista">

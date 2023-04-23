@@ -69,7 +69,7 @@ contar().then(function(valor) {
             unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-17',
             hora_entrada_empresa: '14:45:00',
-            descricao: '70 Sacas de Milho'
+            descricao: '70 Sacas de Soja'
         });
 
         Produto.create({
@@ -78,7 +78,7 @@ contar().then(function(valor) {
             unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-16',
             hora_entrada_empresa: '11:20:00',
-            descricao: '50 Sacas de Milho'
+            descricao: '50 Sacas de Trigo'
         });
 
         Produto.create({
@@ -87,7 +87,7 @@ contar().then(function(valor) {
             unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-15',
             hora_entrada_empresa: '09:10:00',
-            descricao: '30 Sacas de Milho'
+            descricao: '30 Sacas de Arroz'
         })
 
     }

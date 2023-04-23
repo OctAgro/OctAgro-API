@@ -12,6 +12,7 @@ import UserImg from "../../../assets/UserImg.webp";
 import styles from "./FormularioAnalista.module.css";
 
 export const FormularioAnalista = () => {
+  
   return (
     <div className={styles.main}>
       <SidebarAnalista

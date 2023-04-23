@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 // IMPORTANDO MODELOS
 import notaFiscalModelo from "../../../assets/notaFiscalModelo.png"
@@ -12,11 +12,15 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 // IMPORTANDO CSS
 import styles from "./InformacoesDocumentos.module.css"
 
-export const InformacoesDocumentos = ({ numeroPedido }) => {
+export const InformacoesDocumentos = () => {
+
+  const { id } = useParams()
+  const pedidoId = parseInt(id)
+
   return (
     <div className={styles.external}>
       <div className={styles.inside}>
-        <h1>Nota Fiscal - Pedido {numeroPedido} </h1>
+        <h1>Nota Fiscal - Pedido {pedidoId} </h1>
         <div className={styles.insideLeft}>
           <img className={styles.notaFiscal} src={notaFiscalModelo} alt="Nota Fiscal" />
         </div>
@@ -28,7 +32,7 @@ export const InformacoesDocumentos = ({ numeroPedido }) => {
         </div>
       </div>
       <div>
-        <Link to={`/aprovador/relatorio/${numeroPedido}`}>
+        <Link to={`/aprovador/relatorio/${pedidoId}`}>
           <div className={styles.icon}>
             <FontAwesomeIcon icon={faCircleXmark} />
           </div>

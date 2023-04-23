@@ -13,8 +13,6 @@ import styles from "./DocumentacaoAprovador.module.css"
 // Importando o Provider
 import { RelatoriosProvider } from "../../../context/RelatoriosAprovadorContext"
 
-let numeroPedido = "1001"
-
 export const DocumentacaoAprovador = ({ documentacao, analista, recebedor /* , numeroPedido */ }) => {
   if (documentacao) {
     return (
@@ -23,7 +21,7 @@ export const DocumentacaoAprovador = ({ documentacao, analista, recebedor /* , n
           <SidebarAprovador />
           <div className={styles.container}>
             <div className={styles.content}>
-              <InformacoesDocumentos numeroPedido={numeroPedido} />
+              <InformacoesDocumentos />
             </div>
           </div>
         </div>

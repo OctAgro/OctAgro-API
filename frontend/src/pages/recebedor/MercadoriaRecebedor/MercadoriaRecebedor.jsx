@@ -23,12 +23,7 @@ export const MercadoriaRecebedor = () => {
         </div>
 
         <div className={styles.content}>
-          <TabelaMercadoriasCadastradas
-            numeroPedido="1001"
-            fornecedor="Coffelicious"
-            tipoCarga="Café"
-            statusAnalise="Não Iniciada"
-          />
+          <TabelaMercadoriasCadastradas />
         </div>
       </div>
     </div>

@@ -1,21 +1,26 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React from "react"
+import { useForm } from "react-hook-form"
+
+import styles from "../CheckboxBiblioteca/CheckboxBiblioteca.module.css"
 
 export default function CheckboxForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
   const onSubmit = (data) => {
-    console.log(data);
-  };
+    console.log(data)
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>
-          Documentação do produto:
-        </label>
+        <label>Documentação do produto:</label>
         <div>
           <input
+            className={styles.aprovar}
             type="checkbox"
             id="checkboxDocumentacaoProdutoAprovado"
             {...register("checkboxDocumentacaoProdutoAprovado")}
@@ -24,6 +29,7 @@ export default function CheckboxForm() {
         </div>
         <div>
           <input
+            className={styles.recusar}
             type="checkbox"
             id="checkboxDocumentacaoProdutoRecusado"
             {...register("checkboxDocumentacaoProdutoRecusado")}
@@ -32,11 +38,10 @@ export default function CheckboxForm() {
         </div>
       </div>
       <div>
-        <label>
-          Informações do analista:
-        </label>
+        <label>Informações do analista:</label>
         <div>
           <input
+            className={styles.aprovar}
             type="checkbox"
             id="checkboxInfoAnalistaAprovado"
             {...register("checkboxInfoAnalistaAprovado")}
@@ -45,6 +50,7 @@ export default function CheckboxForm() {
         </div>
         <div>
           <input
+            className={styles.recusar}
             type="checkbox"
             id="checkboxInfoAnalistaRecusado"
             {...register("checkboxInfoAnalistaRecusado")}
@@ -53,11 +59,10 @@ export default function CheckboxForm() {
         </div>
       </div>
       <div>
-        <label>
-          Informações do recebedor:
-        </label>
+        <label>Informações do recebedor:</label>
         <div>
           <input
+            className={styles.aprovar}
             type="checkbox"
             id="checkboxInfoRecebedorAprovado"
             {...register("checkboxInfoRecebedorAprovado")}
@@ -66,6 +71,7 @@ export default function CheckboxForm() {
         </div>
         <div>
           <input
+            className={styles.recusar}
             type="checkbox"
             id="checkboxInfoRecebedorRecusado"
             {...register("checkboxInfoRecebedorRecusado")}
@@ -75,5 +81,5 @@ export default function CheckboxForm() {
       </div>
       <button type="submit">Enviar</button>
     </form>
-  );
+  )
 }

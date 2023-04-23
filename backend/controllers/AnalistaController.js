@@ -1,5 +1,8 @@
 const RelatorioAnalista = require('../models/RelatorioAnalista')
 const Pedido = require('../models/Pedido')
+const Usuario = require('../models/Usuario')
+const Produto = require('../models/Produto')
+const Fornecedor = require('../models/Fornecedor')
 
 
 module.exports = class RelatorioController{
@@ -52,7 +55,7 @@ module.exports = class RelatorioController{
 
     static async encontrarRelatorioAnalista(req,res) {  
 
-        const idRelatorio = req.parms.id
+        const idRelatorio = req.params.id
         const relatorioProcurado = RelatorioAnalista.findByPk (idRelatorio)
 
         if (!relatorioProcurado) {
@@ -64,7 +67,7 @@ module.exports = class RelatorioController{
     }
 
     static async atualizarRelatorioAnalista(req,res) {
-        const idRelatorio = req.parms.id
+        const idRelatorio = req.params.id
 
         const data = req.body
 
@@ -120,9 +123,23 @@ module.exports = class RelatorioController{
             const relatorios = await RelatorioAnalista.findAll({
                 include: [
                     {
-                      model: Pedido,
-                      as: "pedido",
-                      attributes: ["id_pedido","produto", "quantidade", "unidade_medida"],
+                        model: Pedido,
+                        as: "pedido",
+                        include: [
+                            {
+                              model: Produto,
+                              as: "produto"
+                            },
+                            {
+                                model: Fornecedor,
+                                as: "fornecedor"
+                            },
+
+                          ]
+                    },
+                    {
+                        model: Usuario,
+                        as: "usuario",
                     },
                   ],});
             console.log(relatorios)

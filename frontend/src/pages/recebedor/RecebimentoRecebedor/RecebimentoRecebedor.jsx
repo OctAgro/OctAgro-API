@@ -4,7 +4,7 @@ import React from "react"
 import { SidebarRecebedor } from "../../../components/sidebar/SidebarRecebedor/SidebarRecebedor"
 import { HeaderRecebedor } from "../../../components/header/HeaderRecebedor/HeaderRecebedor"
 
-import { TabelaMercadorias } from "../../../components/TabelaMercadorias/TabelaMercadorias"
+import { TabelaMercadoriasRecebedor } from "../../../components/TabelaMercadorias/TabelaMercadoriasRecebedor/TabelaMercadoriasRecebedor"
 
 // IMAGEM USADA PARA FINS DE TESTE (SIDEBAR)
 import UserImg from "../../../assets/UserImg.webp"
@@ -23,7 +23,7 @@ export const RecebimentoRecebedor = () => {
         </div>
 
         <div className={styles.content}>
-          <TabelaMercadorias
+          <TabelaMercadoriasRecebedor
             numeroPedido="1001"
             fornecedor="Coffelicious"
             tipoCarga="Café"

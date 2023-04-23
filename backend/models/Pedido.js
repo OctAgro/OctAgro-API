@@ -1,5 +1,7 @@
 const Sequelize = require("sequelize")
 const db = require("../db/conexao")
+const Produto = require("./Produto");
+const Fornecedor = require("./Fornecedor");
 
 
 const Pedido = db.define ("pedido" , {
@@ -9,30 +11,27 @@ const Pedido = db.define ("pedido" , {
         autoIncrement: true
     },
 
-    produto: {
+    status_pedido: {
         type: Sequelize.STRING,
-        require: true,        
-    },
-
-    quantidade: {
-        type: Sequelize.INTEGER,
-        require: true
-
-    },
-
-    unidade_medida: {
-        type: Sequelize.DataTypes.STRING,
+        defaultValue: 'Recebido',
         require: true
     },
 
-    fornecedor: {
-        type: Sequelize.DataTypes.STRING,
+    status_aprovacao:{
+        type: Sequelize.STRING,
+        defaultValue: 'Pendente',
         require: true
+    },
 
-    }
+    id_produto: Sequelize.INTEGER,
+    id_fornecedor: Sequelize.INTEGER
+
 },{
     timestamps: false
 })
+
+Pedido.belongsTo(Produto, { foreignKey: "id_produto"});
+Pedido.belongsTo(Fornecedor, {foreignKey: "id_fornecedor"});
 
 async function contar(){
     const pedidos = await Pedido.count(Pedido.id_pedido)
@@ -44,25 +43,21 @@ contar().then(function(valor){
     if (valor===0) {
 
         Pedido.create({
-            produto: 'Feijao',
-            quantidade: 20,
-            unidade_medida: 'Kg',
-            fornecedor: 'Fatec Graos'
-        })
-
-        Pedido.create({
-            produto: 'Milho',
-            quantidade: 40,
-            unidade_medida: 'Kg',
-            fornecedor: 'Fatec Graos'
-        })
-
-        Pedido.create({
-            produto: 'Café',
-            quantidade: 20,
-            unidade_medida: 'Kg',
-            fornecedor: 'Fatec Graos'
-        })
+            id_produto: 1,
+            id_fornecedor: 1,
+          });
+          Pedido.create({
+            id_produto: 2,
+            id_fornecedor: 2,
+          });
+          Pedido.create({
+            id_produto: 3,
+            id_fornecedor: 3,
+          });
+          Pedido.create({
+            id_produto: 4,
+            id_fornecedor: 4,
+          });
     }
 
 }).catch(function(erro){

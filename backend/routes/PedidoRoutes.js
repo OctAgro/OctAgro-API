@@ -5,7 +5,7 @@ const PedidoController = require('../controllers/PedidoController')
 router.get('/home')
 router.post('/entrada-pedido', PedidoController.criarPedido)
 router.get('/buscar-pedido', PedidoController.listarPedidos)
-/* router.post('/pedido/:id', PedidoController.encontrarPedido) */
+router.get('/buscar-pedido/:id', PedidoController.listarPedidosById)
 
 
 module.exports = router

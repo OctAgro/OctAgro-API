@@ -11,51 +11,6 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
         primaryKey: true
     },
 
-    nome_fornecedor: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-
-    nome_entregador: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-
-    placa_veiculo: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-
-    data_entrada: {
-        type: Sequelize.DATE,
-        allowNull: false
-    },
-
-    horario_entrada: {
-        type: Sequelize.TIME,
-        allowNull: false,
-    },
-
-    documento_entrada: {
-        type: Sequelize.STRING,
-        allowNull: true,
-    },
-
-    produtof: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-
-    quantidade: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-    },
-
-    unidade_medida: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-
     coloracao: {
         type: Sequelize.BOOLEAN,
         allowNull: false
@@ -78,9 +33,9 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
 })
 
 //Criando relação entre tabela RelatorioAprovador e Usuario
+Pedido.hasMany(RelatorioRecebedor, { foreignKey: 'id_pedido' });
 RelatorioRecebedor.belongsTo(Usuario, { foreignKey: 'id_usuario' })
 //Usuario.hasMany(RelatorioRecebedor) // vinculo com a tabela usuarios tambem (Gabriel)
-
 RelatorioRecebedor.belongsTo(Pedido, { foreignKey: 'id_pedido' })
 
 

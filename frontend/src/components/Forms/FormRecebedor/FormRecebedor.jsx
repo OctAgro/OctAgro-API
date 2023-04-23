@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 //IMPORTANDO COMPONENTES
 import { Button } from "../../Button/recebedorBtn/recebedorBtn"
@@ -12,8 +12,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFaceSmileBeam } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormRecebedor.module.css"
+import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 
-export const FormRecebedor = (props) => {
+
+export const FormRecebedor = () => {
+  const { id } = useParams()
+  const pedidoId = parseInt(id)
+
+  const [pedidos, setPedidos] = useState([])
+  useEffect(() => {
+    async function fetchPedidos() {
+      const dadosPedidos = await encontrarPedidosById(pedidoId)
+      setPedidos(dadosPedidos)
+    }
+    fetchPedidos()
+  }, [pedidoId])
+
+  console.log(pedidos)
+
   const {
     register,
     handleSubmit,
@@ -28,16 +44,7 @@ export const FormRecebedor = (props) => {
   const [textoDocmento, setTextoDocmento] = useState("")
   const [textoProduto, setTextoProduto] = useState("")
 
-  const onSubmit = (
-    data,
-    textoNomeFornecedor,
-    textoNomeEntregador,
-    textoPlacaVeiculo,
-    numeroQuantidade,
-    textoUnidadeMedida,
-    textoDocmento,
-    textoProduto
-  ) => {
+  const onSubmit = () => {
     console.log("Booleans:")
     console.log(data)
 
@@ -75,7 +82,7 @@ export const FormRecebedor = (props) => {
         <div className={styles.divForm}>
           <div className={styles.formTop}>
             <label className={styles.label} htmlFor="FormRecebedorUpdate">
-              Pedido {props.numeroPedido} - {props.nomeProduto}
+              Pedido {pedidos?.id_pedido} - {pedidos?.produto?.nome_produto}
             </label>
           </div>
           <form name="FormRecebedorUpdate" onSubmit={handleSubmit(onSubmit)} className={styles.formMain}>
@@ -89,18 +96,14 @@ export const FormRecebedor = (props) => {
                   <label>
                     <h3>Fornecedor:</h3>
                     <div>
-                      <select className={styles.customSelect}
-                        id="fornecedor"
-                        name="textoNomeFornecedor"
-                        form="FormRecebedorUpdate"
-                        value={textoNomeFornecedor}
-                        onChange={(event) => setTextoNomeFornecedor(event.target.value)}
-                      >
-                        <option value="produto1">TRIGOSTOSO</option>
-                        <option value="produto2">COFFELICIOUS</option>
-                        <option value="produto3">KORN FLAKES</option>
-                        <option value="produto4">SOY ATACK</option>
-                      </select>
+                    <input
+                      className={styles.customSelect}
+                      id="fornecedor"
+                      name="textoNomeFornecedor"
+                      form="FormRecebedorUpdate"
+                      value={pedidos?.fornecedor?.nome_fornecedor}
+                      onChange={(event) => setTextoNomeFornecedor(event.target.value)}
+                    />
                     </div>
                   </label>
                 </div>
@@ -111,7 +114,7 @@ export const FormRecebedor = (props) => {
                       <input className={styles.customSelect}
                         type="text"
                         name="textoNomeEntregador"
-                        value={textoNomeEntregador}
+                        value={pedidos?.fornecedor?.nome_motorista}
                         onChange={(event) => setTextoNomeEntregador(event.target.value)}
                       />
                     </div>
@@ -123,7 +126,7 @@ export const FormRecebedor = (props) => {
                     <input className={styles.customSelect}
                       type="text"
                       name="textoPlacaVeiculo"
-                      value={textoPlacaVeiculo}
+                      value={pedidos?.fornecedor?.placa_veiculo}
                       onChange={(event) => setTextoPlacaVeiculo(event.target.value)}
                     />
                   </label>
@@ -132,11 +135,11 @@ export const FormRecebedor = (props) => {
                 <div className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Data:</h3>
-                    <input className={styles.customSelect} type="date" />
+                    <input className={styles.customSelect} type="date" value={pedidos?.produto?.data_entrada_empresa}/>
                   </div>
                   <div className={styles.divProduto}>
                     <h3>Horário:</h3>
-                    <input className={styles.SelectProduto} type="time" />
+                    <input className={styles.SelectProduto} type="time" value={pedidos?.produto?.hora_entrada_empresa}/>
                   </div>
                 </div>
                 <div className={styles.inputBlock}>
@@ -162,38 +165,34 @@ export const FormRecebedor = (props) => {
                 <fieldset className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Produto:</h3>
-                    <select className={styles.SelectProduto}
+                    <input 
+                      className={styles.SelectProduto}
+                      type="text"
                       id="produtos"
                       name="textoProduto"
                       form="FormRecebedorUpdate"
-                      value={textoProduto}
+                      value={pedidos?.produto?.nome_produto}
                       onChange={(event) => setTextoProduto(event.target.value)}
                     >
-                      <option value="produto1">Trigo</option>
-                      <option value="produto2">Café</option>
-                      <option value="produto3">Milho</option>
-                      <option value="produto4">Soja</option>
-                    </select>
+                    </input>
                   </div>
                   <div>
                     <h3>Quantidade:</h3>
                     <input className={styles.quantidade}
                       type="number"
                       name="numeroQuantidade"
-                      value={numeroQuantidade}
+                      value={pedidos?.produto?.quantidade_produto}
                       onChange={(event) => setNumeroQuantidade(event.target.value)} />
-                    <select className={styles.selectMedida}
+                    <input
+                      className={styles.selectMedida}
+                      type="text"
                       id="produtos"
                       name="textoUnidadeMedida"
                       form="FormRecebedorUpdate"
-                      value={textoUnidadeMedida}
+                      value={pedidos?.produto?.unidade_medida}
                       onChange={(event) => setTextoUnidadeMedida(event.target.value)}
                     >
-                      <option value="tipo1">Toneladas (Sc)</option>
-                      <option value="tipo2">Quilograma (kg)</option>
-                      <option value="tipo3">Sacas</option>
-                      <option value="tipo4">Bushel</option>
-                    </select>
+                    </input>
                   </div>
                 </fieldset>
                 <div>

@@ -13,7 +13,6 @@ export const TabelaRelatorios = () => {
   const dados = useContext(RelatoriosAprovadorContext)
 
   const listaRelatorios = dados[0]
-  console.log(listaRelatorios)
 
   const [relatoriosAnalista, setRelatoriosAnalista] = useState([])
   useEffect(() => {

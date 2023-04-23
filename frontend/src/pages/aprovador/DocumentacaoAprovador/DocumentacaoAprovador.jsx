@@ -13,7 +13,7 @@ import styles from "./DocumentacaoAprovador.module.css"
 // Importando o Provider
 import { RelatoriosProvider } from "../../../context/RelatoriosAprovadorContext"
 
-export const DocumentacaoAprovador = ({ documentacao, analista, recebedor /* , numeroPedido */ }) => {
+export const DocumentacaoAprovador = ({ documentacao, analista, recebedor }) => {
   if (documentacao) {
     return (
       <RelatoriosProvider>

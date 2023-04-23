@@ -38,7 +38,7 @@
 }
 .rightSide {
   margin: 0 1%;
-  width: 70%;
+  width: 60%;
 }
 
 .btn {
@@ -58,10 +58,22 @@
   background-color: #c4c4c4;
 }
 
+.btnConfirmar {
+  text-align: center;
+  cursor: pointer;
+  background-color: #4c4b16;
+  color: white;
+  font-family: "Gotham Black";
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: solid 2px black;
+  border-radius: 7px;
+}
+
 .buttons {
+  margin: 0 auto;
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 1rem;
+  justify-content: center;
   filter: drop-shadow(2px 2px 2px #000);  
 }
 
@@ -215,6 +227,88 @@
   border-radius: 5px;
   background-color: #D9D9D9;
   font-family: 'Gotham';
-  filter: drop-shadow(2px 2px 2px #000);
-  
+  filter: drop-shadow(2px 2px 2px #000); 
+}
+
+/* inputs */
+
+input[type="checkbox"] {
+  font-family: 'Gotham Black';
+  margin: auto;
+  padding: 1.1rem;
+}
+
+input[type="checkbox"].aprovar {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  background-color: #fff;
+}
+
+input[type="checkbox"].aprovar:before {
+  content: '\2713';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+}
+
+input[type="checkbox"].aprovar:checked:before {
+  color: #fff;
+}
+
+input[type="checkbox"].aprovar:checked {
+  background-color: #000;
+}
+
+input[type="checkbox"].aprovar:not(:checked) {
+  background-color: #fff;
+}
+
+
+input[type="checkbox"].recusar {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  background-color: #fff;
+}
+
+input[type="checkbox"].recusar:before {
+  content: 'X';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+}
+
+input[type="checkbox"].recusar:checked:before {
+  color: #fff;
+}
+
+input[type="checkbox"].recusar:checked {
+  background-color: #000;
+}
+
+input[type="checkbox"].recusar:not(:checked) {
+  background-color: #fff;
 }

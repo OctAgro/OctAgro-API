@@ -8,3 +8,13 @@ export async function buscarRelatorios(){
         console.log(erro);
     }
 }
+
+export async function buscarRelatoriosAnalista() {
+    try {
+        const relatoriosAnalista = await api.get('/analista/home') 
+        console.log(relatoriosAnalista)
+        return relatoriosAnalista.data
+    } catch (erro) { 
+        console.log(erro) 
+    }
+}

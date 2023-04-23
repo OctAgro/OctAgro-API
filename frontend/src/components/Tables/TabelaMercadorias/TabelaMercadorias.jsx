@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,7 +6,19 @@ import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./TabelaMercadorias.module.css";
 
-export const TabelaMercadorias = (props) => {
+import { buscarRelatoriosAnalista } from '../../../hooks/buscarRelatorios'
+
+export const TabelaMercadorias = () => {
+
+  const [relatoriosAnalista, setRelatoriosAnalista] = useState([])
+  useEffect(() => {
+    async function fetchRelatoriosAnalista() {
+      const dadosPedidos = await buscarRelatoriosAnalista()
+      setRelatoriosAnalista(dadosPedidos)
+    }
+    fetchRelatoriosAnalista()
+  }, [])
+
   return (
     <div className={styles.table}>
       <div className={styles.title}>
@@ -23,18 +35,20 @@ export const TabelaMercadorias = (props) => {
           </tr>
         </thead>
         <tbody>
-          <tr className={styles.tableRow}>
-            <td className={styles.tableData}>{props.numeroPedido}</td>
-            <td className={styles.tableData}>{props.descricao}</td>
-            <td className={styles.tableData}>{props.data}</td>
-            <td className={styles.tableData}>
+          {relatoriosAnalista.map((relatorio) => (
+            <tr key={relatorio.id_relatorio_analista}>
+              <td className={styles.tableData}>{relatorio.pedido.id_pedido}</td>
+              <td className={styles.tableData}>{relatorio.pedido.produto}</td>
+              <td className={styles.tableData}>{relatorio.pedido.unidade_medida}</td>
+              <td className={styles.tableData}>
               <button className={styles.button}>
-                <Link to={`/analista/mercadoria/${props.numeroPedido}`}>
+                <Link to={`/analista/mercadoria/${relatorio.numeroPedido}`}>
                   Analisar <FontAwesomeIcon icon={faClipboardList} />
                 </Link>
               </button>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

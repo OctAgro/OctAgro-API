@@ -13,17 +13,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFaceSmileBeam } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormRecebedor.module.css"
-import axios from 'axios'
+import axios from "axios"
 
 //chamando o hook de encontrar pedidos por ID
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 
-
 export const FormRecebedor = () => {
-
   const { usuario } = useContext(UserContext)
 
-  const usuarioCarregado = (usuario ? usuario.id_usuario : null)
+  const usuarioCarregado = usuario ? usuario.id_usuario : null
 
   //Para encontrar pedidos por ID
   const { id } = useParams()
@@ -54,31 +52,28 @@ export const FormRecebedor = () => {
   const [textoDocmento, setTextoDocmento] = useState("")
   const [textoProduto, setTextoProduto] = useState("")
 
-  const [mensagemErro, setMensagemErro] = useState(null);
+  const [mensagemErro, setMensagemErro] = useState(null)
 
-  
   const onSubmit = (data) => {
     //chamando a funcao de enviar dados
     enviarDados(data)
 
     handleCadastrarMercadoria()
     handleAprovacao()
-    
   } // enviando os dados pro banco de dados atraves do clique
 
   //conectando os dados do usuario para enviar ao banco de dados
   const enviarDados = async (data) => {
-
     const dados = {
       idPedido: pedidos.id_pedido,
       idUsuario: usuarioCarregado,
-      ...data
+      ...data,
     }
 
     console.log("aqui: " + dados)
-  
+
     try {
-      const resposta = await axios.post('http://localhost:3000/recebedor/entradamercadoria', dados)
+      const resposta = await axios.post("http://localhost:3000/recebedor/entradamercadoria", dados)
       //esse console.log retorna respostas json do backend de erros de validacao
       console.log(resposta.data.message)
       setMensagemErro(resposta.data.message)
@@ -125,14 +120,14 @@ export const FormRecebedor = () => {
                   <label>
                     <h3>Fornecedor:</h3>
                     <div>
-                    <input
-                      className={styles.customSelect}
-                      id="fornecedor"
-                      name="textoNomeFornecedor"
-                      form="FormRecebedorUpdate"
-                      value={pedidos?.fornecedor?.nome_fornecedor}
-                      onChange={(event) => setTextoNomeFornecedor(event.target.value)}
-                    />
+                      <input
+                        className={styles.customSelect}
+                        id="fornecedor"
+                        name="textoNomeFornecedor"
+                        form="FormRecebedorUpdate"
+                        value={pedidos?.fornecedor?.nome_fornecedor}
+                        onChange={(event) => setTextoNomeFornecedor(event.target.value)}
+                      />
                     </div>
                   </label>
                 </div>
@@ -140,7 +135,8 @@ export const FormRecebedor = () => {
                   <label>
                     <h3>Nome do Caminhoneiro:</h3>
                     <div>
-                      <input className={styles.customSelect}
+                      <input
+                        className={styles.customSelect}
                         type="text"
                         name="textoNomeEntregador"
                         value={pedidos?.fornecedor?.nome_motorista}
@@ -152,7 +148,8 @@ export const FormRecebedor = () => {
                 <div className={styles.inputBlock}>
                   <label htmlFor="textoPlacaVeiculo">
                     <h3>Placa do Caminhão:</h3>
-                    <input className={styles.customSelect}
+                    <input
+                      className={styles.customSelect}
                       type="text"
                       name="textoPlacaVeiculo"
                       value={pedidos?.fornecedor?.placa_veiculo}
@@ -164,23 +161,33 @@ export const FormRecebedor = () => {
                 <div className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Data:</h3>
-                    <input className={styles.customSelect} type="date" value={pedidos?.produto?.data_entrada_empresa}/>
+                    <input
+                      className={styles.customSelect}
+                      type="date"
+                      value={pedidos?.produto?.data_entrada_empresa}
+                    />
                   </div>
                   <div className={styles.divProduto}>
                     <h3>Horário:</h3>
-                    <input className={styles.SelectProduto} type="time" value={pedidos?.produto?.hora_entrada_empresa}/>
+                    <input
+                      className={styles.SelectProduto}
+                      type="time"
+                      value={pedidos?.produto?.hora_entrada_empresa}
+                    />
                   </div>
                 </div>
                 <div className={styles.inputBlock}>
                   <label htmlFor="">
                     <h3>Documentos:</h3>
                     {/*                   <input type="file" /> */}
-                    <button className={styles.anexarBTN}
+                    <input
+                      className={styles.anexarBTN}
                       type="text"
                       name="textoDocmento"
-                      value=""
+                      value={textoDocmento}
                       onChange={(event) => setTextoDocmento(event.target.value)}
-                    >anexar documentos</button>
+                    >
+                    </input>
                   </label>
                 </div>
               </fieldset>
@@ -194,7 +201,7 @@ export const FormRecebedor = () => {
                 <fieldset className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Produto:</h3>
-                    <input 
+                    <input
                       className={styles.SelectProduto}
                       type="text"
                       id="produtos"
@@ -202,16 +209,17 @@ export const FormRecebedor = () => {
                       form="FormRecebedorUpdate"
                       value={pedidos?.produto?.nome_produto}
                       onChange={(event) => setTextoProduto(event.target.value)}
-                    >
-                    </input>
+                    ></input>
                   </div>
                   <div>
                     <h3>Quantidade:</h3>
-                    <input className={styles.quantidade}
+                    <input
+                      className={styles.quantidade}
                       type="number"
                       name="numeroQuantidade"
                       value={pedidos?.produto?.quantidade_produto}
-                      onChange={(event) => setNumeroQuantidade(event.target.value)} />
+                      onChange={(event) => setNumeroQuantidade(event.target.value)}
+                    />
                     <input
                       className={styles.selectMedida}
                       type="text"
@@ -220,8 +228,7 @@ export const FormRecebedor = () => {
                       form="FormRecebedorUpdate"
                       value={pedidos?.produto?.unidade_medida}
                       onChange={(event) => setTextoUnidadeMedida(event.target.value)}
-                    >
-                    </input>
+                    ></input>
                   </div>
                 </fieldset>
                 <div>
@@ -233,63 +240,67 @@ export const FormRecebedor = () => {
                   <div className={styles.inputBlock}>
                     <input className={styles.btnsRN} value="Coloração" readOnly />
                     <input
+                      className={styles.aprovar}
                       type="checkbox"
                       id="checkboxColoracaoAprovado"
                       {...register("checkboxColoracaoAprovado")}
                     />
-                    <label htmlFor="checkboxColoracaoAprovado">Aprovado</label>
                     <input
+                      className={styles.recusar}
                       type="checkbox"
                       id="checkboxColoracaoReprovado"
                       {...register("checkboxColoracaoReprovado")}
                     />
-                    <label htmlFor="checkboxColoracaoReprovado">Recusado</label>
                   </div>
                   <div className={styles.inputBlock}>
                     <input className={styles.btnsRN} value="Odor" readOnly />
-                    <input type="checkbox" id="checkboxOdorAprovado" {...register("checkboxOdorAprovado")} />
-                    <label htmlFor="checkboxOdorAprovado">Aprovado</label>
-                    <input type="checkbox" id="checkboxOdorReprovado" {...register("checkboxOdorReprovado")} />
-                    <label htmlFor="checkboxOdorReprovado">Recusado</label>
+                    <input
+                      type="checkbox"
+                      className={styles.aprovar}
+                      id="checkboxOdorAprovado"
+                      {...register("checkboxOdorAprovado")}
+                    />
+                    <input
+                      className={styles.recusar}
+                      type="checkbox"
+                      id="checkboxOdorReprovado"
+                      {...register("checkboxOdorReprovado")}
+                    />
                   </div>
                   <div className={styles.inputBlock}>
                     <input className={styles.btnsRN} value="Ausência de Insetos vivos/mortos" readOnly />
                     <input
+                      className={styles.aprovar}
                       type="checkbox"
                       id="checkboxAusenciaAnimaisAprovado"
                       {...register("checkboxAusenciaAnimaisAprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaAnimaisAprovado">Aprovado</label>
                     <input
+                      className={styles.recusar}
                       type="checkbox"
                       id="checkboxAusenciaAnimaisReprovado"
                       {...register("checkboxAusenciaAnimaisReprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaAnimaisReprovado">Recusado</label>
                   </div>
                   <div className={styles.inputBlock}>
                     <input className={styles.btnsRN} value="Ausência de Mofo" readOnly />
                     <input
+                      className={styles.aprovar}
                       type="checkbox"
                       id="checkboxAusenciaMofoAprovado"
                       {...register("checkboxAusenciaMofoAprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaMofoAprovado">Aprovado</label>
                     <input
+                      className={styles.recusar}
                       type="checkbox"
                       id="checkboxAusenciaMofoReprovado"
                       {...register("checkboxAusenciaMofoReprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaMofoReprovado">Recusado</label>
                   </div>
                 </div>
               </fieldset>
               <div className={styles.buttons}>
-                <Button
-                  value1="CONFIRMAR"
-                  type="submit"
-                  /* onClick={handleCadastrarMercadoria} */
-                />
+              <input className={styles.btnConfirmar} type="submit" value="CONFIRMAR" onClick={handleSubmit} />
               </div>
             </div>
           </form>
@@ -299,22 +310,16 @@ export const FormRecebedor = () => {
             <div className={styles.clearfix}>
               {isAprovado ? (
                 <div className={styles.container}>
-                  <FontAwesomeIcon
-                    icon={faFaceSmileBeam}
-                    className={styles.iconSmile}
-                  />
-                  <p className={styles.paragraph}>
-                    Mercadoria cadastrada com sucesso!
-                  </p>
-                  <Link to="/analista/mercadoria">
-                    <Button className={styles.button} value1="CONFIRMAR" />
+                  <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
+                  <p className={styles.paragraph}>Mercadoria cadastrada com sucesso!</p>
+                  <Link to="/recebedor/entradamercadoria">
+                  <input className={styles.btnConfirmar} value="CONFIRMAR"/>
                   </Link>
                 </div>
               ) : null}
             </div>
           </Modal>
         </div>
-
       </div>
     </div>
   )

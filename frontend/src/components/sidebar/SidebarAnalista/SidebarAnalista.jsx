@@ -34,7 +34,7 @@ export const SidebarAnalista = () => {
         <ul className={styles.usuario}>
           <div className={styles.molduraFoto}>
             <img className={styles.molduraOctagonal} src={MolduraOctagonal} alt="Moldura Octagonal" />
-            <img className={styles.fotoUsuario} /* src={usuario ? usuario.imagem : "Carregando..."} */ alt="Foto de perfil do usuário" />
+            <img className={styles.fotoUsuario}  src={ `../src/assets/${usuario ? usuario.foto : "Carregando..."}` }  alt="Foto de perfil do usuário" />
           </div>
           <div className={styles.infoUsuario}>
             <h3 className={styles.nomeUsuario}>{usuario ? usuario.nome : "Carregando..."}</h3>

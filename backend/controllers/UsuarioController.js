@@ -133,7 +133,8 @@ module.exports = class UsuarioControllers {
                 nome: checarUsuario.nome,
                 sobrenome: checarUsuario.sobrenome,
                 email: checarUsuario.email,
-                funcao: checarUsuario.funcao
+                funcao: checarUsuario.funcao,
+                foto: checarUsuario.foto
             }).status(201)
         }
     }

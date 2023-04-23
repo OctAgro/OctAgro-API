@@ -1,10 +1,11 @@
 import React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useParams } from "react-router-dom"
+import { UserContext } from "../../../context/usuarioContext"
 
 //IMPORTANDO COMPONENTES
-import { Button } from "../../Button/recebedorBtn/recebedorBtn"
+import { Button } from "../../Button/Button"
 import { Modal } from "../../Modal/Modal"
 
 // IMPORTANDO ICONES
@@ -12,10 +13,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFaceSmileBeam } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormRecebedor.module.css"
+import axios from 'axios'
+
+//chamando o hook de encontrar pedidos por ID
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 
 
 export const FormRecebedor = () => {
+
+  const { usuario } = useContext(UserContext)
+
+  const usuarioCarregado = (usuario ? usuario.id_usuario : null)
+
+  //Para encontrar pedidos por ID
   const { id } = useParams()
   const pedidoId = parseInt(id)
 
@@ -26,9 +36,9 @@ export const FormRecebedor = () => {
       setPedidos(dadosPedidos)
     }
     fetchPedidos()
-  }, [pedidoId])
+  }, [])
 
-  console.log(pedidos)
+  console.log(pedidos) //Fim do codigo de encontrar pedidos por ID
 
   const {
     register,
@@ -44,26 +54,45 @@ export const FormRecebedor = () => {
   const [textoDocmento, setTextoDocmento] = useState("")
   const [textoProduto, setTextoProduto] = useState("")
 
-  const onSubmit = () => {
-    console.log("Booleans:")
-    console.log(data)
+  const [mensagemErro, setMensagemErro] = useState(null);
 
-    console.log("textoNomeFornecedor:", textoNomeFornecedor)
-    console.log("textoNomeEntregador:", textoNomeEntregador)
-    console.log("textoPlacaVeiculo:", textoPlacaVeiculo)
-    console.log("numeroQuantidade:", numeroQuantidade)
-    console.log("textoUnidadeMedida:", textoUnidadeMedida)
-    console.log("textoDocmento:", textoDocmento)
-    console.log("textoProduto:", textoProduto)
+  
+  const onSubmit = (data) => {
+    //chamando a funcao de enviar dados
+    enviarDados(data)
 
     handleCadastrarMercadoria()
+    handleAprovacao()
+    
+  } // enviando os dados pro banco de dados atraves do clique
+
+  //conectando os dados do usuario para enviar ao banco de dados
+  const enviarDados = async (data) => {
+
+    const dados = {
+      idPedido: pedidos.id_pedido,
+      idUsuario: usuarioCarregado,
+      ...data
+    }
+
+    console.log("aqui: " + dados)
+  
+    try {
+      const resposta = await axios.post('http://localhost:3000/recebedor/entradamercadoria', dados)
+      //esse console.log retorna respostas json do backend de erros de validacao
+      console.log(resposta.data.message)
+      setMensagemErro(resposta.data.message)
+    } catch (erro) {
+      //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
+      console.log(erro.message)
+      /* setMensagemErro(erro) */
+    }
   }
 
   const [isAprovado, setIsAprovado] = useState(false)
   const [openModal, setOpenModal] = useState(false)
 
-  const handleCadastrarMercadoria = (e) => {
-    e.preventDefault()
+  const handleCadastrarMercadoria = () => {
     setIsAprovado(true)
     setOpenModal(true)
   }
@@ -85,7 +114,7 @@ export const FormRecebedor = () => {
               Pedido {pedidos?.id_pedido} - {pedidos?.produto?.nome_produto}
             </label>
           </div>
-          <form name="FormRecebedorUpdate" onSubmit={handleSubmit(onSubmit)} className={styles.formMain}>
+          <form name="FormRecebedorUpdate" className={styles.formMain} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.leftSide}>
               <fieldset>
                 <div>
@@ -149,7 +178,7 @@ export const FormRecebedor = () => {
                     <button className={styles.anexarBTN}
                       type="text"
                       name="textoDocmento"
-                      value={textoDocmento}
+                      value=""
                       onChange={(event) => setTextoDocmento(event.target.value)}
                     >anexar documentos</button>
                   </label>
@@ -227,16 +256,16 @@ export const FormRecebedor = () => {
                     <input className={styles.btnsRN} value="Ausência de Insetos vivos/mortos" readOnly />
                     <input
                       type="checkbox"
-                      id="checkboxAusenciaInsetosAprovado"
-                      {...register("checkboxAusenciaInsetosAprovado")}
+                      id="checkboxAusenciaAnimaisAprovado"
+                      {...register("checkboxAusenciaAnimaisAprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaInsetosAprovado">Aprovado</label>
+                    <label htmlFor="checkboxAusenciaAnimaisAprovado">Aprovado</label>
                     <input
                       type="checkbox"
-                      id="checkboxAusenciaInsetosReprovado"
-                      {...register("checkboxAusenciaInsetosReprovado")}
+                      id="checkboxAusenciaAnimaisReprovado"
+                      {...register("checkboxAusenciaAnimaisReprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaInsetosReprovado">Recusado</label>
+                    <label htmlFor="checkboxAusenciaAnimaisReprovado">Recusado</label>
                   </div>
                   <div className={styles.inputBlock}>
                     <input className={styles.btnsRN} value="Ausência de Mofo" readOnly />
@@ -259,7 +288,7 @@ export const FormRecebedor = () => {
                 <Button
                   value1="CONFIRMAR"
                   type="submit"
-                  onClick={handleCadastrarMercadoria}
+                  /* onClick={handleCadastrarMercadoria} */
                 />
               </div>
             </div>

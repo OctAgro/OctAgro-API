@@ -38,7 +38,7 @@ module.exports = class RelatorioController{
             formato_grao: data.checkboxFormatoGraoAprovado,
             nivel_agrotoxicos: data.checkboxNivelAgrotoxicosAprovado,
             limpeza_graos: data.checkboxLimpezaGraosAprovado,
-            analista_comentario: data.ComentarioAnalista
+            analista_comentario: data.comentarioAnalista
         })
 
         try {

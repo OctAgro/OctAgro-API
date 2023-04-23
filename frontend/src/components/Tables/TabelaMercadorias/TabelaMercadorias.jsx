@@ -6,17 +6,17 @@ import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./TabelaMercadorias.module.css";
 
-import { buscarRelatoriosAnalista } from '../../../hooks/buscarRelatorios'
+import { buscarRelatoriosRecebedor } from '../../../hooks/buscarRelatorios'
 
 export const TabelaMercadorias = () => {
 
-  const [relatoriosAnalista, setRelatoriosAnalista] = useState([])
+  const [relatoriosRecebedor, setRelatoriosRecebedor] = useState([])
   useEffect(() => {
-    async function fetchRelatoriosAnalista() {
-      const dadosPedidos = await buscarRelatoriosAnalista()
-      setRelatoriosAnalista(dadosPedidos)
+    async function fetchRelatoriosRecebedor() {
+      const dadosPedidos = await buscarRelatoriosRecebedor()
+      setRelatoriosRecebedor(dadosPedidos)
     }
-    fetchRelatoriosAnalista()
+    fetchRelatoriosRecebedor()
   }, [])
 
   return (
@@ -35,14 +35,14 @@ export const TabelaMercadorias = () => {
           </tr>
         </thead>
         <tbody>
-          {relatoriosAnalista.map((relatorio) => (
-            <tr key={relatorio.id_relatorio_analista}>
+          {relatoriosRecebedor?.map((relatorio) => (
+            <tr key={relatorio.id_relatorio_recebedor}>
               <td className={styles.tableData}>{relatorio.pedido.id_pedido}</td>
-              <td className={styles.tableData}>{relatorio.pedido.produto}</td>
-              <td className={styles.tableData}>{relatorio.pedido.unidade_medida}</td>
+              <td className={styles.tableData}>{relatorio.pedido.produto.descricao}</td>
+              <td className={styles.tableData}>{relatorio.pedido.produto.data_entrada_empresa}</td>
               <td className={styles.tableData}>
               <button className={styles.button}>
-                <Link to={`/analista/mercadoria/${relatorio.numeroPedido}`}>
+                <Link to={`/analista/mercadoria/${relatorio.id_relatorio_recebedor}`}>
                   Analisar <FontAwesomeIcon icon={faClipboardList} />
                 </Link>
               </button>

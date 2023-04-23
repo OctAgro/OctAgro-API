@@ -30,7 +30,7 @@ app.use(bodyParser.json())
 app.use(cors({ credentials: false, origin: 'http://localhost:5000' }))
 
 //Usando Rotas
-app.use('/analista/', AnalistaRotas)
+app.use('/analista', AnalistaRotas)
 app.use('/aprovador', AprovadorRotas)
 app.use('/usuario', UsuarioRotas)
 app.use('/recebedor', RecebedorRotas)

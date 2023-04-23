@@ -19,3 +19,13 @@ export async function encontrarPedidosById(id){
         console.log(erro) 
     }
 }
+
+export async function encontrarRelatorioRecebedorById(id){
+    try {
+        const relatorios = await api.get(`/recebedor/relatorios/procurar/${id}`) 
+        console.log(relatorios)
+        return relatorios.data
+    } catch (erro) { 
+        console.log(erro) 
+    }
+}

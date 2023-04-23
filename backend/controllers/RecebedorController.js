@@ -1,6 +1,6 @@
 const RelatorioRecebedor = require("../models/RelatorioRecebedor")
 const Pedido = require('../models/Pedido')
-const Usuario = require('../models/usuario')
+const Usuario = require('../models/Usuario')
 const Produto = require('../models/Produto')
 const Fornecedor = require('../models/Fornecedor')
 

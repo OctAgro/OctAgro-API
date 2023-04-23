@@ -7,20 +7,20 @@ import { faClipboardList } from "@fortawesome/free-solid-svg-icons"
 import styles from "../TabelaRelatorios/TabelaRelatorios.module.css"
 
 import { RelatoriosAprovadorContext } from "../../context/RelatoriosAprovadorContext"
-import { encontrarPedidos } from "../../hooks/encontrarPedidos"
+import { buscarRelatoriosAnalista } from "../../hooks/buscarRelatorios"
 
 export const TabelaRelatorios = () => {
   const dados = useContext(RelatoriosAprovadorContext)
 
   const listaRelatorios = dados[0]
 
-  const [pedidos, setPedidos] = useState([])
+  const [relatoriosAnalista, setRelatoriosAnalista] = useState([])
   useEffect(() => {
-    async function fetchPedidos() {
-      const dadosPedidos = await encontrarPedidos()
-      setPedidos(dadosPedidos)
+    async function fetchRelatoriosAnalista() {
+      const dadosPedidos = await buscarRelatoriosAnalista()
+      setRelatoriosAnalista(dadosPedidos)
     }
-    fetchPedidos()
+    fetchRelatoriosAnalista()
   }, [])
 
   return (
@@ -40,15 +40,15 @@ export const TabelaRelatorios = () => {
           </tr>
         </thead>
         <tbody>
-        {pedidos?.map((pedido) => (
-            <tr key={pedido.id_pedido}>
-              <td className={styles.tableData}>{pedido.id_pedido}</td>
-              <td className={styles.tableData}>{pedido.produto.descricao}</td>
-              <td className={styles.tableData}>{pedido.info_analista_status ? 'Aprovado' : 'Recusado'} </td>
-              <td className={styles.tableData}>{pedido.produto.data_entrada_empresa}</td>
+          {relatoriosAnalista?.map((relatorio) => (
+            <tr key={relatorio.id_relatorio_analista}>
+              <td className={styles.tableData}>{relatorio.id_relatorio_analista}</td>
+              <td className={styles.tableData}>{relatorio.pedido.produto.descricao}</td>
+              <td className={styles.tableData}>{relatorio.info_analista_status ? 'Aprovado' : 'Recusado'} </td>
+              <td className={styles.tableData}>{relatorio.pedido.produto.data_entrada_empresa}</td>
               <td className={styles.tableData}>
                 <button className={styles.button}>
-                  <Link to={`/aprovador/relatorio/${pedido.id_pedido}`}>
+                  <Link to={`/aprovador/relatorio/${relatorio.id_relatorio_analista}`}>
                     Analisar <FontAwesomeIcon icon={faClipboardList} />
                   </Link>
                 </button>

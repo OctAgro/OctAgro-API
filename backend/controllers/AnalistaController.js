@@ -41,13 +41,16 @@ module.exports = class RelatorioController{
             formato_grao: data.checkboxFormatoGraoAprovado,
             nivel_agrotoxicos: data.checkboxNivelAgrotoxicosAprovado,
             limpeza_graos: data.checkboxLimpezaGraosAprovado,
-            analista_comentario: data.comentarioAnalista
+            analista_comentario: data.comentarioAnalista,
+            id_pedido: data.idPedido,
+            id_usuario: data.idUsuario
         })
 
         try {
             const novoRelatorioAnalista = await relatorioAnalista.save()
             res.status(201).json({message: 'Relatório salvo com sucesso!'})
         } catch(erro) {
+            console.log(erro)
             res.status(500).json({message: erro})
         }
     }

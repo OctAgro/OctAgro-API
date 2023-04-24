@@ -40,6 +40,7 @@ const RelatorioAnalista = db.define('RelatorioAnalista', {
 
     }
 
+
 })
 
 Pedido.hasMany(RelatorioAnalista, { foreignKey: 'id_pedido' });

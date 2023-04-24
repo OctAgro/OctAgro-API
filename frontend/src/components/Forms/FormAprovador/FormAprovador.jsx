@@ -1,7 +1,8 @@
 import React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useParams } from "react-router-dom"
+import { UserContext } from "../../../context/usuarioContext"
 
 //IMPORTANDO COMPONENTES
 import { Button } from "../../Button/Button"
@@ -21,6 +22,10 @@ import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 export const FormAprovador = () => {
   const { id } = useParams()
   const pedidoId = parseInt(id)
+
+  const { usuario } = useContext(UserContext)
+
+  const usuarioCarregado = usuario ? usuario.id_usuario : null
 
   const [pedidos, setPedidos] = useState([])
 
@@ -60,8 +65,10 @@ export const FormAprovador = () => {
   //fazendo o post
   const enviarDados = async (data) => {
     const dados = {
+      idPedido: pedidos.id_pedido,
+      idUsuario: usuarioCarregado,
       textoRevisaoFinalAprovador: revisao,
-      statusFinalAprovacao: true,
+      statusFinalAprovacao: true, //PRECISA SER ALTERADO!
       ...data,
     }
 

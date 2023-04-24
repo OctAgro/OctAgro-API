@@ -1,0 +1,15 @@
+.main {
+    display: flex;
+    height: 100vh;
+    background-color: #F7F1E5;
+  }
+  
+  .container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    margin: 0 auto;
+  }

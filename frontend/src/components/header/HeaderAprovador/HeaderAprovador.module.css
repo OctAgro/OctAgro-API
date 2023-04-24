@@ -1,0 +1,52 @@
+.external {
+  font-family: "Gotham Black";
+  display: flex;
+  justify-content: space-between;
+}
+
+.clipboards {
+  cursor: default;
+  margin: 0 7rem;
+  padding-right: 3rem;
+  display: flex;
+}
+
+.clipboardA,
+.clipboardB {
+  display: flex;
+  border-radius: 15px;
+  background-color: rgba(231, 224, 209, 1);
+  filter: drop-shadow(2px 2px 2px #000);
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.clipboardB {
+  margin-left: 3rem;
+}
+
+.leftSideA,
+.leftSideB {
+  font-size: 5rem;
+}
+
+.rightSideA,
+.rightSideB {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-left: 0.5rem;
+}
+
+.rightSideA h3,
+.rightSideB h3 {
+  font-size: 16px;
+}
+
+.arrow {
+  margin: auto 0;
+  font-size: 3.5rem;
+}
+
+.arrow:hover {
+  color: #363636;
+}

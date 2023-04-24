@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link, useParams } from "react-router-dom"
+
 import styles from "./InformacoesRecebedor.module.css";
 
 export const InformacoesRecebedor = ({
@@ -12,6 +14,10 @@ export const InformacoesRecebedor = ({
   mercadoriaInput,
   comentarios,
 }) => {
+
+  const { id } = useParams()
+const pedidoId = parseInt(id)
+
   return (
     <div>
       <div>

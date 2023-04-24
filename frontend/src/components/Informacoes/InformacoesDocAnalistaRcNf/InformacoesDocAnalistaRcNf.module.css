@@ -40,6 +40,10 @@
     font-size: 3rem;
   }
 
+  .relatorioCompra {
+    max-width: 100%;
+  }
+
 /*   @media only screen and (min-height: 900px) {
     .external {
       background-color: #e7e0d1;
@@ -49,3 +53,5 @@
       filter: drop-shadow(2px 2px 2px #000);
     }
   } */
+
+

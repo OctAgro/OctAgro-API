@@ -1,5 +1,7 @@
 import React from "react"
 
+
+
 // importando os componentes
 import { SidebarAnalista } from "../../../components/sidebar/SidebarAnalista/SidebarAnalista"
 

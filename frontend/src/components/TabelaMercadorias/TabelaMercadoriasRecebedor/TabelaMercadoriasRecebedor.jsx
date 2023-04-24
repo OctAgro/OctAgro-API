@@ -24,7 +24,7 @@ export const TabelaMercadoriasRecebedor = () => {
   return (
     <div className={styles.table}>
       <div className={styles.title}>
-        <h1>Entrada de mercadoria</h1>
+        <h1>Gerenciar mercadorias</h1>
       </div>
 
       <table className={styles.tableBackground}>

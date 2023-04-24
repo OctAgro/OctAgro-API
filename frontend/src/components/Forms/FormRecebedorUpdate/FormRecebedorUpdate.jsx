@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 //IMPORTANDO COMPONENTES
 import { Button } from "../../Button/recebedorBtn/recebedorBtn"
@@ -12,37 +12,39 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormRecebedorUpdate.module.css"
+import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 
-export const FormRecebedorUpdate = (props) => {
+export const FormRecebedorUpdate = () => {
+  //Para encontrar pedidos por ID
+  const { id } = useParams()
+  const pedidoId = parseInt(id)
+
+  const [pedidos, setPedidos] = useState([])
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
-  const [textoNomeFornecedor, setTextoNomeFornecedor] = useState('');
-  const [textoNomeEntregador, setTextoNomeEntregador] = useState('');
-  const [textoPlacaVeiculo, setTextoPlacaVeiculo] = useState('');
-  const [numeroQuantidade, setNumeroQuantidade] = useState(0);
-  const [textoUnidadeMedida, setTextoUnidadeMedida] = useState('');
-  const [textoDocmento, setTextoDocmento] = useState('');
-  const [textoProduto, setTextoProduto] = useState('');
+  const [textoNomeFornecedor, setTextoNomeFornecedor] = useState("")
+  const [textoNomeEntregador, setTextoNomeEntregador] = useState("")
+  const [textoPlacaVeiculo, setTextoPlacaVeiculo] = useState("")
+  const [numeroQuantidade, setNumeroQuantidade] = useState(0)
+  const [textoUnidadeMedida, setTextoUnidadeMedida] = useState("")
+  const [textoDocmento, setTextoDocmento] = useState("")
+  const [textoProduto, setTextoProduto] = useState("")
 
   // simulando fetch numa API fake, isso te ajuda, meu amigo do BackEnd?
   useEffect(() => {
-    fetch('https://example.com/data')
-      .then(response => response.json())
-      .then(data => {
-        setTextoNomeFornecedor(data.nomeFornecedor);
-        setTextoNomeEntregador(data.nomeEntregador);
-        setTextoPlacaVeiculo(data.placaVeiculo);
-        setNumeroQuantidade(data.quantidade);
-        setTextoUnidadeMedida(data.unidadeMedida);
-        setTextoDocmento(data.documento);
-        setTextoProduto(data.produto);
-      });
-  }, []);
+    async function fetchPedidos() {
+      const dadosPedidos = await encontrarPedidosById(pedidoId)
+      setPedidos(dadosPedidos)
+    }
+    fetchPedidos()
+  }, [])
 
+  console.log(pedidos)
 
   const onSubmit = (
     data,
@@ -56,14 +58,6 @@ export const FormRecebedorUpdate = (props) => {
   ) => {
     console.log("Booleans:")
     console.log(data)
-
-    console.log("textoNomeFornecedor:", textoNomeFornecedor)
-    console.log("textoNomeEntregador:", textoNomeEntregador)
-    console.log("textoPlacaVeiculo:", textoPlacaVeiculo)
-    console.log("numeroQuantidade:", numeroQuantidade)
-    console.log("textoUnidadeMedida:", textoUnidadeMedida)
-    console.log("textoDocmento:", textoDocmento)
-    console.log("textoProduto:", textoProduto)
 
     handleAtualizar()
   }
@@ -91,7 +85,7 @@ export const FormRecebedorUpdate = (props) => {
         <div className={styles.divForm}>
           <div className={styles.formTop}>
             <label className={styles.label} htmlFor="FormRecebedorUpdate">
-              Pedido {props.numeroPedido} - {props.nomeProduto}
+              Pedido {pedidos?.id_pedido} - {pedidos?.produto?.nome_produto}
             </label>
           </div>
           <form name="FormRecebedorUpdate" onSubmit={handleSubmit(onSubmit)} className={styles.formMain}>
@@ -105,18 +99,14 @@ export const FormRecebedorUpdate = (props) => {
                   <label>
                     <h3>Fornecedor:</h3>
                     <div>
-                      <select className={styles.customSelect}
+                      <input
+                        className={styles.customSelect}
                         id="fornecedor"
                         name="textoNomeFornecedor"
-                        form="FormRecebedorUpdate"
-                        value={textoNomeFornecedor}
+                        type="text"
+                        value={pedidos?.fornecedor?.nome_fornecedor}
                         onChange={(event) => setTextoNomeFornecedor(event.target.value)}
-                      >
-                        <option value="produto1">TRIGOSTOSO</option>
-                        <option value="produto2">COFFELICIOUS</option>
-                        <option value="produto3">KORN FLAKES</option>
-                        <option value="produto4">SOY ATACK</option>
-                      </select>
+                      ></input>
                     </div>
                   </label>
                 </div>
@@ -124,10 +114,11 @@ export const FormRecebedorUpdate = (props) => {
                   <label>
                     <h3>Nome do Caminhoneiro:</h3>
                     <div>
-                      <input className={styles.customSelect}
+                      <input
+                        className={styles.customSelect}
                         type="text"
                         name="textoNomeEntregador"
-                        value={textoNomeEntregador}
+                        value={pedidos?.fornecedor?.nome_motorista}
                         onChange={(event) => setTextoNomeEntregador(event.target.value)}
                       />
                     </div>
@@ -136,10 +127,11 @@ export const FormRecebedorUpdate = (props) => {
                 <div className={styles.inputBlock}>
                   <label htmlFor="textoPlacaVeiculo">
                     <h3>Placa do Caminhão:</h3>
-                    <input className={styles.customSelect}
+                    <input
+                      className={styles.customSelect}
                       type="text"
                       name="textoPlacaVeiculo"
-                      value={textoPlacaVeiculo}
+                      value={pedidos?.fornecedor?.placa_veiculo}
                       onChange={(event) => setTextoPlacaVeiculo(event.target.value)}
                     />
                   </label>
@@ -148,23 +140,34 @@ export const FormRecebedorUpdate = (props) => {
                 <div className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Data:</h3>
-                    <input className={styles.customSelect} type="date" />
+                    <input
+                      className={styles.customSelect}
+                      type="date"
+                      value={pedidos?.produto?.data_entrada_empresa}
+                    />
                   </div>
                   <div className={styles.divProduto}>
                     <h3>Horário:</h3>
-                    <input className={styles.SelectProduto} type="time" />
+                    <input
+                      className={styles.SelectProduto}
+                      type="time"
+                      value={pedidos?.produto?.hora_entrada_empresa}
+                    />
                   </div>
                 </div>
                 <div className={styles.inputBlock}>
                   <label htmlFor="">
                     <h3>Documentos:</h3>
                     {/*                   <input type="file" /> */}
-                    <button className={styles.anexarBTN}
+                    <button
+                      className={styles.anexarBTN}
                       type="text"
                       name="textoDocmento"
                       value={textoDocmento}
                       onChange={(event) => setTextoDocmento(event.target.value)}
-                    >anexar documentos</button>
+                    >
+                      anexar documentos
+                    </button>
                   </label>
                 </div>
               </fieldset>
@@ -178,38 +181,31 @@ export const FormRecebedorUpdate = (props) => {
                 <fieldset className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Produto:</h3>
-                    <select className={styles.SelectProduto}
+                    <input
+                      className={styles.SelectProduto}
                       id="produtos"
                       name="textoProduto"
-                      form="FormRecebedorUpdate"
-                      value={textoProduto}
+                      type="text"
+                      value={pedidos?.produto?.nome_produto}
                       onChange={(event) => setTextoProduto(event.target.value)}
-                    >
-                      <option value="produto1">Trigo</option>
-                      <option value="produto2">Café</option>
-                      <option value="produto3">Milho</option>
-                      <option value="produto4">Soja</option>
-                    </select>
+                    ></input>
                   </div>
                   <div>
                     <h3>Quantidade:</h3>
-                    <input className={styles.quantidade}
+                    <input
+                      className={styles.quantidade}
                       type="number"
                       name="numeroQuantidade"
-                      value={numeroQuantidade}
-                      onChange={(event) => setNumeroQuantidade(event.target.value)} />
-                    <select className={styles.selectMedida}
+                      value={pedidos?.produto?.quantidade_produto}
+                      onChange={(event) => setNumeroQuantidade(event.target.value)}
+                    />
+                    <input
+                      className={styles.selectMedida}
                       id="produtos"
                       name="textoUnidadeMedida"
-                      form="FormRecebedorUpdate"
-                      value={textoUnidadeMedida}
+                      value={pedidos?.produto?.unidade_medida}
                       onChange={(event) => setTextoUnidadeMedida(event.target.value)}
-                    >
-                      <option value="tipo1">Toneladas (Sc)</option>
-                      <option value="tipo2">Quilograma (kg)</option>
-                      <option value="tipo3">Sacas</option>
-                      <option value="tipo4">Bushel</option>
-                    </select>
+                    ></input>
                   </div>
                 </fieldset>
                 <div>
@@ -223,61 +219,65 @@ export const FormRecebedorUpdate = (props) => {
                     <input
                       type="checkbox"
                       id="checkboxColoracaoAprovado"
+                      className={styles.aprovar}
                       {...register("checkboxColoracaoAprovado")}
                     />
-                    <label htmlFor="checkboxColoracaoAprovado">Aprovado</label>
                     <input
                       type="checkbox"
                       id="checkboxColoracaoReprovado"
+                      className={styles.recusar}
                       {...register("checkboxColoracaoReprovado")}
                     />
-                    <label htmlFor="checkboxColoracaoReprovado">Recusado</label>
                   </div>
                   <div className={styles.inputBlock}>
                     <input className={styles.btnsRN} value="Odor" readOnly />
-                    <input type="checkbox" id="checkboxOdorAprovado" {...register("checkboxOdorAprovado")} />
-                    <label htmlFor="checkboxOdorAprovado">Aprovado</label>
-                    <input type="checkbox" id="checkboxOdorReprovado" {...register("checkboxOdorReprovado")} />
-                    <label htmlFor="checkboxOdorReprovado">Recusado</label>
+                    <input
+                      type="checkbox"
+                      id="checkboxOdorAprovado"
+                      className={styles.aprovar}
+                      {...register("checkboxOdorAprovado")}
+                    />
+                    <input
+                      type="checkbox"
+                      id="checkboxOdorReprovado"
+                      className={styles.recusar}
+                      {...register("checkboxOdorReprovado")}
+                    />
                   </div>
                   <div className={styles.inputBlock}>
                     <input className={styles.btnsRN} value="Ausência de Insetos vivos/mortos" readOnly />
                     <input
+                      className={styles.aprovar}
                       type="checkbox"
                       id="checkboxAusenciaInsetosAprovado"
                       {...register("checkboxAusenciaInsetosAprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaInsetosAprovado">Aprovado</label>
                     <input
+                      className={styles.recusar}
                       type="checkbox"
                       id="checkboxAusenciaInsetosReprovado"
                       {...register("checkboxAusenciaInsetosReprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaInsetosReprovado">Recusado</label>
                   </div>
                   <div className={styles.inputBlock}>
                     <input className={styles.btnsRN} value="Ausência de Mofo" readOnly />
                     <input
+                      className={styles.aprovar}
                       type="checkbox"
                       id="checkboxAusenciaMofoAprovado"
                       {...register("checkboxAusenciaMofoAprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaMofoAprovado">Aprovado</label>
                     <input
+                      className={styles.recusar}
                       type="checkbox"
                       id="checkboxAusenciaMofoReprovado"
                       {...register("checkboxAusenciaMofoReprovado")}
                     />
-                    <label htmlFor="checkboxAusenciaMofoReprovado">Recusado</label>
                   </div>
                 </div>
               </fieldset>
               <div className={styles.buttons}>
-                <Button
-                  value1="ATUALIZAR"
-                  type="submit"
-                  onClick={handleAtualizar}
-                />
+                <Button value1="ATUALIZAR" type="submit" onClick={handleAtualizar} />
               </div>
             </div>
           </form>
@@ -297,7 +297,6 @@ export const FormRecebedorUpdate = (props) => {
             </div>
           </Modal>
         </div>
-
       </div>
     </div>
   )

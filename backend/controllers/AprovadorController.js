@@ -41,7 +41,9 @@ module.exports = class AprovadorController {
             info_analista_status: data.checkboxInfoAnalistaAprovado,
             /* checkboxInfoAnalistaReprovado, */
             revisao_aprovador: data.textoRevisaoFinalAprovador,
-            status_final_aprovacao: data.statusFinalAprovacao
+            status_final_aprovacao: data.statusFinalAprovacao,
+            id_pedido: data.idPedido,
+            id_usuario: data.idUsuario
         })
 
         try {

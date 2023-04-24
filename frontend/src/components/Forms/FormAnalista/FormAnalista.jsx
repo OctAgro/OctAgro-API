@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom"
 import { UserContext } from "../../../context/usuarioContext"
 
 //IMPORTANDO COMPONENTES
-import { Button } from "../../Button/analistaBtn/analistaBtn"
+import { Button } from "../../Button/Button"
 import { Checkbox } from "../../Checkbox/Checkbox"
 import { Modal } from "../../Modal/Modal"
 import { CheckboxDupla } from "../../Checkbox/CheckboxDupla/CheckboxDupla"
@@ -41,9 +41,10 @@ export const FormAnalista = (props) => {
     fetchPedidos()
   }, [])
 
-  /* const onSubmit = (data) => {
+  const onSubmit = (data) => {
     //chamando a funcao de enviar dados
     enviarDados(data)
+    console.log(data)
 
     handleCadastrarMercadoria()
     handleAprovacao()
@@ -71,7 +72,7 @@ export const FormAnalista = (props) => {
       //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
       console.log(erro.message)
     }
-  } */
+  }
 
   // fechando incluindo trecho de contexto de usuario e salvar dados
 
@@ -143,7 +144,7 @@ export const FormAnalista = (props) => {
               Pedido #{pedidos?.id_pedido} - {pedidos?.produto?.nome_produto}
             </label>
           </div>
-          <form name="FormAnalista">
+          <form name="FormAnalista" onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.formMain}>
               <div className={styles.leftSide}>
                 <fieldset>
@@ -152,8 +153,8 @@ export const FormAnalista = (props) => {
                     <hr className={styles.row} />
                   </div>
                   <div>
-                  <div className={styles.inputBlock}>
-                    <input className={styles.btnsRN} value="Qualidade do Grão" readOnly />
+                    <div className={styles.inputBlock}>
+                      <input className={styles.btnsRN} value="Qualidade do Grão" readOnly />
                       <input
                         className={styles.aprovar}
                         type="checkbox"
@@ -168,7 +169,7 @@ export const FormAnalista = (props) => {
                       />
                     </div>
                     <div className={styles.inputBlock}>
-                    <input className={styles.btnsRN} value="Formato do Grão" readOnly />
+                      <input className={styles.btnsRN} value="Formato do Grão" readOnly />
                       <input
                         className={styles.aprovar}
                         type="checkbox"
@@ -183,7 +184,7 @@ export const FormAnalista = (props) => {
                       />
                     </div>
                     <div className={styles.inputBlock}>
-                    <input className={styles.btnsRN} value="Nível de Agrotóxico" readOnly />
+                      <input className={styles.btnsRN} value="Nível de Agrotóxico" readOnly />
                       <input
                         className={styles.aprovar}
                         type="checkbox"
@@ -198,7 +199,7 @@ export const FormAnalista = (props) => {
                       />
                     </div>
                     <div className={styles.inputBlock}>
-                    <input className={styles.btnsRN} value="Limpeza do Grão" readOnly />
+                      <input className={styles.btnsRN} value="Limpeza do Grão" readOnly />
                       <input
                         className={styles.aprovar}
                         type="checkbox"
@@ -285,13 +286,11 @@ export const FormAnalista = (props) => {
                     id="textoRevisaoFinalAprovador"
                     rows="3"
                     cols="20"
+                    value={revisao}
+                    onChange={(event) => setRevisao(event.target.value)}
                   />
                   <div className={styles.buttons}>
-                    <Button
-                      value1="CONFIRMAR"
-                      /* value2="MERCADORIA" */
-                      onClick={handleAceitar}
-                    />
+                    <Button value1="CONFIRMAR" type="submit" />
                   </div>
                 </div>
               </fieldset>

@@ -49,7 +49,7 @@ export const FormAnalista = ({ hasButton }) => {
   } // enviando os dados pro banco de dados atraves do clique
 
   //conectando os dados do usuario para enviar ao banco de dados
-  const enviarDados = async (data) => {
+  const enviarDados = async (data, event) => {
     const dados = {
       comentarioAnalista: revisao,
       idPedido: pedidos.id_pedido,
@@ -57,6 +57,7 @@ export const FormAnalista = ({ hasButton }) => {
       ...data,
     }
 
+    handleAceitar(event)
     console.log("aqui: " + dados)
 
     try {
@@ -85,7 +86,6 @@ export const FormAnalista = ({ hasButton }) => {
   const [isRecusadoWarning, setIsRecusadoWarning] = useState(false)
 
   const handleAceitar = (e) => {
-    e.preventDefault()
     if (isAprovadoWarning) {
       // useState que trata se foi aprovado ou recusado pelo aprovador vira false, pois ele não pode aprovar ou recusar ainda, tem que ver o WARNING
       setIsAprovado(false)
@@ -301,8 +301,8 @@ export const FormAnalista = ({ hasButton }) => {
                   />
                   {hasButton ? (
                     <div className={styles.buttons}>
-                      <div className={styles.buttons}>
-                        <Button value1="CONFIRMAR" type="submit" />
+                      <div className={styles.button}>
+                        <Button style={{ backgroundColor: "#FF8A00" }} value1="CONFIRMAR" type="submit" />
                       </div>
                     </div>
                   ) : null}
@@ -319,7 +319,7 @@ export const FormAnalista = ({ hasButton }) => {
                   <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                   <p className={styles.paragraph}>Mercadoria cadastrada com sucesso!</p>
                   <Link to="/analista/mercadoria">
-                    <Button className={styles.button} value1="CONFIRMAR" />
+                    <Button style={{ backgroundColor: "#FF8A00" }} className={styles.button} value1="CONFIRMAR" />
                   </Link>
                 </div>
               ) : null}

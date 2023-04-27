@@ -37,7 +37,7 @@ export const HeaderRecebedor = (props) => {
             <FontAwesomeIcon className="icon" icon={faTruck} />
           </div>
           <div className={styles.rightSideA}>
-          <h2>{numeroMercadorias ? numeroMercadorias : "..."}</h2>
+          <h2>{numeroMercadorias ? numeroMercadorias : 0}</h2>
             <h3>
               Mercadorias <br /> à Caminho
             </h3>
@@ -49,7 +49,7 @@ export const HeaderRecebedor = (props) => {
             <FontAwesomeIcon className={styles.icon} icon={faTruck} />
           </div>
           <div className={styles.rightSideB}>
-          <h2>{numeroMercadoriasTotal ? numeroMercadoriasTotal : "..."}</h2>
+          <h2>{numeroMercadoriasTotal ? numeroMercadoriasTotal : 0}</h2>
             <h3>
               Total <br /> Mercadorias
             </h3>

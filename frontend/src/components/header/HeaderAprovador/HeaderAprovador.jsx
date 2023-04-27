@@ -38,7 +38,7 @@ export const HeaderAprovador = (props) => {
             <FontAwesomeIcon className="icon" icon={faClipboard} />
           </div>
           <div className={styles.rightSideA}>
-            <h2>{numeroRelatorios ? numeroRelatorios : "..."}</h2>
+            <h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>
             <h3>
               Relatório(s) <br /> pendentes
             </h3>
@@ -50,7 +50,7 @@ export const HeaderAprovador = (props) => {
             <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
           </div>
           <div className={styles.rightSideB}>
-            <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : "..."}</h2>
+            <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
             <h3>
               Total <br /> de relatórios
             </h3>

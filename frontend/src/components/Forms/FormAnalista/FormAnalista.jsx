@@ -6,9 +6,7 @@ import { UserContext } from "../../../context/usuarioContext"
 
 //IMPORTANDO COMPONENTES
 import { Button } from "../../Button/Button"
-import { Checkbox } from "../../Checkbox/Checkbox"
 import { Modal } from "../../Modal/Modal"
-import { CheckboxDupla } from "../../Checkbox/CheckboxDupla/CheckboxDupla"
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -19,7 +17,7 @@ import axios from "axios"
 
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 
-export const FormAnalista = (props) => {
+export const FormAnalista = ({ hasButton }) => {
   //incluindo trecho de contexto de usuario e salvar dados
 
   const { usuario } = useContext(UserContext)
@@ -48,23 +46,21 @@ export const FormAnalista = (props) => {
 
     handleCadastrarMercadoria()
     handleAprovacao()
-    
   } // enviando os dados pro banco de dados atraves do clique
 
   //conectando os dados do usuario para enviar ao banco de dados
   const enviarDados = async (data) => {
-
     const dados = {
       comentarioAnalista: revisao,
       idPedido: pedidos.id_pedido,
       idUsuario: usuarioCarregado,
-      ...data
+      ...data,
     }
 
     console.log("aqui: " + dados)
-  
+
     try {
-      const resposta = await axios.post('http://localhost:3000/analista/relatorios', dados)
+      const resposta = await axios.post("http://localhost:3000/analista/relatorios", dados)
       //esse console.log retorna respostas json do backend de erros de validacao
       console.log(resposta.data.message)
       setMensagemErro(resposta.data.message)
@@ -229,12 +225,19 @@ export const FormAnalista = (props) => {
                   </label>
 
                   <div className={styles.inputBlock}>
-                    <Link to={`/analista/documentacao/${pedidoId}`}>
+                    {hasButton ? (
+                      <Link to={`/analista/documentacao/${pedidoId}`}>
+                        <button className={styles.btn}>
+                          <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
+                          Visualizar
+                        </button>
+                      </Link>
+                    ) : (
                       <button className={styles.btn}>
                         <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
                         Visualizar
                       </button>
-                    </Link>
+                    )}
                     <input
                       className={styles.aprovar}
                       type="checkbox"
@@ -255,12 +258,19 @@ export const FormAnalista = (props) => {
                 </label>
 
                 <div className={styles.inputBlock}>
-                  <Link to={`/analista/documentacaoRecebedor/${pedidoId}`}>
+                  {hasButton ? (
+                    <Link to={`/analista/documentacaoRecebedor/${pedidoId}`}>
+                      <button className={styles.btn}>
+                        <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
+                        Visualizar
+                      </button>
+                    </Link>
+                  ) : (
                     <button className={styles.btn}>
                       <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
                       Visualizar
                     </button>
-                  </Link>
+                  )}
                   <input
                     className={styles.aprovar}
                     type="checkbox"
@@ -289,9 +299,13 @@ export const FormAnalista = (props) => {
                     value={revisao}
                     onChange={(event) => setRevisao(event.target.value)}
                   />
-                  <div className={styles.buttons}>
-                    <Button value1="CONFIRMAR" type="submit" />
-                  </div>
+                  {hasButton ? (
+                    <div className={styles.buttons}>
+                      <div className={styles.buttons}>
+                        <Button value1="CONFIRMAR" type="submit" />
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </fieldset>
             </div>

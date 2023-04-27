@@ -13,7 +13,7 @@ export async function buscarRelatoriosAnalista() {
     try {
         const relatoriosAnalista = await api.get('/analista/home') 
         console.log(relatoriosAnalista)
-        return relatoriosAnalista.data
+        return relatoriosAnalista
     } catch (erro) { 
         console.log(erro) 
     }
@@ -23,7 +23,7 @@ export async function buscarRelatoriosRecebedor() {
     try{
         const relatoriosRecebedor = await api.get('/recebedor/home') 
         console.log(relatoriosRecebedor)
-        return relatoriosRecebedor.data
+        return relatoriosRecebedor
     }catch (erro) {
         console.log(erro)
     }

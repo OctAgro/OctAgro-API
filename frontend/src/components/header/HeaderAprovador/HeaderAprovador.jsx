@@ -13,14 +13,14 @@ export const HeaderAprovador = (props) => {
   const arrow = props.arrow
   const link = props.link
 
-  const dados = useContext(RelatoriosAprovadorContext)
+  const dadosAnalista = useContext(RelatoriosAprovadorContext)
 
-  console.log()
+  console.log(dadosAnalista)
 
-  const numeroRelatorios = dados[1]
+  const numeroRelatorios = dadosAnalista[1]
 
   // Falta essa lógica no backEnd ainda, por enquanto pegando o numero de relatórios geral.
-  const numeroRelatoriosTotal = dados[1]
+  const numeroRelatoriosTotal = dadosAnalista[1]
 
   return (
     <div className={styles.external}>

@@ -6,22 +6,22 @@ import { Link, useParams } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 
-import styles from "./InformacoesRecebedor.module.css"
+import styles from "./InformacoesRecebedorPageAnalista.module.css"
 import { FormRecebedor } from "../../Forms/FormRecebedor/FormRecebedor"
 
-export const InformacoesRecebedor = () => {
+export const InformacoesRecebedorPageAnalista = () => {
   const { id } = useParams()
   const pedidoId = parseInt(id)
 
   return (
     <div>
-      <div>
+      <Link to={`/analista/mercadoria/${pedidoId}`}>
         <div className={styles.icon}>
-          <Link to={`/aprovador/relatorio/${pedidoId}`}>
-            <FontAwesomeIcon icon={faCircleXmark} />
-          </Link>
+          <FontAwesomeIcon icon={faCircleXmark} />
         </div>
+      </Link>
 
+      <div>
         <FormRecebedor />
       </div>
     </div>

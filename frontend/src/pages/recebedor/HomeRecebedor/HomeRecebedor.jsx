@@ -8,21 +8,22 @@ import { MercadoriasPendentes } from "../../../components/MercadoriasPendentes/M
 // IMPORTANDO CSS
 import styles from "./HomeRecebedor.module.css"
 
+// Importando o Provider
+import { MercadoriasProvider } from "../../../context/MercadoriasRecebedorContext"
+
 export const HomeRecebedor = () => {
-
-  const [mercadoriasPendentes, setRelatoriosPendentes] = useState(1)
-
   return (
-    <div className={styles.main}>
-      <SidebarRecebedor
-      />
+    <MercadoriasProvider>
+      <div className={styles.main}>
+        <SidebarRecebedor />
 
-      <div className={styles.container}>
-        <HeaderRecebedor />
-        <div>
-          <MercadoriasPendentes mercadoriasPendentes={mercadoriasPendentes} />
+        <div className={styles.container}>
+          <HeaderRecebedor />
+          <div>
+            <MercadoriasPendentes />
+          </div>
         </div>
       </div>
-    </div>
+    </MercadoriasProvider>
   )
 }

@@ -30,7 +30,6 @@ export const Login = () => {
     try {
       const dados = await fazerLogin(username, password)
       console.log(dados)
-      alert(dados.message)
 
       //setando dados para dentro do context de usuario
       setUsuario(dados)

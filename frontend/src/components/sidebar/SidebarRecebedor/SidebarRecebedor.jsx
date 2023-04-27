@@ -39,7 +39,7 @@ export const SidebarRecebedor = () => {
         <ul className={styles.usuario}>
           <div className={styles.molduraFoto}>
             <img className={styles.molduraOctagonal} src={MolduraOctagonal} alt="Moldura Octagonal" />
-            <img className={styles.fotoUsuario}  src={ `../src/assets/${usuario ? usuario.foto : "Carregando..."}` }  alt="Foto de perfil do usuário" />
+            <img className={styles.fotoUsuario} src={usuario ? import.meta.env.BASE_URL + `src/assets/${usuario.foto}` : 'Carregando'} />
           </div>
           <div className={styles.infoUsuario}>
             <h3 className={styles.nomeUsuario}>{usuario ? usuario.nome : "Carregando..."}</h3>
@@ -47,12 +47,12 @@ export const SidebarRecebedor = () => {
           </div>
         </ul>
         <ul className={styles.sair}>
-          <li>
-            <FontAwesomeIcon icon={faRightToBracket} />
-            <a className={styles.sairTexto} href="/">
-              Sair
-            </a>
-          </li>
+        <Link to="/">
+            <li>
+              <FontAwesomeIcon icon={faRightToBracket} />
+              <a className={styles.sairTexto}>Sair</a>
+            </li>
+          </Link>
         </ul>
       </div>
     </nav>

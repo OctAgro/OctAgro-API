@@ -7,20 +7,25 @@ import { FormRecebedor } from "../../../components/Forms/FormRecebedor/FormReceb
 
 import styles from "./FormularioRecebedor.module.css"
 
+// Importando o Provider
+import { MercadoriasProvider } from "../../../context/MercadoriasRecebedorContext"
+
 export const FormularioRecebedor = () => {
   return (
-    <div className={styles.main}>
-      <SidebarRecebedor />
+    <MercadoriasProvider>
+      <div className={styles.main}>
+        <SidebarRecebedor />
 
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <HeaderRecebedor arrow="True" link="/recebedor/entradamercadoria" />
-        </div>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <HeaderRecebedor arrow="True" link="/recebedor/entradamercadoria" />
+          </div>
 
-        <div className={styles.content}>
-          <FormRecebedor />
+          <div className={styles.content}>
+            <FormRecebedor hasButton="true" />
+          </div>
         </div>
       </div>
-    </div>
+    </MercadoriasProvider>
   )
 }

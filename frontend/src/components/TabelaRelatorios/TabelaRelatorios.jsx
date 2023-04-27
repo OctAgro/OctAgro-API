@@ -9,6 +9,9 @@ import styles from "../TabelaRelatorios/TabelaRelatorios.module.css"
 import { RelatoriosAprovadorContext } from "../../context/RelatoriosAprovadorContext"
 import { buscarRelatoriosAnalista } from "../../hooks/buscarRelatorios"
 
+// TABELA REFERENTE AO APROVADOR <-------------
+
+
 export const TabelaRelatorios = () => {
   const dados = useContext(RelatoriosAprovadorContext)
 
@@ -22,6 +25,8 @@ export const TabelaRelatorios = () => {
     }
     fetchRelatoriosAnalista()
   }, [])
+
+console.log('Relatorios Analista' , relatoriosAnalista)
 
   return (
     <div className={styles.table}>
@@ -40,7 +45,7 @@ export const TabelaRelatorios = () => {
           </tr>
         </thead>
         <tbody>
-          {relatoriosAnalista?.map((relatorio) => (
+          {relatoriosAnalista.data?.map((relatorio) => (
             <tr key={relatorio.id_relatorio_analista}>
               <td className={styles.tableData}>{relatorio.id_relatorio_analista}</td>
               <td className={styles.tableData}>{relatorio.pedido.produto.descricao}</td>

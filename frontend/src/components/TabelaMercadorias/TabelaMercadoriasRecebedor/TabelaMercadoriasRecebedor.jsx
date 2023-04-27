@@ -8,6 +8,8 @@ import styles from "./TabelaMercadoriasRecebedor.module.css"
 
 import { encontrarPedidos } from "../../../hooks/encontrarPedidos"
 
+// TABELA REFERENTE AO RECEBEDOR <-------------
+
 export const TabelaMercadoriasRecebedor = () => {
 
   const [pedidos, setPedidos] = useState([])
@@ -33,7 +35,7 @@ export const TabelaMercadoriasRecebedor = () => {
             <th>Número do Pedido</th>
             <th>Fornecedor</th>
             <th>Tipo de Carga</th>
-            <th>Estado</th>
+            <th>Estado (recebido/a caminho)</th>
             <th>Ações</th>
           </tr>
         </thead>

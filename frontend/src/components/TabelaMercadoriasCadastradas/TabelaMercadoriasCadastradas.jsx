@@ -37,7 +37,7 @@ export const TabelaMercadoriasCadastradas = () => {
             <th>Número do Pedido</th>
             <th>Fornecedor</th>
             <th>Tipo de Carga</th>
-            <th>Estado</th>
+            <th>Estado de Aprovação (aprovado/recusado)</th>
             <th>Ações</th>
           </tr>
         </thead>

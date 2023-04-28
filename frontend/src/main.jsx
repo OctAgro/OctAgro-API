@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
+
 import "./index.css"
 
 import CheckboxBibioteca from "./components/CheckboxBiblioteca/CheckboxBiblioteca"
@@ -10,7 +11,17 @@ import { Login } from "./pages/Login"
 
 import { UserProvider } from "./context/usuarioContext";
 
+//ADMIN
+import { HomeAdmin } from "./pages/admin/HomeAdmin/HomeAdmin"
+import { UsuariosAdmin } from "./pages/admin/UsuariosAdmin/UsuariosAdmin"
+import { FornecedoresAdmin } from "./pages/admin/FornecedoresAdmin/FornecedoresAdmin"
+import { ProdutosAdmin } from "./pages/admin/ProdutosAdmin/ProdutosAdmin"
+import { RelatoriosAdmin } from "./pages/admin/RelatoriosAdmin/RelatoriosAdmin"
+
+
 // RECEBEDOR
+/* import PathRecebedor from "./components/Paths/PathRecebedor"/* 
+ */
 import { HomeRecebedor } from "./pages/recebedor/HomeRecebedor/HomeRecebedor"
 import { MercadoriaRecebedor } from "./pages/recebedor/MercadoriaRecebedor/MercadoriaRecebedor"
 import { RecebimentoRecebedor } from "./pages/recebedor/RecebimentoRecebedor/RecebimentoRecebedor"
@@ -35,7 +46,34 @@ const router = createBrowserRouter([
     path: "/",
     element: <Login />,
   },
+
+
+  //ADMIN
+
   {
+    path: "/admin/home",
+    element: <HomeAdmin />,
+  },
+  {
+    path: "/admin/usuarios",
+    element: <UsuariosAdmin />,
+  },
+  {
+    path: "/admin/fornecedores",
+    element: <FornecedoresAdmin />,
+  },
+  {
+    path: "/admin/produtos",
+    element: <ProdutosAdmin />,
+  },
+  {
+    path: "/admin/relatorios",
+    element: <RelatoriosAdmin />,
+  },
+
+  //RECEBEDOR
+ /*  < PathRecebedor />, */
+   {
     path: "/recebedor/home",
     element: <HomeRecebedor />,
   },
@@ -55,6 +93,8 @@ const router = createBrowserRouter([
     path: "/recebedor/mercadoriascadastradas/:id",
     element: <FormularioRecebedorUpdate />,
   },
+
+  //ANALISTA
   {
     path: "/analista/home",
     element: <HomeAnalista />,
@@ -75,7 +115,10 @@ const router = createBrowserRouter([
     path: "/analista/documentacaoRecebedor/:id",
     element: <DocumentacaoAnalistaRecebedor recebedor="True" />,
   },
-  {
+ 
+
+  //APROVADOR
+  {    
     path: "/aprovador/home",
     element: <HomeAprovador />,
   },

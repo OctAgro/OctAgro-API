@@ -8,10 +8,11 @@ import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAd
 
 // Importando CSS
 import styles from "./HomeAdmin.module.css"
+import { UsuariosCadastradosProvider } from "../../../context/UsuariosCadastradosContext"
 
 export const HomeAdmin = () => {
   return (
-    <PedidosProvider>
+    <UsuariosCadastradosProvider>
       <div className={styles.main}>
         <SidebarAdmin />   
         <div className={styles.container}>
@@ -24,6 +25,6 @@ export const HomeAdmin = () => {
           </div>
         </div>
       </div>
-    </PedidosProvider>
+    </UsuariosCadastradosProvider>
   )
 }

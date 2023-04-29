@@ -20,8 +20,8 @@ import { RelatoriosAdmin } from "./pages/admin/RelatoriosAdmin/RelatoriosAdmin"
 
 
 // RECEBEDOR
-/* import PathRecebedor from "./components/Paths/PathRecebedor"/* 
- */
+/* import  PathRecebedor from "./components/Paths/PathRecebedor"  */
+
 import { HomeRecebedor } from "./pages/recebedor/HomeRecebedor/HomeRecebedor"
 import { MercadoriaRecebedor } from "./pages/recebedor/MercadoriaRecebedor/MercadoriaRecebedor"
 import { RecebimentoRecebedor } from "./pages/recebedor/RecebimentoRecebedor/RecebimentoRecebedor"
@@ -72,8 +72,10 @@ const router = createBrowserRouter([
   },
 
   //RECEBEDOR
- /*  < PathRecebedor />, */
-   {
+ /*  {
+    element: < PathRecebedor />,
+  }, */
+  {
     path: "/recebedor/home",
     element: <HomeRecebedor />,
   },

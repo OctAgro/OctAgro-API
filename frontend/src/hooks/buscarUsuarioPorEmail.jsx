@@ -8,3 +8,14 @@ export async function buscarUsuarioPorEmail(email){
         console.log(erro);
     }
 }
+
+export async function buscarTodosUsuarios(){
+    try{
+        const todosUsuarios = await api.get('/usuario/buscar-todos-usuarios')
+        return todosUsuarios.data
+
+
+    }catch(erro){
+        console.log(erro);
+    }
+}

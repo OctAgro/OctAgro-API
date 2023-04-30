@@ -37,16 +37,16 @@ export const SidebarAdmin = () => {
           <Link to="/admin/fornecedores" className={styles.relatorio}>
             Fornecedores
           </Link>
-        </li>
+        </li>        
         <li className={styles.actionItems}>
-          {<FontAwesomeIcon className={styles.icon} icon={faWheatAwn} />}
+          <FontAwesomeIcon className={styles.wheal} icon={faWheatAwn} />
           
           <Link to="/admin/produtos" className={styles.relatorio}>
             Produtos
           </Link>
         </li>
         <li className={styles.actionItems}>
-          <FontAwesomeIcon className={styles.icon} icon={faFilePen} />
+          <FontAwesomeIcon className={styles.reportIcon} icon={faFilePen} />
           
           <Link to="/admin/relatorios" className={styles.relatorio}>
             Relatórios

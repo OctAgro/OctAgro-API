@@ -1,6 +1,6 @@
 .navbar {
     position: relative;
-    min-width: 200px;
+    min-width: 18rem;
     max-width: 15vw;
     max-height: 100vh;
     min-height: 100vh;
@@ -62,8 +62,16 @@
     padding-left: 0.5rem;
   }
   
-  .icon {
+  .icon, .wheal, .reportIcon {
     padding: 0 1.2rem;
+  }
+
+  .wheal {
+    margin-right: 0.4rem;
+  }
+
+  .reportIcon{
+    margin-right: 0.2rem;
   }
   
   .usuario {
@@ -132,6 +140,7 @@
   .relatorio {
     font-family: 'Gotham Black';
     padding: 1rem 0;
+    margin-right: 1rem;
     display: block;
     order: 2;
     flex-grow: 1;

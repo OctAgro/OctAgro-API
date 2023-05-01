@@ -1,29 +1,27 @@
 import React from "react"
 
 // Importando o Provider
-import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
+import { UsuariosCadastradosProvider } from "../../../context/UsuariosCadastradosContext"
 
 // Importando Componentes
 import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAdmin"
+import { HeaderUsuarios } from "../../../components/header/HeaderAdmin/HeaderUsuarios/HeaderUsuarios"
 
 // Importando CSS
 import styles from "./UsuariosAdmin.module.css"
 
 export const UsuariosAdmin = () => {
   return (
-    <PedidosProvider>
+    <UsuariosCadastradosProvider>
       <div className={styles.main}>
         <SidebarAdmin />   
-        <div className={styles.container}>
-         
-          <h1>Olá UsuariosAdmin</h1>
-        
-          {/* <Header /> */}
+        <div className={styles.container}>    
+          <HeaderUsuarios />
           <div>
-            {/* <body /> */}
+           {/*  < Body /> */}
           </div>
         </div>
       </div>
-    </PedidosProvider>
+    </UsuariosCadastradosProvider>
   )
 }

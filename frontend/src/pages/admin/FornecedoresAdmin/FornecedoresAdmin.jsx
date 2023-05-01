@@ -8,6 +8,7 @@ import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAd
 
 // Importando CSS
 import styles from "./FornecedoresAdmin.module.css"
+import { HeaderFornecedores } from "../../../components/header/HeaderAdmin/HeaderFornecedores/HeaderFornecedores"
 
 export const FornecedoresAdmin = () => {
   return (
@@ -15,10 +16,7 @@ export const FornecedoresAdmin = () => {
       <div className={styles.main}>
         <SidebarAdmin />   
         <div className={styles.container}>
-         
-          <h1>Olá FornecedoresAdmin</h1>
-        
-          {/* <Header /> */}
+          <HeaderFornecedores />
           <div>
             {/* <body /> */}
           </div>

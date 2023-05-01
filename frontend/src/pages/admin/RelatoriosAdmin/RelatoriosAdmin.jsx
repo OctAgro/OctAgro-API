@@ -5,6 +5,7 @@ import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
 
 // Importando Componentes
 import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAdmin"
+import { HeaderRelatorios } from "../../../components/header/HeaderAdmin/HeaderRelatorios/HeaderRelatorios"
 
 // Importando CSS
 import styles from "./RelatoriosAdmin.module.css"
@@ -13,12 +14,9 @@ export const RelatoriosAdmin = () => {
   return (
     <PedidosProvider>
       <div className={styles.main}>
-        <SidebarAdmin />   
+        <SidebarAdmin />
         <div className={styles.container}>
-         
-          <h1>Olá RelatoriosAdmin</h1>
-        
-          {/* <Header /> */}
+          <HeaderRelatorios />
           <div>
             {/* <body /> */}
           </div>

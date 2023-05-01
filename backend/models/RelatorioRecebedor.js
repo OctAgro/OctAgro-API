@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize")
 const db = require("../db/conexao")
-const Usuario = require("./usuario")
+const Usuario = require("./Usuario")
 const Pedido = require("./Pedido")
 
 const RelatorioRecebedor = db.define("RelatorioRecebedor", {

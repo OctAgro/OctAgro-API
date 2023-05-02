@@ -12,9 +12,11 @@
 
 .grid1 {
     columns: 4;
+    display: flex;
 }
 
 .grid2{
+    display: flex;
     columns: 3;
     margin-top: 2em;
 }
@@ -27,24 +29,30 @@
     filter: drop-shadow(2px 2px 2px #000);
     padding: .5rem;
     margin-left: 2rem;
+    
 }
 
 .icon {
-    font-size: 1em;
+    font-size: 1.2em;
     margin-left: .3em;
+    margin-top: .1em;
 }
 
 .leftSideA,
 .leftSideB {
-    margin-top: .2em;
     font-size: 4rem;
+    border-right: rgba(150em, 0, 0, 0.3) solid;
+    border-radius: 15px;
+    margin: 0;
+    width: 8rem;
+    display: flex;
 }
 
 .rightSideA,
 .rightSideB {
     text-align: center;
     font-size: 2rem;
-    margin-left: 2rem;
+    margin-left: .6em;
     margin-top: .1em;
 }
 
@@ -54,14 +62,5 @@
 }
 
 .grid2 {
-    width: 75%;
-}
-
-
-.arrumar {
-    margin-left: 1em;
-}
-
-.arrumar1 {
-    padding-right: 1em;
+    width: 50%;
 }

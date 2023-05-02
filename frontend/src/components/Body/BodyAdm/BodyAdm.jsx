@@ -21,7 +21,7 @@ export const BodyAdm = () => {
                     <FontAwesomeIcon className={styles.icon} icon={faUserGroup} />
                     </div>
                     <div className={styles.rightSideB}>
-                    <h2>4</h2>
+                    <h2>0</h2>
                     <h3>
                         Usuários
                     </h3>
@@ -29,15 +29,13 @@ export const BodyAdm = () => {
                 </div>
                 <div className={styles.icons}>
                     <div className={styles.leftSideB}>
-                    <FontAwesomeIcon className={styles.icon} icon={faBuildingWheat} />
+                        <FontAwesomeIcon className={styles.icon} icon={faBuildingWheat} />
                     </div>
-                    <div className={styles.arrumar1}>
-                        <div className={styles.rightSideB}>
+                    <div className={styles.rightSideB}>
                         <h2>0</h2>
                         <h3>
                             Fornecedores
                         </h3>
-                        </div>
                     </div>
                 </div>
                 <div className={styles.icons}>

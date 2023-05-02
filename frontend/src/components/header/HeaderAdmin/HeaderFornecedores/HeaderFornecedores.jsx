@@ -25,7 +25,7 @@ export const HeaderFornecedores = (props) => {
         <div className={styles.rightSide}>
           {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
 
-          <h1>3</h1>
+          <h1>0</h1>
           <h3>
             Fornecedores
           </h3>
@@ -39,7 +39,7 @@ export const HeaderFornecedores = (props) => {
         <div className={styles.rightSide}>
           {/*             <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
  */}
-          <h1>42</h1>
+          <h1>0</h1>
           <h3>
             Pedidos
           </h3>

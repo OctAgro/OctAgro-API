@@ -21,6 +21,7 @@ const AprovadorRotas = require('./routes/AprovadorRoutes')
 const UsuarioRotas = require('./routes/UsuarioRoutes')
 const RecebedorRotas = require('./routes/RecebedorRoutes')
 const PedidoRotas = require('./routes/PedidoRoutes')
+const ProdutoRotas = require('./routes/ProdutoRoutes')
 
 //Body Parse
 app.use(bodyParser.urlencoded({extended: true}))
@@ -35,6 +36,7 @@ app.use('/aprovador', AprovadorRotas)
 app.use('/usuario', UsuarioRotas)
 app.use('/recebedor', RecebedorRotas)
 app.use('/pedido', PedidoRotas)
+app.use('/produto', ProdutoRotas)
 
 //Mensagens com flash
 app.use(flash())

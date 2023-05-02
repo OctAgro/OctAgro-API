@@ -1,0 +1,67 @@
+.external {
+    font-family: "Gotham Black";
+    display: flex;
+    justify-content: space-between;
+  }
+  
+.grid {
+    margin-top: 4rem;
+    display: grid;
+    margin-left: 5em;
+}
+
+.grid1 {
+    columns: 4;
+}
+
+.grid2{
+    columns: 3;
+    margin-top: 2em;
+}
+
+  
+.icons {
+    display: flex;
+    border-radius: 15px;
+    background-color: rgba(231, 224, 209, 1);
+    filter: drop-shadow(2px 2px 2px #000);
+    padding: .5rem;
+    margin-left: 2rem;
+}
+
+.icon {
+    font-size: 1em;
+    margin-left: .3em;
+}
+
+.leftSideA,
+.leftSideB {
+    margin-top: .2em;
+    font-size: 4rem;
+}
+
+.rightSideA,
+.rightSideB {
+    text-align: center;
+    font-size: 2rem;
+    margin-left: 2rem;
+    margin-top: .1em;
+}
+
+.rightSideA h3,
+.rightSideB h3 {
+    font-size: 1.5rem;
+}
+
+.grid2 {
+    width: 75%;
+}
+
+
+.arrumar {
+    margin-left: 1em;
+}
+
+.arrumar1 {
+    padding-right: 1em;
+}

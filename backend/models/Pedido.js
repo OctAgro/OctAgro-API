@@ -13,13 +13,11 @@ const Pedido = db.define ("pedido" , {
 
     status_pedido: {
         type: Sequelize.STRING,
-        defaultValue: 'Recebido',
         require: true
     },
 
     status_aprovacao:{
         type: Sequelize.STRING,
-        defaultValue: 'Pendente',
         require: true
     },
 
@@ -43,18 +41,26 @@ contar().then(function(valor){
     if (valor===0) {
 
         Pedido.create({
+            status_pedido: 'Recebido',
+            status_aprovacao: 'Pendente',
             id_produto: 1,
             id_fornecedor: 1,
           });
           Pedido.create({
+            status_pedido: 'Recebido',
+            status_aprovacao: 'Pendente',
             id_produto: 2,
             id_fornecedor: 2,
           });
           Pedido.create({
+            status_pedido: 'Recebido',
+            status_aprovacao: 'Pendente',
             id_produto: 3,
             id_fornecedor: 3,
           });
           Pedido.create({
+            status_pedido: 'Recebido',
+            status_aprovacao: 'Pendente',
             id_produto: 4,
             id_fornecedor: 4,
           });

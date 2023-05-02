@@ -1,4 +1,5 @@
 import React from "react";
+import { PedidosProvider } from "../../../context/PedidosAnalistaContext";
 
 // Importando Componentes
 import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAdmin"

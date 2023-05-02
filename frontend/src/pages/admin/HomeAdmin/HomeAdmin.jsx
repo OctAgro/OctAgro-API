@@ -1,5 +1,4 @@
-import React from "react";
-import { PedidosProvider } from "../../../context/PedidosAnalistaContext";
+import React from "react"
 
 // Importando Componentes
 import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAdmin"
@@ -10,10 +9,11 @@ import styles from "./HomeAdmin.module.css"
 import { UsuariosCadastradosProvider } from "../../../context/UsuariosCadastradosContext"
 
 export const HomeAdmin = () => {
+
   return (
     <UsuariosCadastradosProvider>
       <div className={styles.main}>
-        <SidebarAdmin />   
+        <SidebarAdmin />
         <div className={styles.container}>
           <BodyAdm />
         </div>

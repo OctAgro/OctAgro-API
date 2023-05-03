@@ -8,8 +8,8 @@ const cors = require('cors')
 const app = express()
 
 //Chamando Inputs do Banco de Dados
-const RelatorioAprovadores = require('./models/RelatorioAprovador')
 const Fornecedores = require('./models/Fornecedor')
+const RelatorioAprovadores = require('./models/RelatorioAprovador')
 const Produto = require('./models/Produto')
 const CriteriosAvaliacao = require('./models/CriteriosAvaliacao')
 const Usuario = require('./models/Usuario')

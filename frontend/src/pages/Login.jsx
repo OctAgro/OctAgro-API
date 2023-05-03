@@ -47,6 +47,8 @@ export const Login = () => {
         navigate("/analista/home")
       } else if (tipoFuncao === "Recebedor") {
         navigate("/recebedor/home")
+      } else if (tipoFuncao === "Administrador") {
+        navigate("/admin/home")
       }
     } catch (erro) {
       setErrorMessage(erro.response.data.message)

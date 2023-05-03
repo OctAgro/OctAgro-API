@@ -169,6 +169,20 @@ contar().then(function(valor) {
             foto: 'igor.png'
     
         })
+
+        Usuario.create({
+            nome: 'Gabriela',
+            senha: hashedSenha,
+            email: 'gabriela@live.com',
+            funcao: 'Administrador',
+            dataAdmissao: '10-01-2010',
+            CPF: '12345',
+            RG: '54321',
+            dataNascimento: '01-01-2002',
+            genero: 'F',
+            foto: 'gabriela.png'
+    
+        })
     }
 }).catch(function(erro) {
     console.log('Erro', erro)

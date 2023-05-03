@@ -6,14 +6,14 @@ import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
 // Importando Componentes
 import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAdmin"
 import { Modal } from "../../../components/Modal/Modal"
+import { HeaderFornecedores } from "../../../components/header/HeaderAdmin/HeaderFornecedores/HeaderFornecedores"
 
 // Importando os ícones
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleCheck, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
+import { faCircleCheck, faTriangleExclamation, faTrash } from "@fortawesome/free-solid-svg-icons"
 
 // Importando CSS
 import styles from "./FornecedoresAdmin.module.css"
-import { HeaderFornecedores } from "../../../components/header/HeaderAdmin/HeaderFornecedores/HeaderFornecedores"
 
 export const FornecedoresAdmin = () => {
   // HANDLES DO MODAL DE CADASTRO
@@ -43,6 +43,11 @@ export const FornecedoresAdmin = () => {
     setOpenModalFornecedorExcluirWarning(true)
   }
 
+  function handleCloseAndOpenModals() {
+    handleCloseModalFornecedorExcluirWarning()
+    handleOpenModalFornecedorExcluir()
+  }
+
   // HANDLES DO MODAL DE EXCLUIR
   const handleCloseModalFornecedorExcluir = () => {
     setOpenModalFornecedorExcluir(false)
@@ -56,11 +61,6 @@ export const FornecedoresAdmin = () => {
   const [openModalFornecedorAtualizado, setOpenModalFornecedorAtualizado] = useState(false)
   const [openModalFornecedorExcluirWarning, setOpenModalFornecedorExcluirWarning] = useState(false)
   const [openModalFornecedorExcluir, setOpenModalFornecedorExcluir] = useState(false)
-
-  function handleCloseAndOpenModals() {
-    handleCloseModalFornecedorExcluirWarning()
-    handleOpenModalFornecedorExcluir()
-  }
 
   return (
     <PedidosProvider>
@@ -96,7 +96,7 @@ export const FornecedoresAdmin = () => {
             <Modal isOpen={openModalFornecedorAtualizado} onClick={handleCloseModalFornecedorAtualizado}>
               <div className={styles.conteudoModal}>
                 <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                <p> (nomeDoFornecedor) foi atualizado com sucesso!</p>
+                <p> (nomeDoFornecedor) foi atualizado com sucesso! (puxar do backend)</p>
                 <input
                   className={styles.botaoConfirmarModal}
                   type="button"
@@ -132,8 +132,8 @@ export const FornecedoresAdmin = () => {
             {/* MODAL EXCLUIR */}
             <Modal isOpen={openModalFornecedorExcluir} onClick={handleCloseModalFornecedorExcluir}>
               <div className={styles.conteudoModal}>
-                <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                <p> (nomeDoFornecedor) foi excluído!</p>
+                <FontAwesomeIcon icon={faTrash} className={styles.iconeModal} />
+                <p> (nomeDoFornecedor) foi excluído! (puxar do backend)</p>
                 <input
                   className={styles.botaoConfirmarModal}
                   type="button"

@@ -1,7 +1,7 @@
 .main {
   display: flex;
   height: 100vh;
-  background-color: #F7F1E5;
+  background-color: #f7f1e5;
   position: fixed;
 }
 
@@ -10,4 +10,35 @@
   display: flex;
   flex-direction: column;
   width: 85vw;
+}
+
+.conteudoModal {
+  text-align: center;
+  margin: 5rem;
+  font-size: 2rem;
+}
+
+.iconeModal {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}
+
+.botaoConfirmarModal,
+.botaoRecusarModal {
+  cursor: pointer;
+  margin-top: 1rem;
+  margin: 0.5rem;
+  padding: 0rem 3rem;
+  color: white;
+  border-radius: 5px;
+  font-family: "Gotham Medium";
+  font-size: 2rem;
+}
+
+.botaoConfirmarModal {
+  background-color: #4c4b16;
+}
+
+.botaoRecusarModal {
+  background-color: #898121;
 }

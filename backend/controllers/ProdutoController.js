@@ -107,4 +107,24 @@ module.exports = class ProdutoControllers {
             return res.json(error).status(500)
         }
     }
+
+    static async listarProduto(req, res) {
+        try {
+            const produto = await Produto.findAll()
+            return res.json(produto).status(201)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async procurarProduto(req, res) {
+        const oId_produto = req.params.id_produto
+
+        try {
+            const produto = await Produto.findByPk(oId_produto)
+            return res.json(produto).status(201)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
 }

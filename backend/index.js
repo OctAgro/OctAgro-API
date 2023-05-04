@@ -22,6 +22,7 @@ const UsuarioRotas = require('./routes/UsuarioRoutes')
 const RecebedorRotas = require('./routes/RecebedorRoutes')
 const PedidoRotas = require('./routes/PedidoRoutes')
 const ProdutoRotas = require('./routes/ProdutoRoutes')
+const FornecedorRotas = require('./routes/FornecedorRoutes')
 
 //Body Parse
 app.use(bodyParser.urlencoded({extended: true}))
@@ -37,6 +38,7 @@ app.use('/usuario', UsuarioRotas)
 app.use('/recebedor', RecebedorRotas)
 app.use('/pedido', PedidoRotas)
 app.use('/produto', ProdutoRotas)
+app.use('/fornecedor', FornecedorRotas)
 
 //Mensagens com flash
 app.use(flash())

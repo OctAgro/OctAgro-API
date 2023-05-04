@@ -70,7 +70,7 @@ module.exports = class AprovadorController {
 
     // Função para atualizar um relatório de aprovação pelo ID
     static async atualizarRelatorioAprovacao(req, res) {
-        const idRelatorio = req.params.id
+        
         const data = req.body
 
         if (data.checkboxDocumentacaoProdutoAprovado && data.checkboxDocumentacaoProdutoReprovado) {

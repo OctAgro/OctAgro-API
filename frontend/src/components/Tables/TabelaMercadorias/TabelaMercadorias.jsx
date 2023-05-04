@@ -11,6 +11,7 @@ import { buscarRelatoriosRecebedor } from "../../../hooks/buscarRelatorios"
 // TABELA REFERENTE AO ANALISTA <-------------
 
 export const TabelaMercadorias = () => {
+
   const [relatoriosRecebedor, setRelatoriosRecebedor] = useState([])
   useEffect(() => {
     async function fetchRelatoriosRecebedor() {

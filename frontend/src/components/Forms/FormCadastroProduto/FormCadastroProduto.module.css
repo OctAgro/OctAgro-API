@@ -1,0 +1,110 @@
+.row {
+  display: flex;
+}
+
+.leftSide {
+  width: 40%;
+}
+
+.rightSide {
+  width: 60%;
+}
+
+.title {
+  font-size: 2rem;
+  font-family: "Gotham Medium";
+  text-align: center;
+}
+
+.subTitle {
+  font-size: 1.5rem;
+  font-family: "Gotham Medium";
+  margin: 1rem 0 0.5rem 0;
+}
+
+.external {
+  width: 60%;
+  margin: 0 auto;
+  background-color: #e7e0d1;
+  border-radius: 15px;
+  box-shadow: 1px 1px 10px 1px #000000;
+}
+
+.formCadastroProduto {
+  padding: 0.5rem;
+  font-family: "Gotham Medium";
+}
+
+.inputCadastroProduto,
+.porcentagem {
+  background-color: #d9d9d9;
+  font-family: "Gotham Medium";
+  border: 1px solid black;
+}
+
+.inputCadastroProduto {
+  margin: 0.2rem;
+  text-align: center;
+}
+
+.porcentagem {
+  margin: 0 0.5rem;
+  width: 2vw;
+}
+
+.inserirRegra {
+  cursor: pointer;
+  color: white;
+  background: #4c4b16;
+  text-align: center;
+  width: 40%;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  border-radius: 15px;
+  filter: drop-shadow(2px 2px 2px #000);
+}
+
+.icon {
+  font-size: 3rem;
+}
+
+.paragrafoRegra {
+  margin-top: 0.5rem;
+}
+
+.botaoConfirmarModal {
+  text-align: center;
+  cursor: pointer;
+  background-color: #4c4b16;
+  color: white;
+  font-family: "Gotham Black";
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: solid 2px black;
+  border-radius: 7px;
+  margin: 1rem 0;
+}
+
+.conteudoModalRegra {
+  text-align: center;
+  width: 50vw;
+}
+
+.usuarioModal,
+.descricaoModal,
+.tituloModal,
+.inserirModal {
+  margin: 1rem 0rem;
+}
+
+.radioModal {
+  margin: 0 0.5rem;
+}
+
+.inputModal {
+  background-color: #d9d9d9;
+}
+
+.maxLabel {
+  margin-left: 1rem;
+}

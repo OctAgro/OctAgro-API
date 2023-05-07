@@ -367,6 +367,21 @@ export const FormAprovadorUpdate = ({ hasButton }) => {
           </div>
         </form>
       </div>
+      <div className={styles.divModal}>
+        <Modal isOpen={openModal} onClick={handleCloseModal}>
+          <div className={styles.clearfix}>
+            {isAprovado ? (
+              <div className={styles.container}>
+                <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
+                <p className={styles.paragraph}>Mercadoria atualizada com sucesso!</p>
+                <Link to="/aprovador/mercadoriascadastradas">
+                  <Button style={{ backgroundColor: "#512c13" }} className={styles.button} value1="CONFIRMAR" />
+                </Link>
+              </div>
+            ) : null}
+          </div>
+        </Modal>
+      </div>
     </div>
   )
 }

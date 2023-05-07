@@ -16,7 +16,7 @@ router.get('/relatorios/criterios/:id', AprovadorController.listarCriterios)
 router.post('/GEAnalista/home', AnalistaController.listarRelatorios)
 router.post('/GEAnalista/relatorios', AnalistaController.criarRelatorioAnalista)
 router.post('/GEAnalista/relatorios/:id', AnalistaController.encontrarRelatorioAnalista)
-router.post('/GEAnalista/relatorios/editar/:id', AnalistaController.atualizarRelatorioAnalista)
+router.post('/GEAnalista/relatorios/editar/:id', AnalistaController.updateRelatorioAnalista)
 
 //Todas as rotas de Recebedor com Função de Gerente (agregando função de Recebedor ao Aprovador)
 

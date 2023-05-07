@@ -38,7 +38,7 @@ const Fornecedor = db.define('fornecedor', {
 //adicionei---------------------------------------------------
 async function contar(){
     const fornecedores = await Fornecedor.count(Fornecedor.id_fornecedor)
-    return fornecedores;
+    return fornecedores
 }
 contar().then(function(valor) {
     console.log('Quantidade', valor);

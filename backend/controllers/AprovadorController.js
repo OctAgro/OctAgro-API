@@ -1,4 +1,9 @@
 const RelatorioAprovador = require('../models/RelatorioAprovador')
+const Pedido = require('../models/Pedido')
+const Usuario = require('../models/Usuario')
+const Produto = require('../models/Produto')
+const Fornecedor = require('../models/Fornecedor')
+const RelatorioAnalista = require('../models/RelatorioAnalista')
 
 module.exports = class AprovadorController {
 
@@ -6,8 +11,6 @@ module.exports = class AprovadorController {
     static async criarRelatorioAprovacao(req, res) {
         //trazendo as informações preenchidas pelo usuario Aprovador através do "req.body"
         const data = req.body
-
-        console.log(data)
 
         //checando se as checkboxs/caixas de seleção estão corretamente preenchidas
 
@@ -29,8 +32,6 @@ module.exports = class AprovadorController {
             return res.json({message: "Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!", status: 500}).status(500)
         }
 
-        console.log(data.checkboxDocumentacaoProdutoAprovado)
-
         //Salvando dados na Tabela do Banco de Dados
         const relatorioAprovador = new RelatorioAprovador({
 
@@ -48,6 +49,11 @@ module.exports = class AprovadorController {
 
         try {
             const novoRelatorioAprovador = await relatorioAprovador.save()
+            const atualizacaoStatus = await RelatorioAprovador.update(
+                { status_aprovacao: 'Concluído' },
+                { where: { id_pedido: data.idPedido}, returning: true }
+            );
+            console.log("aqui: " + data.idPedido)
             res.status(201).json({message: 'Relatório salvo com sucesso!'})
         } catch(erro) {
             res.status(500).json({message: erro})
@@ -58,7 +64,7 @@ module.exports = class AprovadorController {
     static async encontrarRelatorioPorId(req,res) {
         const idRelatorio = req.params.id
 
-        const relatorioProcurado = await RelatorioAprovadores.findByPk(idRelatorio)
+        const relatorioProcurado = await RelatorioAprovador.findByPk(idRelatorio)
 
         if (!relatorioProcurado) {
             res.status(422).json({message: "Relatório não encontrado!"})
@@ -75,7 +81,7 @@ module.exports = class AprovadorController {
 
         if (data.checkboxDocumentacaoProdutoAprovado && data.checkboxDocumentacaoProdutoReprovado) {
             return res.json({message: "Não é possível marcar as duas opções ao mesmo tempo! A informação da Documentação deve ser aprovada ou reprovada!", status: 500}).status(500)
-        } else if (!data.checkboxDocumentacaoProdutoAprovado && !data.checkboxDocumentacaoProdutoAprovado){
+        } else if (!data.checkboxDocumentacaoProdutoAprovado && !data.checkboxDocumentacaoProdutoReprovado){
             return res.json({message: "Não é possível desmarcar as duas opções ao mesmo tempo! A informação da Documentação deve ser aprovada ou reprovada!", status: 500}).status(500)
         }
 
@@ -92,15 +98,14 @@ module.exports = class AprovadorController {
         }
 
         try {
-            const relatorioAtualizado = await RelatorioAprovadores.update({
-                doc_status: data.heckboxDocumentacaoProdutoAprovado, 
+            const relatorioAtualizado = await RelatorioAprovador.update({
+                doc_status: data.checkboxDocumentacaoProdutoAprovado, 
                 info_recebedor_status: data.checkboxInfoRecebedorAprovado,
                 info_analista_status: data.checkboxInfoAnalistaAprovado,
                 revisao_aprovador: data.textoRevisaoFinalAprovador,
-                status_final_aprovacao: data.statusFinalAprovacao
             }, {
                 where: {
-                    id_relatorio_aprovador: idRelatorio
+                    id_pedido: data.idPedido
                 }
             })
             res.status(200).json({message: 'Relatório atualizado com sucesso!'})
@@ -112,10 +117,33 @@ module.exports = class AprovadorController {
     // Função para listar todos os relatórios de aprovação
     static async listarRelatorios(req, res) {
         try {
-            const relatorios = await RelatorioAprovador.findAll();
+            const relatorios = await RelatorioAprovador.findAll({
+                include: [
+                    {
+                        model: Pedido,
+                        as: "pedido",
+                        include: [
+                            {
+                                model: Produto,
+                                as: "produto"
+                            },
+                            {
+                                model: Fornecedor,
+                                as: "fornecedor"
+                            },
+
+                        ]
+                    },
+                    {
+                        model: Usuario,
+                        as: "usuario",
+                    },
+                ],
+            });
+            console.log(relatorios)
             res.status(200).json(relatorios);
         } catch (erro) {
-            res.status(500).json({ message: erro });
+            res.status(500).json({ message: "Não há relatórios disponíveis no momento!" });
         }
     }
 
@@ -134,6 +162,25 @@ module.exports = class AprovadorController {
             }
         } catch (erro) {
             res.status(500).json({ message: erro });
+        }
+    }
+    
+    static async listarCriterios(req, res) {
+        const id = req.params.id
+        try {
+            const pedidos = await RelatorioAprovador.findOne({
+                where: { id_relatorio_aprovador: id },
+                attributes: ['doc_status', 'info_recebedor_status', 'info_analista_status', 'revisao_aprovador'],
+            })
+
+            if (!pedidos) {
+                return res.status(404).json({ message: 'Pedido não encontrado' });
+            }
+
+            res.status(200).json(pedidos)
+
+        } catch (erro) {
+            res.status(500).json({ message: erro })
         }
     }
 

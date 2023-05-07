@@ -1,0 +1,16 @@
+.main {
+    display: flex;
+    height: 100vh;
+    background-color: #f7f1e5;
+  }
+  
+  .container {
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    margin: 0 auto;
+  }

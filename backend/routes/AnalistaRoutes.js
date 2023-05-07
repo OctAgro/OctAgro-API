@@ -4,8 +4,8 @@ const AnalistaController = require('../controllers/AnalistaController')
 
 router.get('/home', AnalistaController.listarRelatorios)
 router.post('/relatorios', AnalistaController.criarRelatorioAnalista)
+router.post('/relatorios/atualizar', AnalistaController.updateRelatorioAnalista)
 router.post('/relatorios/:id', AnalistaController.encontrarRelatorioAnalista)
-router.post('/relatorios/editar', AnalistaController.atualizarRelatorioAnalista)
 router.get('/relatorios/criterios/:id', AnalistaController.listarCriterios)
 
 module.exports = router

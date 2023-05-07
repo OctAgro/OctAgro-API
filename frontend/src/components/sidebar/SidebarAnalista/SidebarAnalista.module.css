@@ -6,14 +6,16 @@
     min-height: 100vh;
     background-color: #FF8A00;
     font-size: 1.5rem;
-    -webkit-box-shadow: 5px 0px 10px 1px #000000;
-    box-shadow: 5px 0px 10px 1px #000000;
+    /* -webkit-box-shadow: 5px 0px 10px 1px #000000;
+    box-shadow: 5px 0px 10px 1px #000000; */
+    filter: drop-shadow(2px 2px 2px #000);
   }
   
   .actionItems {
     align-items: center;
     justify-content: center;
     display: flex;
+    border-bottom: #000 solid;
   }
     
   .topItems {
@@ -44,7 +46,9 @@
     cursor: pointer;
   }
   
-  .topItems:hover , .sair:hover {
+  
+  .actionItems:hover,
+  .sair:hover {
     background-color: rgba(247, 241, 229, 0.4);
     transition: 0.4s;
   }

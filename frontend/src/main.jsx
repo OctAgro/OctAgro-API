@@ -34,12 +34,16 @@ import { MercadoriaAnalista } from "./pages/analista/MercadoriaAnalista/Mercador
 import { FormularioAnalista } from "./pages/analista/FormularioAnalista/FormularioAnalista"
 import { DocumentacaoAnalista } from "./pages/analista/DocumentacaoAnalista/DocumentacaoAnalista"
 import { DocumentacaoAnalistaRecebedor } from "./pages/analista/DocumentacaoAnalistaRecebedor/DocumentacaoAnalistaRecebedor"
+import { MercadoriaAnalistaConcluido } from "./pages/analista/MercadoriaAnalistaConcluido/MercadoriaAnalistaConcluido"
+import { FormularioAnalistaUpdate } from "./pages/analista/FormularioAnalistaUpdate/FormularioAnalistaUpdate"
 
 // APROVADOR
 import { HomeAprovador } from "./pages/aprovador/HomeAprovador/HomeAprovador"
 import { RelatorioAprovador } from "./pages/aprovador/RelatorioAprovador/RelatorioAprovador"
 import { FormularioAprovador } from "./pages/aprovador/FormularioAprovador/FormularioAprovador"
 import { DocumentacaoAprovador } from "./pages/aprovador/DocumentacaoAprovador/DocumentacaoAprovador"
+import { MercadoriaAprovador } from "./pages/aprovador/MercadoriaAprovador/MercadoriaAprovador"
+import { FormularioAprovadorUpdate } from "./pages/aprovador/FormularioAprovadorUpdate/FormularioAprovadorUpdate"
 
 const router = createBrowserRouter([
   {
@@ -117,6 +121,14 @@ const router = createBrowserRouter([
     path: "/analista/documentacaoRecebedor/:id",
     element: <DocumentacaoAnalistaRecebedor recebedor="True" />,
   },
+  {
+    path: "/analista/mercadoriascadastradas",
+    element: <MercadoriaAnalistaConcluido />,
+  },
+  {
+    path: "/analista/mercadoriascadastradas/:id",
+    element: <FormularioAnalistaUpdate />,
+  },
  
 
   //APROVADOR
@@ -127,6 +139,14 @@ const router = createBrowserRouter([
   {
     path: "/aprovador/relatorio",
     element: <RelatorioAprovador />,
+  },
+  {
+    path: "/aprovador/mercadoriascadastradas",
+    element: <MercadoriaAprovador />,
+  },
+  {
+    path: "/aprovador/mercadoriascadastradas/:id",
+    element: <FormularioAprovadorUpdate />,
   },
   {
     path: "/aprovador/relatorio/:id",

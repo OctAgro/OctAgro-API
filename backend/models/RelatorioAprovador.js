@@ -41,6 +41,9 @@ const RelatorioAprovador = db.define('RelatorioAprovador', {
 //Criando relação entre tabela RelatorioAprovador e Usuario
 RelatorioAprovador.belongsTo(Usuario,{foreignKey: 'id_usuario'})
 RelatorioAprovador.belongsTo(Pedido,{foreignKey: 'id_pedido'})
-//Usuario.hasMany(RelatorioAprovador) // vinculo com a tabela usuarios tambem (Gabriel)
+
+
+//Criando relação entre tabela RelatorioAprovador e Usuario
+Pedido.hasMany(RelatorioAprovador, { foreignKey: 'id_pedido' });
 
 module.exports = RelatorioAprovador

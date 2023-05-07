@@ -32,11 +32,13 @@ export const CadastroProdutosAdmin = () => {
 
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <HeaderProdutos />
-          <div>
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin />
+        </div>
+        <div id={styles["header"]}><HeaderProdutos />
+        </div>
+
+        <div id={styles["barraPesquisa"]}>
             <BarraAdmin linkVoltar="/admin/produtos" linkCadastrar="/admin/produtos/cadastrar">
               <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
             </BarraAdmin>
@@ -59,8 +61,11 @@ export const CadastroProdutosAdmin = () => {
               </Modal>
             </div>
           </div>
+
+        <div id={styles["body"]}>
+        {/* Veja a possibilidade de colocar o formulario dentro desse body */}
         </div>
-      </div>
+      </div>    
     </PedidosProvider>
   )
 }

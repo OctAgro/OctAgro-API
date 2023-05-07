@@ -1,12 +1,8 @@
 .navbar {
     position: relative;
-    min-width: 18rem;
-    max-width: 15vw;
-    max-height: 100vh;
-    min-height: 100vh;
+    height: 100vh;
     background-color: rgba(77, 61, 19, 0.19);
     font-size: 1.5rem;
-    -webkit-box-shadow: 5px 0px 10px 1px #000000;
     box-shadow: 5px 0px 10px 1px #000000;
   }
   

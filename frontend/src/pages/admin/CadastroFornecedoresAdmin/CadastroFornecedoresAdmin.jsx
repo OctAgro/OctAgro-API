@@ -20,21 +20,18 @@ import styles from "./CadastroFornecedoresAdmin.module.css"
 export const CadastroFornecedoresAdmin = () => {
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <HeaderFornecedores />
-          <div>
-            <BarraAdmin linkVoltar="/admin/fornecedores" linkCadastrar="/admin/fornecedores/cadastrar">
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin /></div>
+        <div id={styles["header"]}><HeaderFornecedores /></div>
+        <div id={styles["barraPesquisa"]}>
+        <BarraAdmin linkVoltar="/admin/fornecedores" linkCadastrar="/admin/fornecedores/cadastrar">
               <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo fornecedor!" />
             </BarraAdmin>
-
-            <div>
-              <FormCadastroFornecedor />
-            </div>
-          </div>
         </div>
-      </div>
+        <div id={styles["body"]}>
+        <FormCadastroFornecedor />
+        </div>
+      </div>      
     </PedidosProvider>
   )
 }

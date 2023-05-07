@@ -56,13 +56,11 @@ export const FornecedoresAdmin = () => {
 
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <HeaderFornecedores />
-          <div>{/* <body /> */}</div>
-
-          <div>
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin /></div>
+        <div id={styles["header"]}><HeaderFornecedores /></div>
+        <div id={styles["barraPesquisa"]}>
+        <div>
             <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/fornecedores/cadastrar">
               <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo fornecedor!"/>
             </BarraAdmin>
@@ -124,6 +122,9 @@ export const FornecedoresAdmin = () => {
             </Modal>
           </div>
         </div>
+        <div id={styles["body"]}>
+        {/*  < Body /> */}  
+        </div>          
       </div>
     </PedidosProvider>
   )

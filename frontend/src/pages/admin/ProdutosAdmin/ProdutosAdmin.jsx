@@ -65,11 +65,11 @@ export const ProdutosAdmin = () => {
 
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <HeaderProdutos />
-          <div>
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin /></div>
+        <div id={styles["header"]}><HeaderProdutos /></div>
+        <div id={styles["barraPesquisa"]}>
+        <div>
             <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/produtos/cadastrar">
               <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
             </BarraAdmin>
@@ -146,6 +146,7 @@ export const ProdutosAdmin = () => {
           </div>
         </div>
       </div>
+
     </PedidosProvider>
   )
 }

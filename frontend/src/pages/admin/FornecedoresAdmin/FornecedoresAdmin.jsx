@@ -7,23 +7,16 @@ import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
 import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAdmin"
 import { Modal } from "../../../components/Modal/Modal"
 import { HeaderFornecedores } from "../../../components/header/HeaderAdmin/HeaderFornecedores/HeaderFornecedores"
+import { BarraAdmin } from "../../../components/BarraAdmin/BarraAdmin"
 
 // Importando os ícones
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleCheck, faTriangleExclamation, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCircleCheck, faTriangleExclamation, faTrash, faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons"
 
 // Importando CSS
 import styles from "./FornecedoresAdmin.module.css"
 
 export const FornecedoresAdmin = () => {
-  // HANDLES DO MODAL DE CADASTRO
-  const handleCloseModalFornecedorCadastrado = () => {
-    setOpenModalFornecedorCadastrado(false)
-  }
-
-  const handleOpenModalFornecedorCadastrado = () => {
-    setOpenModalFornecedorCadastrado(true)
-  }
 
   // HANDLES DO MODAL DE ATUALIZAR
   const handleCloseModalFornecedorAtualizado = () => {
@@ -57,40 +50,25 @@ export const FornecedoresAdmin = () => {
     setOpenModalFornecedorExcluir(true)
   }
 
-  const [openModalFornecedorCadastrado, setOpenModalFornecedorCadastrado] = useState(false)
   const [openModalFornecedorAtualizado, setOpenModalFornecedorAtualizado] = useState(false)
   const [openModalFornecedorExcluirWarning, setOpenModalFornecedorExcluirWarning] = useState(false)
   const [openModalFornecedorExcluir, setOpenModalFornecedorExcluir] = useState(false)
 
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <HeaderFornecedores />
-          <div>{/* <body /> */}</div>
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin /></div>
+        <div id={styles["header"]}><HeaderFornecedores /></div>
+        <div id={styles["barraPesquisa"]}>
+        <div>
+            <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/fornecedores/cadastrar">
+              <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo fornecedor!"/>
+            </BarraAdmin>
 
-          {/* AO CONSTRUIR O FORMULARIO, COMENTAR A DIV ABAIXO, ESTOU USANDO ESTE BOTÃO PARA APLICAR OS MODALS */}
-          <div>
             <div>
-              <input type="button" onClick={handleOpenModalFornecedorCadastrado} value="Cadastrar" />
               <input type="button" onClick={handleOpenModalFornecedorAtualizado} value="Atualizar" />
               <input type="button" onClick={handleOpenModalFornecedorExcluirWarning} value="Excluir" />
             </div>
-
-            {/* MODAL CADASTRAR */}
-            <Modal isOpen={openModalFornecedorCadastrado} onClick={handleCloseModalFornecedorCadastrado}>
-              <div className={styles.conteudoModal}>
-                <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                <p>Fornecedor cadastrado com sucesso!</p>
-                <input
-                  className={styles.botaoConfirmarModal}
-                  type="button"
-                  value="OK"
-                  onClick={handleCloseModalFornecedorCadastrado}
-                />
-              </div>
-            </Modal>
 
             {/* MODAL ATUALIZAR */}
             <Modal isOpen={openModalFornecedorAtualizado} onClick={handleCloseModalFornecedorAtualizado}>
@@ -144,6 +122,9 @@ export const FornecedoresAdmin = () => {
             </Modal>
           </div>
         </div>
+        <div id={styles["body"]}>
+        {/*  < Body /> */}  
+        </div>          
       </div>
     </PedidosProvider>
   )

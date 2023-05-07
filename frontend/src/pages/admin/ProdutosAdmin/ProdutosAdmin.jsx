@@ -7,10 +7,11 @@ import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
 import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAdmin"
 import { HeaderProdutos } from "../../../components/header/HeaderAdmin/HeaderProdutos/HeaderProdutos"
 import { Modal } from "../../../components/Modal/Modal"
+import { BarraAdmin } from "../../../components/BarraAdmin/BarraAdmin"
 
 // Importando os ícones
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleCheck, faTriangleExclamation, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCircleCheck, faTriangleExclamation, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons"
 
 // Importando CSS
 import styles from "./ProdutosAdmin.module.css"
@@ -64,17 +65,18 @@ export const ProdutosAdmin = () => {
 
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <HeaderProdutos />
-          <div>
-            {/* <body /> */}
-
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin /></div>
+        <div id={styles["header"]}><HeaderProdutos /></div>
+        <div id={styles["barraPesquisa"]}>
+        <div>
+            <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/produtos/cadastrar">
+              <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
+            </BarraAdmin>
             {/* AO CONSTRUIR O FORMULARIO, COMENTAR A DIV ABAIXO, ESTOU USANDO ESTE BOTÃO PARA APLICAR OS MODALS */}
             <div>
               <div>
-                <input type="button" onClick={handleOpenModalProdutoCadastrado} value="Cadastrar" />
+
                 <input type="button" onClick={handleOpenModalProdutoAtualizado} value="Atualizar" />
                 <input type="button" onClick={handleOpenModalProdutoExcluirWarning} value="Excluir" />
               </div>
@@ -144,6 +146,7 @@ export const ProdutosAdmin = () => {
           </div>
         </div>
       </div>
+
     </PedidosProvider>
   )
 }

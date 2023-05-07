@@ -22,6 +22,12 @@
   border-bottom: #000 solid;
 }
 
+@media screen and (max-width: 1650px) {
+  .navbar {
+    font-size: 1.1rem;
+  }
+}
+
 /* @media screen and (max-width: 1400px) {
     .navbar {
       display: none;

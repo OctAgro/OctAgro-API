@@ -2,22 +2,25 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-
 import "./index.css"
 
 import CheckboxBibioteca from "./components/CheckboxBiblioteca/CheckboxBiblioteca"
 
 import { Login } from "./pages/Login"
 
-import { UserProvider } from "./context/usuarioContext";
+import { UserProvider } from "./context/usuarioContext"
 
 //ADMIN
 import { HomeAdmin } from "./pages/admin/HomeAdmin/HomeAdmin"
 import { UsuariosAdmin } from "./pages/admin/UsuariosAdmin/UsuariosAdmin"
+import { CadastroUsuario } from "./pages/admin/CadastroUsuario/CadastroUsuario"
+import { AtualizarUsuario } from "./pages/admin/AtualizarUsuario/AtualizarUsuario"
 import { FornecedoresAdmin } from "./pages/admin/FornecedoresAdmin/FornecedoresAdmin"
 import { ProdutosAdmin } from "./pages/admin/ProdutosAdmin/ProdutosAdmin"
+import { CadastroProdutosAdmin } from "./pages/admin/CadastroProdutosAdmin/CadastroProdutosAdmin"
 import { RelatoriosAdmin } from "./pages/admin/RelatoriosAdmin/RelatoriosAdmin"
-
+import { CadastroFornecedoresAdmin } from "./pages/admin/CadastroFornecedoresAdmin/CadastroFornecedoresAdmin"
+import { AtualizarProdutosAdmin } from "./pages/admin/AtualizarProdutosAdmin/AtualizarProdutosAdmin"
 
 // RECEBEDOR
 /* import  PathRecebedor from "./components/Paths/PathRecebedor"  */
@@ -45,12 +48,12 @@ import { DocumentacaoAprovador } from "./pages/aprovador/DocumentacaoAprovador/D
 import { MercadoriaAprovador } from "./pages/aprovador/MercadoriaAprovador/MercadoriaAprovador"
 import { FormularioAprovadorUpdate } from "./pages/aprovador/FormularioAprovadorUpdate/FormularioAprovadorUpdate"
 
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
   },
-
 
   //ADMIN
 
@@ -63,12 +66,32 @@ const router = createBrowserRouter([
     element: <UsuariosAdmin />,
   },
   {
+    path: "admin/usuarios/cadastrousuarios",
+    element: <CadastroUsuario />,
+  },
+  {
+    path: "admin/usuarios/atualizarusuarios",
+    element: <AtualizarUsuario />,
+  },
+  {
     path: "/admin/fornecedores",
     element: <FornecedoresAdmin />,
   },
   {
+    path: "/admin/fornecedores/cadastrar",
+    element: <CadastroFornecedoresAdmin />,
+  },
+  {
     path: "/admin/produtos",
     element: <ProdutosAdmin />,
+  },
+  {
+    path: "/admin/produtos/cadastrar",
+    element: <CadastroProdutosAdmin />,
+  },
+  {
+    path: "/admin/produtos/atualizar/:id",
+    element: <AtualizarProdutosAdmin />,
   },
   {
     path: "/admin/relatorios",
@@ -76,7 +99,7 @@ const router = createBrowserRouter([
   },
 
   //RECEBEDOR
- /*  {
+  /*  {
     element: < PathRecebedor />,
   }, */
   {
@@ -132,7 +155,7 @@ const router = createBrowserRouter([
  
 
   //APROVADOR
-  {    
+  {
     path: "/aprovador/home",
     element: <HomeAprovador />,
   },

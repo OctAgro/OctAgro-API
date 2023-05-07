@@ -13,13 +13,10 @@ import styles from "./RelatoriosAdmin.module.css"
 export const RelatoriosAdmin = () => {
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <HeaderRelatorios />
-          <div>
-            {/* <body /> */}
-          </div>
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin /></div>
+        <div id={styles["header"]}><HeaderRelatorios /></div>
+        <div id={styles["barraPesquisa"]}>
         </div>
       </div>
     </PedidosProvider>

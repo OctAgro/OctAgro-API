@@ -12,12 +12,10 @@ export const HomeAdmin = () => {
 
   return (
     <UsuariosCadastradosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <BodyAdm />
-        </div>
-      </div>
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin /></div>        
+        <div id={styles["body"]}><BodyAdm /></div>          
+      </div>      
     </UsuariosCadastradosProvider>
   )
 }

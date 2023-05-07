@@ -5,7 +5,7 @@ const sequelize = new Sequelize({
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '',
+    password: 'Topsp808!@',
     database: 'octagro',
     define: {
         timestamps: true,

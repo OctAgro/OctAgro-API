@@ -13,6 +13,8 @@ import { UserProvider } from "./context/usuarioContext"
 //ADMIN
 import { HomeAdmin } from "./pages/admin/HomeAdmin/HomeAdmin"
 import { UsuariosAdmin } from "./pages/admin/UsuariosAdmin/UsuariosAdmin"
+import { CadastroUsuario } from "./pages/admin/CadastroUsuario/CadastroUsuario"
+import { AtualizarUsuario } from "./pages/admin/AtualizarUsuario/AtualizarUsuario"
 import { FornecedoresAdmin } from "./pages/admin/FornecedoresAdmin/FornecedoresAdmin"
 import { ProdutosAdmin } from "./pages/admin/ProdutosAdmin/ProdutosAdmin"
 import { CadastroProdutosAdmin } from "./pages/admin/CadastroProdutosAdmin/CadastroProdutosAdmin"
@@ -42,6 +44,7 @@ import { RelatorioAprovador } from "./pages/aprovador/RelatorioAprovador/Relator
 import { FormularioAprovador } from "./pages/aprovador/FormularioAprovador/FormularioAprovador"
 import { DocumentacaoAprovador } from "./pages/aprovador/DocumentacaoAprovador/DocumentacaoAprovador"
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,6 +60,14 @@ const router = createBrowserRouter([
   {
     path: "/admin/usuarios",
     element: <UsuariosAdmin />,
+  },
+  {
+    path: "admin/usuarios/cadastrousuarios",
+    element: <CadastroUsuario />,
+  },
+  {
+    path: "admin/usuarios/atualizarusuarios",
+    element: <AtualizarUsuario />,
   },
   {
     path: "/admin/fornecedores",

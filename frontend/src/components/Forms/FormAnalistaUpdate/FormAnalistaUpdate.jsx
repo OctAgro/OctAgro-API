@@ -12,23 +12,23 @@ import { Modal } from "../../Modal/Modal"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faFaceSmileBeam, faFaceFrown, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
 
-import styles from "./FormAnalista.module.css"
+import styles from "./FormAnalistaUpdate.module.css"
 import axios from "axios"
 
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
+import { buscarCriteriosAnalistaPorId } from "../../../hooks/buscarCriteriosRecebedorPorId"
 
-export const FormAnalista = ({ hasButton }) => {
-  //incluindo trecho de contexto de usuario e salvar dados
+export const FormAnalistaUpdate = ({ hasButton }) => {
+  //Para encontrar pedidos por ID
 
   const { usuario } = useContext(UserContext)
 
-  const usuarioCarregado = usuario ? usuario.id_usuario : null
+  const idUsuario = usuario ? usuario.id_usuario : null
 
-  //Para encontrar pedidos por ID
   const { id } = useParams()
   const pedidoId = parseInt(id)
 
-  const [revisao, setRevisao] = useState("")
+
 
   const [pedidos, setPedidos] = useState([])
   useEffect(() => {
@@ -37,34 +37,206 @@ export const FormAnalista = ({ hasButton }) => {
       setPedidos(dadosPedidos)
     }
     fetchPedidos()
+
+    async function fetchRelatoriosAnalistaPorCriterios() {
+      const dadosRelatorioAnalista = await buscarCriteriosAnalistaPorId(pedidoId)
+      setRelatorioAnalista(dadosRelatorioAnalista)
+
+    }
+    fetchRelatoriosAnalistaPorCriterios()
+
   }, [])
 
-  const onSubmit = (data) => {
-    //chamando a funcao de enviar dados
-    enviarDados(data)
-    console.log(data)
+  const [revisao, setRevisao] = useState("")
 
-    handleCadastrarMercadoria()
-    handleAprovacao()
+  const [relatorioAnalista, setRelatorioAnalista] = useState([])
+
+  console.log("esse: ", relatorioAnalista)
+
+  useEffect(() => {
+    setRevisao(relatorioAnalista?.analista_comentario)
+  }, [relatorioAnalista])
+
+  const [checkboxQualidadeGraoAprovado, setCheckboxQualidadeGraoAprovado] = useState(false)
+  const [checkboxQualidadeGraoReprovado, setCheckboxQualidadeGraoReprovado] = useState(false)
+  const [checkboxFormatoGraoAprovado, setCheckboxFormatoGraoAprovado] = useState(false)
+  const [checkboxFormatoGraoReprovado, setCheckboxFormatoGraoReprovado] = useState(false)
+  const [checkboxNivelAgrotoxicosAprovado, setCheckboxNivelAgrotoxicosAprovado] = useState(false)
+  const [checkboxNivelAgrotoxicosReprovado, setCheckboxNivelAgrotoxicosReprovado] = useState(false)
+  const [checkboxLimpezaGraosAprovado, setCheckboxLimpezaGraosAprovado] = useState(false)
+  const [checkboxLimpezaGraosReprovado, setCheckboxLimpezaGraosReprovado] = useState(false)
+  const [checkboxDocumentacaoProdutoAprovado, setCheckboxDocumentacaoProdutoAprovado] = useState(false)
+  const [checkboxDocumentacaoProdutoReprovado, setCheckboxDocumentacaoProdutoReprovado] = useState(false)
+  const [checkboxInfoAnalistaAprovado, setCheckboxInfoAnalistaAprovado] = useState(false)
+  const [checkboxInfoAnalistaReprovado, setCheckboxInfoAnalistaReprovado] = useState(false)
+
+  useEffect(() => {
+    if (relatorioAnalista === undefined) {
+      setCheckboxQualidadeGraoAprovado(false);
+      setCheckboxQualidadeGraoReprovado(false);
+    }
+    else if (relatorioAnalista.qualidade_grao === true) {
+      setCheckboxQualidadeGraoAprovado(relatorioAnalista.qualidade_grao);
+      setCheckboxQualidadeGraoReprovado(!relatorioAnalista.qualidade_grao);
+    } else {
+      setCheckboxQualidadeGraoReprovado(true);
+      setCheckboxQualidadeGraoAprovado(false);
+    }
+  }, [relatorioAnalista]);
+
+  useEffect(() => {
+    if (relatorioAnalista === undefined) {
+      setCheckboxFormatoGraoAprovado(false);
+      setCheckboxFormatoGraoReprovado(false);
+    }
+    else if (relatorioAnalista.formato_grao === true) {
+      setCheckboxFormatoGraoAprovado(relatorioAnalista.formato_grao);
+      setCheckboxFormatoGraoReprovado(!relatorioAnalista.formato_grao);
+    } else {
+      setCheckboxFormatoGraoReprovado(true);
+      setCheckboxFormatoGraoAprovado(false);
+    }
+  }, [relatorioAnalista]);
+
+  //useEffect para carregar checkbox de nível de agrotóxicos
+  useEffect(() => {
+    if (relatorioAnalista === undefined) {
+      setCheckboxNivelAgrotoxicosAprovado(false);
+      setCheckboxNivelAgrotoxicosReprovado(false);
+    }
+    else if (relatorioAnalista.nivel_agrotoxicos === true) {
+      setCheckboxNivelAgrotoxicosAprovado(relatorioAnalista.nivel_agrotoxicos);
+      setCheckboxNivelAgrotoxicosReprovado(!relatorioAnalista.nivel_agrotoxicos);
+    } else {
+      setCheckboxNivelAgrotoxicosReprovado(true);
+      setCheckboxNivelAgrotoxicosAprovado(false);
+    }
+  }, [relatorioAnalista]);
+
+  //useEffect para carregar checkbox de limpeza de grãos
+  useEffect(() => {
+    if (relatorioAnalista === undefined) {
+      setCheckboxLimpezaGraosAprovado(false);
+      setCheckboxLimpezaGraosReprovado(false);
+    }
+    else if (relatorioAnalista.limpeza_graos === true) {
+      setCheckboxLimpezaGraosAprovado(relatorioAnalista.limpeza_graos);
+      setCheckboxLimpezaGraosReprovado(!relatorioAnalista.limpeza_graos);
+    } else {
+      setCheckboxLimpezaGraosReprovado(true);
+      setCheckboxLimpezaGraosAprovado(false);
+    }
+  }, [relatorioAnalista]);
+
+  useEffect(() => {
+    if (relatorioAnalista === undefined) {
+      setCheckboxDocumentacaoProdutoAprovado(false);
+      setCheckboxDocumentacaoProdutoReprovado(false);
+    }
+    else if (relatorioAnalista.limpeza_graos === true) {
+      setCheckboxDocumentacaoProdutoAprovado(relatorioAnalista.doc_status);
+      setCheckboxDocumentacaoProdutoReprovado(!relatorioAnalista.doc_status);
+    } else {
+      setCheckboxDocumentacaoProdutoReprovado(true);
+      setCheckboxDocumentacaoProdutoAprovado(false);
+    }
+  }, [relatorioAnalista]);
+
+  useEffect(() => {
+    if (relatorioAnalista === undefined) {
+      setCheckboxInfoAnalistaAprovado(false);
+      setCheckboxInfoAnalistaReprovado(false);
+    }
+    else if (relatorioAnalista.limpeza_graos === true) {
+      setCheckboxInfoAnalistaAprovado(relatorioAnalista.info_recebedor_status);
+      setCheckboxInfoAnalistaReprovado(!relatorioAnalista.info_recebedor_status);
+    } else {
+      setCheckboxInfoAnalistaReprovado(true);
+      setCheckboxInfoAnalistaAprovado(false);
+    }
+  }, [relatorioAnalista]);
+
+
+
+  const handleCheckboxQGAChange = () => {
+    setCheckboxQualidadeGraoAprovado(!checkboxQualidadeGraoAprovado);
+  }
+  const handleCheckboxQGRChange = () => {
+    setCheckboxQualidadeGraoReprovado(!checkboxQualidadeGraoReprovado);
+  }
+
+  const handleCheckboxFGAChange = () => {
+    setCheckboxFormatoGraoAprovado(!checkboxFormatoGraoAprovado);
+  }
+  const handleCheckboxFGRChange = () => {
+    setCheckboxFormatoGraoReprovado(!checkboxFormatoGraoReprovado);
+  }
+
+  const handleCheckboxAAAChange = () => {
+    setCheckboxNivelAgrotoxicosAprovado(!checkboxNivelAgrotoxicosAprovado);
+  }
+  const handleCheckboxAARChange = () => {
+    setCheckboxNivelAgrotoxicosReprovado(!checkboxNivelAgrotoxicosReprovado);
+  }
+
+  const handleCheckboxLGAChange = () => {
+    setCheckboxLimpezaGraosAprovado(!checkboxLimpezaGraosAprovado);
+  }
+  const handleCheckboxLGRChange = () => {
+    setCheckboxLimpezaGraosReprovado(!checkboxLimpezaGraosReprovado);
+  }
+
+  const handleCheckboxDPAChange = () => {
+    setCheckboxDocumentacaoProdutoAprovado(!checkboxDocumentacaoProdutoAprovado);
+  }
+  const handleCheckboxDPRChange = () => {
+    setCheckboxDocumentacaoProdutoReprovado(!checkboxDocumentacaoProdutoReprovado);
+  }
+
+  const handleCheckboxIAAChange = () => {
+    setCheckboxInfoAnalistaAprovado(!checkboxInfoAnalistaAprovado);
+  }
+  const handleCheckboxIARChange = () => {
+    setCheckboxInfoAnalistaReprovado(!checkboxInfoAnalistaReprovado);
+  }
+
+  const onSubmit = () => {
+    //chamando a funcao de enviar dados
+    console.log("chegou aqui")
   } // enviando os dados pro banco de dados atraves do clique
 
+  const handleAtualizar = () => {
+    enviarDados()
+    setIsAprovado(true)
+    setOpenModal(true)
+  }
+
   //conectando os dados do usuario para enviar ao banco de dados
-  const enviarDados = async (data, event) => {
-    const dados = {
+  const enviarDados = async () => {
+    const data = {
       comentarioAnalista: revisao,
       idPedido: pedidos.id_pedido,
-      idUsuario: usuarioCarregado,
-      ...data,
+      idUsuario: idUsuario,
+      checkboxQualidadeGraoAprovado,
+      checkboxQualidadeGraoReprovado,
+      checkboxFormatoGraoAprovado,
+      checkboxFormatoGraoReprovado,
+      checkboxNivelAgrotoxicosAprovado,
+      checkboxNivelAgrotoxicosReprovado,
+      checkboxLimpezaGraosAprovado,
+      checkboxLimpezaGraosReprovado,
+      checkboxDocumentacaoProdutoAprovado,
+      checkboxDocumentacaoProdutoReprovado,
+      checkboxInfoAnalistaAprovado,
+      checkboxInfoAnalistaReprovado,
     }
 
-    handleAceitar(event)
-    console.log("aqui: " + dados)
+    console.log("dados aqui: ", data)
 
     try {
-      const resposta = await axios.post("http://localhost:3000/analista/relatorios", dados)
+      const resposta = await axios.post("http://localhost:3000/analista/relatorios/atualizar", data)
       //esse console.log retorna respostas json do backend de erros de validacao
-      console.log(resposta.data.message)
-      setMensagemErro(resposta.data.message)
+      console.log("enviou?: ", resposta.data.message)
     } catch (erro) {
       //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
       console.log(erro.message)
@@ -140,7 +312,7 @@ export const FormAnalista = ({ hasButton }) => {
               Pedido #{pedidos?.id_pedido} - {pedidos?.produto?.nome_produto}
             </label>
           </div>
-          <form name="FormAnalista" onSubmit={handleSubmit(onSubmit)}>
+          <form name="FormAnalistaUpdate" onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.formMain}>
               <div className={styles.leftSide}>
                 <fieldset>
@@ -156,12 +328,16 @@ export const FormAnalista = ({ hasButton }) => {
                         type="checkbox"
                         id="checkboxQualidadeGraoAprovado"
                         {...register("checkboxQualidadeGraoAprovado")}
+                        checked={checkboxQualidadeGraoAprovado}
+                        onClick={handleCheckboxQGAChange}
                       />
                       <input
                         className={styles.recusar}
                         type="checkbox"
                         id="checkboxQualidadeGraoReprovado"
                         {...register("checkboxQualidadeGraoReprovado")}
+                        checked={checkboxQualidadeGraoReprovado}
+                        onClick={handleCheckboxQGRChange}
                       />
                     </div>
                     <div className={styles.inputBlock}>
@@ -171,12 +347,16 @@ export const FormAnalista = ({ hasButton }) => {
                         type="checkbox"
                         id="checkboxFormatoGraoAprovado"
                         {...register("checkboxFormatoGraoAprovado")}
+                        checked={checkboxFormatoGraoAprovado}
+                        onClick={handleCheckboxFGAChange}
                       />
                       <input
                         className={styles.recusar}
                         type="checkbox"
                         id="checkboxFormatoGraoReprovado"
                         {...register("checkboxFormatoGraoReprovado")}
+                        checked={checkboxFormatoGraoReprovado}
+                        onClick={handleCheckboxFGRChange}
                       />
                     </div>
                     <div className={styles.inputBlock}>
@@ -186,12 +366,17 @@ export const FormAnalista = ({ hasButton }) => {
                         type="checkbox"
                         id="checkboxNivelAgrotoxicosAprovado"
                         {...register("checkboxNivelAgrotoxicosAprovado")}
+                        checked={checkboxNivelAgrotoxicosAprovado}
+                        onClick={handleCheckboxAAAChange}
                       />
                       <input
                         className={styles.recusar}
                         type="checkbox"
                         id="checkboxNivelAgrotoxicosReprovado"
                         {...register("checkboxNivelAgrotoxicosReprovado")}
+                        checked={checkboxNivelAgrotoxicosReprovado}
+                        onClick={handleCheckboxAARChange}
+
                       />
                     </div>
                     <div className={styles.inputBlock}>
@@ -201,12 +386,16 @@ export const FormAnalista = ({ hasButton }) => {
                         type="checkbox"
                         id="checkboxLimpezaGraosAprovado"
                         {...register("checkboxLimpezaGraosAprovado")}
+                        checked={checkboxLimpezaGraosAprovado}
+                        onClick={handleCheckboxLGAChange}
                       />
                       <input
                         className={styles.recusar}
                         type="checkbox"
                         id="checkboxLimpezaGraosReprovado"
                         {...register("checkboxLimpezaGraosReprovado")}
+                        checked={checkboxLimpezaGraosReprovado}
+                        onClick={handleCheckboxLGRChange}
                       />
                     </div>
                   </div>
@@ -220,7 +409,7 @@ export const FormAnalista = ({ hasButton }) => {
                 </div>
 
                 <div>
-                  <label className={styles.label} htmlFor="infRecebedor">
+                  <label className={styles.label} htmlFor="infAnalista">
                     Documentos (RC/NF):
                   </label>
 
@@ -243,23 +432,27 @@ export const FormAnalista = ({ hasButton }) => {
                       type="checkbox"
                       id="checkboxDocumentacaoProdutoAprovado"
                       {...register("checkboxDocumentacaoProdutoAprovado")}
+                      checked={checkboxDocumentacaoProdutoAprovado}
+                      onClick={handleCheckboxDPAChange}
                     />
                     <input
                       className={styles.recusar}
                       type="checkbox"
                       id="checkboxDocumentacaoProdutoRecusado"
-                      {...register("checkboxDocumentacaoProdutoReprovado")}
+                      {...register("checkboxDocumentacaoProdutoRecusado")}
+                      checked={checkboxDocumentacaoProdutoReprovado}
+                      onClick={handleCheckboxDPRChange}
                     />
                   </div>
                 </div>
 
-                <label className={styles.label} htmlFor="infRecebedor">
-                  Info. do Recebedor:
+                <label className={styles.label} htmlFor="infAnalista">
+                  Info. do Analista:
                 </label>
 
                 <div className={styles.inputBlock}>
                   {hasButton ? (
-                    <Link to={`/analista/documentacaoRecebedor/${pedidoId}`}>
+                    <Link to={`/analista/documentacaoAnalista/${pedidoId}`}>
                       <button className={styles.btn}>
                         <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
                         Visualizar
@@ -274,14 +467,18 @@ export const FormAnalista = ({ hasButton }) => {
                   <input
                     className={styles.aprovar}
                     type="checkbox"
-                    id="checkboxInfoRecebedorAprovado"
-                    {...register("checkboxInfoRecebedorAprovado")}
+                    id="checkboxInfoAnalistaAprovado"
+                    {...register("checkboxInfoAnalistaAprovado")}
+                    checked={checkboxInfoAnalistaAprovado}
+                    onClick={handleCheckboxIAAChange}
                   />
                   <input
                     className={styles.recusar}
                     type="checkbox"
-                    id="checkboxInfoRecebedorRecusado"
-                    {...register("checkboxInfoRecebedorReprovado")}
+                    id="checkboxInfoAnalistaRecusado"
+                    {...register("checkboxInfoAnalistaRecusado")}
+                    checked={checkboxInfoAnalistaReprovado}
+                    onClick={handleCheckboxIARChange}
                   />
                 </div>
               </div>
@@ -299,13 +496,11 @@ export const FormAnalista = ({ hasButton }) => {
                     value={revisao}
                     onChange={(event) => setRevisao(event.target.value)}
                   />
-                  {hasButton ? (
-                    <div className={styles.buttons}>
-                      <div className={styles.button}>
-                        <Button style={{ backgroundColor: "#FF8A00" }} value1="CONFIRMAR" type="submit" />
-                      </div>
+                  <div className={styles.buttons}>
+                    <div className={styles.button}>
+                      <Button style={{ backgroundColor: "#FF8A00" }} value1="ATUALIZAR" type="submit" onClick={handleAtualizar}/>
                     </div>
-                  ) : null}
+                  </div>
                 </div>
               </fieldset>
             </div>

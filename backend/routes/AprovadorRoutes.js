@@ -5,17 +5,18 @@ const AnalistaController = require('../controllers/AnalistaController') // funç
 const RecebedorController = require('../controllers/RecebedorController') // funções puxadas do Recebedor
 
 //Todas as rotas do usuario aprovador
-router.post('/home', AprovadorController.listarRelatorios)
+router.get('/home', AprovadorController.listarRelatorios)
 router.post('/relatorios', AprovadorController.criarRelatorioAprovacao)
+router.post('/relatorios/editar', AprovadorController.atualizarRelatorioAprovacao)
 router.post('/relatorios/:id', AprovadorController.encontrarRelatorioPorId)
-router.post('/relatorios/editar/:id', AprovadorController.atualizarRelatorioAprovacao)
+router.get('/relatorios/criterios/:id', AprovadorController.listarCriterios)
 
 //Todas as rotas de Aprovador com Função de Gerente (agregando função de Analista ao Aprovador)
 
 router.post('/GEAnalista/home', AnalistaController.listarRelatorios)
 router.post('/GEAnalista/relatorios', AnalistaController.criarRelatorioAnalista)
 router.post('/GEAnalista/relatorios/:id', AnalistaController.encontrarRelatorioAnalista)
-router.post('/GEAnalista/relatorios/editar/:id', AnalistaController.atualizarRelatorioAnalista)
+router.post('/GEAnalista/relatorios/editar/:id', AnalistaController.updateRelatorioAnalista)
 
 //Todas as rotas de Recebedor com Função de Gerente (agregando função de Recebedor ao Aprovador)
 

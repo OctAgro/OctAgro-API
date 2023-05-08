@@ -11,6 +11,12 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
         primaryKey: true
     },
 
+    status_aprovacao:{
+        type: Sequelize.STRING,
+        require: true,
+        defaultValue: 'Pendente'
+    },
+
     coloracao: {
         type: Sequelize.BOOLEAN,
         allowNull: false

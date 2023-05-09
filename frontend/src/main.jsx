@@ -66,11 +66,11 @@ const router = createBrowserRouter([
     element: <UsuariosAdmin />,
   },
   {
-    path: "admin/usuarios/cadastrousuarios",
+    path: "/admin/usuarios/cadastrousuarios",
     element: <CadastroUsuario />,
   },
   {
-    path: "admin/usuarios/atualizarusuarios",
+    path: "/admin/usuarios/atualizarusuarios",
     element: <AtualizarUsuario />,
   },
   {

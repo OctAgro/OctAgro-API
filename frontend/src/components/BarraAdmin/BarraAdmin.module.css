@@ -1,9 +1,10 @@
 .external {
   display: flex;
-  width: 93%;
+  width: 100%;
   justify-content: space-between;
-  margin: 1rem;
-  font-size: 1.5rem;
+  margin: auto;
+  padding: 0 1rem;
+  font-size: 1.2rem;
 }
 
 .leftSide {
@@ -37,6 +38,7 @@ input[type="search"] {
 }
 
 .searchBar {
+  border-radius: 15px;
   text-align: center;
   margin-left: 1rem;
   padding: 0.3rem;

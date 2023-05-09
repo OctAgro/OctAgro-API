@@ -3,39 +3,44 @@ const Produto = require('../models/Produto')
 module.exports = class ProdutoControllers {
     
     static async cadastrarProduto(req, res) {
-        const{nome_produto, quantidade_produto, unidade_medida, descricao, data_entrada_empresa, hora_entrada_empresa} = req.body
+        const data = req.body
 
-        if (!nome_produto) {
+        if (!data.nome_produto) {
             return res.json({message: "Por favor, adicione um nome ao produto cadastrado!", status: 500}).status(500)
         }
 
-        else if (!quantidade_produto) {
+        if (!data.tipo) {
+            return res.json({message: "Por favor, adicione um tipo", status: 500}).status(500)
+        }
+
+        else if (!data.quantidade_produto) {
             return res.json({message: "Por favor, digite a quantidade do produto!", status: 500}).status(500)
         }
 
-        else if (!unidade_medida) {
+        else if (!data.unidade_medida) {
             return res.json({message: "Por favor, digite a unidade de medida do produto!", status: 500}).status(500)
         }
 
-        else if (!descricao) {
+        else if (!data.descricao) {
             return res.json({message: "Por favor, dê uma descrição ao produto!", status: 500}).status(500)
         }
 
-        else if (!data_entrada_empresa) {
+        else if (!data.data_entrada_empresa) {
             return res.json({message: "Por favor, adicione uma data de entrega da empresa", status: 500}).status(500)
         }
 
-        else if(!hora_entrada_empresa) {
+        else if(!data.hora_entrada_empresa) {
             return res.json({message: "Por favor, adicione um horário para entrega do Produto", status: 500}).status(500)
         }
 
         const produto = {
-            nome_produto, 
-            quantidade_produto, 
-            unidade_medida, 
-            descricao, 
-            data_entrada_empresa, 
-            hora_entrada_empresa
+            nome_produto: data.nome_produto,
+            tipo: data.tipo, 
+            quantidade_produto: data.quantidade_produto, 
+            unidade_medida: data.unidade_medida, 
+            descricao: data.descricao, 
+            data_entrada_empresa: data.data_entrada_empresa, 
+            hora_entrada_empresa: data.hora_entrada_empresa
         }
 
         try {
@@ -61,47 +66,53 @@ module.exports = class ProdutoControllers {
     }
 
     static async atualizarProduto(req, res) {
-        const oId_produto = req.params.id_produto
+        const oId_produto = req.params.id
 
-        const{nome_produto, quantidade_produto, unidade_medida, descricao, data_entrada_empresa, hora_entrada_empresa} = req.body
+        const data = req.body
 
-        if (!nome_produto) {
-            return res.json({message: "O campo 'nome do produto' não pode estar vazio", status: 500}).status(500)
+        if (!data.nome_produto) {
+            return res.json({message: "Por favor, adicione um nome ao produto cadastrado!", status: 500}).status(500)
         }
 
-        else if (!quantidade_produto) {
-            return res.json({message: "O campo 'quantidade do produto' não pode estar vazio", status: 500}).status(500)
+        if (!data.tipo) {
+            return res.json({message: "Por favor, adicione um tipo", status: 500}).status(500)
         }
 
-        else if (!unidade_medida) {
-            return res.json({message: "O campo 'unidade de medida' não pode estar vazio", status: 500}).status(500)
+        else if (!data.quantidade_produto) {
+            return res.json({message: "Por favor, digite a quantidade do produto!", status: 500}).status(500)
         }
 
-        else if (!descricao) {
-            return res.json({message: "O campo 'descrição' não pode estar vazio", status: 500}).status(500)
+        else if (!data.unidade_medida) {
+            return res.json({message: "Por favor, digite a unidade de medida do produto!", status: 500}).status(500)
         }
 
-        else if (!data_entrada_empresa) {
-            return res.json({message: "O campo 'data de entrega da empresa' não pode estar vazio", status: 500}).status(500)
+        else if (!data.descricao) {
+            return res.json({message: "Por favor, dê uma descrição ao produto!", status: 500}).status(500)
         }
 
-        else if(!hora_entrada_empresa) {
-            return res.json({message: "O campo 'hora de entrega da empresa' não pode estar vazio", status: 500}).status(500)
+        else if (!data.data_entrada_empresa) {
+            return res.json({message: "Por favor, adicione uma data de entrega da empresa", status: 500}).status(500)
+        }
+
+        else if(!data.hora_entrada_empresa) {
+            return res.json({message: "Por favor, adicione um horário para entrega do Produto", status: 500}).status(500)
         }
 
         try {
-            await Produto.update({            
-                nome_produto: req.body.nome_produto, 
-                quantidade_produto: req.body.quantidade_produto, 
-                unidade_medida: req.body.unidade_medida, 
-                descricao: req.body.descricao, 
-                data_entrada_empresa: req.body.data_entrada_empresa, 
-                hora_entrada_empresa: req.body.hora_entrada_empresa
+            const atualizarProduto = await Produto.update({            
+                nome_produto: data.nome_produto,
+                tipo: data.tipo, 
+                quantidade_produto: data.quantidade_produto, 
+                unidade_medida: data.unidade_medida, 
+                descricao: data.descricao, 
+                data_entrada_empresa: data.data_entrada_empresa, 
+                hora_entrada_empresa: data.hora_entrada_empresa
                 },{
                 where: {
                     id_produto: oId_produto
                 }
             })
+            console.log(atualizarProduto)
             return res.json({message: "Produto atualizado com sucesso!", status: 201}).status(201)
         } catch (error) {
             return res.json(error).status(500)
@@ -118,13 +129,14 @@ module.exports = class ProdutoControllers {
     }
 
     static async procurarProduto(req, res) {
-        const oId_produto = req.params.id_produto
+        const oId_produto = req.params.id
+        const produtoProcurado = await Produto.findByPk(oId_produto)
 
-        try {
-            const produto = await Produto.findByPk(oId_produto)
-            return res.json(produto).status(201)
-        } catch (error) {
-            return res.json(error).status(500)
+        if (!produtoProcurado) {
+            res.status(422).json({message: "Produto não encontrado"})
         }
+
+        res.status(200).json({message: produtoProcurado})
+        
     }
 }

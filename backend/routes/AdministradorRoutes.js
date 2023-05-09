@@ -27,6 +27,6 @@ router.get('/produtos/home',ProdutoController.listarProduto) // Listar Produtos
 router.post('/produtos/cadastrar',ProdutoController.cadastrarProduto) // Cadastrar Produto
 router.post('/produtos/atualizar/:id',ProdutoController.atualizarProduto) // Atualizar Produto
 router.post('/produtos/deletar/:id',ProdutoController.deletarProduto) // Deletar Produto
-
+router.post('/produtos/procurar/:id',ProdutoController.procurarProduto) // Achar um Produto Produto
 
 module.exports = router

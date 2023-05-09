@@ -15,6 +15,12 @@ const Produto = db.define('produto', {
         allowNull: false
     },
 
+    tipo: {
+        type: Sequelize.STRING,
+        require: true,
+        allowNull: false
+    },
+
     quantidade_produto: {
         type:Sequelize.FLOAT,
         require: true,
@@ -56,6 +62,7 @@ contar().then(function(valor) {
 
         Produto.create({
             nome_produto: 'Milho',
+            tipo: "Grão",
             quantidade_produto: 100,
             unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-18',
@@ -65,6 +72,7 @@ contar().then(function(valor) {
 
         Produto.create({
             nome_produto: 'Soja',
+            tipo: "Cumulus",
             quantidade_produto: 70,
             unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-17',
@@ -74,6 +82,7 @@ contar().then(function(valor) {
 
         Produto.create({
             nome_produto: 'Trigo',
+            tipo: "DOR ou DOD",
             quantidade_produto: 50,
             unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-16',
@@ -84,6 +93,7 @@ contar().then(function(valor) {
         Produto.create({
             nome_produto: 'Arroz',
             quantidade_produto: 30,
+            tipo: "Japones",
             unidade_medida: 'kg',
             data_entrada_empresa: '2023-04-15',
             hora_entrada_empresa: '09:10:00',

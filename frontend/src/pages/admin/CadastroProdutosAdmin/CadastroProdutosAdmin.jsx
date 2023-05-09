@@ -39,33 +39,33 @@ export const CadastroProdutosAdmin = () => {
         </div>
 
         <div id={styles["barraPesquisa"]}>
-            <BarraAdmin linkVoltar="/admin/produtos" linkCadastrar="/admin/produtos/cadastrar">
-              <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
-            </BarraAdmin>
-            {/* AO CONSTRUIR O FORMULARIO, COMENTAR A DIV ABAIXO, ESTOU USANDO ESTE BOTÃO PARA APLICAR OS MODALS */}
-            <div>
-              <FormCadastroProduto onClick={handleOpenModalProdutoCadastrado} />
+          <BarraAdmin linkVoltar="/admin/produtos" linkCadastrar="/admin/produtos/cadastrar">
+            <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
+          </BarraAdmin>
+          {/* AO CONSTRUIR O FORMULARIO, COMENTAR A DIV ABAIXO, ESTOU USANDO ESTE BOTÃO PARA APLICAR OS MODALS */}
 
-              {/* MODAL CADASTRAR */}
-              <Modal isOpen={openModalProdutoCadastrado} onClick={handleCloseModalProdutoCadastrado}>
-                <div className={styles.conteudoModal}>
-                  <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                  <p>Produto cadastrado com sucesso!</p>
-                  <input
-                    className={styles.botaoConfirmarModal}
-                    type="button"
-                    value="OK"
-                    onClick={handleCloseModalProdutoCadastrado}
-                  />
-                </div>
-              </Modal>
-            </div>
-          </div>
+        </div>
 
         <div id={styles["body"]}>
-        {/* Veja a possibilidade de colocar o formulario dentro desse body */}
+
+          <FormCadastroProduto onClick={handleOpenModalProdutoCadastrado} />
+
+          {/* MODAL CADASTRAR */}
+          <Modal isOpen={openModalProdutoCadastrado} onClick={handleCloseModalProdutoCadastrado}>
+            <div className={styles.conteudoModal}>
+              <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+              <p>Produto cadastrado com sucesso!</p>
+              <input
+                className={styles.botaoConfirmarModal}
+                type="button"
+                value="OK"
+                onClick={handleCloseModalProdutoCadastrado}
+              />
+            </div>
+          </Modal>
+
         </div>
-      </div>    
+      </div>
     </PedidosProvider>
   )
 }

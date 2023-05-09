@@ -3,33 +3,104 @@ const Fornecedor = require('../models/Fornecedor')
 module.exports = class FornecedorControllers {
 
     static async cadastrarFornecedor(req, res) {
-        const{nome_fornecedor, nome_motorista, placa_veiculo, documentos_anexos} = req.body
+        const data = req.body
         
-        if (!nome_fornecedor) {
+        if (!data.CNPJ) {
+            return res.json({message: "Por favor, digite o CNPJ!"})
+        }
+
+        if (!data.IE) {
+            return  res.json({message: "Por favor, digite o IE"})
+        }
+
+        if (!data.razao_social) {
+            return res.json ({message: "Por favor, digite a Razao Social"})
+        }
+
+        if (!data.responsavel) {
+            return res.json ({message: "Por favor, digite um responsavel!"})
+        }
+
+        if (!data.telefone) {
+            return res.json ({message: "Por favor, digite um telefone"})
+        }
+
+        if (!data.tel_celular) {
+            return res.json({message: "Por favor, digite o numero de celular!"})
+        }
+
+        if (!data.e_mail1) {
+            return res.json({message: "Por favor, entre com um e-mail"})
+        }
+
+        if (!data.cep) {
+            return res.json ({message: "Por favor, entre com o numero do CEP"})
+        }
+
+        if (!data.estado) {
+            return res.json ({message: "Por favor, entre o seu estado "})
+        }
+
+        if (!data.cidade) {
+            return res.json ({message: "Por favor, entre com a cidade"})
+        }
+
+        if (!data.bairro) {
+            return res.json ({message: "Por favor, entre com o bairro!"})
+        }
+
+        if (!data.endereco) {
+            return  res.json ({message: "Por favor, entre com o endereço"})
+        }
+
+        if (!data.numero) {
+            return res.json ({message: "Por favor entre com o numero do local"})
+        }
+
+        if (!data.nome_fornecedor) {
             return res.json({message: "Por favor, digite o nome do fornecedor!"})
         }
 
-        else if (!nome_motorista) {
+        if (!data.nome_motorista) {
             return res.json({message: "Por favor, digite o nome do motorista!"})
         }
 
-        else if (!placa_veiculo) {
+        if (!data.placa_veiculo) {
             return res.json({message: "Por favor, digite a placa do veiculo!"})
         }
 
-        else if (!documentos_anexos) {
+        if (!data.documentos_anexos) {
             return res.json({message: "Por favor, anexe um documento!"})
         }
 
-        const fornecedor = {
-            nome_fornecedor,
-            nome_motorista,
-            placa_veiculo,
-            documentos_anexos
-        }
+        const fornecedor =  new Fornecedor({
+            CNPJ: data.CNPJ,
+            IE: data.IE,
+            razao_social: data.razao_social,
+            responsavel: data.responsavel,
+            telefone: data.telefone,
+            tel_celular: data.tel_celular,
+            e_mail1: data.e_mail1,
+            e_mail2: data.e_mail2,
+            cep: data.cep,
+            estado: data.estado,
+            cidade: data.cidade,
+            bairro: data.bairro,
+            endereco: data.endereco,
+            numero: data.numero,
+            complemento: data.complemento,
+            comentario: data.comentario,
+            nome_fornecedor: data.nome_fornecedor,
+            nome_motorista: data.nome_motorista,
+            placa_veiculo: data.placa_veiculo,
+            documentos_anexos: data.documentos_anexos,
+            status_fornecedor: data.status_fornecedor
+
+        })
 
         try {
-            await Fornecedor.create(fornecedor)
+            
+            const novoFornecedor = await fornecedor.save()
             res.json({message: "Fornecedor cadastrado com sucesso!", status: 201}).status(201)
         } catch (error) {
             return res.json(error).status(500)
@@ -37,52 +108,126 @@ module.exports = class FornecedorControllers {
     }
 
     static async deletarFornecedor(req, res) {
-        const oId_fornecedor = req.params.id_fornecedor
+        const oId_fornecedor = req.params.id;
         try {
-            await Fornecedor.destroy({
-                where: {
-                    id_fornecedor: oId_fornecedor
-                }
-            })
+            const fornecedorAtualizado = await Fornecedor.destroy({
+                where: { id_fornecedor: oId_fornecedor}
+            });
+            if (fornecedorAtualizado != undefined) {
+                res.status(422).json({message: "Fornecedor Excluido com sucesso!"})
+            } else {
+                res.status(200).json({message: "Fornecedor não excluido !"})
+            }
         } catch (error) {
-            return res.json(error).status(500)
+            console.log(erro)
+            res.json({message: error}).status(500)
         }
     }
 
     static async atualizarFornecedor(req, res) {
-        const oId_fornecedor = req.params.id_fornecedor
+        const idForncedor = req.params.id
+        const data = req.body
 
-        const{nome_fornecedor, nome_motorista, placa_veiculo, documentos_anexos} = req.body
-        
-        if (!nome_fornecedor) {
-            return res.json({message: "O nome do fornecedor não pode estar vazio!"})
+
+        if (!data.CNPJ) {
+            return res.json({message: "Por favor, digite o CNPJ!"})
         }
 
-        else if (!nome_motorista) {
-            return res.json({message: "O nome do motorista não pode estar vazio!"})
+        if (!data.IE) {
+            return  res.json({message: "Por favor, digite o IE"})
         }
 
-        else if (!placa_veiculo) {
-            return res.json({message: "A placa do veiculo não pode estar vazio!"})
+        if (!data.razao_social) {
+            return res.json ({message: "Por favor, digite a Razao Social"})
         }
 
-        else if (!documentos_anexos) {
-            return res.json({message: "Anexe um documento, ele não pode estar vazio!"})
+        if (!data.responsavel) {
+            return res.json ({message: "Por favor, digite um responsavel!"})
+        }
+
+        if (!data.telefone) {
+            return res.json ({message: "Por favor, digite um telefone"})
+        }
+
+        if (!data.tel_celular) {
+            return res.json({message: "Por favor, digite o numero de celular!"})
+        }
+
+        if (!data.e_mail1) {
+            return res.json({message: "Por favor, entre com um e-mail"})
+        }
+
+        if (!data.cep) {
+            return res.json ({message: "Por favor, entre com o numero do CEP"})
+        }
+
+        if (!data.estado) {
+            return res.json ({message: "Por favor, entre o seu estado "})
+        }
+
+        if (!data.cidade) {
+            return res.json ({message: "Por favor, entre com a cidade"})
+        }
+
+        if (!data.bairro) {
+            return res.json ({message: "Por favor, entre com o bairro!"})
+        }
+
+        if (!data.endereco) {
+            return  res.json ({message: "Por favor, entre com o endereço"})
+        }
+
+        if (!data.numero) {
+            return res.json ({message: "Por favor entre com o numero do local"})
+        }
+
+        if (!data.nome_fornecedor) {
+            return res.json({message: "Por favor, digite o nome do fornecedor!"})
+        }
+
+        if (!data.nome_motorista) {
+            return res.json({message: "Por favor, digite o nome do motorista!"})
+        }
+
+        if (!data.placa_veiculo) {
+            return res.json({message: "Por favor, digite a placa do veiculo!"})
+        }
+
+        if (!data.documentos_anexos) {
+            return res.json({message: "Por favor, anexe um documento!"})
         }
 
         try {
             await Fornecedor.update({
-                nome_fornecedor: req.body.nome_fornecedor,
-                nome_motorista: req.body.nome_motorista,
-                placa_veiculo: req.body.placa_veiculo,
-                documentos_anexos: req.body.documentos_anexos
+            CNPJ: data.CNPJ,
+            IE: data.IE,
+            razao_social: data.razao_social,
+            responsavel: data.responsavel,
+            telefone: data.telefone,
+            tel_celular: data.tel_celular,
+            e_mail1: data.e_mail1,
+            e_mail2: data.e_mail2,
+            cep: data.cep,
+            estado: data.estado,
+            cidade: data.cidade,
+            bairro: data.bairro,
+            endereco: data.endereco,
+            numero: data.numero,
+            complemento: data.complemento,
+            comentario: data.comentario,
+            nome_fornecedor: data.nome_fornecedor,
+            nome_motorista: data.nome_motorista,
+            placa_veiculo: data.placa_veiculo,
+            documentos_anexos: data.documentos_anexos,
+            status_fornecedor: data.status_fornecedor
             }, { 
                 where: {
-                    id_fornecedor: oId_fornecedor
+                    id_fornecedor: idForncedor
                 }
             })
+            res.status(200).json({message: 'Fornecedor atualizado com sucesso!'})
         } catch (error) {
-            return res.json(error).status(500)
+            return res.json("deu erro").status(500)
         }
     }
 
@@ -96,13 +241,13 @@ module.exports = class FornecedorControllers {
     }
 
     static async procurarFornecedor(req, res) {
-        const oId_fornecedor = req.params.id_fornecedor
-
-        try {
-            const oFornecedor = await Fornecedor.findByPk(oId_fornecedor)
-            return res.json(oFornecedor).status(200)
-        } catch (error) {
-            
+        const idFornecedor = req.params.id
+        const fornecedorProcurado = await Fornecedor.findByPk(idFornecedor)
+        if (!fornecedorProcurado) {
+            res.status(422).json({message: "Fornecedor não encontrado"})
         }
+
+        res.status(200).json({message: fornecedorProcurado})
+        
     }
 }

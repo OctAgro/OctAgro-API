@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const { Sequelize } = require('sequelize')
 
 const sequelize = new Sequelize({
@@ -5,9 +8,8 @@ const sequelize = new Sequelize({
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'Topsp808!@',
+    password: 'fatec',
     database: 'octagro',
-    logging: false,
     define: {
         timestamps: true,
         freezeTableName: true

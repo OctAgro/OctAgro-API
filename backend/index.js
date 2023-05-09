@@ -8,8 +8,8 @@ const cors = require('cors')
 const app = express()
 
 //Chamando Inputs do Banco de Dados
-const RelatorioAprovadores = require('./models/RelatorioAprovador')
 const Fornecedores = require('./models/Fornecedor')
+const RelatorioAprovadores = require('./models/RelatorioAprovador')
 const Produto = require('./models/Produto')
 const CriteriosAvaliacao = require('./models/CriteriosAvaliacao')
 const Usuario = require('./models/Usuario')
@@ -21,6 +21,9 @@ const AprovadorRotas = require('./routes/AprovadorRoutes')
 const UsuarioRotas = require('./routes/UsuarioRoutes')
 const RecebedorRotas = require('./routes/RecebedorRoutes')
 const PedidoRotas = require('./routes/PedidoRoutes')
+const ProdutoRotas = require('./routes/ProdutoRoutes')
+const FornecedorRotas = require('./routes/FornecedorRoutes')
+const AdministradorRotas = require('./routes/AdministradorRoutes')
 
 //Body Parse
 app.use(bodyParser.urlencoded({extended: true}))
@@ -35,6 +38,9 @@ app.use('/aprovador', AprovadorRotas)
 app.use('/usuario', UsuarioRotas)
 app.use('/recebedor', RecebedorRotas)
 app.use('/pedido', PedidoRotas)
+app.use('/produto', ProdutoRotas)
+app.use('/fornecedor', FornecedorRotas)
+app.use('/administrador',AdministradorRotas)
 
 //Mensagens com flash
 app.use(flash())

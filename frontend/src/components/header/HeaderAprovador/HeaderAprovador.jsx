@@ -17,10 +17,10 @@ export const HeaderAprovador = (props) => {
 
   console.log(dadosAnalista)
 
-  const numeroRelatorios = dadosAnalista[1]
+  const numeroRelatorios = 1
 
   // Falta essa lógica no backEnd ainda, por enquanto pegando o numero de relatórios geral.
-  const numeroRelatoriosTotal = dadosAnalista[1]
+  const numeroRelatoriosTotal = 1
 
   return (
     <div className={styles.external}>

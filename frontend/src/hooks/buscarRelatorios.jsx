@@ -9,6 +9,16 @@ export async function buscarRelatorios(){
     }
 }
 
+export async function buscarRelatoriosRecebedor() {
+    try{
+        const relatoriosRecebedor = await api.get('/recebedor/home') 
+        console.log(relatoriosRecebedor)
+        return relatoriosRecebedor
+    }catch (erro) {
+        console.log(erro)
+    }
+}
+
 export async function buscarRelatoriosAnalista() {
     try {
         const relatoriosAnalista = await api.get('/analista/home') 
@@ -19,11 +29,11 @@ export async function buscarRelatoriosAnalista() {
     }
 }
 
-export async function buscarRelatoriosRecebedor() {
+export async function buscarRelatoriosAprovador() {
     try{
-        const relatoriosRecebedor = await api.get('/recebedor/home') 
-        console.log(relatoriosRecebedor)
-        return relatoriosRecebedor
+        const relatoriosAprovador = await api.get('/aprovador/home') 
+        console.log(relatoriosAprovador)
+        return relatoriosAprovador
     }catch (erro) {
         console.log(erro)
     }

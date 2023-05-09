@@ -48,7 +48,7 @@ const Usuario = db.define('usuario', {
 //adicionei---------------------------------------------------
 async function contar(){
     const usuarios = await Usuario.count(Usuario.id_usuario)
-    return usuarios;
+    return usuarios
 }
 contar().then(function(valor) {
     console.log('Quantidade', valor);
@@ -167,6 +167,20 @@ contar().then(function(valor) {
             dataNascimento: '10-03-1998',
             genero: 'M',
             foto: 'igor.png'
+    
+        })
+
+        Usuario.create({
+            nome: 'Gabriela',
+            senha: hashedSenha,
+            email: 'gabriela@live.com',
+            funcao: 'Administrador',
+            dataAdmissao: '10-01-2010',
+            CPF: '12345',
+            RG: '54321',
+            dataNascimento: '01-01-2002',
+            genero: 'F',
+            foto: 'gabriela.png'
     
         })
     }

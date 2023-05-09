@@ -81,7 +81,6 @@ module.exports = class PedidoController {
                         as: "fornecedor",
                     },
                   ],});
-            console.log(pedidos)
             res.status(200).json(pedidos)
          } catch(erro) {
             res.status(500).json({mensagem: erro})
@@ -103,8 +102,6 @@ module.exports = class PedidoController {
                     as: "fornecedor",
                 },
                 ],});
-
-           console.log(pedidos)
 
            if (!pedidos) {
             return res.status(404).json({ mensagem: 'Pedido não encontrado' });

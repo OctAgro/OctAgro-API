@@ -248,7 +248,7 @@ export const FormAnalista = ({ hasButton }) => {
                       className={styles.recusar}
                       type="checkbox"
                       id="checkboxDocumentacaoProdutoRecusado"
-                      {...register("checkboxDocumentacaoProdutoRecusado")}
+                      {...register("checkboxDocumentacaoProdutoReprovado")}
                     />
                   </div>
                 </div>
@@ -281,7 +281,7 @@ export const FormAnalista = ({ hasButton }) => {
                     className={styles.recusar}
                     type="checkbox"
                     id="checkboxInfoRecebedorRecusado"
-                    {...register("checkboxInfoRecebedorRecusado")}
+                    {...register("checkboxInfoRecebedorReprovado")}
                   />
                 </div>
               </div>

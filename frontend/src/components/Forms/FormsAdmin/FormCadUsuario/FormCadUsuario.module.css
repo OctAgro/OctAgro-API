@@ -1,0 +1,215 @@
+#container {
+  background-color: #e7e0d1;
+  border-radius: 10px;
+  font-family: "Gotham Black";
+  font-size: 1rem;
+  margin: 2%;
+  padding: 1%;
+  filter: drop-shadow(2px 2px 2px #000);
+}
+
+#container div {
+  padding: 0.2rem 0;
+  align-items: center;
+}
+
+#header {
+  display: grid;
+  grid-template-columns: 10% 50% 15% auto;
+}
+
+
+#imgUser,
+#cadUser {
+  grid-row-start: 1;
+  grid-row-end: 4;
+  font-size: 7rem;
+  margin: auto;
+}
+
+#cadUser {
+  font-size: 2rem;
+}
+
+#body {
+  display: grid;
+  grid-template-columns: 10% 24% 8% 24% 10% 24%;
+}
+
+#nome,
+#input-nome {
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+#input-nome {
+  grid-column-start: 2;
+  grid-column-end: 7;
+}
+
+#cpf,
+#rg,
+#dnasc,
+#input-cpf,
+#input-rg,
+#input-dnasc {
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#input-cpf {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#input-rg {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+#input-dnasc {
+  grid-column-start: 6;
+  grid-column-end: 7;
+}
+
+#genero,
+#tel,
+#cel,
+#input-genero,
+#input-tel,
+#input-cel {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+#input-genero {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#input-tel {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+#input-cel {
+  grid-column-start: 6;
+  grid-column-end: 7;
+}
+
+#email,
+#cep,
+#input-email,
+#input-cep {
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+#input-email {
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+#input-cep {
+  grid-column-start: 6;
+  grid-column-end: 7;
+}
+
+#endereco,
+#input-endereco {
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+
+#input-endereco {
+  grid-column-start: 2;
+  grid-column-end: 7;
+}
+
+#num,
+#comp,
+#bairro,
+#input-num,
+#input-comp,
+#input-bairro {
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+
+#input-num {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#input-comp {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+#input-bairro {
+  grid-column-start: 6;
+  grid-column-end: 7;
+}
+
+#cidade,
+#estado,
+#input-cidade,
+#input-estado {
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+
+#input-cidade {
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+#input-estado {
+  grid-column-start: 6;
+  grid-column-end: 7;
+}
+
+/* INPUTS */
+
+.fullSizeInput {
+  background-color: #D9D9D9;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  text-align: left;
+  width: 100%;
+  padding-left: 1%;
+}
+
+#rg,
+#dnasc,
+#tel,
+#cel,
+#cep,
+#comp,
+#bairro,
+#estado
+{
+  margin-left: 10%;
+}
+
+#botaoCadastrar {
+  grid-row-start: 9;
+  grid-row-end: 10;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  margin: auto;
+}
+
+.botaoConfirmarModal {
+  cursor: pointer;
+  background-color: #4c4b16;
+  color: white;
+  font-family: "Gotham Black";
+  padding: 0.7rem 2rem;
+  font-size: 1rem;
+  border: solid 2px black;
+  border-radius: 7px;
+  margin: 1rem auto;
+  filter: drop-shadow(2px 2px 2px #000);
+}
+

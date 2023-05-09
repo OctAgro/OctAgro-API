@@ -1,0 +1,54 @@
+.external {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: auto;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+}
+
+.leftSide {
+  width: 50%;
+  float: left;
+}
+
+.arrowIcon {
+    font-size: 2rem;
+}
+
+.rightSide {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+input[type="search"] {
+  -webkit-appearance: none; /* remove a aparência padrão do WebKit */
+  -moz-appearance: none; /* remove a aparência padrão do Firefox */
+  appearance: none; /* remove a aparência padrão de outros navegadores */
+  border: none; /* remove a borda padrão */
+  outline: none; /* remove a outline (contorno) ao receber foco */
+  padding: 0; /* remove o padding interno */
+  background-color: transparent; /* define o fundo como transparente */
+  /* adicione aqui as propriedades de estilo personalizadas */
+  text-align: center;
+  font-family: "Gotham Book";
+  font-size: 1rem;
+  border-bottom: 1px solid black;
+}
+
+.searchBar {
+  border-radius: 15px;
+  text-align: center;
+  margin-left: 1rem;
+  padding: 0.3rem;
+  background-color: #e7e0d1;
+  filter: drop-shadow(2px 2px 2px #000);
+}
+
+.childrenButton {
+    padding: 0.3rem 0.5rem;
+    background-color: #e7e0d1;
+    border-radius: 100px;
+    filter: drop-shadow(2px 2px 2px #000);
+}

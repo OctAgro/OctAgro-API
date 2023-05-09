@@ -2,22 +2,25 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-
 import "./index.css"
 
 import CheckboxBibioteca from "./components/CheckboxBiblioteca/CheckboxBiblioteca"
 
 import { Login } from "./pages/Login"
 
-import { UserProvider } from "./context/usuarioContext";
+import { UserProvider } from "./context/usuarioContext"
 
 //ADMIN
 import { HomeAdmin } from "./pages/admin/HomeAdmin/HomeAdmin"
 import { UsuariosAdmin } from "./pages/admin/UsuariosAdmin/UsuariosAdmin"
+import { CadastroUsuario } from "./pages/admin/CadastroUsuario/CadastroUsuario"
+import { AtualizarUsuario } from "./pages/admin/AtualizarUsuario/AtualizarUsuario"
 import { FornecedoresAdmin } from "./pages/admin/FornecedoresAdmin/FornecedoresAdmin"
 import { ProdutosAdmin } from "./pages/admin/ProdutosAdmin/ProdutosAdmin"
+import { CadastroProdutosAdmin } from "./pages/admin/CadastroProdutosAdmin/CadastroProdutosAdmin"
 import { RelatoriosAdmin } from "./pages/admin/RelatoriosAdmin/RelatoriosAdmin"
-
+import { CadastroFornecedoresAdmin } from "./pages/admin/CadastroFornecedoresAdmin/CadastroFornecedoresAdmin"
+import { AtualizarProdutosAdmin } from "./pages/admin/AtualizarProdutosAdmin/AtualizarProdutosAdmin"
 
 // RECEBEDOR
 /* import  PathRecebedor from "./components/Paths/PathRecebedor"  */
@@ -34,19 +37,23 @@ import { MercadoriaAnalista } from "./pages/analista/MercadoriaAnalista/Mercador
 import { FormularioAnalista } from "./pages/analista/FormularioAnalista/FormularioAnalista"
 import { DocumentacaoAnalista } from "./pages/analista/DocumentacaoAnalista/DocumentacaoAnalista"
 import { DocumentacaoAnalistaRecebedor } from "./pages/analista/DocumentacaoAnalistaRecebedor/DocumentacaoAnalistaRecebedor"
+import { MercadoriaAnalistaConcluido } from "./pages/analista/MercadoriaAnalistaConcluido/MercadoriaAnalistaConcluido"
+import { FormularioAnalistaUpdate } from "./pages/analista/FormularioAnalistaUpdate/FormularioAnalistaUpdate"
 
 // APROVADOR
 import { HomeAprovador } from "./pages/aprovador/HomeAprovador/HomeAprovador"
 import { RelatorioAprovador } from "./pages/aprovador/RelatorioAprovador/RelatorioAprovador"
 import { FormularioAprovador } from "./pages/aprovador/FormularioAprovador/FormularioAprovador"
 import { DocumentacaoAprovador } from "./pages/aprovador/DocumentacaoAprovador/DocumentacaoAprovador"
+import { MercadoriaAprovador } from "./pages/aprovador/MercadoriaAprovador/MercadoriaAprovador"
+import { FormularioAprovadorUpdate } from "./pages/aprovador/FormularioAprovadorUpdate/FormularioAprovadorUpdate"
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
   },
-
 
   //ADMIN
 
@@ -59,12 +66,32 @@ const router = createBrowserRouter([
     element: <UsuariosAdmin />,
   },
   {
+    path: "/admin/usuarios/cadastrousuarios",
+    element: <CadastroUsuario />,
+  },
+  {
+    path: "/admin/usuarios/atualizarusuarios",
+    element: <AtualizarUsuario />,
+  },
+  {
     path: "/admin/fornecedores",
     element: <FornecedoresAdmin />,
   },
   {
+    path: "/admin/fornecedores/cadastrar",
+    element: <CadastroFornecedoresAdmin />,
+  },
+  {
     path: "/admin/produtos",
     element: <ProdutosAdmin />,
+  },
+  {
+    path: "/admin/produtos/cadastrar",
+    element: <CadastroProdutosAdmin />,
+  },
+  {
+    path: "/admin/produtos/atualizar/:id",
+    element: <AtualizarProdutosAdmin />,
   },
   {
     path: "/admin/relatorios",
@@ -72,7 +99,7 @@ const router = createBrowserRouter([
   },
 
   //RECEBEDOR
- /*  {
+  /*  {
     element: < PathRecebedor />,
   }, */
   {
@@ -117,16 +144,32 @@ const router = createBrowserRouter([
     path: "/analista/documentacaoRecebedor/:id",
     element: <DocumentacaoAnalistaRecebedor recebedor="True" />,
   },
+  {
+    path: "/analista/mercadoriascadastradas",
+    element: <MercadoriaAnalistaConcluido />,
+  },
+  {
+    path: "/analista/mercadoriascadastradas/:id",
+    element: <FormularioAnalistaUpdate />,
+  },
  
 
   //APROVADOR
-  {    
+  {
     path: "/aprovador/home",
     element: <HomeAprovador />,
   },
   {
     path: "/aprovador/relatorio",
     element: <RelatorioAprovador />,
+  },
+  {
+    path: "/aprovador/mercadoriascadastradas",
+    element: <MercadoriaAprovador />,
+  },
+  {
+    path: "/aprovador/mercadoriascadastradas/:id",
+    element: <FormularioAprovadorUpdate />,
   },
   {
     path: "/aprovador/relatorio/:id",

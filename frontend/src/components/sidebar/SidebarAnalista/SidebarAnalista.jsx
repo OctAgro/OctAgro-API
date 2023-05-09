@@ -4,7 +4,7 @@ import sidebarOctagro from "../../../assets/sidebarOctagro.png"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faRightToBracket, faListCheck } from "@fortawesome/free-solid-svg-icons"
+import { faBox, faRightToBracket, faListCheck } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./SidebarAnalista.module.css"
 
@@ -23,9 +23,14 @@ export const SidebarAnalista = () => {
       </Link>
       <ul className={styles.topItems}>
         <li className={styles.actionItems}>
-          <FontAwesomeIcon className={styles.icon} icon={faListCheck} />
-
+          <FontAwesomeIcon className={styles.icon} icon={faBox} />
           <Link to="/analista/mercadoria" className={styles.relatorio}>
+            Análise de <br /> Mercadorias
+          </Link>
+        </li>
+        <li className={styles.actionItems}>
+          <FontAwesomeIcon icon={faListCheck} className={styles.icon} />
+          <Link to="/analista/mercadoriascadastradas" className={styles.relatorio}>
             Mercadorias <br /> Cadastradas
           </Link>
         </li>

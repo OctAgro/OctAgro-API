@@ -48,7 +48,7 @@ const Usuario = db.define('usuario', {
 //adicionei---------------------------------------------------
 async function contar(){
     const usuarios = await Usuario.count(Usuario.id_usuario)
-    return usuarios;
+    return usuarios
 }
 contar().then(function(valor) {
     console.log('Quantidade', valor);

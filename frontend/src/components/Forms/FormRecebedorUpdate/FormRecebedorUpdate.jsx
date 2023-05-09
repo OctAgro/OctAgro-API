@@ -185,7 +185,6 @@ export const FormRecebedorUpdate = () => {
       idPedido: pedidos.id_pedido,
       checkboxColoracaoAprovado,
       checkboxColoracaoReprovado,
-      checkboxAusenciaAnimaisReprovado,
       checkboxOdorAprovado,
       checkboxOdorReprovado,
       checkboxAusenciaAnimaisAprovado,
@@ -203,7 +202,7 @@ export const FormRecebedorUpdate = () => {
     try {
       const resposta = await axios.post(`http://localhost:3000/recebedor/relatorios/editar`, data)
       //esse console.log retorna respostas json do backend de erros de validacao
-      console.log("enviou? ", resposta.data.message)
+      console.log("enviou? ", resposta)
       setMensagemErro(resposta.data.message)
     } catch (erro) {
       //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors

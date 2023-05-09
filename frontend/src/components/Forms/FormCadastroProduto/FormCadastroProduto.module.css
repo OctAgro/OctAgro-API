@@ -23,8 +23,8 @@
 }
 
 .external {
-  width: 60%;
-  margin: 0 auto;
+  width: 65%;
+  margin: 1rem auto 0;
   background-color: #e7e0d1;
   border-radius: 15px;
   box-shadow: 1px 1px 10px 1px #000000;

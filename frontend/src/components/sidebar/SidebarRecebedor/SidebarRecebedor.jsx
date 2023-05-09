@@ -25,7 +25,7 @@ export const SidebarRecebedor = () => {
         <li className={styles.actionItems}>
           <FontAwesomeIcon icon={faBox} className={styles.icon} />
           <Link to="/recebedor/entradamercadoria" className={styles.relatorio}>
-            Recebimento de <br /> Mercadoria
+            Recebimentos de <br /> Mercadoria
           </Link>
         </li>
         <li className={styles.actionItems}>

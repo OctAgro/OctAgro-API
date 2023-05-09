@@ -47,11 +47,11 @@ module.exports = class RelatorioController {
 
         try {
             const novoRelatorioRecebedor = await relatorioRecebedor.save()
-            const atualizacao = await Pedido.update(
+            const atualizacaoStatus = await Pedido.update(
                 { status_aprovacao: 'Concluído' },
                 { where: { id_pedido: data.idPedido }, returning: true }
             );
-            res.status(201).json({ mensagem: 'Relatório aprovado com sucesso!' })
+            res.status(201).json({ mensagem: 'Relatório aprovado com sucesso!' }, )
         } catch (erro) {
             console.log(erro)
             res.status(500).json(erro)
@@ -123,13 +123,6 @@ module.exports = class RelatorioController {
 
         try {
             const relatorioRecebedorAtualizado = await RelatorioRecebedor.update({
-                /* nome_fornecedor: data.textoNomeFornecedor,
-                nome_entregador: data.textoNomeEntregador,
-                placa_veiculo: data.textoPlacaVeiculo,
-                documento_entrada: data.textoDocmento,
-                produto: data.textoProduto,
-                quantidade: data.numeroQuantidade,
-                unidade_medida: data.textoUnidadeMedida, */
                 coloracao: data.checkboxColoracaoAprovado,
                 odor: data.checkboxOdorAprovado,
                 ausencia_animais: data.checkboxAusenciaAnimaisAprovado,
@@ -140,9 +133,38 @@ module.exports = class RelatorioController {
                 }
             })
 
+            //encontrando os id de Produto e Fornecedor por meio do id de Pedido
+            const pedido = await Pedido.findOne({
+                where: { id_pedido: data.idPedido },
+                include: [Produto, Fornecedor],
+              });
+              
+            const idProduto = pedido.id_produto;
+            const idFornecedor = pedido.id_fornecedor;
+
+            const fornecedorAtualizado = await Fornecedor.update({
+                nome_fornecedor: data.textoNomeFornecedor,
+                nome_motorista: data.textoNomeEntregador,
+                placa_veiculo: data.textoPlacaVeiculo
+              }, {
+                where: {
+                  id_fornecedor: idFornecedor
+                }
+              })
+            
+              const produtoAtualizado = await Produto.update({
+                nome_produto: data.textoProduto,
+                quantidade_produto: data.numeroQuantidade,
+                unidade_medida: data.textoUnidadeMedida
+              }, {
+                where: {
+                  id_produto: idProduto
+                }
+              })
 
             res.status(200).json({ mensagem: 'Relatório atualizado com sucesso!' })
         } catch (erro) {
+            console.log(erro)
             res.status(500).json({ mensagem: erro })
         }
     }
@@ -205,8 +227,6 @@ module.exports = class RelatorioController {
                     },
                 ],
             });
-
-            console.log(pedidos)
 
             if (!pedidos) {
                 return res.status(404).json({ message: 'Pedido não encontrado' });

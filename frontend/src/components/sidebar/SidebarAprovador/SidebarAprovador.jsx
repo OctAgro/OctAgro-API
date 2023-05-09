@@ -4,7 +4,7 @@ import sidebarOctagro from "../../../assets/sidebarOctagro.png"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faReceipt, faRightToBracket } from "@fortawesome/free-solid-svg-icons"
+import { faBox, faListCheck, faReceipt, faRightToBracket } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./SidebarAprovador.module.css"
 
@@ -26,7 +26,13 @@ export const SidebarAprovador = () => {
           <FontAwesomeIcon className={styles.icon} icon={faReceipt} />
 
           <Link to="/aprovador/relatorio" className={styles.relatorio}>
-            Relatórios <br /> pendentes
+            Aprovação de <br /> Mercadorias
+          </Link>
+        </li>
+        <li className={styles.actionItems}>
+          <FontAwesomeIcon icon={faBox} className={styles.icon} />
+          <Link to="/aprovador/mercadoriascadastradas" className={styles.relatorio}>
+            Mercadorias <br /> Cadastradas
           </Link>
         </li>
       </ul>

@@ -129,4 +129,36 @@ module.exports = class PedidoController {
         }
     }
 
+    static async alterarStatusPedido(req, res) {
+        const oId_pedido = req.params.id_pedido
+
+        console.log(oId_pedido)
+
+        const pedido = await Pedido.findByPk(oId_pedido)
+
+
+            try {
+                if (pedido.status_pedido_situacao === 1) {
+                    await Pedido.update({
+                        status_pedido_situacao: 0
+                    },{
+                        where: {
+                            id_pedido: oId_pedido
+                        }
+                    })
+                } else {
+                    await Produto.update({
+                        status_pedido_situacao: 1
+                    },{
+                        where: {
+                            id_pedido: oId_pedido
+                        }
+                    })
+                }
+                return res.json({message: "Status do pedido alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
+    }
+
 }

@@ -139,4 +139,37 @@ module.exports = class ProdutoControllers {
         res.status(200).json({message: produtoProcurado})
         
     }
+
+    static async alterarStatusProduto(req, res) {
+        const oId_produto = req.params.id_produto
+
+        console.log(oId_produto)
+
+        const produto = await Produto.findByPk(oId_produto)
+
+
+            try {
+                if (produto.status_produto === 1) {
+                    await Produto.update({
+                        status_produto: 0
+                    },{
+                        where: {
+                            id_produto: oId_produto
+                        }
+                    })
+                } else {
+                    await Produto.update({
+                        status_produto: 1
+                    },{
+                        where: {
+                            id_produto: oId_produto
+                        }
+                    })
+                }
+                return res.json({message: "Status do produto alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
+    }
+    
 }

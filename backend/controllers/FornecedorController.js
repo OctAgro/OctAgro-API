@@ -3,7 +3,7 @@ const Fornecedor = require('../models/Fornecedor')
 module.exports = class FornecedorControllers {
 
     static async cadastrarFornecedor(req, res) {
-        const data = req.body.data
+        const data = req.body
 
         if (!data.CNPJ) {
             return res.json({message: "Por favor, digite o CNPJ!"})
@@ -249,5 +249,37 @@ module.exports = class FornecedorControllers {
 
         res.status(200).json({message: fornecedorProcurado})
         
+    }
+
+    static async alterarStatusFornecedor(req, res) {
+        const oId_fornecedor = req.params.id_fornecedor
+
+        console.log(oId_fornecedor)
+
+        const fornecedor = await Fornecedor.findByPk(oId_fornecedor)
+
+
+            try {
+                if (fornecedor.status_fornecedor === 1) {
+                    await Fornecedor.update({
+                        status_fornecedor: 0
+                    },{
+                        where: {
+                            id_fornecedor: oId_fornecedor
+                        }
+                    })
+                } else {
+                    await Fornecedor.update({
+                        status_fornecedor: 1
+                    },{
+                        where: {
+                            id_fornecedor: oId_fornecedor
+                        }
+                    })
+                }
+                return res.json({message: "Status do fornecedor alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
     }
 }

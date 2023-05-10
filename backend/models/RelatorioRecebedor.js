@@ -37,7 +37,13 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
         allowNull: false
     },
     id_pedido: Sequelize.INTEGER,
-    id_usuario: Sequelize.INTEGER
+    id_usuario: Sequelize.INTEGER,
+
+    status_recebedor: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+    }
 })
 
 //Criando relação entre tabela RelatorioAprovador e Usuario

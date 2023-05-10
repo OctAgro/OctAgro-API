@@ -152,4 +152,104 @@ module.exports = class UsuarioControllers {
 
     }
 
+    static async listarUsuario(req, res) {
+        try {
+            const usuario = await Usuario.findAll()
+            return res.json(usuario).status(201)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async procurarUsuario(req, res) {
+        const oId_usuario = req.params.id_usuario
+
+        try {
+            const usuario = await Usuario.findByPk(oId_usuario)
+            return res.json(usuario)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async deletarUsuario(req, res) {
+        const oId_produto = req.params.id_usuario
+
+        try {
+            await Usuario.destroy({
+                where: {
+                    id_usuario: oId_produto
+                }
+            })
+            return res.json({message: "Usuario excluído com sucesso!", status: 201}).status(201)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async atualizarUsuario(req, res) {
+        const oId_usuario = req.params.id_usuario
+
+        const {nome, email, funcao} = req.body
+
+        if (!nome) {
+            return res.json({message: "Por favor, adicione um nome!", status: 500}).status(500)
+        }
+
+        else if (!email) {
+            return res.json({message: "Por favor, adicione um e-mail válido!", status: 500}).status(500)
+        }
+
+        else if (!funcao) {
+            return res.json({message: "Por favor, adicione uma função!", status: 500}).status(500)
+        }
+
+        try {
+            await Usuario.update({
+                nome: req.body.nome, 
+                email: req.body.email, 
+                funcao: req.body.funcao
+            }, {
+                where: {
+                    id_usuario: oId_usuario
+                }
+            })
+            return res.json({message:"Usuário atualizado com sucesso!"})
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async alterarStatusUsuario(req, res) {
+        const oId_usuario = req.params.id_usuario
+
+        console.log(oId_usuario)
+
+        const usuario = await Usuario.findByPk(oId_usuario)
+
+
+            try {
+                if (usuario.status_usuario == true) {
+                    await Usuario.update({
+                        status_usuario: false
+                    },{
+                        where: {
+                            id_usuario: oId_usuario
+                        }
+                    })
+                } else {
+                    await Usuario.update({
+                        status_usuario: true
+                    },{
+                        where: {
+                            id_usuario: oId_usuario
+                        }
+                    })
+                }
+                return res.json({message: "Status do usuário alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
+    }
+
 }

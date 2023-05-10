@@ -231,4 +231,37 @@ module.exports = class RelatorioController {
             res.status(500).json({ message: erro });
         }
     }
+
+    static async alterarStatusAnalista(req, res) {
+        const oId_relatorio_analista = req.params.id_relatorio_analista
+
+        console.log(oId_relatorio_analista)
+
+        const aprovador = await RelatorioAnalista.findByPk(oId_relatorio_analista)
+
+
+            try {
+                if (aprovador.status_relatorio_analista === 1) {
+                    await Fornecedor.update({
+                        status_relatorio_analista: 0
+                    },{
+                        where: {
+                            id_relatorio_analista: oId_relatorio_analista
+                        }
+                    })
+                } else {
+                    await Fornecedor.update({
+                        status_relatorio_analista: 1
+                    },{
+                        where: {
+                            id_relatorio_analista: oId_relatorio_analista
+                        }
+                    })
+                }
+                return res.json({message: "Status do relatório do aprovador alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
+    }
+    
 }

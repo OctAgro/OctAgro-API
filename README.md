@@ -18,8 +18,7 @@
 
 <div align="center">
       <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT1.md">Sprint 1</a> | 
-      <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT2.md">Sprint 2</a> |
-      <a href="">Sprint 3</a>
+      <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT2.md">Sprint 2</a>
 </div>
 
 ## Aprendizagem por Projetos Integrados <a id="API"></a>
@@ -34,12 +33,12 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 
 ## :clipboard: Entregas <a id="entregas"></a>
 
-| Sprint | Data | Status | Relatório
-|:------:|:----:|:------:|:------:|
-| Sprint 1 | 13/03/23 a 02/04/23 | :white_check_mark: Entregue | <a href="https://github.com/Yetgvg/OctAgro-API/blob/main/doc/entregas/SPRINT1.md">Ver relatório</a> |
-| Sprint 2 | 03/04/23 a 23/04/23 | :white_check_mark: Entregue | <a href="https://github.com/Yetgvg/OctAgro-API/blob/main/doc/entregas/SPRINT2.md">Ver relatório</a> |
-| Sprint 3 | 24/04/23 a 14/05/23 | :hourglass_flowing_sand: Em andamento |
-| Sprint 4 | 15/05/23 a 04/06/23 | :lock: Não iniciada |
+| Sprint | Data | Status |
+|:------:|:----:|:------:|
+| <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT1.md">Sprint 1</a> | 13/03/23 a 02/04/23 | Entregue
+| <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT2.md">Sprint 2</a> | 03/04/23 a 23/04/23 | Entregue
+| Sprint 3 | 24/04/23 a 14/05/23 | Pendente
+| Sprint 4 | 15/05/23 a 04/06/23 | Pendente
 
 <br>
 

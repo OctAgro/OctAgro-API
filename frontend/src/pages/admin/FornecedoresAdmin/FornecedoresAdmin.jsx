@@ -12,7 +12,13 @@ import { BarraAdmin } from "../../../components/BarraAdmin/BarraAdmin"
 
 // Importando os ícones
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleCheck, faTriangleExclamation, faTrash, faPersonCirclePlus, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import {
+  faCircleCheck,
+  faTriangleExclamation,
+  faTrash,
+  faPersonCirclePlus,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons"
 
 // Importando CSS
 import styles from "./FornecedoresAdmin.module.css"
@@ -21,7 +27,6 @@ import styles from "./FornecedoresAdmin.module.css"
 import { encontrarPedidos } from "../../../hooks/encontrarPedidos"
 
 export const FornecedoresAdmin = () => {
-
   //importando todos os Pedidos
   const [pedidos, setPedidos] = useState([])
   useEffect(() => {
@@ -73,8 +78,12 @@ export const FornecedoresAdmin = () => {
   return (
     <PedidosProvider>
       <div id={styles["main"]}>
-        <div id={styles["sidebar"]}><SidebarAdmin /></div>
-        <div id={styles["header"]}><HeaderFornecedores /></div>
+        <div id={styles["sidebar"]}>
+          <SidebarAdmin />
+        </div>
+        <div id={styles["header"]}>
+          <HeaderFornecedores />
+        </div>
         <div id={styles["barraPesquisa"]}>
           <div>
             <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/fornecedores/cadastrar">
@@ -161,7 +170,6 @@ export const FornecedoresAdmin = () => {
                     <td className={styles.tableData}>{pedido.fornecedor.razao_social}</td>
                     <td className={styles.tableData}>{pedido.produto.nome_produto}</td>
                     <td className={styles.tableData}>
-
                       {/* verificando com é o estado da aprovação para mostrar ação */}
                       <button className={styles.button}>
                         <Link to={``}>
@@ -182,7 +190,6 @@ export const FornecedoresAdmin = () => {
             </table>
           </div>
         </div>
-
       </div>
     </PedidosProvider>
   )

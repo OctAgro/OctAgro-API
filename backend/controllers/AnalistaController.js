@@ -233,7 +233,7 @@ module.exports = class RelatorioController {
     }
 
     static async alterarStatusAnalista(req, res) {
-        const oId_relatorio_analista = req.params.id_relatorio_analista
+        const oId_relatorio_analista = req.params.id
 
         console.log(oId_relatorio_analista)
 
@@ -241,24 +241,24 @@ module.exports = class RelatorioController {
 
 
             try {
-                if (aprovador.status_relatorio_analista === 1) {
-                    await Fornecedor.update({
-                        status_relatorio_analista: 0
+                if (aprovador.status_relatorio_analista == true) {
+                    await RelatorioAnalista.update({
+                        status_relatorio_analista: false
                     },{
                         where: {
                             id_relatorio_analista: oId_relatorio_analista
                         }
                     })
                 } else {
-                    await Fornecedor.update({
-                        status_relatorio_analista: 1
+                    await RelatorioAnalista.update({
+                        status_relatorio_analista: true
                     },{
                         where: {
                             id_relatorio_analista: oId_relatorio_analista
                         }
                     })
                 }
-                return res.json({message: "Status do relatório do aprovador alterado com sucesso!", status: 201}).status(201)
+                return res.json({message: "Status do relatório do analista alterado com sucesso!", status: 201}).status(201)
             } catch (error) {
                 return res.json(error).status(500)
             }

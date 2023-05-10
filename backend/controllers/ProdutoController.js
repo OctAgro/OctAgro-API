@@ -149,9 +149,9 @@ module.exports = class ProdutoControllers {
 
 
             try {
-                if (produto.status_produto === 1) {
+                if (produto.status_produto == true) {
                     await Produto.update({
-                        status_produto: 0
+                        status_produto: false
                     },{
                         where: {
                             id_produto: oId_produto
@@ -159,7 +159,7 @@ module.exports = class ProdutoControllers {
                     })
                 } else {
                     await Produto.update({
-                        status_produto: 1
+                        status_produto: true
                     },{
                         where: {
                             id_produto: oId_produto

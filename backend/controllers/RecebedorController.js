@@ -274,7 +274,7 @@ module.exports = class RelatorioController {
     }
 
     static async alterarStatusRecebedor(req, res) {
-        const oId_relatorio_recebedor = req.params.id_relatorio_recebedor
+        const oId_relatorio_recebedor = req.params.id
 
         console.log(oId_relatorio_recebedor)
 

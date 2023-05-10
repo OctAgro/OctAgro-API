@@ -10,6 +10,6 @@ router.post('/registrarUsuarioPost', UsuarioController.registrarUsuarioPost)
 router.delete("/:id_usuario", UsuarioController.deletarUsuario)
 router.put("/atualizarUsuarioPost/:id_usuario", UsuarioController.atualizarUsuario)
 router.get('/buscar-usuario', UsuarioController.buscarUsuarioByEmail)
-router.get('/alterarStatus/:id_usuario', UsuarioController.alterarStatusUsuario)
+router.put('/alterarStatus/:id_usuario', UsuarioController.alterarStatusUsuario)
 
 module.exports = router

@@ -241,7 +241,7 @@ module.exports = class FornecedorControllers {
     }
 
     static async procurarFornecedor(req, res) {
-        const idFornecedor = req.params.id
+        const idFornecedor = req.params.id_fornecedor
         const fornecedorProcurado = await Fornecedor.findByPk(idFornecedor)
         if (!fornecedorProcurado) {
             res.status(422).json({message: "Fornecedor não encontrado"})
@@ -260,9 +260,9 @@ module.exports = class FornecedorControllers {
 
 
             try {
-                if (fornecedor.status_fornecedor === 1) {
+                if (fornecedor.status_fornecedor == true) {
                     await Fornecedor.update({
-                        status_fornecedor: 0
+                        status_fornecedor: false
                     },{
                         where: {
                             id_fornecedor: oId_fornecedor
@@ -270,7 +270,7 @@ module.exports = class FornecedorControllers {
                     })
                 } else {
                     await Fornecedor.update({
-                        status_fornecedor: 1
+                        status_fornecedor: true
                     },{
                         where: {
                             id_fornecedor: oId_fornecedor

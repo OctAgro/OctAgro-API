@@ -185,7 +185,7 @@ module.exports = class AprovadorController {
     }
 
     static async alterarStatusAprovador(req, res) {
-        const oId_relatorio_aprovador = req.params.id_relatorio_aprovador
+        const oId_relatorio_aprovador = req.params.id
 
         console.log(oId_relatorio_aprovador)
 
@@ -193,17 +193,17 @@ module.exports = class AprovadorController {
 
 
             try {
-                if (aprovador.status_relatorio_aprovador === 1) {
-                    await Fornecedor.update({
-                        status_relatorio_aprovador: 0
+                if (aprovador.status_relatorio_aprovador == true) {
+                    await RelatorioAprovador.update({
+                        status_relatorio_aprovador: false
                     },{
                         where: {
                             id_relatorio_aprovador: oId_relatorio_aprovador
                         }
                     })
                 } else {
-                    await Fornecedor.update({
-                        status_relatorio_aprovador: 1
+                    await RelatorioAprovador.update({
+                        status_relatorio_aprovador: true
                     },{
                         where: {
                             id_relatorio_aprovador: oId_relatorio_aprovador

@@ -130,7 +130,7 @@ module.exports = class PedidoController {
     }
 
     static async alterarStatusPedido(req, res) {
-        const oId_pedido = req.params.id_pedido
+        const oId_pedido = req.params.id
 
         console.log(oId_pedido)
 
@@ -138,17 +138,17 @@ module.exports = class PedidoController {
 
 
             try {
-                if (pedido.status_pedido_situacao === 1) {
+                if (pedido.status_pedido_situacao == true) {
                     await Pedido.update({
-                        status_pedido_situacao: 0
+                        status_pedido_situacao: false
                     },{
                         where: {
                             id_pedido: oId_pedido
                         }
                     })
                 } else {
-                    await Produto.update({
-                        status_pedido_situacao: 1
+                    await Pedido.update({
+                        status_pedido_situacao: true
                     },{
                         where: {
                             id_pedido: oId_pedido

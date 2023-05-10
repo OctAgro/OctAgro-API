@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
+import InputMask from "react-input-mask"
 
 // IMPORTANDO COMPONENTES
 import { Modal } from "../../Modal/Modal"
@@ -63,7 +65,7 @@ export const FormCadastroFornecedor = () => {
   }
 
   // NAVIGATE DO REACT ROUTER DOM
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // STATES DO FORMULÁRIO
   const [CNPJ, setCNPJ] = useState("")
@@ -91,7 +93,31 @@ export const FormCadastroFornecedor = () => {
   // MENSAGEM DE ERRO
   const [errorMessage, setErrorMessage] = useState(null)
 
+  // STATE DO MODAL
   const [openModalFornecedorCadastrado, setOpenModalFornecedorCadastrado] = useState(false)
+
+  const handleCepChange = (e) => {
+    const enteredCep = e.target.value
+    setCep(enteredCep)
+    const cepFormatado = enteredCep.replace(/\D/g, '');
+    console.log(cepFormatado)
+    if (cepFormatado.length === 8) {
+      searchCep(cepFormatado)
+    }
+  }
+
+  const searchCep = async (cepFormatado) => {
+    try {
+      const response = await axios.get(`https://brasilapi.com.br/api/cep/v1/${cepFormatado}`)
+      console.log(response.data)
+      setBairro(response.data.neighborhood)
+      setEstado(response.data.state)
+      setCidade(response.data.city)
+      setEndereco(response.data.street)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div>
@@ -107,38 +133,41 @@ export const FormCadastroFornecedor = () => {
               {/*               <div>
                 <label>
                   ID:
-                  <input type="text" className={styles.inputCadastroFornecedor} />
+                  <InputMask type="text" className={styles.inputCadastroFornecedor} />
                 </label>
                 <label>
                   Data:
-                  <input type="text" className={styles.inputCadastroFornecedor} />
+                  <InputMask type="text" className={styles.inputCadastroFornecedor} />
                 </label>
               </div> */}
               <div>
                 <label>
                   CNPJ:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={CNPJ}
                     onChange={(event) => setCNPJ(event.target.value)}
-                    maxLength="14"
+                    mask="99.999.999/9999-99"
+                    maskChar=" "
                   />
                 </label>
                 <label>
                   IE:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={IE}
                     onChange={(event) => setIE(event.target.value)}
+                    mask="99.999.999-9"
+                    maskChar="_"
                   />
                 </label>
               </div>
               <div>
                 <label>
                   Razão Social:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={razao_social}
@@ -150,7 +179,7 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   Nome Fantasia:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={nome_fornecedor}
@@ -162,7 +191,7 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   Responsável:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={responsavel}
@@ -178,29 +207,31 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   Tel.:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={telefone}
                     onChange={(event) => setTelefone(event.target.value)}
-                    maxLength="9"
+                    mask="(99) 9999-9999"
+                    maskChar="_"
                   />
                 </label>
                 <label>
                   Cel.:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={tel_celular}
                     onChange={(event) => setTelCelular(event.target.value)}
-                    maxLength="10"
+                    mask="(99) 99999-9999"
+                    maskChar="_"
                   />
                 </label>
               </div>
               <div>
                 <label>
                   E-mail 1:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="email"
                     value={e_mail1}
@@ -212,7 +243,7 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   E-mail 2:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="email"
                     value={e_mail2}
@@ -230,17 +261,18 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   CEP:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={cep}
-                    onChange={(event) => setCep(event.target.value)}
-                    maxLength="9"
+                    onChange={handleCepChange}
+                    mask="99999-999"
+                    maskChar="_"
                   />
                 </label>
                 <label>
                   Estado:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={estado}
@@ -252,7 +284,7 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   Cidade:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={cidade}
@@ -264,7 +296,7 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   Bairro:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={bairro}
@@ -276,7 +308,7 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   Endereço:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={endereco}
@@ -288,7 +320,7 @@ export const FormCadastroFornecedor = () => {
               <div>
                 <label>
                   Num.:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={numero}
@@ -298,7 +330,7 @@ export const FormCadastroFornecedor = () => {
                 </label>
                 <label>
                   Comp.:
-                  <input
+                  <InputMask
                     className={styles.inputCadastroFornecedor}
                     type="text"
                     value={complemento}
@@ -323,7 +355,7 @@ export const FormCadastroFornecedor = () => {
                 </label>
               </div>
               <div>
-                <input
+                <InputMask
                   type="button"
                   className={styles.botaoConfirmarModal}
                   onClick={handleSubmit}
@@ -338,17 +370,17 @@ export const FormCadastroFornecedor = () => {
                     <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
                     <p>{errorMessage}</p>
                     <Link to="/admin/fornecedores">
-                      <input className={styles.botaoConfirmarModal} type="button" value="OK" />
+                      <InputMask className={styles.botaoConfirmarModal} type="button" value="OK" />
                     </Link>
                   </div>
                 </Modal>
               ) : (
-                /* MODAL CADASTRO COM INPUT FALTANDO */
+                /* MODAL CADASTRO COM InputMask FALTANDO */
                 <Modal isOpen={openModalFornecedorCadastrado} onClick={handleCloseModalFornecedorCadastrado}>
                   <div className={styles.conteudoModal}>
                     <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
                     <p>{errorMessage}</p>
-                    <input
+                    <InputMask
                       className={styles.botaoConfirmarModal}
                       type="button"
                       value="OK"

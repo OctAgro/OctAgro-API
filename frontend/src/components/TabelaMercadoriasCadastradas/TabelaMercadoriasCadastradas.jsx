@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 
 import { Link } from "react-router-dom"
 
@@ -9,8 +9,12 @@ import styles from "./TabelaMercadoriasCadastradas.module.css"
 
 import { encontrarPedidos } from "../../hooks/encontrarPedidos"
 import { buscarRelatoriosRecebedor } from "../../hooks/buscarRelatorios"
+import { UserContext } from "../../context/usuarioContext"
 
 export const TabelaMercadoriasCadastradas = () => {
+  //importando contexto do Usuario
+  const { usuario } = useContext(UserContext)
+
   const handleExclusao = () => {
     // logica de exclusao + modal
   }
@@ -37,7 +41,7 @@ export const TabelaMercadoriasCadastradas = () => {
     fetchRelatoriosRecebedor()
   }, [])
 
-  console.log('Relatorios' , relatoriosRecebedor.data)
+  console.log('Relatorios', relatoriosRecebedor.data)
 
   return (
     <div className={styles.table}>
@@ -56,40 +60,42 @@ export const TabelaMercadoriasCadastradas = () => {
           </tr>
         </thead>
         <tbody>
-        {relatoriosRecebedor.data !== undefined ? (
-          relatoriosRecebedor.data.map((relatorios) => (
-            <tr key={relatorios.pedido.id_pedido}>
-              <td className={styles.tableData}>{relatorios.pedido.id_pedido}</td>
-              <td className={styles.tableData}>{relatorios.pedido.fornecedor.nome_fornecedor}</td>
-              <td className={styles.tableData}>{relatorios.pedido.produto.nome_produto}</td>
-              <td className={styles.tableData}>{relatorios.pedido.status_aprovacao}</td>
-              <td className={styles.tableData}>
-                <div className={styles.actionsMercadoria}>
-                  <div>
-                    <button className={styles.button}>
-                      <Link to={`/recebedor/mercadoriascadastradas/${relatorios.pedido.id_pedido}`}>
-                        Editar <FontAwesomeIcon icon={faPencil} />
-                      </Link>
-                    </button>
-                  </div>
-                  {/* REMOVENDO BOTÃO DE EXCLUSÃO */}
-                  {/* <div>
-                    <button className={styles.button} onClick={handleExclusao}>
-                      Excluir <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                  </div> */}
+          {relatoriosRecebedor.data !== undefined ? (
+            relatoriosRecebedor.data.map((relatorios) => (
+              <tr key={relatorios.pedido.id_pedido}>
+                <td className={styles.tableData}>{relatorios.pedido.id_pedido}</td>
+                <td className={styles.tableData}>{relatorios.pedido.fornecedor.nome_fornecedor}</td>
+                <td className={styles.tableData}>{relatorios.pedido.produto.nome_produto}</td>
+                <td className={styles.tableData}>{relatorios.pedido.status_aprovacao}</td>
+                <td className={styles.tableData}>
+                  <div className={styles.actionsMercadoria}>
+                    <div>
+                      <button className={styles.button}>
+                        <Link to={`/recebedor/mercadoriascadastradas/${relatorios.pedido.id_pedido}`}>
+                          Editar <FontAwesomeIcon icon={faPencil} />
+                        </Link>
+                      </button>
+                    </div>
+                    {/* O BOTÃO DE EXCLUSÃO SÓ APARECE PARA USUÁRIOS APROVADORES */}
+                    {usuario?.funcao === 'Aprovador' ? (
+                      <div>
+                        <button className={styles.button} onClick={handleExclusao}>
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </div>
+                    ) : null }
                 </div>
-              </td>
-            </tr>
-          ))
+                </td>
+              </tr>
+            ))
 
-        //SE VIER UNDEFINED DA TABELA RELATORIO RECEBEDOR DEVERIA APARECER ESSA MENSAGEM
-        ) : (
-          <div className={styles.external}>
-            <FontAwesomeIcon icon={faCheckDouble} className={styles.icon} />
-            <p className={styles.text}>Não há mercadorias pendentes</p>
-          </div>
-        )}
+            //SE VIER UNDEFINED DA TABELA RELATORIO RECEBEDOR DEVERIA APARECER ESSA MENSAGEM
+          ) : (
+            <div className={styles.external}>
+              <FontAwesomeIcon icon={faCheckDouble} className={styles.icon} />
+              <p className={styles.text}>Não há mercadorias pendentes</p>
+            </div>
+          )}
 
         </tbody>
       </table>

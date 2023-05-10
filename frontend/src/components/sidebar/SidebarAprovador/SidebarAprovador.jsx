@@ -13,6 +13,7 @@ import { UserContext } from "../../../context/usuarioContext"
 
 export const SidebarAprovador = () => {
   const { usuario } = useContext(UserContext)
+  console.log("usuario: ", usuario?.funcao)
 
   return (
     <nav className={styles.navbar}>
@@ -33,6 +34,20 @@ export const SidebarAprovador = () => {
           <FontAwesomeIcon icon={faBox} className={styles.icon} />
           <Link to="/aprovador/mercadoriascadastradas" className={styles.relatorio}>
             Mercadorias <br /> Cadastradas
+          </Link>
+        </li>
+        {/* aba para acessar recebedores */}
+        <li className={styles.actionItems}>
+          <FontAwesomeIcon icon={faBox} className={styles.icon} />
+          <Link to="/recebedor/home" className={styles.relatorio}>
+            Recebedores <br />
+          </Link>
+        </li>
+        {/* aba para acessar analistas */}
+        <li className={styles.actionItems}>
+          <FontAwesomeIcon icon={faBox} className={styles.icon} />
+          <Link to="/analista/home" className={styles.relatorio}>
+            Analistas <br />
           </Link>
         </li>
       </ul>

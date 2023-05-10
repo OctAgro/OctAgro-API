@@ -13,6 +13,7 @@ import { UserContext } from "../../../context/usuarioContext"
 
 export const SidebarAnalista = () => {
   const { usuario } = useContext(UserContext)
+  console.log("usuario: ", usuario?.funcao)
 
   return (
     <nav className={styles.navbar}>
@@ -34,6 +35,15 @@ export const SidebarAnalista = () => {
             Mercadorias <br /> Cadastradas
           </Link>
         </li>
+        {/* ESSA ABA SÓ APARECERÁ PARA USUÁRIOS APROVADORES! */}
+        {usuario?.funcao === 'Aprovador' ? (
+          <li className={styles.actionItems}>
+            <FontAwesomeIcon icon={faListCheck} className={styles.icon} />
+            <Link to="/aprovador/home" className={styles.relatorio}>
+              Voltar para <br /> Aprovadores
+            </Link>
+          </li>
+        ) : null }
       </ul>
       <div className={styles.botItems}>
         <ul className={styles.usuario}>

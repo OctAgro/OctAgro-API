@@ -106,170 +106,201 @@ export const FormCadastroProduto = ({ onClick }) => {
   }
 
   return (
-    <div className={styles.external}>
-      <form className={styles.formCadastroProduto}>
-        <div>
-          <h1 className={styles.title}>CADASTRO NOVO PRODUTO</h1>
-        </div>
-        <div>
-          <legend>Dados de Identificação</legend>
-          <hr />
-          <fieldset>
-            <div>
-              <label>
-                ID:
-                <input className={styles.inputCadastroProduto} type="number" name="id" />
-              </label>
-              <label>
-                Data:
-                <input className={styles.inputCadastroProduto} type="date" name="data" />
-              </label>
-            </div>
-            <div>
-              <label>
-                Nome do Produto:
-                <input className={styles.inputCadastroProduto} type="text" name="nomeproduto" />
-              </label>
-            </div>
-            <div>
-              <label>
-                Tipo:
-                <input className={styles.inputCadastroProduto} type="text" name="tipo" />
-              </label>
-              <label>
-                Descrição:
-                <input className={styles.inputCadastroProduto} type="text" name="descricao" />
-              </label>
-            </div>
-          </fieldset>
-        </div>
-        <div>
-          <legend className={styles.subTitle}>Regras de Aceitação</legend>
-          <hr />
-          <div className={styles.row}>
-            <div className={styles.leftSide}>
-              <fieldset>
-                <legend>Regras - Recebedor</legend>
-                <div>
-                  <input className={styles.inputCadastroProduto} value="Coloração" readOnly />
-                  <input
-                    type="checkbox"
-                    id="checkboxColoracao"
-                    className={styles.aprovar}
-                    {...register("checkboxColoracao")}
-                    checked={checkboxColoracao}
-                    onClick={handleCheckboxColoracao}
-                  />
-                </div>
-                <div>
-                  <input className={styles.inputCadastroProduto} value="Odor" readOnly />
-                  <input
-                    type="checkbox"
-                    id="checkboxOdor"
-                    className={styles.aprovar}
-                    {...register("checkboxOdor")}
-                    checked={checkboxOdor}
-                    onClick={handleCheckboxOdor}
-                  />
-                </div>
-                <div>
-                  <input
-                    className={styles.inputCadastroProduto}
-                    value="Ausência de Insetos vivos/mortos"
-                    readOnly
-                  />
-                  <input
-                    type="checkbox"
-                    id="checkboxAusenciaAnimais"
-                    className={styles.aprovar}
-                    {...register("checkboxAM")}
-                    checked={checkboxAusenciaAnimais}
-                    onClick={handleCheckboxAusenciaAnimais}
-                  />
-                </div>
-                <div>
-                  <input className={styles.inputCadastroProduto} value="Ausência de Mofo" readOnly />
-                  <input
-                    type="checkbox"
-                    id="checkboxAM"
-                    className={styles.aprovar}
-                    {...register("checkboxAusenciaMofo")}
-                    checked={checkboxAusenciaMofo}
-                    onClick={handleCheckboxAusenciaMofo}
-                  />
-                </div>
-              </fieldset>
-            </div>
-            <div className={styles.rightSide}>
-              <div className={styles.inserirRegra} onClick={handleOpenModalRegra}>
-                <FontAwesomeIcon icon={faFileLines} className={styles.icon} />
-                <p className={styles.paragrafoRegra}>INSERIR NOVA REGRA</p>
-              </div>
-            </div>
+    <div>
+      <form action="" method="post">
+
+        <div id={styles["container"]}>
+          <div id={styles["titulo1"]}>
+            CADASTRO NOVO PRODUTO
           </div>
-        </div>
-        <div>
-          <legend>Regras - Analista</legend>
-          <hr />
-          <fieldset>
-            <div>
-              <input className={styles.inputCadastroProduto} value="Qualidade" readOnly />
-              <input
-                type="checkbox"
-                id="checkboxQualidade"
-                className={styles.aprovar}
-                {...register("checkboxQualidade")}
-                checked={checkboxQualidade}
-                onClick={handleCheckboxQualidade}
+          <div>
+            Dados de Identificação
+            <hr />
+          </div>
+
+          <div id={styles["idProduto"]}>
+            <div id={styles["id"]}>
+              ID:
+            </div>
+            <div id={styles["inputId"]}><input type="text" className={styles.fullSizeInput} /></div>
+            <div id={styles["data"]}>
+              Data:
+            </div>
+            <div id={styles["inputData"]}><input type="date" className={styles.fullSizeInput} /></div>
+            <div id={styles["nomeProduto"]}>
+              Nome:
+            </div>
+            <div id={styles["inputNomeProduto"]}><input type="text" className={styles.fullSizeInput} /></div>
+            <div id={styles["id"]}>
+              TIPO:
+            </div>
+            <div id={styles["inputId"]}><input type="text" className={styles.fullSizeInput} /></div>
+            <div id={styles["data"]}>
+              DESCRIÇÃO:
+            </div>
+            <div id={styles["inputData"]}><input type="text" className={styles.fullSizeInput} /></div>
+          </div>
+          <div id={styles["titulo2"]}>
+            Regras de Aceitação
+            <hr />
+          </div>
+
+
+          <div id={styles["regrasAceitacao"]}>
+            <div id={styles["subtitle"]}>
+              REGRAS - RECEBEDOR
+              <hr />
+            </div>
+            <div id={styles["boxRegras"]}>
+              COLORAÇÃO
+            </div>
+
+            <input
+              type="checkbox"
+              id="checkboxColoracao"
+              {...register("checkboxColoracao")}
+              checked={checkboxColoracao}
+              onClick={handleCheckboxColoracao}
+              className={styles.checkAprovar}
+            />
+
+            <div id={styles["boxRegras"]}>
+              ODOR
+            </div>
+
+            <input
+              type="checkbox"
+              id="checkboxColoracao"
+              {...register("checkboxColoracao")}
+              checked={checkboxColoracao}
+              onClick={handleCheckboxColoracao}
+              className={styles.checkAprovar}
+            />
+            <div id={styles["boxRegras"]}>
+              AUSÊNCIA DE INSETOS VIVOS/MORTOS
+            </div>
+
+            <input
+              type="checkbox"
+              id="checkboxColoracao"
+              {...register("checkboxColoracao")}
+              checked={checkboxColoracao}
+              onClick={handleCheckboxColoracao}
+              className={styles.checkAprovar}
+            />
+            <div id={styles["boxRegras"]}>
+              AUSÊNCIA DE MOFO
+            </div>
+
+            <input
+              type="checkbox"
+              id="checkboxColoracao"
+              {...register("checkboxColoracao")}
+              checked={checkboxColoracao}
+              onClick={handleCheckboxColoracao}
+              className={styles.checkAprovar}
+            />
+
+            <div id={styles["subtitle"]}>
+              REGRAS - ANALISTA
+              <hr />
+            </div>
+
+            <div id={styles["boxRegras"]}>
+              COLORAÇÃO
+            </div>
+
+            <input
+              type="checkbox"
+              id="checkboxColoracao"
+              {...register("checkboxColoracao")}
+              checked={checkboxColoracao}
+              onClick={handleCheckboxColoracao}
+              className={styles.checkAprovar}
+            />
+
+            <div id={styles["boxRegras"]}>
+              ODOR
+            </div>
+
+            <input
+              type="checkbox"
+              id="checkboxColoracao"
+              {...register("checkboxColoracao")}
+              checked={checkboxColoracao}
+              onClick={handleCheckboxColoracao}
+              className={styles.checkAprovar}
+            />
+            <div id={styles["boxRegras"]}>
+              AUSÊNCIA DE INSETOS VIVOS/MORTOS
+            </div>
+
+            <input
+              type="checkbox"
+              id="checkboxColoracao"
+              {...register("checkboxColoracao")}
+              checked={checkboxColoracao}
+              onClick={handleCheckboxColoracao}
+              className={styles.checkAprovar}
+            />
+
+            <div id={styles["valorMax"]}>
+              MÁX.
+            </div>
+
+            <div id={styles["inputValorMax"]}>
+              <input className={styles.fullSizeInput}
+                type="number"
+                id="porcentagemImpurezas"
+              />
+
+            </div>
+            <p>%</p>
+
+
+            <div id={styles["boxRegras"]}>
+              Impurezas
+            </div>
+
+            <input
+              type="checkbox"
+              id="checkboxColoracao"
+              {...register("checkboxColoracao")}
+              checked={checkboxColoracao}
+              onClick={handleCheckboxColoracao}
+              className={styles.checkAprovar}
+            />
+
+            <div id={styles["valorMax"]}>
+              MÁX.
+            </div>
+
+
+            <div id={styles["inputValorMax"]}>
+              <input className={styles.fullSizeInput}
+                type="number"
+                id="porcentagemImpurezas"
               />
             </div>
-            <div>
-              <input className={styles.inputCadastroProduto} value="Formato" readOnly />
-              <input
-                type="checkbox"
-                id="checkboxFormato"
-                className={styles.aprovar}
-                {...register("checkboxFormato")}
-                checked={checkboxFormato}
-                onClick={handleCheckboxFormato}
-              />
-            </div>
-            <div>
-              <input className={styles.inputCadastroProduto} value="Nível de Agrotóxicos" readOnly />
-              <input
-                type="checkbox"
-                id="checkboxNA"
-                className={styles.aprovar}
-                {...register("checkboxNA")}
-                checked={checkboxNA}
-                onClick={handleCheckboxNA}
-              />
-              <label className={styles.maxLabel}>
-                Máx.
-                <input type="text" className={styles.porcentagem} maxLength="3" />
-              </label>
-              %
-            </div>
-            <div>
-              <input className={styles.inputCadastroProduto} value="Impurezas" readOnly />
-              <input
-                type="checkbox"
-                id="checkboxImpurezas"
-                className={styles.aprovar}
-                {...register("checkboxImpurezas")}
-                checked={checkboxImpurezas}
-                onClick={handleCheckboxImpurezas}
-              />
-              <label className={styles.maxLabel}>
-                Máx.
-                <input type="text" className={styles.porcentagem} maxLength="3" />
-              </label>
-              %
-            </div>
+            <p>%</p>
+
             <input type="submit" value="CADASTRAR" onClick={onClick} className={styles.botaoConfirmarModal} />
-          </fieldset>
+
+            <div className={styles.inserirRegra} onClick={handleOpenModalRegra}>
+              <FontAwesomeIcon icon={faFileLines} className={styles.icon} />
+              <p className={styles.paragrafoRegra}>INSERIR NOVA REGRA</p>
+            </div>
+
+          </div>
+
+
+
+
         </div>
-      </form>
+
+
+      </form >
+
       <div>
         <Modal isOpen={openModalRegra} onClick={handleCloseModalRegra}>
           <div className={styles.conteudoModalRegra}>
@@ -348,6 +379,7 @@ export const FormCadastroProduto = ({ onClick }) => {
           </div>
         </Modal>
       </div>
-    </div>
+
+    </div >
   )
 }

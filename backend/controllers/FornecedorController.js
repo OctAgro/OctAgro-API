@@ -3,8 +3,8 @@ const Fornecedor = require('../models/Fornecedor')
 module.exports = class FornecedorControllers {
 
     static async cadastrarFornecedor(req, res) {
-        const data = req.body
-        
+        const data = req.body.data
+
         if (!data.CNPJ) {
             return res.json({message: "Por favor, digite o CNPJ!"})
         }
@@ -61,7 +61,7 @@ module.exports = class FornecedorControllers {
             return res.json({message: "Por favor, digite o nome do fornecedor!"})
         }
 
-        if (!data.nome_motorista) {
+/*         if (!data.nome_motorista) {
             return res.json({message: "Por favor, digite o nome do motorista!"})
         }
 
@@ -71,7 +71,7 @@ module.exports = class FornecedorControllers {
 
         if (!data.documentos_anexos) {
             return res.json({message: "Por favor, anexe um documento!"})
-        }
+        } */
 
         const fornecedor =  new Fornecedor({
             CNPJ: data.CNPJ,

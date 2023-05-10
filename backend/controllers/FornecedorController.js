@@ -118,9 +118,9 @@ module.exports = class FornecedorControllers {
             } else {
                 res.status(200).json({message: "Fornecedor não excluido !"})
             }
-        } catch (error) {
+        } catch (erro) {
             console.log(erro)
-            res.json({message: error}).status(500)
+            res.json({message: erro}).status(500)
         }
     }
 

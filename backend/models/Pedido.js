@@ -13,12 +13,15 @@ const Pedido = db.define ("pedido" , {
 
     status_pedido: {
         type: Sequelize.STRING,
-        require: true
+        require: true,
+        defaultValue: "Recebido"
+
     },
 
     status_aprovacao:{
         type: Sequelize.STRING,
-        require: true
+        require: true,
+        defaultValue: "Pendente"
     },
 
     id_produto: Sequelize.INTEGER,

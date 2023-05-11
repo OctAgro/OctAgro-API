@@ -184,4 +184,36 @@ module.exports = class AprovadorController {
         }
     }
 
+    static async alterarStatusAprovador(req, res) {
+        const oId_relatorio_aprovador = req.params.id
+
+        console.log(oId_relatorio_aprovador)
+
+        const aprovador = await RelatorioAprovador.findByPk(oId_relatorio_aprovador)
+
+
+            try {
+                if (aprovador.status_relatorio_aprovador == true) {
+                    await RelatorioAprovador.update({
+                        status_relatorio_aprovador: false
+                    },{
+                        where: {
+                            id_relatorio_aprovador: oId_relatorio_aprovador
+                        }
+                    })
+                } else {
+                    await RelatorioAprovador.update({
+                        status_relatorio_aprovador: true
+                    },{
+                        where: {
+                            id_relatorio_aprovador: oId_relatorio_aprovador
+                        }
+                    })
+                }
+                return res.json({message: "Status do relatório do aprovador alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
+    }
+
 }

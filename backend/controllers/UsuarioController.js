@@ -5,46 +5,46 @@ const bcrypt = require('bcryptjs')
 module.exports = class UsuarioControllers {
 
     static async registrarUsuarioPost(req, res) {
-        const {nome, email, senha, confirmarSenha, funcao, dataAdmissao, CPF, RG, dataNascimento, genero} = req.body
+        const data = req.body
 
-        if (!nome) {
+        if (!data.nome) {
             return res.json({message: "Por favor, adicione um nome!", status: 500}).status(500)
         }
 
-        else if (!email) {
+        else if (!data.email) {
             return res.json({message: "Por favor, adicione um e-mail válido!", status: 500}).status(500)
         }
 
-        else if (!senha) {
+        else if (!data.senha) {
             return res.json({message: "Por favor, adicione uma senha!", status: 500}).status(500)
         }
 
-        else if (!funcao) {
+        else if (!data.funcao) {
             return res.json({message: "Por favor, adicione uma função!", status: 500}).status(500)
         }
 
-        else if (!dataAdmissao) {
+        else if (!data.dataAdmissao) {
             return res.json({message: "Por favor, adicione uma data de admissão!", status: 500}).status(500)
         }
 
-        else if (!CPF) {
+        else if (!data.CPF) {
             return res.json({message: "Por favor, adicione um CPF!", status: 500}).status(500)
         }
 
-        else if (!RG) {
+        else if (!data.RG) {
             return res.json({message: "Por favor, adicione um RG!", status: 500}).status(500)
         }
 
-        else if (!dataNascimento) {
+        else if (!data.dataNascimento) {
             return res.json({message: "Por favor, adicione a data de nacimento!", status: 500}).status(500)
         }
 
-        else if (!genero) {
+        else if (!data.genero) {
             return res.json({message: "Por favor, adicione o gênero!", status: 500}).status(500)
         }
 
         //checagem se a senha é a mesma de confirmar senha
-        if (senha != confirmarSenha) {
+        if (data.senha != data.confirmarSenha) {
             //mensagem
             return res.json({message: "As senhas não conferem, tente novamente!", status: 500}).status(500)
             //res.render('/usuario/registrarUsuario')
@@ -53,15 +53,15 @@ module.exports = class UsuarioControllers {
 
         //checar se usuário existe
         const checarSeUsuarioExiste = await Usuario.findOne({
-            where: {email: email}
+            where: {email: data.email}
         })
 
         const checarSeCPFExiste = await Usuario.findOne({
-            where: {CPF: CPF}
+            where: {CPF: data.CPF}
         })
 
         const checarSeRGExiste = await Usuario.findOne({
-            where: {RG: RG}
+            where: {RG: data.RG}
         })
         
         //checagem se existe dados repetidos
@@ -74,18 +74,18 @@ module.exports = class UsuarioControllers {
         }
 
         const salt = bcrypt.genSaltSync(10)
-        const hashedSenha = bcrypt.hashSync(senha, salt)
+        const hashedSenha = bcrypt.hashSync(data.senha, salt)
 
         const usuario = {
-            nome,
-            email,
+            nome: data.nome,
+            email: data.email,
             senha: hashedSenha,
-            funcao,
-            dataAdmissao,
-            CPF,
-            RG,
-            dataNascimento,
-            genero
+            funcao: data.funcao,
+            dataAdmissao: data.dataAdmissao,
+            CPF: data.CPF,
+            RG: data.RG,
+            dataNascimento: data.dataNascimento,
+            genero: data.genero
         }
 
         try {
@@ -100,24 +100,24 @@ module.exports = class UsuarioControllers {
 
     //função de logar
     static async loginPost(req, res) {
-        const {email, senha} = req.body
+        const data = req.body
 
-        if (!email) {
+        if (!data.email) {
             return res.json({message: "Por favor, digite seu e-mail!", status: 500}).status(500)
         }
 
-        else if (!senha) {
+        else if (!data.senha) {
             return res.json({message: "Por favor, digite sua senha!", status: 500}).status(500)
         }
 
         //checar se usuário existe
-        const checarUsuario = await Usuario.findOne({where: {email: email}})
+        const checarUsuario = await Usuario.findOne({where: {email: data.email}})
 
         if (!checarUsuario) {
             return res.json({message: "Usuário não encontrado!", status: 500}).status(500)
         }
 
-        const checarSenha = bcrypt.compareSync(senha, checarUsuario.senha)
+        const checarSenha = bcrypt.compareSync(data.senha, checarUsuario.senha)
 
         if (!checarSenha) {
             return res.json({message: "A senha digitada está inválida!", status: 500}).status(500)
@@ -150,6 +150,106 @@ module.exports = class UsuarioControllers {
             res.json({checarUsuario: checarUsuario}).status(201)
         }
 
+    }
+
+    static async listarUsuario(req, res) {
+        try {
+            const usuario = await Usuario.findAll()
+            return res.json(usuario).status(201)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async procurarUsuario(req, res) {
+        const oId_usuario = req.params.id_usuario
+
+        try {
+            const usuario = await Usuario.findByPk(oId_usuario)
+            return res.json(usuario)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async deletarUsuario(req, res) {
+        const oId_produto = req.params.id_usuario
+
+        try {
+            await Usuario.destroy({
+                where: {
+                    id_usuario: oId_produto
+                }
+            })
+            return res.json({message: "Usuario excluído com sucesso!", status: 201}).status(201)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async atualizarUsuario(req, res) {
+        const oId_usuario = req.params.id_usuario
+
+        const data = req.body
+
+        if (!data.nome) {
+            return res.json({message: "Por favor, adicione um nome!", status: 500}).status(500)
+        }
+
+        else if (!data.email) {
+            return res.json({message: "Por favor, adicione um e-mail válido!", status: 500}).status(500)
+        }
+
+        else if (!data.funcao) {
+            return res.json({message: "Por favor, adicione uma função!", status: 500}).status(500)
+        }
+
+        try {
+            await Usuario.update({
+                nome: data.nome, 
+                email: data.email, 
+                funcao: data.funcao
+            }, {
+                where: {
+                    id_usuario: oId_usuario
+                }
+            })
+            return res.json({message:"Usuário atualizado com sucesso!"})
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async alterarStatusUsuario(req, res) {
+        const oId_usuario = req.params.id_usuario
+
+        console.log(oId_usuario)
+
+        const usuario = await Usuario.findByPk(oId_usuario)
+
+
+            try {
+                if (usuario.status_usuario == true) {
+                    await Usuario.update({
+                        status_usuario: false
+                    },{
+                        where: {
+                            id_usuario: oId_usuario
+                        }
+                    })
+                } else {
+                    await Usuario.update({
+                        status_usuario: true
+                    },{
+                        where: {
+                            id_usuario: oId_usuario
+                        }
+                    })
+                }
+                return res.json({message: "Status do usuário alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
     }
 
 }

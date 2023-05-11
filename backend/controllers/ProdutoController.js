@@ -3,7 +3,7 @@ const Produto = require('../models/Produto')
 module.exports = class ProdutoControllers {
     
     static async cadastrarProduto(req, res) {
-        const data = req.body
+        const data = req.body.data
 
         if (!data.nome_produto) {
             return res.json({message: "Por favor, adicione um nome ao produto cadastrado!", status: 500}).status(500)
@@ -139,4 +139,37 @@ module.exports = class ProdutoControllers {
         res.status(200).json({message: produtoProcurado})
         
     }
+
+    static async alterarStatusProduto(req, res) {
+        const oId_produto = req.params.id_produto
+
+        console.log(oId_produto)
+
+        const produto = await Produto.findByPk(oId_produto)
+
+
+            try {
+                if (produto.status_produto == true) {
+                    await Produto.update({
+                        status_produto: false
+                    },{
+                        where: {
+                            id_produto: oId_produto
+                        }
+                    })
+                } else {
+                    await Produto.update({
+                        status_produto: true
+                    },{
+                        where: {
+                            id_produto: oId_produto
+                        }
+                    })
+                }
+                return res.json({message: "Status do produto alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
+    }
+    
 }

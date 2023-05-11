@@ -47,6 +47,12 @@ const Produto = db.define('produto', {
         type:Sequelize.TIME,
         require: true,
         allowNull: false
+    },
+
+    status_produto: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
     }
 })
 

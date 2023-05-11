@@ -124,9 +124,10 @@ const Fornecedor = db.define('fornecedor', {
         allowNull: true
     },
 
-    status_fornecedor : {
-        type: Sequelize.STRING,
-        allowNull: true
+    status_fornecedor: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
     }
 })
 
@@ -160,8 +161,7 @@ contar().then(function(valor) {
             nome_fornecedor: 'Trigostoso', // nome fantasia
             nome_motorista: 'Adenilson Pereira',
             placa_veiculo: 'ABC1A23',
-            documentos_anexos: 'DocumentoA.pdf',
-            status_fornecedor: "Ativo"
+            documentos_anexos: 'DocumentoA.pdf'
         })
 
         Fornecedor.create({
@@ -184,8 +184,7 @@ contar().then(function(valor) {
             nome_fornecedor: 'Fornecedor Agrícola S/A',
             nome_motorista: 'João da Silva',
             placa_veiculo: 'DEF5678',
-            documentos_anexos: 'DocumentoB.pdf',
-            status_fornecedor: "Ativo"
+            documentos_anexos: 'DocumentoB.pdf'
         })
 
         Fornecedor.create({
@@ -208,8 +207,7 @@ contar().then(function(valor) {
             nome_fornecedor: 'Fornecedor Grãos Export',
             nome_motorista: 'Dirlei Vasconcelos de Almeida',
             placa_veiculo: 'GHI9101',
-            documentos_anexos: 'DocumentoC.pdf',
-            status_fornecedor: "Ativo"
+            documentos_anexos: 'DocumentoC.pdf'
         })
 
         Fornecedor.create({
@@ -232,8 +230,7 @@ contar().then(function(valor) {
             nome_fornecedor: 'Fornecedor Cereal Farmers',
             nome_motorista: 'Maria Aparecida Ramos',
             placa_veiculo: 'JKL2345',
-            documentos_anexos: 'DocumentoD.pdf',
-            status_fornecedor: "Ativo"
+            documentos_anexos: 'DocumentoD.pdf'
         })
     }
 }).catch(function(erro) {

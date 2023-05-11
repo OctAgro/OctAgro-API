@@ -39,6 +39,12 @@ const Usuario = db.define('usuario', {
 
     foto: {
         type: Sequelize.STRING
+    },
+
+    status_usuario: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
     }
 
 }, {

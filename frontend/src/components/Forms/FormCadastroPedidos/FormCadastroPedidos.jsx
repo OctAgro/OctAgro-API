@@ -9,19 +9,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons"
 
 // IMPORTANDO ESTILOS
-import styles from "./FormCadastroPedido.module.css"
+import styles from "./FormCadastroPedidos.module.css"
 
 // IMPORTANDO HOOK
 import { criarFornecedor } from "../../../hooks/criarFornecedor"
 
-export const FormCadastroPedido = () => {
+export const FormCadastroPedidos = () => {
   // HANDLES DO MODAL DE CADASTRO
   const handleCloseModalFornecedorCadastrado = () => {
     setOpenModalFornecedorCadastrado(false)
   }
 
   const handleRedirect = () => {
-    navigate("/admin/fornecedores")
+    navigate("/admin/pedidos")
   }
 
   // HANDLE SUBMIT
@@ -97,12 +97,12 @@ export const FormCadastroPedido = () => {
     <div>
       <div className={styles.external}>
         <div>
-          <h1 className={styles.title}>CADASTRO FORNECEDOR</h1>
+          <h1 className={styles.title}>CADASTRO PEDIDOS</h1>
         </div>
         <form className={styles.formCadastroFornecedor} onSubmit={handleSubmit}>
           <div className={styles.leftSide}>
             <div className={styles.upperLeft}>
-              <legend className={styles.subTitle}>Dados de identificação</legend>
+              <legend className={styles.subTitle}>Dados do Fornecedor</legend>
               <hr />
               {/*               <div>
                 <label>
@@ -117,209 +117,94 @@ export const FormCadastroPedido = () => {
               <div>
                 <label>
                   CNPJ:
-                  <input
+                  <select
                     className={styles.inputCadastroFornecedor}
-                    type="text"
                     value={CNPJ}
                     onChange={(event) => setCNPJ(event.target.value)}
-                    maxLength="14"
-                  />
+                  >
+                    <option value="">Selecione</option>
+                    <option value="cnpj1">CNPJ 1</option>
+                  </select>
                 </label>
                 <label>
                   IE:
-                  <input
+                  <select
                     className={styles.inputCadastroFornecedor}
-                    type="text"
                     value={IE}
                     onChange={(event) => setIE(event.target.value)}
-                  />
+                  >
+                    <option value="">Selecione</option>
+                    <option value="ie1">IE 1</option>
+                  </select>
                 </label>
               </div>
               <div>
                 <label>
                   Razão Social:
-                  <input
+                  <select
                     className={styles.inputCadastroFornecedor}
-                    type="text"
                     value={razao_social}
                     onChange={(event) => setRazaoSocial(event.target.value)}
-                    maxLength="255"
-                  />
+                  >
+                    <option value="">Selecione</option>
+                    <option value="rs1">Razão Social 1</option>
+                  </select>
                 </label>
               </div>
               <div>
                 <label>
                   Nome Fantasia:
-                  <input
+                  <select
                     className={styles.inputCadastroFornecedor}
-                    type="text"
                     value={nome_fornecedor}
                     onChange={(event) => setNomeFornecedor(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Responsável:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={responsavel}
-                    onChange={(event) => setResponsavel(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-            </div>
-            <div className={styles.downLeft}>
-              <legend className={styles.subTitle}>Dados de Contato</legend>
-              <hr />
-              <div>
-                <label>
-                  Tel.:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={telefone}
-                    onChange={(event) => setTelefone(event.target.value)}
-                    maxLength="9"
-                  />
-                </label>
-                <label>
-                  Cel.:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={tel_celular}
-                    onChange={(event) => setTelCelular(event.target.value)}
-                    maxLength="10"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  E-mail 1:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="email"
-                    value={e_mail1}
-                    onChange={(event) => setEmail1(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  E-mail 2:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="email"
-                    value={e_mail2}
-                    onChange={(event) => setEmail2(event.target.value)}
-                    maxLength="255"
-                  />
+                  >
+                    <option value="">Selecione</option>
+                    <option value="nf1">Nome Fantasia 1</option>
+                  </select>
                 </label>
               </div>
             </div>
           </div>
           <div className={styles.rightSide}>
             <div className={styles.upperRight}>
-              <legend className={styles.subTitle}>Dados de Endereço</legend>
+              <legend className={styles.subTitle}>Dados do Produto</legend>
               <hr />
               <div>
                 <label>
-                  CEP:
-                  <input
+                  Nome do Produto:
+                  <select
                     className={styles.inputCadastroFornecedor}
-                    type="text"
                     value={cep}
                     onChange={(event) => setCep(event.target.value)}
-                    maxLength="9"
-                  />
+                  >
+                    <option value="">Selecione</option>
+                    <option value="produto1">Produto 1</option>
+                  </select>
                 </label>
                 <label>
-                  Estado:
-                  <input
+                  Tipo:
+                  <select
                     className={styles.inputCadastroFornecedor}
-                    type="text"
                     value={estado}
                     onChange={(event) => setEstado(event.target.value)}
-                    maxLength="2"
-                  />
+                  >
+                    <option value="">Selecione</option>
+                    <option value="tipo1">Tipo 1</option>
+                  </select>
                 </label>
               </div>
               <div>
                 <label>
-                  Cidade:
-                  <input
+                  Descrição:
+                  <select
                     className={styles.inputCadastroFornecedor}
-                    type="text"
                     value={cidade}
                     onChange={(event) => setCidade(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Bairro:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={bairro}
-                    onChange={(event) => setBairro(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Endereço:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={endereco}
-                    onChange={(event) => setEndereco(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Num.:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={numero}
-                    onChange={(event) => setNumero(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-                <label>
-                  Comp.:
-                  <input
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={complemento}
-                    onChange={(event) => setComplemento(event.target.value)}
-                  />
-                </label>
-              </div>
-            </div>
-            <div className={styles.downRight}>
-              <legend className={styles.subTitle}>Outros</legend>
-              <hr />
-              <div>
-                <label>
-                  Observações:
-                  <textarea
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={comentario}
-                    onChange={(event) => setComentario(event.target.value)}
-                    maxLength="255"
-                  />
+                  >
+                    <option value="">Selecione</option>
+                    <option value="descricao1">Descrição 1</option>
+                  </select>
                 </label>
               </div>
               <div>

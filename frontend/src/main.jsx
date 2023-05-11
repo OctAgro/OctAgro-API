@@ -22,6 +22,7 @@ import { RelatoriosAdmin } from "./pages/admin/RelatoriosAdmin/RelatoriosAdmin"
 import { CadastroFornecedoresAdmin } from "./pages/admin/CadastroFornecedoresAdmin/CadastroFornecedoresAdmin"
 import { AtualizarProdutosAdmin } from "./pages/admin/AtualizarProdutosAdmin/AtualizarProdutosAdmin"
 import { PedidosAdmin } from "./pages/admin/PedidosAdmin/PedidosAdmin"
+import { CadastroPedidosAdmin } from "./pages/admin/CadastroPedidosAdmin/CadastroPedidosAdmin"
 
 // RECEBEDOR
 /* import  PathRecebedor from "./components/Paths/PathRecebedor"  */

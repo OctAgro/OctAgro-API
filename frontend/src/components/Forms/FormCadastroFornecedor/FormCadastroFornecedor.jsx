@@ -55,6 +55,7 @@ export const FormCadastroFornecedor = () => {
       }
 
       const fornecedor = await criarFornecedor(dados)
+      console.log(fornecedor)
       setErrorMessage(fornecedor.message)
       setOpenModalFornecedorCadastrado(true)
     } catch (erro) {
@@ -88,7 +89,7 @@ export const FormCadastroFornecedor = () => {
   const [nome_motorista, setNomeMotorista] = useState("")
   const [placa_veiculo, setPlacaVeiculo] = useState("")
   const [documentos_anexos, setDocumentosAnexos] = useState("")
-  const [status_fornecedor, setStatusFornecedor] = useState("")
+  const [status_fornecedor, setStatusFornecedor] = useState(1)
 
   // MENSAGEM DE ERRO
   const [errorMessage, setErrorMessage] = useState(null)
@@ -127,25 +128,10 @@ export const FormCadastroFornecedor = () => {
           <div id={styles["titulo"]}>
             CADASTRO FORNECEDOR
           </div>
-
-
           <div id={styles["ladoEsquerdo"]}>
             <div id={styles["subtitle"]}>
               Dados de Identificação
               <hr />
-            </div>
-
-            <div id={styles["id"]}>
-              ID:
-            </div>
-            <div id={styles["inputId"]}>
-              <input type="text" className={styles.fullSizeInput} />
-            </div>
-            <div id={styles["data"]}>
-              Data:
-            </div>
-            <div id={styles["inputData"]}>
-              <input type="date" className={styles.fullSizeInput} />
             </div>
             <div id={styles["cnpj"]}>
               CNPJ:

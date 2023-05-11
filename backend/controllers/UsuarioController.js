@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 module.exports = class UsuarioControllers {
 
     static async registrarUsuarioPost(req, res) {
-        const data = req.body
+        const data = req.body.data
 
         if (!data.nome) {
             return res.json({message: "Por favor, adicione um nome!", status: 500}).status(500)
@@ -140,9 +140,9 @@ module.exports = class UsuarioControllers {
     }
 
     static async buscarUsuarioByEmail(req, res) {
-        const email = req.body
+        const data = req.body
 
-        const checarUsuario = await Usuario.findOne({where: {email: email}})
+        const checarUsuario = await Usuario.findOne({where: {email: data.email}})
 
         if (!checarUsuario) {
             return res.json({message: "Usuário não encontrado!", status: 500}).status(500)

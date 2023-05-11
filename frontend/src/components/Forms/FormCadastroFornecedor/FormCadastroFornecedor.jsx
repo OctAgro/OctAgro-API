@@ -121,249 +121,235 @@ export const FormCadastroFornecedor = () => {
 
   return (
     <div>
-      <div className={styles.external}>
-        <div>
-          <h1 className={styles.title}>CADASTRO FORNECEDOR</h1>
-        </div>
-        <form className={styles.formCadastroFornecedor} onSubmit={handleSubmit}>
-          <div className={styles.leftSide}>
-            <div className={styles.upperLeft}>
-              <legend className={styles.subTitle}>Dados de identificação</legend>
-              <hr />
-              {/*               <div>
-                <label>
-                  ID:
-                  <InputMask type="text" className={styles.inputCadastroFornecedor} />
-                </label>
-                <label>
-                  Data:
-                  <InputMask type="text" className={styles.inputCadastroFornecedor} />
-                </label>
-              </div> */}
-              <div>
-                <label>
-                  CNPJ:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={CNPJ}
-                    onChange={(event) => setCNPJ(event.target.value)}
-                    mask="99.999.999/9999-99"
-                    maskChar=" "
-                  />
-                </label>
-                <label>
-                  IE:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={IE}
-                    onChange={(event) => setIE(event.target.value)}
-                    mask="99.999.999-9"
-                    maskChar="_"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Razão Social:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={razao_social}
-                    onChange={(event) => setRazaoSocial(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Nome Fantasia:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={nome_fornecedor}
-                    onChange={(event) => setNomeFornecedor(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Responsável:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={responsavel}
-                    onChange={(event) => setResponsavel(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-            </div>
-            <div className={styles.downLeft}>
-              <legend className={styles.subTitle}>Dados de Contato</legend>
-              <hr />
-              <div>
-                <label>
-                  Tel.:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={telefone}
-                    onChange={(event) => setTelefone(event.target.value)}
-                    mask="(99) 9999-9999"
-                    maskChar="_"
-                  />
-                </label>
-                <label>
-                  Cel.:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={tel_celular}
-                    onChange={(event) => setTelCelular(event.target.value)}
-                    mask="(99) 99999-9999"
-                    maskChar="_"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  E-mail 1:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="email"
-                    value={e_mail1}
-                    onChange={(event) => setEmail1(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  E-mail 2:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="email"
-                    value={e_mail2}
-                    onChange={(event) => setEmail2(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className={styles.rightSide}>
-            <div className={styles.upperRight}>
-              <legend className={styles.subTitle}>Dados de Endereço</legend>
-              <hr />
-              <div>
-                <label>
-                  CEP:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={cep}
-                    onChange={handleCepChange}
-                    mask="99999-999"
-                    maskChar="_"
-                  />
-                </label>
-                <label>
-                  Estado:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={estado}
-                    onChange={(event) => setEstado(event.target.value)}
-                    maxLength="2"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Cidade:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={cidade}
-                    onChange={(event) => setCidade(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Bairro:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={bairro}
-                    onChange={(event) => setBairro(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Endereço:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={endereco}
-                    onChange={(event) => setEndereco(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Num.:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={numero}
-                    onChange={(event) => setNumero(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-                <label>
-                  Comp.:
-                  <InputMask
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={complemento}
-                    onChange={(event) => setComplemento(event.target.value)}
-                  />
-                </label>
-              </div>
-            </div>
-            <div className={styles.downRight}>
-              <legend className={styles.subTitle}>Outros</legend>
-              <hr />
-              <div>
-                <label>
-                  Observações:
-                  <textarea
-                    className={styles.inputCadastroFornecedor}
-                    type="text"
-                    value={comentario}
-                    onChange={(event) => setComentario(event.target.value)}
-                    maxLength="255"
-                  />
-                </label>
-              </div>
-              <div>
-                <InputMask
-                  type="button"
-                  className={styles.botaoConfirmarModal}
-                  onClick={handleSubmit}
-                  value="CADASTRAR"
-                />
-              </div>
+      <form onSubmit={handleSubmit}>
 
-              {errorMessage === "Fornecedor cadastrado com sucesso!" ? (
+        <div id={styles["container"]}>
+          <div id={styles["titulo"]}>
+            CADASTRO FORNECEDOR
+          </div>
+
+
+          <div id={styles["ladoEsquerdo"]}>
+            <div id={styles["subtitle"]}>
+              Dados de Identificação
+              <hr />
+            </div>
+
+            <div id={styles["id"]}>
+              ID:
+            </div>
+            <div id={styles["inputId"]}>
+              <input type="text" className={styles.fullSizeInput} />
+            </div>
+            <div id={styles["data"]}>
+              Data:
+            </div>
+            <div id={styles["inputData"]}>
+              <input type="date" className={styles.fullSizeInput} />
+            </div>
+            <div id={styles["cnpj"]}>
+              CNPJ:
+            </div>
+            <div id={styles["inputId"]}>
+              <InputMask
+                type="text"
+                value={CNPJ}
+                onChange={(event) => setCNPJ(event.target.value)}
+                mask="99.999.999/9999-99"
+                maskChar=" "
+                className={styles.fullSizeInput} />
+            </div>
+            <div id={styles["ie"]}>
+              IE:
+            </div>
+            <div id={styles["inputIe"]}>
+              <InputMask
+
+                type="text"
+                value={IE}
+                onChange={(event) => setIE(event.target.value)}
+                mask="99.999.999-9"
+                maskChar="_"
+
+                className={styles.fullSizeInput} />
+            </div>
+            <div className={styles.dadosEmpresa}>
+              Razão Social:
+            </div>
+            <div className={styles.dadosEmpresa}>
+              <InputMask
+                type="text"
+                value={razao_social}
+                onChange={(event) => setRazaoSocial(event.target.value)}
+                maxLength="255" className={styles.fullSizeInput} />
+            </div>
+            <div className={styles.dadosEmpresa}>
+              Nome Fantasia:
+            </div>
+            <div className={styles.dadosEmpresa}>
+              <InputMask
+                type="text"
+                value={nome_fornecedor}
+                onChange={(event) => setNomeFornecedor(event.target.value)}
+                maxLength="255"
+                className={styles.fullSizeInput} />
+            </div>
+            <div className={styles.dadosEmpresa}>
+              Responsável:
+            </div>
+            <div className={styles.dadosEmpresa}>
+              <InputMask
+                type="text"
+                value={responsavel}
+                onChange={(event) => setResponsavel(event.target.value)}
+                maxLength="255" className={styles.fullSizeInput} />
+            </div>
+
+
+
+            <div id={styles["subtitle"]}>
+              Dados de Contato
+              <hr />
+            </div>
+            <div id={styles["tel"]}>Tel.:</div>
+            <div>
+              <InputMask
+                value={telefone}
+                onChange={(event) => setTelefone(event.target.value)}
+                mask="(99) 9999-9999"
+                maskChar="_" className={styles.fullSizeInput} type="text" />
+            </div>
+            <div id={styles["cel"]}>Cel.:</div>
+            <div>
+              <InputMask
+                value={tel_celular}
+                onChange={(event) => setTelCelular(event.target.value)}
+                mask="(99) 99999-9999"
+                maskChar="_"
+                className={styles.fullSizeInput} type="text" /></div>
+            <div className={styles.email}>E-mail 1:</div>
+            <div className={styles.inputEmail}>
+              <InputMask
+                type="email"
+                value={e_mail1}
+                onChange={(event) => setEmail1(event.target.value)}
+                maxLength="255"
+
+                className={styles.fullSizeInput} /></div>
+            <div >E-mail 2:</div>
+            <div className={styles.inputEmail}>
+              <InputMask
+                type="email"
+                value={e_mail2}
+                onChange={(event) => setEmail2(event.target.value)}
+                maxLength="255"
+                className={styles.fullSizeInput} />
+            </div>
+
+          </div>
+
+
+
+          <div id={styles["ladoDireito"]}>
+            <div id={styles["subtitle"]}>
+              Dados de Endereço
+              <hr />
+            </div>
+            <div id={styles["cep"]}>
+              CEP:
+            </div>
+            <div id={styles["inputCep"]}>
+              <InputMask
+                type="text"
+                value={cep}
+                onChange={handleCepChange}
+                mask="99999-999"
+                maskChar="_" className={styles.fullSizeInput} />
+            </div>
+
+            <div id={styles["estado"]}>
+              Estado:
+            </div>
+            <div id={styles["inputEstado"]}>
+              <InputMask
+                type="text"
+                value={estado}
+                onChange={(event) => setEstado(event.target.value)}
+                maxLength="2"
+                className={styles.fullSizeInput} />
+            </div>
+            <div >Cidade:</div>
+            <div className={styles.inputEndereco}>
+              <InputMask
+                value={cidade}
+                onChange={(event) => setCidade(event.target.value)}
+                maxLength="255"
+                className={styles.fullSizeInput} type="text" /></div>
+            <div >Bairro:</div>
+            <div className={styles.inputEndereco}>
+              <InputMask
+                value={bairro}
+                onChange={(event) => setBairro(event.target.value)}
+                maxLength="255"
+                className={styles.fullSizeInput} type="text" />
+            </div>
+            <div >Endereço:</div>
+            <div className={styles.inputEndereco}>
+              <InputMask
+                value={endereco}
+                onChange={(event) => setEndereco(event.target.value)}
+                maxLength="255"
+                className={styles.fullSizeInput} type="text" /></div>
+
+            <div id={styles["numero"]}>
+              Núm.:
+            </div>
+            <div id={styles["inputNum"]}>
+              <InputMask
+                value={numero}
+                onChange={(event) => setNumero(event.target.value)}
+                maxLength="255"
+                type="text" className={styles.fullSizeInput} />
+            </div>
+
+            <div id={styles["complemento"]}>
+              Comp.:
+            </div>
+            <div id={styles["inputComp"]}>
+              <InputMask
+                value={complemento}
+                onChange={(event) => setComplemento(event.target.value)} type="text" className={styles.fullSizeInput} />
+            </div>
+            <div id={styles["subtitle"]}>
+              Outros
+              <hr />
+            </div>
+            <div className={styles.dadosEmpresa}>Observações:</div>
+            <div className={styles.dadosEmpresa}><textarea className={styles.fullSizeInput}
+            type="text"
+            value={comentario}
+            onChange={(event) => setComentario(event.target.value)}
+            maxLength="255"
+            cols="50" rows="10"></textarea>
+            </div>
+
+
+            <InputMask
+              type="button"
+              className={styles.botaoConfirmarModal}
+              onClick={handleSubmit}
+              value="CADASTRAR"
+            />
+          </div>
+
+
+        </div>
+
+
+      </form >
+
+          
+      {errorMessage === "Fornecedor cadastrado com sucesso!" ? (
                 /* MODAL CADASTRO COM SUCESSO */
                 <Modal isOpen={openModalFornecedorCadastrado} onClick={handleRedirect}>
                   <div className={styles.conteudoModal}>
@@ -389,10 +375,6 @@ export const FormCadastroFornecedor = () => {
                   </div>
                 </Modal>
               )}
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+    </div >
   )
 }

@@ -43,7 +43,13 @@ const RelatorioAprovador = db.define('RelatorioAprovador', {
         allowNull: true
     },
     id_pedido: DataTypes.INTEGER,
-    id_usuario: DataTypes.INTEGER
+    id_usuario: DataTypes.INTEGER,
+
+    status_relatorio_aprovador: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+    }
 })
 
 //Criando relação entre tabela RelatorioAprovador e Usuario

@@ -56,7 +56,13 @@ const RelatorioAnalista = db.define('RelatorioAnalista', {
 
     },
     id_pedido: DataTypes.INTEGER,
-    id_usuario: DataTypes.INTEGER
+    id_usuario: DataTypes.INTEGER,
+
+    status_relatorio_analista: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+    }
 
 
 })

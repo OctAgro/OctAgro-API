@@ -7,5 +7,6 @@ router.get('/listar/:id_fornecedor', FornecedorController.procurarFornecedor)
 router.post('/cadastrar', FornecedorController.cadastrarFornecedor)
 router.delete('/:id_fornecedor', FornecedorController.deletarFornecedor)
 router.put('/atualizar/:id_fornecedor', FornecedorController.atualizarFornecedor)
+router.put('/alterarStatus/:id_fornecedor', FornecedorController.alterarStatusFornecedor)
 
 module.exports = router

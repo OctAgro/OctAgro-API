@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 // Importando o Provider
 import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
@@ -11,12 +12,28 @@ import { BarraAdmin } from "../../../components/BarraAdmin/BarraAdmin"
 
 // Importando os ícones
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleCheck, faTriangleExclamation, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faCircleCheck, faTriangleExclamation, faTrash, faPlus, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 // Importando CSS
 import styles from "./ProdutosAdmin.module.css"
 
+// Importando Hooks
+import { encontrarPedidos } from "../../../hooks/encontrarPedidos"
+
 export const ProdutosAdmin = () => {
+
+  //importando todos os Pedidos
+  const [pedidos, setPedidos] = useState([])
+  useEffect(() => {
+    async function fetchPedidos() {
+      const dadosPedidos = await encontrarPedidos()
+      setPedidos(dadosPedidos)
+    }
+    fetchPedidos()
+  }, [])
+
+  console.log("pedidos: ", pedidos)
+
   // HANDLES DO MODAL DE CADASTRO
   const handleCloseModalProdutoCadastrado = () => {
     setOpenModalProdutoCadastrado(false)
@@ -69,7 +86,7 @@ export const ProdutosAdmin = () => {
         <div id={styles["sidebar"]}><SidebarAdmin /></div>
         <div id={styles["header"]}><HeaderProdutos /></div>
         <div id={styles["barraPesquisa"]}>
-        <div>
+          <div>
             <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/produtos/cadastrar">
               <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
             </BarraAdmin>
@@ -144,6 +161,53 @@ export const ProdutosAdmin = () => {
               </Modal>
             </div>
           </div>
+
+          {/* --- BODY --- */}
+          <div id={styles["body"]}>
+            <div className={styles.divBody}>
+              <table className={styles.tableBackground}>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Fornecedor</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pedidos?.map((pedido) => (
+                    <tr key={pedido.id_pedido}>
+                      <td className={styles.tableData}>{pedido.id_pedido}</td>
+                      <td className={styles.tableData}>{pedido.produto.nome_produto}</td>
+                      <td className={styles.tableData}>{pedido.fornecedor.nome_fornecedor}</td>
+                      <td className={styles.tableData}>{pedido.produto.tipo}</td>
+                      <td className={styles.tableData}>{pedido.produto.descricao}</td>
+                      <td className={styles.tableData}>
+
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={``}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button className={styles.button}>
+                          <Link to={``}>
+                            Excluir <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
       </div>
 

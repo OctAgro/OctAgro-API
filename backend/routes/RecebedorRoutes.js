@@ -8,5 +8,6 @@ router.post('/relatorios/apagar/:id', RecebedorController.apagarRelatorio)
 router.post('/relatorios/editar', RecebedorController.atualizarRelatorio)
 router.get('/relatorios/procurar/:id', RecebedorController.listarRelatoriosById)
 router.get('/relatorios/criterios/:id', RecebedorController.listarCriterios)
+router.put('/alterarStatus/:id', RecebedorController.alterarStatusRecebedor)
 
 module.exports = router

@@ -3,8 +3,8 @@ const Fornecedor = require('../models/Fornecedor')
 module.exports = class FornecedorControllers {
 
     static async cadastrarFornecedor(req, res) {
-        const data = req.body
-        
+        const data = req.body.data
+
         if (!data.CNPJ) {
             return res.json({message: "Por favor, digite o CNPJ!"})
         }
@@ -61,7 +61,7 @@ module.exports = class FornecedorControllers {
             return res.json({message: "Por favor, digite o nome do fornecedor!"})
         }
 
-        if (!data.nome_motorista) {
+/*         if (!data.nome_motorista) {
             return res.json({message: "Por favor, digite o nome do motorista!"})
         }
 
@@ -71,7 +71,7 @@ module.exports = class FornecedorControllers {
 
         if (!data.documentos_anexos) {
             return res.json({message: "Por favor, anexe um documento!"})
-        }
+        } */
 
         const fornecedor =  new Fornecedor({
             CNPJ: data.CNPJ,
@@ -118,9 +118,9 @@ module.exports = class FornecedorControllers {
             } else {
                 res.status(200).json({message: "Fornecedor não excluido !"})
             }
-        } catch (error) {
+        } catch (erro) {
             console.log(erro)
-            res.json({message: error}).status(500)
+            res.json({message: erro}).status(500)
         }
     }
 
@@ -241,7 +241,7 @@ module.exports = class FornecedorControllers {
     }
 
     static async procurarFornecedor(req, res) {
-        const idFornecedor = req.params.id
+        const idFornecedor = req.params.id_fornecedor
         const fornecedorProcurado = await Fornecedor.findByPk(idFornecedor)
         if (!fornecedorProcurado) {
             res.status(422).json({message: "Fornecedor não encontrado"})
@@ -249,5 +249,37 @@ module.exports = class FornecedorControllers {
 
         res.status(200).json({message: fornecedorProcurado})
         
+    }
+
+    static async alterarStatusFornecedor(req, res) {
+        const oId_fornecedor = req.params.id_fornecedor
+
+        console.log(oId_fornecedor)
+
+        const fornecedor = await Fornecedor.findByPk(oId_fornecedor)
+
+
+            try {
+                if (fornecedor.status_fornecedor == true) {
+                    await Fornecedor.update({
+                        status_fornecedor: false
+                    },{
+                        where: {
+                            id_fornecedor: oId_fornecedor
+                        }
+                    })
+                } else {
+                    await Fornecedor.update({
+                        status_fornecedor: true
+                    },{
+                        where: {
+                            id_fornecedor: oId_fornecedor
+                        }
+                    })
+                }
+                return res.json({message: "Status do fornecedor alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
     }
 }

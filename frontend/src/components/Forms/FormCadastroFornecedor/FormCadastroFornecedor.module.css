@@ -1,63 +1,108 @@
-.row {
-  display: flex;
-}
-
-.leftSide {
-  width: 50%;
-}
-
-.rightSide {
-  width: 50%;
-}
-
-.title {
-  font-size: 2rem;
-  font-family: "Gotham Medium";
-  text-align: center;
-}
-
-.subTitle {
-  font-size: 1.2rem;
-  font-family: "Gotham Black";
-  margin: 1rem 0 0.1rem 0;
-}
-
-.external {
-  width: 90%;
-  margin: 2rem 2.2rem;
+#container {
   background-color: #e7e0d1;
-  border-radius: 15px;
-  box-shadow: 1px 1px 10px 1px #000000;
+  border-radius: 10px;
+  font-family: "Gotham Black";
+  font-size: 90%;
+  margin: 1% auto;
+  padding: 0.5%;
+  filter: drop-shadow(2px 2px 2px #000);
+  width: 80%;
+  display: grid;
+  grid-template-columns: 49% 2% 49%;
+
 }
 
-.formCadastroFornecedor {
-  display: flex;
-  padding: 0.5rem;
-  font-family: "Gotham Medium";
+#container div {
+  padding: 0.2rem 0;
+  align-items: center;
 }
 
-.inputCadastroFornecedor {
-  margin: 0.2rem;
+.fullSizeInput {
+  background-color: #D9D9D9;
+  border-radius: 5px;
+  font-size: 100%;
+  text-align: left;
+  width: 100%;
+  padding-left: 3%;
   text-align: center;
-  background-color: #d9d9d9;
-  font-family: "Gotham Medium";
-  border: 1px solid black;
 }
 
-.icon {
-  font-size: 3rem;
+#titulo {
+  margin: auto;
+  font-size: 1.7rem;
+  grid-column-start: 1;
+  grid-column-end: 4;
 }
+
+hr {
+  border: #000 solid 0.02rem;
+}
+
+#ladoEsquerdo{
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-template-columns: 15% auto 20% auto;
+}
+
+#ladoDireito{
+  display: grid;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-template-columns: 16% 30% auto 30%;
+}
+
+#id, #cnpj, #tel, #cep, #numero {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#inputId, #inputCep, #inputNum {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#data, #ie, #cel, #estado, #complemento {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  text-align: right;
+  margin-right: 15%;
+}
+
+#inputData, #inputIe, #inputEstado, #inputComp {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+.dadosEmpresa{
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
+.inputEmail, .inputEndereco{
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+#subtitle {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  margin: 1% 0;
+}
+
 
 .botaoConfirmarModal {
+  text-align: center;
   cursor: pointer;
   background-color: #4c4b16;
   color: white;
   font-family: "Gotham Black";
-  padding: 0.7rem 2rem;
+  padding: 0.7rem;
   font-size: 1rem;
   border: solid 2px black;
   border-radius: 7px;
-  margin: 1rem auto;
+  margin: 0.5% 0;
+  grid-column-start: 3;
+  grid-column-end: 5;
 }
 
 .conteudoModal {

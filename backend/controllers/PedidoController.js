@@ -4,26 +4,22 @@ const Produto = require('../models/Produto')
 
 module.exports = class PedidoController {
     static async criarPedido(req,res) {
-        const {
-            produto,
-            quantidade,
-            unidade_medida,
-            fornecedor
+        const data = req.body
 
-        } = req.body
+    const pedido = new Pedido ({
 
-    const Pedido = new Pedido ({
 
-        produto: produto,
-        quantidade: quantidade,
-        unidade_medida: unidade_medida,
-        fornecedor: fornecedor
+        status_pedido: data.status_pedido,
+        status_aprovacao: data.status_aprovacao,
+        id_produto: data.id_produto,
+        id_fornecedor: data.id_fornecedor
 
     })
 
     try {
-        const novoPedido = await Pedido.save()
-        res.status(201).json({mensagem: 'Relatório salvo com sucesso!', novoPedido})
+
+        const novoPedido = await pedido.save()
+        res.json({mensagem: 'Pedido salvo com sucesso!', status: 201 }).status(201)
     } catch(erro) {
         res.status(500).json({mensagem: erro})
     }
@@ -35,7 +31,7 @@ module.exports = class PedidoController {
         const pedidoProcurado = await Pedido.findByPk(idPedido)
 
         if (!pedidoProcurado) {
-            res.status(422).json({mensagem: "Relatório não encontrado!"})
+            res.status(422).json({mensagem: "Pedido não encontrado!"})
         }
 
         res.status(200).json({mensagem: pedidoProcurado})
@@ -43,28 +39,22 @@ module.exports = class PedidoController {
 
 
     static async atualizarPedido (req,res) {
-        const idPedido = req.parms.id
-        const { 
-            produto,
-            quantidade,
-            unidade_medida,
-            fornecedor
-
-        } = req.body
+        const idPedido = req.params.id
+        const data = req.body
 
         try {
-            const PedidoAtualizado = await Pedido.update({
-                produto: produto,
-                quantidade: quantidade,
-                unidade_medida: unidade_medida,
-                fornecedor: fornecedor
+            await Pedido.update({
+                status_pedido: data.status_pedido,
+                status_aprovacao: data.status_aprovacao,
+                id_produto: data.id_produto,
+                id_fornecedor: data.id_fornecedor
             },{
                 where: { id_pedido: idPedido
                 }
             })
-            res.status(200).json({mensagem: 'pedido atualizado com sucesso!', PedidoAtualizado})
+            res.status(200).json({message: 'Pedido atualizado com sucesso!'})
         } catch(erro) {
-            res.status(500).json({mensagem: erro})
+            res.status(500).json({mesage: erro})
         }
     }
 
@@ -83,7 +73,7 @@ module.exports = class PedidoController {
                   ],});
             res.status(200).json(pedidos)
          } catch(erro) {
-            res.status(500).json({mensagem: erro})
+            res.status(500).json({message: erro})
          }
     }
 
@@ -127,6 +117,38 @@ module.exports = class PedidoController {
         } catch (erro) {
             res.status(500).json({ mensagem: erro });
         }
+    }
+
+    static async alterarStatusPedido(req, res) {
+        const oId_pedido = req.params.id
+
+        console.log(oId_pedido)
+
+        const pedido = await Pedido.findByPk(oId_pedido)
+
+
+            try {
+                if (pedido.status_pedido_situacao == true) {
+                    await Pedido.update({
+                        status_pedido_situacao: false
+                    },{
+                        where: {
+                            id_pedido: oId_pedido
+                        }
+                    })
+                } else {
+                    await Pedido.update({
+                        status_pedido_situacao: true
+                    },{
+                        where: {
+                            id_pedido: oId_pedido
+                        }
+                    })
+                }
+                return res.json({message: "Status do pedido alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
     }
 
 }

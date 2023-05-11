@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 // Importando o Provider
 import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
@@ -11,12 +12,32 @@ import { BarraAdmin } from "../../../components/BarraAdmin/BarraAdmin"
 
 // Importando os ícones
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleCheck, faTriangleExclamation, faTrash, faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons"
+import {
+  faCircleCheck,
+  faTriangleExclamation,
+  faTrash,
+  faPersonCirclePlus,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons"
 
 // Importando CSS
 import styles from "./FornecedoresAdmin.module.css"
 
+// Importando Hooks
+import { encontrarPedidos } from "../../../hooks/encontrarPedidos"
+
 export const FornecedoresAdmin = () => {
+  //importando todos os Pedidos
+  const [pedidos, setPedidos] = useState([])
+  useEffect(() => {
+    async function fetchPedidos() {
+      const dadosPedidos = await encontrarPedidos()
+      setPedidos(dadosPedidos)
+    }
+    fetchPedidos()
+  }, [])
+
+  console.log("pedidos: ", pedidos)
 
   // HANDLES DO MODAL DE ATUALIZAR
   const handleCloseModalFornecedorAtualizado = () => {
@@ -57,12 +78,16 @@ export const FornecedoresAdmin = () => {
   return (
     <PedidosProvider>
       <div id={styles["main"]}>
-        <div id={styles["sidebar"]}><SidebarAdmin /></div>
-        <div id={styles["header"]}><HeaderFornecedores /></div>
+        <div id={styles["sidebar"]}>
+          <SidebarAdmin />
+        </div>
+        <div id={styles["header"]}>
+          <HeaderFornecedores />
+        </div>
         <div id={styles["barraPesquisa"]}>
-        <div>
+          <div>
             <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/fornecedores/cadastrar">
-              <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo fornecedor!"/>
+              <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo fornecedor!" />
             </BarraAdmin>
 
             <div>
@@ -122,9 +147,49 @@ export const FornecedoresAdmin = () => {
             </Modal>
           </div>
         </div>
+
+        {/* ---- BODY ---- */}
         <div id={styles["body"]}>
-        {/*  < Body /> */}  
-        </div>          
+          <div className={styles.divBody}>
+            <table className={styles.tableBackground}>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>CNPJ</th>
+                  <th>Razão Social</th>
+                  <th>Produtos</th>
+                  <th>Ações</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pedidos?.map((pedido) => (
+                  <tr key={pedido.id_pedido}>
+                    <td className={styles.tableData}>{pedido.id_pedido}</td>
+                    <td className={styles.tableData}>{pedido.fornecedor.CNPJ}</td>
+                    <td className={styles.tableData}>{pedido.fornecedor.razao_social}</td>
+                    <td className={styles.tableData}>{pedido.produto.nome_produto}</td>
+                    <td className={styles.tableData}>
+                      {/* verificando com é o estado da aprovação para mostrar ação */}
+                      <button className={styles.button}>
+                        <Link to={``}>
+                          Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </Link>
+                      </button>
+                    </td>
+                    <td className={styles.tableData}>
+                      <button className={styles.button}>
+                        <Link to={``}>
+                          Excluir <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </Link>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </PedidosProvider>
   )

@@ -68,7 +68,7 @@ module.exports = class ProdutoControllers {
     static async atualizarProduto(req, res) {
         const oId_produto = req.params.id
 
-        const data = req.body
+        const data = req.body.data
 
         if (!data.nome_produto) {
             return res.json({message: "Por favor, adicione um nome ao produto cadastrado!", status: 500}).status(500)
@@ -112,7 +112,6 @@ module.exports = class ProdutoControllers {
                     id_produto: oId_produto
                 }
             })
-            console.log(atualizarProduto)
             return res.json({message: "Produto atualizado com sucesso!", status: 201}).status(201)
         } catch (error) {
             return res.json(error).status(500)
@@ -133,11 +132,12 @@ module.exports = class ProdutoControllers {
         const produtoProcurado = await Produto.findByPk(oId_produto)
 
         if (!produtoProcurado) {
+            console.log('Deu ruim garai')
             res.status(422).json({message: "Produto não encontrado"})
         }
-
+        console.log('Encontrou isso no Back:', produtoProcurado)
         res.status(200).json({message: produtoProcurado})
-        
+
     }
 
     static async alterarStatusProduto(req, res) {

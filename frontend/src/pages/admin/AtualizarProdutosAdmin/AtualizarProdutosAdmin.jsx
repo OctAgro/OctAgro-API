@@ -19,47 +19,52 @@ import styles from "./AtualizarProdutosAdmin.module.css"
 
 
 export const AtualizarProdutosAdmin = () => {
-  // HANDLES DO MODAL DE ATUALIZAR PRODUTOS
-  const handleCloseModalProdutoAtualizado = () => {
-    setOpenModalProdutoAtualizado(false)
+  // HANDLES DO MODAL DE CADASTRO
+  const handleCloseModalProdutoCadastrado = () => {
+    setOpenModalProdutoCadastrado(false)
   }
 
-  const handleOpenModalProdutoAtualizado = (e) => {
+  const handleOpenModalProdutoCadastrado = (e) => {
     e.preventDefault()
-    setOpenModalProdutoAtualizado(true)
+    setOpenModalProdutoCadastrado(true)
   }
 
-  const [openModalProdutoAtualizado, setOpenModalProdutoAtualizado] = useState(false)
+  const [openModalProdutoCadastrado, setOpenModalProdutoCadastrado] = useState(false)
 
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAdmin />
-        <div className={styles.container}>
-          <HeaderProdutos />
-          <div>
-            <BarraAdmin linkVoltar="/admin/produtos" linkCadastrar="/admin/produtos/cadastrar">
-              <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
-            </BarraAdmin>
-            {/* AO CONSTRUIR O FORMULARIO, COMENTAR A DIV ABAIXO, ESTOU USANDO ESTE BOTÃO PARA APLICAR OS MODALS */}
-            <div>
-              <FormAtualizarProduto onClick={handleOpenModalProdutoAtualizado} />
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}><SidebarAdmin />
+        </div>
+        <div id={styles["header"]}><HeaderProdutos />
+        </div>
 
-              {/* MODAL CADASTRAR */}
-              <Modal isOpen={openModalProdutoAtualizado} onClick={handleCloseModalProdutoAtualizado}>
-                <div className={styles.conteudoModal}>
-                  <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                  <p>Produto atualizado com sucesso!</p>
-                  <input
-                    className={styles.botaoConfirmarModal}
-                    type="button"
-                    value="OK"
-                    onClick={handleCloseModalProdutoAtualizado}
-                  />
-                </div>
-              </Modal>
+        <div id={styles["barraPesquisa"]}>
+          <BarraAdmin linkVoltar="/admin/produtos" linkCadastrar="/admin/produtos/cadastrar">
+            <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
+          </BarraAdmin>
+          {/* AO CONSTRUIR O FORMULARIO, COMENTAR A DIV ABAIXO, ESTOU USANDO ESTE BOTÃO PARA APLICAR OS MODALS */}
+
+        </div>
+
+        <div id={styles["body"]}>
+
+          <FormAtualizarProduto onClick={handleOpenModalProdutoCadastrado} />
+
+          {/* MODAL CADASTRAR */}
+          <Modal isOpen={openModalProdutoCadastrado} onClick={handleCloseModalProdutoCadastrado}>
+            <div className={styles.conteudoModal}>
+              <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+              <p>Produto cadastrado com sucesso!</p>
+              <input
+                className={styles.botaoConfirmarModal}
+                type="button"
+                value="OK"
+                onClick={handleCloseModalProdutoCadastrado}
+              />
             </div>
-          </div>
+          </Modal>
+
         </div>
       </div>
     </PedidosProvider>

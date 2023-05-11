@@ -189,7 +189,7 @@ export const ProdutosAdmin = () => {
 
                         {/* verificando com é o estado da aprovação para mostrar ação */}
                         <button className={styles.button}>
-                          <Link to={``}>
+                          <Link to={`/admin/produtos/atualizar/${pedido.id_pedido}`}>
                             Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
                           </Link>
                         </button>

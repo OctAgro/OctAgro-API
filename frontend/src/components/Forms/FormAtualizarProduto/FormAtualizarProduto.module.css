@@ -1,88 +1,118 @@
-.row {
-  display: flex;
-}
-
-.leftSide {
-  width: 40%;
-}
-
-.rightSide {
-  width: 60%;
-}
-
-.title {
-  font-size: 2rem;
-  font-family: "Gotham Medium";
-  text-align: center;
-}
-
-.subTitle {
-  font-size: 1.5rem;
-  font-family: "Gotham Medium";
-  margin: 1rem 0 0.5rem 0;
-}
-
-.external {
-  width: 60%;
-  margin: 0 auto;
+#container {
   background-color: #e7e0d1;
-  border-radius: 15px;
-  box-shadow: 1px 1px 10px 1px #000000;
-}
-
-.FormAtualizarProduto {
-  padding: 0.5rem;
-  font-family: "Gotham Medium";
-}
-
-.inputCadastroProduto,
-.porcentagem {
-  background-color: #d9d9d9;
-  font-family: "Gotham Medium";
-}
-
-.inputCadastroProduto {
-  margin: 0.2rem;
-  text-align: center;
-}
-
-.porcentagem {
-  margin: 0 0.5rem;
-  width: 2vw;
-}
-
-.btnConfirmar {
-  text-align: center;
-  cursor: pointer;
-  background-color: #4c4b16;
-  color: white;
+  border-radius: 10px;
   font-family: "Gotham Black";
-  padding: 0.7rem;
-  margin: 0.5rem;
-  font-size: 1rem;
-  border: solid 2px black;
-  border-radius: 7px;
-  float: right;
-}
-
-.inserirRegra {
-  cursor: pointer;
-  color: white;
-  background: #4c4b16;
-  text-align: center;
-  width: 40%;
-  margin-top: 0.5rem;
-  padding: 1rem;
-  border-radius: 15px;
+  font-size: 90%;
+  margin: 0.5% auto;
+  padding: 0.5%;
   filter: drop-shadow(2px 2px 2px #000);
+  width: 50%;
+
 }
 
-.icon {
-  font-size: 3rem;
+#container div {
+  padding: 0.2rem 0;
+  align-items: center;
+
 }
 
-.paragrafoRegra {
-  margin-top: 0.5rem;
+.fullSizeInput {
+  background-color: #D9D9D9;
+  border-radius: 5px;
+  font-size: 90%;
+  text-align: left;
+  width: 100%;
+  padding-left: 1%;
+}
+
+#titulo1,
+#titulo2 {
+  margin: 0.3rem auto;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+#titulo2 {
+  text-align: left;
+}
+
+hr {
+  border: #000 solid 0.02rem;
+}
+
+#idProduto {
+  display: grid;
+  grid-template-columns: 10% 30% auto 40%;
+}
+
+#id {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#inputId {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#data {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  text-align: right;
+  margin-right: 15%;
+}
+
+#inputData {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+#inputNomeProduto {
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+#regrasAceitacao {
+  display: grid;
+  grid-template-columns: 50% 10% 8% 10% auto;
+}
+
+#boxRegras {
+  background-color: #D9D9D9;
+  border-radius: 5px;
+  font-size: 70%;
+  text-align: center;
+  width: 100%;
+  padding-left: 1%;
+  border: 1px solid black;
+  margin: 1% 0;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#subtitle {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin: 0.5% 0;
+}
+
+.checkAprovar {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+#valorMax {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+#inputValorMax {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+p {
+  padding: 2%;
 }
 
 .botaoConfirmarModal {
@@ -95,25 +125,28 @@
   font-size: 1rem;
   border: solid 2px black;
   border-radius: 7px;
-  margin: 1rem 0;
+  margin: 0.5% 1%;
+  grid-column-start: 3;
+  grid-column-end: 6;
 }
 
-.conteudoModalRegra {
+.inserirRegra {
+  cursor: pointer;
+  color: white;
+  background: #4c4b16;
   text-align: center;
-  width: 50vw;
+  width: 40%;
+  height: 15vh;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 10px;
+  filter: drop-shadow(2px 2px 2px #000);
+  grid-column-start: 3;
+  grid-column-end: 6;
+  grid-row-start: 2;
+  grid-row-end: 6;
 }
 
-.usuarioModal,
-.descricaoModal,
-.tituloModal,
-.inserirModal {
-  margin: 1rem 0rem;
-}
-
-.radioModal{
-  margin: 0 0.5rem;
-}
-
-.inputModal {
-  background-color: #D9D9D9;
+.icon {
+  font-size: 3rem;
 }

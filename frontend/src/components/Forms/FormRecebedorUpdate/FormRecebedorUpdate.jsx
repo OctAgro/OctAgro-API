@@ -49,7 +49,6 @@ export const FormRecebedorUpdate = () => {
     setTextoProduto(pedidos?.produto?.nome_produto)
   }, [relatorioRecebedor])
 
-  // simulando fetch numa API fake, isso te ajuda, meu amigo do BackEnd?
   useEffect(() => {
 
     async function fetchPedidos() {
@@ -67,9 +66,6 @@ export const FormRecebedorUpdate = () => {
   }, [])
 
   console.log("relatorios", relatorioRecebedor)
-
-
-
 
   //lidando com as checkboxs vindas do BD
 

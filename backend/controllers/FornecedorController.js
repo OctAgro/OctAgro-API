@@ -3,7 +3,7 @@ const Fornecedor = require('../models/Fornecedor')
 module.exports = class FornecedorControllers {
 
     static async cadastrarFornecedor(req, res) {
-        const data = req.body
+        const data = req.body.data
 
         if (!data.CNPJ) {
             return res.json({message: "Por favor, digite o CNPJ!"})

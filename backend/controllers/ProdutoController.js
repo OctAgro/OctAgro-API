@@ -3,7 +3,7 @@ const Produto = require('../models/Produto')
 module.exports = class ProdutoControllers {
     
     static async cadastrarProduto(req, res) {
-        const data = req.body
+        const data = req.body.data
 
         if (!data.nome_produto) {
             return res.json({message: "Por favor, adicione um nome ao produto cadastrado!", status: 500}).status(500)

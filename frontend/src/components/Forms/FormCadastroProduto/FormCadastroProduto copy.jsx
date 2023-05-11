@@ -155,7 +155,7 @@ export const FormCadastroProduto = ({ onClick }) => {
                   <input
                     type="checkbox"
                     id="checkboxColoracao"
-                    className={styles.aprovar}
+                    className={styles.checkAprovar}
                     {...register("checkboxColoracao")}
                     checked={checkboxColoracao}
                     onClick={handleCheckboxColoracao}
@@ -166,7 +166,7 @@ export const FormCadastroProduto = ({ onClick }) => {
                   <input
                     type="checkbox"
                     id="checkboxOdor"
-                    className={styles.aprovar}
+                    className={styles.checkAprovar}
                     {...register("checkboxOdor")}
                     checked={checkboxOdor}
                     onClick={handleCheckboxOdor}
@@ -181,7 +181,7 @@ export const FormCadastroProduto = ({ onClick }) => {
                   <input
                     type="checkbox"
                     id="checkboxAusenciaAnimais"
-                    className={styles.aprovar}
+                    className={styles.checkAprovar}
                     {...register("checkboxAM")}
                     checked={checkboxAusenciaAnimais}
                     onClick={handleCheckboxAusenciaAnimais}
@@ -192,7 +192,7 @@ export const FormCadastroProduto = ({ onClick }) => {
                   <input
                     type="checkbox"
                     id="checkboxAM"
-                    className={styles.aprovar}
+                    className={styles.checkAprovar}
                     {...register("checkboxAusenciaMofo")}
                     checked={checkboxAusenciaMofo}
                     onClick={handleCheckboxAusenciaMofo}
@@ -217,7 +217,7 @@ export const FormCadastroProduto = ({ onClick }) => {
               <input
                 type="checkbox"
                 id="checkboxQualidade"
-                className={styles.aprovar}
+                className={styles.checkAprovar}
                 {...register("checkboxQualidade")}
                 checked={checkboxQualidade}
                 onClick={handleCheckboxQualidade}
@@ -228,7 +228,7 @@ export const FormCadastroProduto = ({ onClick }) => {
               <input
                 type="checkbox"
                 id="checkboxFormato"
-                className={styles.aprovar}
+                className={styles.checkAprovar}
                 {...register("checkboxFormato")}
                 checked={checkboxFormato}
                 onClick={handleCheckboxFormato}
@@ -239,7 +239,7 @@ export const FormCadastroProduto = ({ onClick }) => {
               <input
                 type="checkbox"
                 id="checkboxNA"
-                className={styles.aprovar}
+                className={styles.checkAprovar}
                 {...register("checkboxNA")}
                 checked={checkboxNA}
                 onClick={handleCheckboxNA}
@@ -255,7 +255,7 @@ export const FormCadastroProduto = ({ onClick }) => {
               <input
                 type="checkbox"
                 id="checkboxImpurezas"
-                className={styles.aprovar}
+                className={styles.checkAprovar}
                 {...register("checkboxImpurezas")}
                 checked={checkboxImpurezas}
                 onClick={handleCheckboxImpurezas}
@@ -327,12 +327,7 @@ export const FormCadastroProduto = ({ onClick }) => {
                   <div>
                     <label>
                       Máx.
-                      <input
-                        type="text"
-                        className={styles.porcentagem}
-                        min='0'
-                        max='100'
-                      />
+                      <input type="text" className={styles.porcentagem} min="0" max="100" />
                     </label>
                     %
                   </div>

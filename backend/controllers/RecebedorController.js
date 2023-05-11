@@ -272,4 +272,37 @@ module.exports = class RelatorioController {
             res.status(500).json({ message: erro });
         }
     }
+
+    static async alterarStatusRecebedor(req, res) {
+        const oId_relatorio_recebedor = req.params.id
+
+        console.log(oId_relatorio_recebedor)
+
+        const recebedor = await RelatorioRecebedor.findByPk(oId_relatorio_recebedor)
+
+
+            try {
+                if (recebedor.status_recebedor == true) {
+                    await RelatorioRecebedor.update({
+                        status_recebedor: false
+                    },{
+                        where: {
+                            id_relatorio_recebedor: oId_relatorio_recebedor
+                        }
+                    })
+                } else {
+                    await RelatorioRecebedor.update({
+                        status_recebedor: true
+                    },{
+                        where: {
+                            id_relatorio_recebedor: oId_relatorio_recebedor
+                        }
+                    })
+                }
+                return res.json({message: "Status do relatório do recebedor alterado com sucesso!", status: 201}).status(201)
+            } catch (error) {
+                return res.json(error).status(500)
+            }
+    }
+    
 }

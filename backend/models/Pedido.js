@@ -25,7 +25,13 @@ const Pedido = db.define ("pedido" , {
     },
 
     id_produto: Sequelize.INTEGER,
-    id_fornecedor: Sequelize.INTEGER
+    id_fornecedor: Sequelize.INTEGER,
+
+    status_pedido_situacao: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+    }
 
 },{
     timestamps: false

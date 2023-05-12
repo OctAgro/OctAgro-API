@@ -52,7 +52,8 @@ const Produto = db.define('produto', {
     status_produto: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1
     }
 })
 

@@ -109,13 +109,17 @@ const Fornecedor = db.define('fornecedor', {
     nome_motorista: {
         type:Sequelize.STRING,
         require: false,
-        allowNull: true
+        allowNull: true,
+        defaultValue: ""
+
+        
     },
     
     placa_veiculo: {
         type:Sequelize.STRING,
         require: false,
-        allowNull: true
+        allowNull: true,
+        defaultValue: ""
     },
 
     documentos_anexos: {
@@ -127,7 +131,8 @@ const Fornecedor = db.define('fornecedor', {
     status_fornecedor: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1
     }
 })
 

@@ -141,7 +141,7 @@ module.exports = class ProdutoControllers {
     }
 
     static async alterarStatusProduto(req, res) {
-        const oId_produto = req.params.id_produto
+        const oId_produto = req.params.id
 
         console.log(oId_produto)
 

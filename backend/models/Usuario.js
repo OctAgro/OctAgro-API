@@ -44,7 +44,8 @@ const Usuario = db.define('usuario', {
     status_usuario: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1
     }
 
 }, {
@@ -123,7 +124,7 @@ contar().then(function(valor) {
         Usuario.create({
             nome: 'Thiago',
             senha: hashedSenha,
-            email: 'tiago@live.com',
+            email: 'thiago@live.com',
             funcao: 'Recebedor',
             dataAdmissao: '10-01-2010',
             CPF: '12345',

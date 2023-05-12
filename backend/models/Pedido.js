@@ -30,7 +30,8 @@ const Pedido = db.define ("pedido" , {
     status_pedido_situacao: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1
     }
 
 },{

@@ -52,6 +52,13 @@ export const SidebarAdmin = () => {
             Relatórios
           </Link>
         </li>
+        <li className={styles.actionItems}>
+          <FontAwesomeIcon className={styles.reportIcon} icon={faFilePen} />
+          
+          <Link to="/admin/pedidos" className={styles.relatorio}>
+            Pedidos
+          </Link>
+        </li>
       </ul>
       <div className={styles.botItems}>
         <ul className={styles.usuario}>

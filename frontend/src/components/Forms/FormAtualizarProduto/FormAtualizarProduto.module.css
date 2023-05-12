@@ -150,3 +150,14 @@ p {
 .icon {
   font-size: 3rem;
 }
+
+.conteudoModal {
+  text-align: center;
+  margin: 5rem;
+  font-size: 2rem;
+}
+
+.iconeModal {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}

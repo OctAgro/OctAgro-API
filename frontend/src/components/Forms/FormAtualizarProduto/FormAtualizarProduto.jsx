@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 
 // IMPORTANDO COMPONENTES
 import { Modal } from "../../Modal/Modal"
@@ -8,13 +8,16 @@ import styles from "./FormAtualizarProduto.module.css"
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFileLines } from "@fortawesome/free-solid-svg-icons"
+import { faFileLines, faCircleCheck } from "@fortawesome/free-solid-svg-icons"
 
 // HOOK
 import { procurarProduto } from "../../../hooks/procurarProduto"
 import { atualizarProduto } from "../../../hooks/atualizarProduto"
 
 export const FormAtualizarProduto = () => {
+  // NAVIGATE DO REACT ROUTER DOM
+  const navigate = useNavigate()
+
   // MODAL
   const [openModalRegra, setOpenModalRegra] = useState(false)
   const [openModalProduto, setOpenModalProduto] = useState(false)
@@ -115,16 +118,15 @@ export const FormAtualizarProduto = () => {
         data_entrada_empresa,
         hora_entrada_empresa,
       }
-
       console.log(dados)
 
       const produto = await atualizarProduto(produtoId, dados)
       console.log(produto)
-      setErrorMessage(produto.message)
-      setOpenModalProdutoCadastrado(true)
+      setErrorMessage(produto.data.message)
+      setOpenModalProdutoAtualizado(true)
     } catch (erro) {
       setErrorMessage(erro.response.data.message)
-      setOpenModalProdutoCadastrado(true)
+      setOpenModalProdutoAtualizado(true)
       alert(errorMessage)
     }
   }
@@ -134,7 +136,7 @@ export const FormAtualizarProduto = () => {
     async function fetchProdutos() {
       const dadosProdutos = await procurarProduto(produtoId)
       setProduto(dadosProdutos)
-/*       console.log('Informações do Produto que chegam do BackEnd ' + JSON.stringify(dadosProdutos.data.message)) */
+      /*       console.log('Informações do Produto que chegam do BackEnd ' + JSON.stringify(dadosProdutos.data.message)) */
       setNomeProduto(dadosProdutos.data.message.nome_produto)
       setTipo(dadosProdutos.data.message.tipo)
       setDescricao(dadosProdutos.data.message.descricao)
@@ -158,8 +160,49 @@ export const FormAtualizarProduto = () => {
 
   const [produto, setProduto] = useState([])
 
+  // ModalProdutoAtualizado
+  const [openModalProdutoAtualizado, setOpenModalProdutoAtualizado] = useState(false)
+
+  // HANDLES DO MODAL DE ATUALIZAR
+  const handleCloseModalProdutoAtualizado = () => {
+    setOpenModalProdutoAtualizado(false)
+  }
+
+  // Error message do Modal acima
+
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const handleRedirect = () => {
+    navigate("/admin/produtos/")
+  }
   return (
     <div>
+      {errorMessage === "Produto atualizado com sucesso!" ? (
+        /* MODAL ATUALIZAR */
+        <Modal isOpen={openModalProdutoAtualizado} onClick={handleRedirect}>
+          <div className={styles.conteudoModal}>
+            <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+            <p>{errorMessage}</p>
+            <Link to="/admin/produtos/">
+              <input className={styles.botaoConfirmarModal} type="button" value="OK" />
+            </Link>
+          </div>
+        </Modal>
+      ) : (
+        <Modal isOpen={openModalProdutoAtualizado} onClick={handleCloseModalProdutoAtualizado}>
+          <div className={styles.conteudoModal}>
+            <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+            <p>{errorMessage}</p>
+            <input
+              className={styles.botaoConfirmarModal}
+              type="button"
+              value="OK"
+              onClick={handleCloseModalProdutoAtualizado}
+            />
+          </div>
+        </Modal>
+      )}
+
       <form action="" method="post">
         <div id={styles["container"]}>
           <div id={styles["titulo1"]}>ATUALIZAR PRODUTO - {produtoId}</div>

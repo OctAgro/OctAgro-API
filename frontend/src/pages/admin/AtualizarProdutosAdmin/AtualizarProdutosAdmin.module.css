@@ -34,17 +34,6 @@
   background-color: #F7F1E5; 
 }
 
-.conteudoModal {
-  text-align: center;
-  margin: 5rem;
-  font-size: 2rem;
-}
-
-.iconeModal {
-  font-size: 3rem;
-  padding-bottom: 1rem;
-}
-
 .botaoConfirmarModal,
 .botaoRecusarModal {
   cursor: pointer;

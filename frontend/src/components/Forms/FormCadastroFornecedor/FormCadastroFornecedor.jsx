@@ -53,9 +53,8 @@ export const FormCadastroFornecedor = () => {
         documentos_anexos,
         status_fornecedor,
       }
-
       const fornecedor = await criarFornecedor(dados)
-      console.log(fornecedor)
+      console.log('Resposta do Fornecedor' , fornecedor)
       setErrorMessage(fornecedor.message)
       setOpenModalFornecedorCadastrado(true)
     } catch (erro) {

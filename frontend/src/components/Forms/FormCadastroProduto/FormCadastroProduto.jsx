@@ -7,7 +7,7 @@ import styles from "./FormCadastroProduto.module.css"
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFileLines } from "@fortawesome/free-solid-svg-icons"
+import { faFileLines, faCircleCheck } from "@fortawesome/free-solid-svg-icons"
 
 // HOOK
 import { criarProduto } from "../../../hooks/criarProduto"
@@ -135,10 +135,38 @@ export const FormCadastroProduto = () => {
   const [data_entrada_empresa, setDataEntradaEmpresa] = useState("01/01/2023")
   const [hora_entrada_empresa, setHoraEntradaEmpresa] = useState("12:00")
 
+  // MODAL CADASTRO PRODUTO
+  const [openModalProdutoCadastrado, setOpenModalProdutoCadastrado] = useState(false)
+
+  // HANDLES DO MODAL DE CADASTRO
+  const handleCloseModalProdutoCadastrado = () => {
+    setOpenModalProdutoCadastrado(false)
+  }
+
+  const handleOpenModalProdutoCadastrado = (e) => {
+    e.preventDefault()
+    setOpenModalProdutoCadastrado(true)
+  }
+
+  const [errorMessage, setErrorMessage] = useState('')
+
   return (
     <div>
       <form action="" method="post">
         <div id={styles["container"]}>
+          {/* MODAL CADASTRAR */}
+          <Modal isOpen={openModalProdutoCadastrado} onClick={handleCloseModalProdutoCadastrado}>
+            <div className={styles.conteudoModal}>
+              <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+              <p>{errorMessage}</p>
+              <input
+                className={styles.botaoConfirmarModal}
+                type="button"
+                value="OK"
+                onClick={handleCloseModalProdutoCadastrado}
+              />
+            </div>
+          </Modal>
           <div id={styles["titulo1"]}>CADASTRO NOVO PRODUTO</div>
           <div>
             Dados de Identificação
@@ -288,7 +316,12 @@ export const FormCadastroProduto = () => {
             </div>
             <p>%</p>
 
-            <input type="submit" value="CADASTRAR" onClick={handleSubmit} className={styles.botaoConfirmarModal} />
+            <input
+              type="submit"
+              value="CADASTRAR"
+              onClick={handleSubmit}
+              className={styles.botaoConfirmarModal}
+            />
 
             <div className={styles.inserirRegra} onClick={handleOpenModalRegra}>
               <FontAwesomeIcon icon={faFileLines} className={styles.icon} />

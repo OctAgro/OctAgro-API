@@ -26,7 +26,7 @@ export const UsuariosAdmin = () => {
           <HeaderUsuarios />
         </div>
         <div id={styles["barraPesquisa"]}>
-          <BarraAdmin linkVoltar="/admin/usuarios" linkCadastrar="/admin/usuarios/cadastrousuarios">
+          <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/usuarios/cadastrousuarios">
             <FontAwesomeIcon icon={faUserPlus} title="Cadastrar novo usuário!" />
           </BarraAdmin>
         </div>

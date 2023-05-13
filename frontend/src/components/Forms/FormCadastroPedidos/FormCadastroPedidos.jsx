@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 // IMPORTANDO COMPONENTES
@@ -12,9 +12,37 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons"
 import styles from "./FormCadastroPedidos.module.css"
 
 // IMPORTANDO HOOK
-import { criarFornecedor } from "../../../hooks/criarFornecedor"
+import { criarPedido } from "../../../hooks/criarPedido"
+import { buscarFornecedores } from "../../../hooks/buscarFornecedores"
+import { buscarProduto } from "../../../hooks/procurarProduto"
 
 export const FormCadastroPedidos = () => {
+
+  //trazendo lista de todos os Fornecedores
+  const [fornecedores, setFornecedores] = useState([])
+  useEffect(() => {
+    async function fetchFornecedores() {
+      const dadosFornecedores = await buscarFornecedores()
+      setFornecedores(dadosFornecedores)
+    }
+    fetchFornecedores()
+  }, [])
+
+  console.log("fornecedores: ", fornecedores)
+
+  //trazendo lista de todos os Produtos
+  const [produtos, setProdutos] = useState([])
+  useEffect(() => {
+    async function fetchProdutos() {
+      const dadosProdutos = await buscarProduto()
+      setProdutos(dadosProdutos)
+    }
+    fetchProdutos()
+  }, [])
+
+  console.log("produtos: ", produtos)
+
+
   // HANDLES DO MODAL DE CADASTRO
   const handleCloseModalFornecedorCadastrado = () => {
     setOpenModalFornecedorCadastrado(false)
@@ -29,37 +57,22 @@ export const FormCadastroPedidos = () => {
     event.preventDefault()
     try {
       const dados = {
-        CNPJ,
-        IE,
-        razao_social,
-        responsavel,
-        telefone,
-        tel_celular,
-        e_mail1,
-        e_mail2,
-        cep,
-        estado,
-        cidade,
-        bairro,
-        endereco,
-        numero,
-        complemento,
-        comentario,
-        nome_fornecedor,
+        id_produto,
+        id_fornecedor,
         nome_motorista,
         placa_veiculo,
-        documentos_anexos,
-        status_fornecedor,
+        documentos_anexos
+
       }
 
-      const fornecedor = await criarFornecedor(dados)
-      setErrorMessage(fornecedor.message)
+      const pedido = await criarPedido(dados)
+      setErrorMessage(pedido.message)
       setOpenModalFornecedorCadastrado(true)
     } catch (erro) {
       setErrorMessage(erro.response.data.message)
       setOpenModalFornecedorCadastrado(true)
       alert(errorMessage)
-    }
+    }  
   }
 
   // NAVIGATE DO REACT ROUTER DOM
@@ -69,20 +82,10 @@ export const FormCadastroPedidos = () => {
   const [CNPJ, setCNPJ] = useState("")
   const [IE, setIE] = useState("")
   const [razao_social, setRazaoSocial] = useState("")
-  const [responsavel, setResponsavel] = useState("")
-  const [telefone, setTelefone] = useState("")
-  const [tel_celular, setTelCelular] = useState("")
-  const [e_mail1, setEmail1] = useState("")
-  const [e_mail2, setEmail2] = useState("")
+  const [nome_fornecedor, setNomeFornecedor] = useState("")
   const [cep, setCep] = useState("")
   const [estado, setEstado] = useState("")
   const [cidade, setCidade] = useState("")
-  const [bairro, setBairro] = useState("")
-  const [endereco, setEndereco] = useState("")
-  const [numero, setNumero] = useState("")
-  const [complemento, setComplemento] = useState("")
-  const [comentario, setComentario] = useState("")
-  const [nome_fornecedor, setNomeFornecedor] = useState("")
   const [nome_motorista, setNomeMotorista] = useState("")
   const [placa_veiculo, setPlacaVeiculo] = useState("")
   const [documentos_anexos, setDocumentosAnexos] = useState("")
@@ -123,7 +126,11 @@ export const FormCadastroPedidos = () => {
                     onChange={(event) => setCNPJ(event.target.value)}
                   >
                     <option value="">Selecione</option>
-                    <option value="cnpj1">CNPJ 1</option>
+                    {fornecedores.map((fornecedor) => (
+                      <option key={fornecedor.id} value={fornecedor.CNPJ}>
+                        ({fornecedor.CNPJ})
+                      </option>
+                    ))}
                   </select>
                 </label>
                 <label>
@@ -134,7 +141,11 @@ export const FormCadastroPedidos = () => {
                     onChange={(event) => setIE(event.target.value)}
                   >
                     <option value="">Selecione</option>
-                    <option value="ie1">IE 1</option>
+                    {fornecedores.map((fornecedor) => (
+                      <option key={fornecedor.id} value={fornecedor.IE}>
+                        ({fornecedor.IE})
+                      </option>
+                    ))}
                   </select>
                 </label>
               </div>
@@ -147,7 +158,11 @@ export const FormCadastroPedidos = () => {
                     onChange={(event) => setRazaoSocial(event.target.value)}
                   >
                     <option value="">Selecione</option>
-                    <option value="rs1">Razão Social 1</option>
+                    {fornecedores.map((fornecedor) => (
+                      <option key={fornecedor.id} value={fornecedor.razao_social}>
+                        ({fornecedor.razao_social})
+                      </option>
+                    ))}
                   </select>
                 </label>
               </div>
@@ -160,7 +175,11 @@ export const FormCadastroPedidos = () => {
                     onChange={(event) => setNomeFornecedor(event.target.value)}
                   >
                     <option value="">Selecione</option>
-                    <option value="nf1">Nome Fantasia 1</option>
+                    {fornecedores.map((fornecedor) => (
+                      <option key={fornecedor.id} value={fornecedor.nome_fornecedor}>
+                        ({fornecedor.nome_fornecedor})
+                      </option>
+                    ))}
                   </select>
                 </label>
               </div>
@@ -179,7 +198,11 @@ export const FormCadastroPedidos = () => {
                     onChange={(event) => setCep(event.target.value)}
                   >
                     <option value="">Selecione</option>
-                    <option value="produto1">Produto 1</option>
+                    {produtos.map((produto) => (
+                      <option key={produto.id} value={produto.nome_produto}>
+                        ({produto.nome_produto})
+                      </option>
+                    ))}
                   </select>
                 </label>
                 <label>
@@ -190,7 +213,11 @@ export const FormCadastroPedidos = () => {
                     onChange={(event) => setEstado(event.target.value)}
                   >
                     <option value="">Selecione</option>
-                    <option value="tipo1">Tipo 1</option>
+                    {produtos.map((produto) => (
+                      <option key={produto.id} value={produto.tipo}>
+                        ({produto.tipo})
+                      </option>
+                    ))}
                   </select>
                 </label>
               </div>
@@ -203,7 +230,11 @@ export const FormCadastroPedidos = () => {
                     onChange={(event) => setCidade(event.target.value)}
                   >
                     <option value="">Selecione</option>
-                    <option value="descricao1">Descrição 1</option>
+                    {produtos.map((produto) => (
+                      <option key={produto.id} value={produto.descricao}>
+                        ({produto.descricao})
+                      </option>
+                    ))}
                   </select>
                 </label>
               </div>

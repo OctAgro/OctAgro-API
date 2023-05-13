@@ -105,28 +105,7 @@ const Fornecedor = db.define('fornecedor', {
         allowNull: false
     },
 
-
-    nome_motorista: {
-        type:Sequelize.STRING,
-        require: false,
-        allowNull: true,
-        defaultValue: ""
-
-        
-    },
-    
-    placa_veiculo: {
-        type:Sequelize.STRING,
-        require: false,
-        allowNull: true,
-        defaultValue: ""
-    },
-
-    documentos_anexos: {
-        type:Sequelize.STRING,
-        require: false,
-        allowNull: true
-    },
+    //removido nome_motorista, placa_veiculo, documento_anexos de Fornecedor para Pedido
 
     status_fornecedor: {
         type: Sequelize.BOOLEAN,

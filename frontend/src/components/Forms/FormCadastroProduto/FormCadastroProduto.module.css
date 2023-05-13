@@ -5,7 +5,7 @@
   font-size: 90%;
   margin: 0.5% auto;
   padding: 0.5%;
-  filter: drop-shadow(2px 2px 2px #000);
+  box-shadow: 2px 2px 2px #000;
   width: 50%;
 
 }

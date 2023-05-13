@@ -32,7 +32,7 @@ export const FormCadUsuario = () => {
             <div id={styles["item-4"]}>
               <input className={styles.fullSizeInput} type="date" />
             </div>
-            <div id={styles["item-5"]}>MATRÍCULA:</div>
+            <div id={styles["item-5"]}>SENHA:</div>
             <div id={styles["item-6"]}>
               <input className={styles.fullSizeInput} type="text" />
             </div>

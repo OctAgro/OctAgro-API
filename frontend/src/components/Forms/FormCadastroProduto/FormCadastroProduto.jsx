@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 
+import { Link, useNavigate } from "react-router-dom"
+
 // IMPORTANDO COMPONENTES
 import { Modal } from "../../Modal/Modal"
 
@@ -137,7 +139,7 @@ export const FormCadastroProduto = () => {
 
   // MODAL CADASTRO PRODUTO
   const [openModalProdutoCadastrado, setOpenModalProdutoCadastrado] = useState(false)
-
+  
   // HANDLES DO MODAL DE CADASTRO
   const handleCloseModalProdutoCadastrado = () => {
     setOpenModalProdutoCadastrado(false)
@@ -148,25 +150,50 @@ export const FormCadastroProduto = () => {
     setOpenModalProdutoCadastrado(true)
   }
 
-  const [errorMessage, setErrorMessage] = useState('')
+  // DEFININDO NAVIGATOR
+
+  const navigate = useNavigate()
+
+  const handleRedirect = () => {
+    navigate("/admin/produtos/")
+  }
+
+  const [errorMessage, setErrorMessage] = useState("")
 
   return (
     <div>
       <form action="" method="post">
         <div id={styles["container"]}>
-          {/* MODAL CADASTRAR */}
-          <Modal isOpen={openModalProdutoCadastrado} onClick={handleCloseModalProdutoCadastrado}>
-            <div className={styles.conteudoModal}>
-              <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-              <p>{errorMessage}</p>
-              <input
-                className={styles.botaoConfirmarModal}
-                type="button"
-                value="OK"
-                onClick={handleCloseModalProdutoCadastrado}
-              />
-            </div>
-          </Modal>
+          {errorMessage === "Produto cadastrado com sucesso!" ? (
+            <Modal isOpen={openModalProdutoCadastrado} onClick={handleRedirect}>
+              <div className={styles.conteudoModal}>
+                <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+                <p className={styles.textoModal}>{errorMessage}</p>
+                <Link to='/admin/produtos/'>
+                  <input
+                    className={styles.botaoConfirmarModal}
+                    type="button"
+                    value="OK"
+                    onClick={handleCloseModalProdutoCadastrado}
+                  />
+                </Link>
+              </div>
+            </Modal>
+          ) : (
+            <Modal isOpen={openModalProdutoCadastrado} onClick={handleCloseModalProdutoCadastrado}>
+              <div className={styles.conteudoModal}>
+                <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+                <p className={styles.textoModal}>{errorMessage}</p>
+                <input
+                  className={styles.botaoConfirmarModal}
+                  type="button"
+                  value="OK"
+                  onClick={handleCloseModalProdutoCadastrado}
+                />
+              </div>
+            </Modal>
+          )}
+
           <div id={styles["titulo1"]}>CADASTRO NOVO PRODUTO</div>
           <div>
             Dados de Identificação
@@ -174,14 +201,16 @@ export const FormCadastroProduto = () => {
           </div>
 
           <div id={styles["idProduto"]}>
-            {/*             <div id={styles["id"]}>ID:</div>
+            {/*
+            <div id={styles["id"]}>ID:</div>
             <div id={styles["inputId"]}>
               <input type="text" className={styles.fullSizeInput} />
             </div>
             <div id={styles["data"]}>Data:</div>
             <div id={styles["inputData"]}>
               <input type="date" className={styles.fullSizeInput} />
-            </div> */}
+            </div>
+            */}
             <div id={styles["nomeProduto"]}>Nome:</div>
             <div id={styles["inputNomeProduto"]}>
               <input
@@ -316,12 +345,7 @@ export const FormCadastroProduto = () => {
             </div>
             <p>%</p>
 
-            <input
-              type="submit"
-              value="CADASTRAR"
-              onClick={handleSubmit}
-              className={styles.botaoConfirmarModal}
-            />
+            <input type="submit" value="CADASTRAR" onClick={handleSubmit} className={styles.botaoConfirmar} />
 
             <div className={styles.inserirRegra} onClick={handleOpenModalRegra}>
               <FontAwesomeIcon icon={faFileLines} className={styles.icon} />
@@ -394,7 +418,7 @@ export const FormCadastroProduto = () => {
               )}
             </div>
             <input
-              className={styles.botaoConfirmarModal}
+              className={styles.botaoConfirmar}
               type="button"
               value="CADASTRAR"
               onClick={handleOpenModalRegra}

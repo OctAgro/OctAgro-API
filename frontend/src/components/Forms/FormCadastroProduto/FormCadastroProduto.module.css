@@ -115,7 +115,7 @@ p {
   padding: 2%;
 }
 
-.botaoConfirmarModal {
+.botaoConfirmar {
   text-align: center;
   cursor: pointer;
   background-color: #4c4b16;
@@ -128,6 +128,20 @@ p {
   margin: 0.5% 1%;
   grid-column-start: 3;
   grid-column-end: 6;
+}
+
+.botaoConfirmarModal {
+  display: flex;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+  background-color: #4c4b16;
+  color: white;
+  font-family: "Gotham Black";
+  padding: 0.7rem 1.8rem;
+  font-size: 1rem;
+  border: solid 2px black;
+  border-radius: 7px;
 }
 
 .inserirRegra {
@@ -149,4 +163,15 @@ p {
 
 .icon {
   font-size: 3rem;
+}
+
+.iconeModal {
+  font-size: 2rem;
+  display: flex;
+  margin: auto;
+}
+
+.textoModal {
+  font-size: 1.5rem;
+  margin: 0.5rem;
 }

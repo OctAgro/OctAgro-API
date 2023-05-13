@@ -2,10 +2,11 @@
   background-color: #e7e0d1;
   border-radius: 10px;
   font-family: "Gotham Black";
-  font-size: 1rem;
-  margin: 2%;
+  font-size: 100%;
+  margin: 1% auto;
   padding: 1%;
   filter: drop-shadow(2px 2px 2px #000);
+  width: 90%;
 }
 
 #container div {

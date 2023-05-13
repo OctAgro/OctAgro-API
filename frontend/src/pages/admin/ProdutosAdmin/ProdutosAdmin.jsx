@@ -20,6 +20,7 @@ import styles from "./ProdutosAdmin.module.css"
 // Importando Hooks
 import { encontrarPedidos } from "../../../hooks/encontrarPedidos"
 import { excluirProduto } from "../../../hooks/excluirProduto"
+import { buscarProduto } from "../../../hooks/procurarProduto"
 
 export const ProdutosAdmin = () => {
   //importando todos os Pedidos
@@ -33,6 +34,18 @@ export const ProdutosAdmin = () => {
   }, [])
 
   console.log("Pedidos: ", pedidos)
+
+  //trazendo lista de todos os Produtos
+  const [produtos, setProdutos] = useState([])
+  useEffect(() => {
+    async function fetchProdutos() {
+      const dadosProdutos = await buscarProduto()
+      setProdutos(dadosProdutos)
+    }
+    fetchProdutos()
+  }, [])
+
+  console.log("produtos: ", produtos)
 
   const handleExclusao = async () => {
     try {
@@ -60,6 +73,7 @@ export const ProdutosAdmin = () => {
   // HANDLES DO MODAL DE EXCLUIR
   const handleCloseModalProdutoExcluir = () => {
     setOpenModalProdutoExcluir(false)
+    window.location.reload()
   }
 
   // Error message do Modal acima
@@ -85,7 +99,10 @@ export const ProdutosAdmin = () => {
             </BarraAdmin>
 
             {/* MODAL EXCLUIR_WARNING */}
-            <Modal isOpen={openModalProdutoExcluirWarning} onClick={handleCloseModalProdutoExcluirWarning}>
+            <Modal 
+              isOpen={openModalProdutoExcluirWarning}
+              onClick={handleCloseModalProdutoExcluirWarning}
+            >
               <div className={styles.conteudoModal}>
                 <FontAwesomeIcon icon={faTriangleExclamation} className={styles.iconeModal} />
                 <p> Tem certeza que deseja excluir o Produto?</p>
@@ -128,7 +145,7 @@ export const ProdutosAdmin = () => {
                 <tr>
                   <th>ID</th>
                   <th>Produto</th>
-                  <th>Fornecedor</th>
+                  <th>Quantidade</th>
                   <th>Tipo</th>
                   <th>Descrição</th>
                   <th>Ações</th>
@@ -136,17 +153,17 @@ export const ProdutosAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {pedidos?.map((pedido) => (
-                  <tr key={pedido.id_pedido}>
-                    <td className={styles.tableData}>{pedido.id_pedido}</td>
-                    <td className={styles.tableData}>{pedido.produto.nome_produto}</td>
-                    <td className={styles.tableData}>{pedido.fornecedor.nome_fornecedor}</td>
-                    <td className={styles.tableData}>{pedido.produto.tipo}</td>
-                    <td className={styles.tableData}>{pedido.produto.descricao}</td>
+                {produtos?.map((produto) => (
+                  <tr key={produto.id_produto}>
+                    <td className={styles.tableData}>{produto.id_produto}</td>
+                    <td className={styles.tableData}>{produto.nome_produto}</td>
+                    <td className={styles.tableData}>{produto.quantidade_produto}</td>
+                    <td className={styles.tableData}>{produto.tipo}</td>
+                    <td className={styles.tableData}>{produto.descricao}</td>
                     <td className={styles.tableData}>
                       {/* verificando com é o estado da aprovação para mostrar ação */}
                       <button className={styles.button}>
-                        <Link to={`/admin/produtos/atualizar/${pedido.id_pedido}`}>
+                        <Link to={`/admin/produtos/atualizar/${produto.id_produto}`}>
                           Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </Link>
                       </button>
@@ -155,7 +172,7 @@ export const ProdutosAdmin = () => {
                       <button
                         className={styles.button}
                         onClick={() => {
-                          setprodutoExcluir(pedido.id_pedido)
+                          setprodutoExcluir(produto.id_produto)
                           setOpenModalProdutoExcluirWarning(true)
                         }}
                       >

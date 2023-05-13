@@ -60,7 +60,12 @@ module.exports = class FornecedorControllers {
       return res.json({ message: "Por favor, digite o nome do fornecedor!" })
     }
 
-    if (!data.nome_motorista) {
+
+
+
+    //eventualmente vai para Pedido
+
+    /* if (!data.nome_motorista) {
       return res.json({ message: "Por favor, digite o nome do motorista!" })
     }
 
@@ -70,7 +75,7 @@ module.exports = class FornecedorControllers {
 
     if (!data.documentos_anexos) {
       return res.json({ message: "Por favor, anexe um documento!" })
-    }
+    } */
 
     const fornecedor = new Fornecedor({
       CNPJ: data.CNPJ,
@@ -90,9 +95,9 @@ module.exports = class FornecedorControllers {
       complemento: data.complemento,
       comentario: data.comentario,
       nome_fornecedor: data.nome_fornecedor,
-      nome_motorista: data.nome_motorista,
+      /* nome_motorista: data.nome_motorista,
       placa_veiculo: data.placa_veiculo,
-      documentos_anexos: data.documentos_anexos,
+      documentos_anexos: data.documentos_anexos, */
       status_fornecedor: data.status_fornecedor,
     })
 

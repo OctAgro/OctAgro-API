@@ -56,33 +56,33 @@ export const FormCadastroPedidos = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const dados = {
-        id_produto,
-        id_fornecedor,
+      const data = {
+        idProduto,
+        idFornecedor,
         nome_motorista,
-        placa_veiculo,
-        documentos_anexos
-
+        placa_veiculo
       }
 
-      const pedido = await criarPedido(dados)
+      const pedido = await criarPedido(data)
       setErrorMessage(pedido.message)
       setOpenModalFornecedorCadastrado(true)
     } catch (erro) {
       setErrorMessage(erro.response.data.message)
       setOpenModalFornecedorCadastrado(true)
       alert(errorMessage)
-    }  
+    }
   }
 
   // NAVIGATE DO REACT ROUTER DOM
   const navigate = useNavigate();
 
   // STATES DO FORMULÁRIO
+  const [idFornecedor, setIdFornecedor] = useState("")
   const [CNPJ, setCNPJ] = useState("")
   const [IE, setIE] = useState("")
   const [razao_social, setRazaoSocial] = useState("")
   const [nome_fornecedor, setNomeFornecedor] = useState("")
+  const [idProduto, setIdProduto] = useState("")
   const [cep, setCep] = useState("")
   const [estado, setEstado] = useState("")
   const [cidade, setCidade] = useState("")
@@ -118,6 +118,21 @@ export const FormCadastroPedidos = () => {
                 </label>
               </div> */}
               <div>
+                <label>
+                  Id Fornecedor:
+                  <select
+                    className={styles.inputCadastroFornecedor}
+                    value={idFornecedor}
+                    onChange={(event) => setIdFornecedor(event.target.value)}
+                  >
+                    <option value="">Selecione</option>
+                    {fornecedores.map((fornecedor) => (
+                      <option key={fornecedor.id_fornecedor} value={fornecedor.id_fornecedor}>
+                        ({fornecedor.id_fornecedor})
+                      </option>
+                    ))}
+                  </select>
+                </label>
                 <label>
                   CNPJ:
                   <select
@@ -191,6 +206,21 @@ export const FormCadastroPedidos = () => {
               <hr />
               <div>
                 <label>
+                  Id Produto:
+                  <select
+                    className={styles.inputCadastroFornecedor}
+                    value={idProduto}
+                    onChange={(event) => setIdProduto(event.target.value)}
+                  >
+                    <option value="">Selecione</option>
+                    {produtos.map((produto) => (
+                      <option key={produto.id_produto} value={produto.id_produto}>
+                        ({produto.id_produto})
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
                   Nome do Produto:
                   <select
                     className={styles.inputCadastroFornecedor}
@@ -236,6 +266,32 @@ export const FormCadastroPedidos = () => {
                       </option>
                     ))}
                   </select>
+                </label>
+              </div>
+              <div>
+                <label>
+                  <h3>Nome do Caminhoneiro:</h3>
+                  <div>
+                    <input
+                      className={styles.customSelect}
+                      type="text"
+                      name="textoNomeEntregador"
+                      value={nome_motorista}
+                      onChange={(event) => setNomeMotorista(event.target.value)}
+                    />
+                  </div>
+                </label>
+              </div>
+              <div className={styles.inputBlock}>
+                <label htmlFor="textoPlacaVeiculo">
+                  <h3>Placa do Caminhão:</h3>
+                  <input
+                    className={styles.customSelect}
+                    type="text"
+                    name="textoPlacaVeiculo"
+                    value={placa_veiculo}
+                    onChange={(event) => setPlacaVeiculo(event.target.value)}
+                  />
                 </label>
               </div>
               <div>

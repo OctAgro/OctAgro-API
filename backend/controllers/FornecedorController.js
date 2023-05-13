@@ -243,7 +243,9 @@ module.exports = class FornecedorControllers {
 
   static async listarFornecedor(req, res) {
     try {
-      const oFornecedor = await Fornecedor.findAll()
+      const oFornecedor = await Fornecedor.findAll({
+        where: { status_fornecedor: 1 },
+      })
       return res.json(oFornecedor).status(200)
     } catch (error) {
       return res.json(error).status(500)
@@ -276,7 +278,7 @@ module.exports = class FornecedorControllers {
           {
             where: {
               id_fornecedor: oId_fornecedor,
-            },
+            }
           }
         )
       } else {
@@ -287,7 +289,7 @@ module.exports = class FornecedorControllers {
           {
             where: {
               id_fornecedor: oId_fornecedor,
-            },
+            }
           }
         )
       }

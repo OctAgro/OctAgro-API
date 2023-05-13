@@ -120,7 +120,9 @@ module.exports = class ProdutoControllers {
 
     static async listarProduto(req, res) {
         try {
-            const produto = await Produto.findAll()
+            const produto = await Produto.findAll({
+                where: { status_produto: 1 },
+              })
             return res.json(produto).status(201)
         } catch (error) {
             return res.json(error).status(500)

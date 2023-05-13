@@ -25,6 +25,8 @@ import styles from "./FornecedoresAdmin.module.css"
 
 // Importando Hooks
 import { encontrarPedidos } from "../../../hooks/encontrarPedidos"
+import { buscarFornecedores } from "../../../hooks/buscarFornecedores"
+import { excluirFornecedor } from "../../../hooks/excluirFornecedor"
 
 export const FornecedoresAdmin = () => {
   //importando todos os Pedidos
@@ -39,13 +41,28 @@ export const FornecedoresAdmin = () => {
 
   console.log("pedidos: ", pedidos)
 
-  // HANDLES DO MODAL DE ATUALIZAR
-  const handleCloseModalFornecedorAtualizado = () => {
-    setOpenModalFornecedorAtualizado(false)
-  }
+  //importando todos os Fornecedores
+  const [fornecedores, setFornecedores] = useState([])
+  useEffect(() => {
+    async function fetchFornecedores() {
+      const dadosFornecedores = await buscarFornecedores()
+      setFornecedores(dadosFornecedores)
+    }
+    fetchFornecedores()
+  }, [])
 
-  const handleOpenModalFornecedorAtualizado = () => {
-    setOpenModalFornecedorAtualizado(true)
+  console.log("fornecedores: ", fornecedores)
+
+  const handleExclusao = async () => {
+    try {
+      const exclusao = await excluirFornecedor(fornecedorExcluir)
+      setErrorMessage(exclusao.data.message)
+      setOpenModalProdutoExcluir(true)
+    } catch (erro) {
+      setErrorMessage(erro.response.data.message)
+      setOpenModalProdutoExcluir(true)
+      alert(errorMessage)
+    }
   }
 
   // HANDLES DO MODAL DE EXCLUIR WARNING
@@ -58,20 +75,26 @@ export const FornecedoresAdmin = () => {
   }
 
   function handleCloseAndOpenModals() {
-    handleCloseModalFornecedorExcluirWarning()
-    handleOpenModalFornecedorExcluir()
+    handleCloseModalFornecedorExcluirWarning(false)
+    handleOpenModalFornecedorExcluir(false)
+    handleExclusao()
   }
 
   // HANDLES DO MODAL DE EXCLUIR
   const handleCloseModalFornecedorExcluir = () => {
     setOpenModalFornecedorExcluir(false)
+    window.location.reload()
   }
 
   const handleOpenModalFornecedorExcluir = () => {
     setOpenModalFornecedorExcluir(true)
   }
 
-  const [openModalFornecedorAtualizado, setOpenModalFornecedorAtualizado] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const [fornecedorExcluir, setFornecedorExcluir] = useState(null)
+
+  /* const [openModalFornecedorAtualizado, setOpenModalFornecedorAtualizado] = useState(false) */
   const [openModalFornecedorExcluirWarning, setOpenModalFornecedorExcluirWarning] = useState(false)
   const [openModalFornecedorExcluir, setOpenModalFornecedorExcluir] = useState(false)
 
@@ -91,11 +114,11 @@ export const FornecedoresAdmin = () => {
             </BarraAdmin>
 
             <div>
-              <input type="button" onClick={handleOpenModalFornecedorAtualizado} value="Atualizar" />
+              {/* <input type="button" onClick={handleOpenModalFornecedorAtualizado} value="Atualizar" /> */}
               <input type="button" onClick={handleOpenModalFornecedorExcluirWarning} value="Excluir" />
             </div>
 
-            {/* MODAL ATUALIZAR */}
+            {/* MODAL ATUALIZAR
             <Modal isOpen={openModalFornecedorAtualizado} onClick={handleCloseModalFornecedorAtualizado}>
               <div className={styles.conteudoModal}>
                 <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
@@ -107,7 +130,7 @@ export const FornecedoresAdmin = () => {
                   onClick={handleCloseModalFornecedorAtualizado}
                 />
               </div>
-            </Modal>
+            </Modal> */}
 
             {/* MODAL EXCLUIR_WARNING */}
             <Modal
@@ -133,7 +156,10 @@ export const FornecedoresAdmin = () => {
             </Modal>
 
             {/* MODAL EXCLUIR */}
-            <Modal isOpen={openModalFornecedorExcluir} onClick={handleCloseModalFornecedorExcluir}>
+            <Modal 
+              isOpen={openModalFornecedorExcluir} 
+              onClick={handleCloseModalFornecedorExcluir}
+            >
               <div className={styles.conteudoModal}>
                 <FontAwesomeIcon icon={faTrash} className={styles.iconeModal} />
                 <p> (nomeDoFornecedor) foi excluído! (puxar do backend)</p>
@@ -157,18 +183,20 @@ export const FornecedoresAdmin = () => {
                   <th>ID</th>
                   <th>CNPJ</th>
                   <th>Razão Social</th>
-                  <th>Produtos</th>
+                  <th>Telefone</th>
+                  <th>E-mail</th>
                   <th>Ações</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                {pedidos?.map((pedido) => (
-                  <tr key={pedido.id_pedido}>
-                    <td className={styles.tableData}>{pedido.id_pedido}</td>
-                    <td className={styles.tableData}>{pedido.fornecedor.CNPJ}</td>
-                    <td className={styles.tableData}>{pedido.fornecedor.razao_social}</td>
-                    <td className={styles.tableData}>{pedido.produto.nome_produto}</td>
+                {fornecedores?.map((fornecedor) => (
+                  <tr key={fornecedor.id_fornecedor}>
+                    <td className={styles.tableData}>{fornecedor.id_fornecedor}</td>
+                    <td className={styles.tableData}>{fornecedor.CNPJ}</td>
+                    <td className={styles.tableData}>{fornecedor.razao_social}</td>
+                    <td className={styles.tableData}>{fornecedor.telefone}</td>
+                    <td className={styles.tableData}>{fornecedor.e_mail1}</td>
                     <td className={styles.tableData}>
                       {/* verificando com é o estado da aprovação para mostrar ação */}
                       <button className={styles.button}>
@@ -178,10 +206,14 @@ export const FornecedoresAdmin = () => {
                       </button>
                     </td>
                     <td className={styles.tableData}>
-                      <button className={styles.button}>
-                        <Link to={``}>
-                          Excluir <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </Link>
+                      <button
+                        className={styles.button}
+                        onClick={() => {
+                          setFornecedorExcluir(fornecedor.id_fornecedor)
+                          setOpenModalFornecedorExcluirWarning(true)
+                        }}
+                      >
+                        Excluir <FontAwesomeIcon icon={faTrash} />
                       </button>
                     </td>
                   </tr>

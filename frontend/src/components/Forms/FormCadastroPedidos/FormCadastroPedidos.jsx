@@ -95,157 +95,136 @@ export const FormCadastroPedidos = () => {
 
   return (
     <div>
-      <div className={styles.external}>
-        <div>
-          <h1 className={styles.title}>CADASTRO PEDIDOS</h1>
-        </div>
-        <form className={styles.formCadastroFornecedor} onSubmit={handleSubmit}>
-          <div className={styles.leftSide}>
-            <div className={styles.upperLeft}>
-              <legend className={styles.subTitle}>Dados do Fornecedor</legend>
-              <hr />
-              {/*               <div>
-                <label>
-                  ID:
-                  <input type="text" className={styles.inputCadastroFornecedor} />
-                </label>
-                <label>
-                  Data:
-                  <input type="text" className={styles.inputCadastroFornecedor} />
-                </label>
-              </div> */}
-              <div>
-                <label>
-                  CNPJ:
-                  <select
-                    className={styles.inputCadastroFornecedor}
-                    value={CNPJ}
-                    onChange={(event) => setCNPJ(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    <option value="cnpj1">CNPJ 1</option>
-                  </select>
-                </label>
-                <label>
-                  IE:
-                  <select
-                    className={styles.inputCadastroFornecedor}
-                    value={IE}
-                    onChange={(event) => setIE(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    <option value="ie1">IE 1</option>
-                  </select>
-                </label>
+      <form onSubmit={handleSubmit}>
+        <div id={styles["container"]}>
+          <div id={styles["titulo"]}>CADASTRO PEDIDOS</div>          
+            <div id={styles["ladoEsquerdo"]}>
+              <div id={styles["subtitle"]}>
+                Dados do Fornecedor
+                <hr />
               </div>
-              <div>
-                <label>
-                  Razão Social:
-                  <select
-                    className={styles.inputCadastroFornecedor}
-                    value={razao_social}
-                    onChange={(event) => setRazaoSocial(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    <option value="rs1">Razão Social 1</option>
-                  </select>
-                </label>
+              <div id={styles["cnpj"]}>CNPJ:</div>
+              <div id={styles["inputId"]}>
+                <select
+                  className={styles.fullSizeInput}
+                  value={CNPJ}
+                  onChange={(event) => setCNPJ(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  <option value="cnpj1">CNPJ 1</option>
+                </select>
               </div>
-              <div>
-                <label>
-                  Nome Fantasia:
-                  <select
-                    className={styles.inputCadastroFornecedor}
-                    value={nome_fornecedor}
-                    onChange={(event) => setNomeFornecedor(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    <option value="nf1">Nome Fantasia 1</option>
-                  </select>
-                </label>
+              <div id={styles["ie"]}>IE:</div>
+              <div id={styles["inputIe"]}>
+                <select
+                  className={styles.fullSizeInput}
+                  value={IE}
+                  onChange={(event) => setIE(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  <option value="ie1">IE 1</option>
+                </select>
+              </div>
+              <div className={styles.dadosEmpresa}>Razão Social:</div>
+              <div className={styles.dadosEmpresa}>
+                <select
+                  className={styles.fullSizeInput}
+                  value={razao_social}
+                  onChange={(event) => setRazaoSocial(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  <option value="rs1">Razão Social 1</option>
+                </select>
+              </div>
+              <div className={styles.dadosEmpresa}>Nome Fantasia:</div>
+              <div className={styles.dadosEmpresa}>
+                <select
+                  className={styles.fullSizeInput}
+                  value={nome_fornecedor}
+                  onChange={(event) => setNomeFornecedor(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  <option value="nf1">Nome Fantasia 1</option>
+                </select>
               </div>
             </div>
-          </div>
-          <div className={styles.rightSide}>
-            <div className={styles.upperRight}>
-              <legend className={styles.subTitle}>Dados do Produto</legend>
-              <hr />
-              <div>
-                <label>
-                  Nome do Produto:
-                  <select
-                    className={styles.inputCadastroFornecedor}
-                    value={cep}
-                    onChange={(event) => setCep(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    <option value="produto1">Produto 1</option>
-                  </select>
-                </label>
-                <label>
-                  Tipo:
-                  <select
-                    className={styles.inputCadastroFornecedor}
-                    value={estado}
-                    onChange={(event) => setEstado(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    <option value="tipo1">Tipo 1</option>
-                  </select>
-                </label>
+            <div id={styles["ladoDireito"]}>
+              <div id={styles["subtitle"]}>
+                Dados do Produto
+                <hr />
               </div>
-              <div>
-                <label>
-                  Descrição:
-                  <select
-                    className={styles.inputCadastroFornecedor}
-                    value={cidade}
-                    onChange={(event) => setCidade(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    <option value="descricao1">Descrição 1</option>
-                  </select>
-                </label>
+              <div id={styles["produto"]}>Produto:</div>
+              <div id={styles["selectProduto"]}>
+                <select
+                  className={styles.fullSizeInput}
+                  value={cep}
+                  onChange={(event) => setCep(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  <option value="produto1">Produto 1</option>
+                </select>
               </div>
-              <div>
-                <input
-                  type="button"
-                  className={styles.botaoConfirmarModal}
-                  onClick={handleSubmit}
-                  value="CADASTRAR"
-                />
+              <div id={styles["tipo"]}>Tipo</div>
+              <div id={styles["selectTipo"]}>
+                <select
+                  className={styles.fullSizeInput}
+                  value={estado}
+                  onChange={(event) => setEstado(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  <option value="tipo1">Tipo 1</option>
+                </select>
               </div>
+              <div className={styles.dadosEmpresa}>Descrição:</div>
+              <div className={styles.dadosEmpresa}>
+                <select
+                  className={styles.fullSizeInput}
+                  value={cidade}
+                  onChange={(event) => setCidade(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  <option value="descricao1">Descrição 1</option>
+                </select>
+              </div>
+            </div>
+          
 
-              {errorMessage === "Fornecedor cadastrado com sucesso!" ? (
-                /* MODAL CADASTRO COM SUCESSO */
-                <Modal isOpen={openModalFornecedorCadastrado} onClick={handleRedirect}>
-                  <div className={styles.conteudoModal}>
-                    <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                    <p>{errorMessage}</p>
-                    <Link to="/admin/fornecedores">
-                      <input className={styles.botaoConfirmarModal} type="button" value="OK" />
-                    </Link>
-                  </div>
-                </Modal>
-              ) : (
-                /* MODAL CADASTRO COM INPUT FALTANDO */
-                <Modal isOpen={openModalFornecedorCadastrado} onClick={handleCloseModalFornecedorCadastrado}>
-                  <div className={styles.conteudoModal}>
-                    <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                    <p>{errorMessage}</p>
-                    <input
-                      className={styles.botaoConfirmarModal}
-                      type="button"
-                      value="OK"
-                      onClick={handleCloseModalFornecedorCadastrado}
-                    />
-                  </div>
-                </Modal>
-              )}
-            </div>
+          <input
+            type="button"
+            className={styles.botaoConfirmarModal}
+            onClick={handleSubmit}
+            value="CADASTRAR"
+          />
+
+        </div>
+      </form>
+      {errorMessage === "Fornecedor cadastrado com sucesso!" ? (
+        /* MODAL CADASTRO COM SUCESSO */
+        <Modal isOpen={openModalFornecedorCadastrado} onClick={handleRedirect}>
+          <div className={styles.conteudoModal}>
+            <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+            <p>{errorMessage}</p>
+            <Link to="/admin/fornecedores">
+              <input className={styles.botaoConfirmarModal} type="button" value="OK" />
+            </Link>
           </div>
-        </form>
-      </div>
+        </Modal>
+      ) : (
+        /* MODAL CADASTRO COM INPUT FALTANDO */
+        <Modal isOpen={openModalFornecedorCadastrado} onClick={handleCloseModalFornecedorCadastrado}>
+          <div className={styles.conteudoModal}>
+            <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+            <p>{errorMessage}</p>
+            <input
+              className={styles.botaoConfirmarModal}
+              type="button"
+              value="OK"
+              onClick={handleCloseModalFornecedorCadastrado}
+            />
+          </div>
+        </Modal>
+      )}
+
     </div>
   )
 }

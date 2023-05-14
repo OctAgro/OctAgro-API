@@ -11,6 +11,7 @@ router.post('/relatorios/editar', AprovadorController.atualizarRelatorioAprovaca
 router.post('/relatorios/:id', AprovadorController.encontrarRelatorioPorId)
 router.get('/relatorios/criterios/:id', AprovadorController.listarCriterios)
 router.put('/alterarStatus/:id', AprovadorController.alterarStatusAprovador)
+router.post('/relatorios/apagar/:id', AprovadorController.apagarRelatorio)
 
 //Todas as rotas de Aprovador com Função de Gerente (agregando função de Analista ao Aprovador)
 

@@ -200,7 +200,7 @@ export const FornecedoresAdmin = () => {
                     <td className={styles.tableData}>
                       {/* verificando com é o estado da aprovação para mostrar ação */}
                       <button className={styles.button}>
-                        <Link to={``}>
+                        <Link to={`/admin/fornecedores/atualizar/${fornecedor.id_fornecedor}`}>
                           Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </Link>
                       </button>

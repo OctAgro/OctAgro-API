@@ -241,8 +241,8 @@ export const FormAprovador = () => {
             </fieldset>
 
             <div className={styles.buttons}>
-              <Button value1="RECUSAR" value2="MERCADORIA" type="submit" /* onClick={handleAprovacao}  */ />
-              <Button value1="ACEITAR" value2="MERCADORIA" type="submit" /* onClick={handleAprovacao} */ />
+              <Button value1="RECUSAR" value2="MERCADORIA" type="submit" style={{ backgroundColor: "#512c13" }} /* onClick={handleAprovacao}  */ />
+              <Button value1="ACEITAR" value2="MERCADORIA" type="submit" style={{ backgroundColor: "#512c13" }} /* onClick={handleAprovacao} */ />
             </div>
           </div>
         </form>
@@ -260,7 +260,7 @@ export const FormAprovador = () => {
                 <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {pedidoId} foi aprovado!</p>
                 <Link to="/aprovador/relatorio">
-                  <Button className={styles.buttonConfirm} value1="CONFIRMAR" />
+                  <Button className={styles.buttonConfirm} style={{ backgroundColor: "#512c13" }} value1="CONFIRMAR" />
                 </Link>
               </div>
             ) : isRecusado && !isRecusadoWarning && !mensagemErro ? (
@@ -268,7 +268,7 @@ export const FormAprovador = () => {
                 <FontAwesomeIcon icon={faFaceFrown} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {pedidoId} foi recusado!</p>
                 <Link to="/aprovador/relatorio">
-                  <Button className={styles.button} value1="CONFIRMAR" />
+                  <Button className={styles.button} style={{ backgroundColor: "#512c13" }} value1="CONFIRMAR" />
                 </Link>
               </div>
             ) : isAprovadoWarning && isAprovado && !mensagemErro ? (
@@ -279,7 +279,7 @@ export const FormAprovador = () => {
                   <br />
                   Essa mercadoria foi recusada pelo Analista.
                 </p>
-                <Button className={styles.button} value1="CONFIRMAR" onClick={handleChangeModal} />
+                <Button className={styles.button} style={{ backgroundColor: "#512c13" }} value1="CONFIRMAR" onClick={handleChangeModal} />
               </div>
             ) : isRecusadoWarning && isRecusado && !mensagemErro ? (
               <div className={styles.container}>
@@ -289,7 +289,7 @@ export const FormAprovador = () => {
                   <br />
                   Essa mercadoria foi aprovada pelo Analista.
                 </p>
-                <Button className={styles.button} value1="CONFIRMAR" onClick={handleChangeModal} />
+                <Button className={styles.button} style={{ backgroundColor: "#512c13" }} value1="CONFIRMAR" onClick={handleChangeModal} />
               </div>
             ) : null}
           </div>

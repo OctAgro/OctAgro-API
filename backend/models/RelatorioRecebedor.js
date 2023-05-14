@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize")
 const db = require("../db/conexao")
-const Usuario = require("./usuario")
+const Usuario = require("./Usuario")
 const Pedido = require("./Pedido")
 
 const RelatorioRecebedor = db.define("RelatorioRecebedor", {
@@ -9,6 +9,12 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
         autoIncrement:  true,
         autoNull: false,
         primaryKey: true
+    },
+
+    status_aprovacao:{
+        type: Sequelize.STRING,
+        require: true,
+        defaultValue: 'Pendente'
     },
 
     coloracao: {
@@ -31,7 +37,13 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
         allowNull: false
     },
     id_pedido: Sequelize.INTEGER,
-    id_usuario: Sequelize.INTEGER
+    id_usuario: Sequelize.INTEGER,
+
+    status_recebedor: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+    }
 })
 
 //Criando relação entre tabela RelatorioAprovador e Usuario

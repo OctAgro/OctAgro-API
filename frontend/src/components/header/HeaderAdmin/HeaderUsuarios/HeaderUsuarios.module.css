@@ -1,0 +1,46 @@
+h1 {
+  font-size: 10%;
+}
+
+h3{
+  font-size: 15%;
+  margin: 0.5rem;
+}
+
+.clipboards {
+  cursor: default;
+  display: flex;
+  font-family: "Gotham Black";
+}
+
+.clipboard {
+  display: flex;
+  border-radius: 15px;
+  background-color: rgba(231, 224, 209, 1);
+  filter: drop-shadow(2px 2px 2px #000);
+  margin: 1%;
+  width: 25%;
+  height: 10%;
+}
+
+.leftSide {
+  font-size: 4rem;
+  padding: 0rem 1rem;
+  border-right: rgba(0, 0, 0, 0.3) solid;
+  border-radius: 15px;
+  margin: 0;
+  width: 40%;
+  display: flex;
+}
+
+.rightSide {
+  text-align: center;
+  font-size: 1.5rem;
+  width: 60%;
+  margin: auto;
+}
+
+.icon{
+  margin: auto;
+  font-size: 3rem;
+}

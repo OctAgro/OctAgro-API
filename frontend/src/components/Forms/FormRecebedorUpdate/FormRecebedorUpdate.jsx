@@ -12,7 +12,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormRecebedorUpdate.module.css"
+import axios from "axios"
+
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
+import { buscarCriteriosRecebedorPorId } from "../../../hooks/buscarCriteriosRecebedorPorId"
 
 export const FormRecebedorUpdate = () => {
   //Para encontrar pedidos por ID
@@ -35,40 +38,187 @@ export const FormRecebedorUpdate = () => {
   const [textoDocmento, setTextoDocmento] = useState("")
   const [textoProduto, setTextoProduto] = useState("")
 
-  // simulando fetch numa API fake, isso te ajuda, meu amigo do BackEnd?
+  const [relatorioRecebedor, setRelatorioRecebedor] = useState([])
+
   useEffect(() => {
+    setTextoNomeFornecedor(pedidos?.fornecedor?.nome_fornecedor)
+    setTextoNomeEntregador(pedidos?.fornecedor?.nome_motorista)
+    setTextoPlacaVeiculo(pedidos?.fornecedor?.placa_veiculo)
+    setNumeroQuantidade(pedidos?.produto?.quantidade_produto)
+    setTextoUnidadeMedida(pedidos?.produto?.unidade_medida)
+    setTextoProduto(pedidos?.produto?.nome_produto)
+  }, [relatorioRecebedor])
+
+  useEffect(() => {
+
     async function fetchPedidos() {
       const dadosPedidos = await encontrarPedidosById(pedidoId)
       setPedidos(dadosPedidos)
     }
     fetchPedidos()
+
+    async function fetchRelatoriosRecebedorPorCriterios() {
+      const dadosRelatorioRecebedor = await buscarCriteriosRecebedorPorId(pedidoId)
+      setRelatorioRecebedor(dadosRelatorioRecebedor)
+    }
+    fetchRelatoriosRecebedorPorCriterios()
+
   }, [])
+
+  console.log("relatorios", relatorioRecebedor)
+
+  //lidando com as checkboxs vindas do BD
+
+  const [checkboxColoracaoAprovado, setCheckboxColoracaoAprovado] = useState(false);
+  const [checkboxColoracaoReprovado, setCheckboxColoracaoReprovado] = useState(false);
+
+  const [checkboxOdorAprovado, setCheckboxOdorAprovado] = useState(false);
+  const [checkboxOdorReprovado, setCheckboxOdorReprovado] = useState(false);
+
+  const [checkboxAusenciaAnimaisAprovado, setCheckboxAusenciaAnimaisAprovado] = useState(false);
+  const [checkboxAusenciaAnimaisReprovado, setCheckboxAusenciaAnimaisReprovado] = useState(false);
+
+  const [checkboxAusenciaMofoAprovado, setCheckboxAusenciaMofoAprovado] = useState(false);
+  const [checkboxAusenciaMofoReprovado, setCheckboxAusenciaMofoReprovado] = useState(false);
+
+
+  useEffect(() => {
+    if (relatorioRecebedor === undefined) {
+      setCheckboxColoracaoAprovado(false);
+      setCheckboxColoracaoReprovado(false);
+    }
+    else if (relatorioRecebedor.coloracao === true) {
+      setCheckboxColoracaoAprovado(relatorioRecebedor.coloracao);
+      setCheckboxColoracaoReprovado(!relatorioRecebedor.coloracao);
+    } else {
+      setCheckboxColoracaoReprovado(true);
+      setCheckboxColoracaoAprovado(false);
+    }
+  }, [relatorioRecebedor]);
+
+  useEffect(() => {
+    if (relatorioRecebedor === undefined) {
+      setCheckboxOdorAprovado(false);
+      setCheckboxOdorReprovado(false);
+    }
+    else if (relatorioRecebedor.odor === true) {
+      setCheckboxOdorAprovado(relatorioRecebedor.odor);
+      setCheckboxOdorReprovado(!relatorioRecebedor.odor);
+    } else {
+      setCheckboxOdorReprovado(true);
+      setCheckboxOdorAprovado(false);
+    }
+  }, [relatorioRecebedor]);
+
+  //useEffect para carregar checkbox de animais
+  useEffect(() => {
+    if (relatorioRecebedor === undefined) {
+      setCheckboxAusenciaAnimaisAprovado(false);
+      setCheckboxAusenciaAnimaisReprovado(false);
+    }
+    else if (relatorioRecebedor.ausencia_animais === true) {
+      setCheckboxAusenciaAnimaisAprovado(relatorioRecebedor.ausencia_animais);
+      setCheckboxAusenciaAnimaisReprovado(!relatorioRecebedor.ausencia_animais);
+    } else {
+      setCheckboxAusenciaAnimaisReprovado(true);
+      setCheckboxAusenciaAnimaisAprovado(false);
+    }
+  }, [relatorioRecebedor]);
+  
+  //useEffect para carregar checkbox de mofo
+  useEffect(() => {
+    if (relatorioRecebedor === undefined) {
+      setCheckboxAusenciaMofoAprovado(false);
+      setCheckboxAusenciaMofoReprovado(false);
+    }
+    else if (relatorioRecebedor.ausencia_mofo === true) {
+      setCheckboxAusenciaMofoAprovado(relatorioRecebedor.ausencia_mofo);
+      setCheckboxAusenciaMofoReprovado(!relatorioRecebedor.ausencia_mofo);
+    } else {
+      setCheckboxAusenciaMofoReprovado(true);
+      setCheckboxAusenciaMofoAprovado(false);
+    }
+  }, [relatorioRecebedor]);
+
 
   console.log(pedidos)
 
-  const onSubmit = (
-    data,
-    textoNomeFornecedor,
-    textoNomeEntregador,
-    textoPlacaVeiculo,
-    numeroQuantidade,
-    textoUnidadeMedida,
-    textoDocmento,
-    textoProduto
-  ) => {
-    console.log("Booleans:")
-    console.log(data)
+  //possibilitando as mudanças de checkbox ao clique
+  const handleCheckboxCAChange = () => {
+    setCheckboxColoracaoAprovado(!checkboxColoracaoAprovado);
+  }
+  const handleCheckboxCRChange = () => {
+    setCheckboxColoracaoReprovado(!checkboxColoracaoReprovado);
+  }
 
+
+  const handleCheckboxOAChange = () => {
+    setCheckboxOdorAprovado(!checkboxOdorAprovado);
+  }
+  const handleCheckboxORChange = () => {
+    setCheckboxOdorReprovado(!checkboxOdorReprovado);
+  }
+
+
+  const handleCheckboxAAChange = () => {
+    setCheckboxAusenciaAnimaisAprovado(!checkboxAusenciaAnimaisAprovado);
+  }
+  const handleCheckboxARChange = () => {
+    setCheckboxAusenciaAnimaisReprovado(!checkboxAusenciaAnimaisReprovado); //
+  }
+  
+  
+  const handleCheckboxMAChange = () => {
+    setCheckboxAusenciaMofoAprovado(!checkboxAusenciaMofoAprovado);
+  }
+  const handleCheckboxMRChange = () => {
+    setCheckboxAusenciaMofoReprovado(!checkboxAusenciaMofoReprovado); //
+  }
+
+  const enviarDados = async () => {
+
+    const data = {
+      idPedido: pedidos.id_pedido,
+      checkboxColoracaoAprovado,
+      checkboxColoracaoReprovado,
+      checkboxOdorAprovado,
+      checkboxOdorReprovado,
+      checkboxAusenciaAnimaisAprovado,
+      checkboxAusenciaAnimaisReprovado,
+      checkboxAusenciaMofoAprovado,
+      checkboxAusenciaMofoReprovado,
+      textoNomeFornecedor,
+      textoNomeEntregador,
+      textoPlacaVeiculo,
+      numeroQuantidade,
+      textoUnidadeMedida,
+      textoProduto,
+    }  
+
+    try {
+      const resposta = await axios.post(`http://localhost:3000/recebedor/relatorios/editar`, data)
+      //esse console.log retorna respostas json do backend de erros de validacao
+      console.log("enviou? ", resposta)
+      setMensagemErro(resposta.data.message)
+    } catch (erro) {
+      //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
+      console.log(erro.message)
+      /* setMensagemErro(erro) */
+    }
+  }
+
+
+  const onSubmit = () => {
     handleAtualizar()
   }
 
   const [isAprovado, setIsAprovado] = useState(false)
   const [openModal, setOpenModal] = useState(false)
 
-  const handleAtualizar = (e) => {
-    e.preventDefault()
+  const handleAtualizar = () => {
     setIsAprovado(true)
     setOpenModal(true)
+    enviarDados()
   }
 
   const handleCloseModal = () => {
@@ -104,8 +254,8 @@ export const FormRecebedorUpdate = () => {
                         id="fornecedor"
                         name="textoNomeFornecedor"
                         type="text"
-                        value={pedidos?.fornecedor?.nome_fornecedor}
-                        onChange={(event) => setTextoNomeFornecedor(event.target.value)}
+                        value={textoNomeFornecedor}
+                        onChange={(event) => {setTextoNomeFornecedor(event.target.value)}}
                       ></input>
                     </div>
                   </label>
@@ -118,8 +268,8 @@ export const FormRecebedorUpdate = () => {
                         className={styles.customSelect}
                         type="text"
                         name="textoNomeEntregador"
-                        value={pedidos?.fornecedor?.nome_motorista}
-                        onChange={(event) => setTextoNomeEntregador(event.target.value)}
+                        value={textoNomeEntregador}
+                        onChange={(event) => {setTextoNomeEntregador(event.target.value)}}
                       />
                     </div>
                   </label>
@@ -131,8 +281,8 @@ export const FormRecebedorUpdate = () => {
                       className={styles.customSelect}
                       type="text"
                       name="textoPlacaVeiculo"
-                      value={pedidos?.fornecedor?.placa_veiculo}
-                      onChange={(event) => setTextoPlacaVeiculo(event.target.value)}
+                      value={textoPlacaVeiculo}
+                      onChange={(event) => {setTextoPlacaVeiculo(event.target.value)}}
                     />
                   </label>
                 </div>
@@ -186,8 +336,8 @@ export const FormRecebedorUpdate = () => {
                       id="produtos"
                       name="textoProduto"
                       type="text"
-                      value={pedidos?.produto?.nome_produto}
-                      onChange={(event) => setTextoProduto(event.target.value)}
+                      value={textoProduto}
+                      onChange={(event) => {setTextoProduto(event.target.value)}}
                     ></input>
                   </div>
                   <div>
@@ -196,15 +346,15 @@ export const FormRecebedorUpdate = () => {
                       className={styles.quantidade}
                       type="number"
                       name="numeroQuantidade"
-                      value={pedidos?.produto?.quantidade_produto}
-                      onChange={(event) => setNumeroQuantidade(event.target.value)}
+                      value={numeroQuantidade}
+                      onChange={(event) => {setNumeroQuantidade(event.target.value)}}
                     />
                     <input
                       className={styles.selectMedida}
                       id="produtos"
                       name="textoUnidadeMedida"
-                      value={pedidos?.produto?.unidade_medida}
-                      onChange={(event) => setTextoUnidadeMedida(event.target.value)}
+                      value={textoUnidadeMedida}
+                      onChange={(event) => {setTextoUnidadeMedida(event.target.value)}}
                     ></input>
                   </div>
                 </fieldset>
@@ -219,14 +369,19 @@ export const FormRecebedorUpdate = () => {
                     <input
                       type="checkbox"
                       id="checkboxColoracaoAprovado"
+                      name="checkboxColoracaoAprovado"
                       className={styles.aprovar}
                       {...register("checkboxColoracaoAprovado")}
+                      checked={checkboxColoracaoAprovado}
+                      onClick={handleCheckboxCAChange}
                     />
                     <input
                       type="checkbox"
                       id="checkboxColoracaoReprovado"
                       className={styles.recusar}
                       {...register("checkboxColoracaoReprovado")}
+                      checked={checkboxColoracaoReprovado}
+                      onClick={handleCheckboxCRChange}
                     />
                   </div>
                   <div className={styles.inputBlock}>
@@ -236,12 +391,16 @@ export const FormRecebedorUpdate = () => {
                       id="checkboxOdorAprovado"
                       className={styles.aprovar}
                       {...register("checkboxOdorAprovado")}
+                      checked={checkboxOdorAprovado}
+                      onClick={handleCheckboxOAChange}
                     />
                     <input
                       type="checkbox"
                       id="checkboxOdorReprovado"
                       className={styles.recusar}
                       {...register("checkboxOdorReprovado")}
+                      checked={checkboxOdorReprovado}
+                      onClick={handleCheckboxORChange}
                     />
                   </div>
                   <div className={styles.inputBlock}>
@@ -251,12 +410,16 @@ export const FormRecebedorUpdate = () => {
                       type="checkbox"
                       id="checkboxAusenciaInsetosAprovado"
                       {...register("checkboxAusenciaInsetosAprovado")}
+                      checked={checkboxAusenciaAnimaisAprovado}
+                      onClick={handleCheckboxAAChange}
                     />
                     <input
                       className={styles.recusar}
                       type="checkbox"
                       id="checkboxAusenciaInsetosReprovado"
                       {...register("checkboxAusenciaInsetosReprovado")}
+                      checked={checkboxAusenciaAnimaisReprovado}
+                      onClick={handleCheckboxARChange}
                     />
                   </div>
                   <div className={styles.inputBlock}>
@@ -266,12 +429,16 @@ export const FormRecebedorUpdate = () => {
                       type="checkbox"
                       id="checkboxAusenciaMofoAprovado"
                       {...register("checkboxAusenciaMofoAprovado")}
+                      checked={checkboxAusenciaMofoAprovado}
+                      onClick={handleCheckboxMAChange}
                     />
                     <input
                       className={styles.recusar}
                       type="checkbox"
                       id="checkboxAusenciaMofoReprovado"
                       {...register("checkboxAusenciaMofoReprovado")}
+                      checked={checkboxAusenciaMofoReprovado}
+                      onClick={handleCheckboxMRChange}
                     />
                   </div>
                 </div>

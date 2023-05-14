@@ -5,7 +5,7 @@
   max-height: 100vh;
   min-height: 100vh;
   background-color: #4c4b16;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   filter: drop-shadow(2px 2px 2px #000);
 }
 
@@ -20,6 +20,12 @@
   justify-content: center;
   display: flex;
   border-bottom: #000 solid;
+}
+
+@media screen and (max-width: 1650px) {
+  .navbar {
+    font-size: 1.1rem;
+  }
 }
 
 /* @media screen and (max-width: 1400px) {

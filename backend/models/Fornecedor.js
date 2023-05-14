@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db/conexao')
 
 const Fornecedor = db.define('fornecedor', {
+    // DADOS IDENTIFICAÇÃO
     id_fornecedor: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -9,70 +10,108 @@ const Fornecedor = db.define('fornecedor', {
         primaryKey: true
     },
 
+    CNPJ: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+
+    IE: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    razao_social: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    
+
+    responsavel: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    // DADOS DE CONTATO
+
+    telefone: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    tel_celular: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    e_mail1: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    e_mail2: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+
+    //DADOS DO ENDEREÇO
+
+    cep: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    estado: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    cidade: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    bairro: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    endereco: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    numero: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+
+    complemento: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+
+    // OUTROS 
+
+    comentario: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+
+    // EQUIVALENTE A NOME FANTASIA
     nome_fornecedor: {
         type:Sequelize.STRING,
         require: true,
         allowNull: false
     },
-    nome_motorista: {
-        type:Sequelize.STRING,
-        require: true,
-        allowNull: false
-    },
-    
-    placa_veiculo: {
-        type:Sequelize.STRING,
-        require: true,
-        allowNull: false
-    },
 
-    documentos_anexos: {
-        type:Sequelize.STRING,
-        require: true,
-        allowNull: false
+    //removido nome_motorista, placa_veiculo, documento_anexos de Fornecedor para Pedido
+
+    status_fornecedor: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: 1
     }
-})
-
-//INPUT DOS FORNECEDOR
-
-//adicionei---------------------------------------------------
-async function contar(){
-    const fornecedores = await Fornecedor.count(Fornecedor.id_fornecedor)
-    return fornecedores;
-}
-contar().then(function(valor) {
-    console.log('Quantidade', valor);
-    if (valor === 0) {
-        Fornecedor.create({
-            nome_fornecedor: 'Trigostoso',
-            nome_motorista: 'Adenilson Pereira',
-            placa_veiculo: 'ABC1A23',
-            documentos_anexos: 'DocumentoA.pdf'
-        })
-
-        Fornecedor.create({
-            nome_fornecedor: 'Fornecedor Agrícola S/A',
-            nome_motorista: 'João da Silva',
-            placa_veiculo: 'DEF5678',
-            documentos_anexos: 'DocumentoB.pdf'
-        })
-
-        Fornecedor.create({
-            nome_fornecedor: 'Fornecedor Grãos Export',
-            nome_motorista: 'Dirlei Vasconcelos de Almeida',
-            placa_veiculo: 'GHI9101',
-            documentos_anexos: 'DocumentoC.pdf'
-        })
-
-        Fornecedor.create({
-            nome_fornecedor: 'Fornecedor Cereal Farmers',
-            nome_motorista: 'Maria Aparecida Ramos',
-            placa_veiculo: 'JKL2345',
-            documentos_anexos: 'DocumentoD.pdf'
-        })
-    }
-}).catch(function(erro) {
-    console.log('Erro', erro)
 })
 
 module.exports = Fornecedor

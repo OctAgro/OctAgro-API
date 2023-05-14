@@ -1,41 +1,29 @@
-import React from "react";
+import React from "react"
 
 import { Link, useParams } from "react-router-dom"
 
-import styles from "./InformacoesRecebedor.module.css";
+// IMPORTANDO ICONES
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 
-export const InformacoesRecebedor = ({
-  nomeAnalista,
-  numeroPedido,
-  descricaoPedido,
-  regrasAceitacao,
-  regrasAceitacaoInput,
-  mercadoria,
-  mercadoriaInput,
-  comentarios,
-}) => {
+import styles from "./InformacoesRecebedor.module.css"
+import { FormRecebedor } from "../../Forms/FormRecebedor/FormRecebedor"
 
+export const InformacoesRecebedor = () => {
   const { id } = useParams()
-const pedidoId = parseInt(id)
+  const pedidoId = parseInt(id)
 
   return (
     <div>
       <div>
-        <h1>Informações do Recebedor</h1>
-        <h2>{nomeAnalista}</h2>
-      </div>
+        <div className={styles.icon}>
+          <Link to={`/aprovador/relatorio/${pedidoId}`}>
+            <FontAwesomeIcon icon={faCircleXmark} />
+          </Link>
+        </div>
 
-      <div>
-        <h2>
-          {numeroPedido} - {descricaoPedido}
-        </h2>
-      </div>
-
-      <div>
-        <h1>Regras de Aceitação</h1>
-        <hr />
-        
+        <FormRecebedor />
       </div>
     </div>
-  );
-};
+  )
+}

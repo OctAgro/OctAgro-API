@@ -4,7 +4,7 @@ import sidebarOctagro from "../../../assets/sidebarOctagro.png"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faRightToBracket, faListCheck } from "@fortawesome/free-solid-svg-icons"
+import { faBox, faRightToBracket, faListCheck } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./SidebarAnalista.module.css"
 
@@ -13,6 +13,7 @@ import { UserContext } from "../../../context/usuarioContext"
 
 export const SidebarAnalista = () => {
   const { usuario } = useContext(UserContext)
+  console.log("usuario: ", usuario?.funcao)
 
   return (
     <nav className={styles.navbar}>
@@ -23,18 +24,35 @@ export const SidebarAnalista = () => {
       </Link>
       <ul className={styles.topItems}>
         <li className={styles.actionItems}>
-          <FontAwesomeIcon className={styles.icon} icon={faListCheck} />
-
+          <FontAwesomeIcon className={styles.icon} icon={faBox} />
           <Link to="/analista/mercadoria" className={styles.relatorio}>
+            Análise de <br /> Mercadorias
+          </Link>
+        </li>
+        <li className={styles.actionItems}>
+          <FontAwesomeIcon icon={faListCheck} className={styles.icon} />
+          <Link to="/analista/mercadoriascadastradas" className={styles.relatorio}>
             Mercadorias <br /> Cadastradas
           </Link>
         </li>
+        {/* ESSA ABA SÓ APARECERÁ PARA USUÁRIOS APROVADORES! */}
+        {usuario?.funcao === 'Aprovador' ? (
+          <li className={styles.actionItems}>
+            <FontAwesomeIcon icon={faListCheck} className={styles.icon} />
+            <Link to="/aprovador/home" className={styles.relatorio}>
+              Voltar para <br /> Aprovadores
+            </Link>
+          </li>
+        ) : null }
       </ul>
       <div className={styles.botItems}>
         <ul className={styles.usuario}>
           <div className={styles.molduraFoto}>
             <img className={styles.molduraOctagonal} src={MolduraOctagonal} alt="Moldura Octagonal" />
-            <img className={styles.fotoUsuario}  src={ `../src/assets/${usuario ? usuario.foto : "Carregando..."}` }  alt="Foto de perfil do usuário" />
+            <img
+              className={styles.fotoUsuario}
+              src={usuario ? import.meta.env.BASE_URL + `src/assets/${usuario.foto}` : "Carregando"}
+            />
           </div>
           <div className={styles.infoUsuario}>
             <h3 className={styles.nomeUsuario}>{usuario ? usuario.nome : "Carregando..."}</h3>
@@ -42,12 +60,12 @@ export const SidebarAnalista = () => {
           </div>
         </ul>
         <ul className={styles.sair}>
-          <li>
-            <FontAwesomeIcon icon={faRightToBracket} />
-            <a className={styles.sairTexto} href="/">
-              Sair
-            </a>
-          </li>
+          <Link to="/">
+            <li>
+              <FontAwesomeIcon icon={faRightToBracket} />
+              <a className={styles.sairTexto}>Sair</a>
+            </li>
+          </Link>
         </ul>
       </div>
     </nav>

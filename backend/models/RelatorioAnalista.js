@@ -13,6 +13,12 @@ const RelatorioAnalista = db.define('RelatorioAnalista', {
 
     },
 
+    status_aprovacao:{
+        type: DataTypes.STRING,
+        require: true,
+        defaultValue: 'Pendente'
+    },
+
     qualidade_grao: {
         type: DataTypes.BOOLEAN,
         required: true,
@@ -34,17 +40,35 @@ const RelatorioAnalista = db.define('RelatorioAnalista', {
         required: true
     },
 
+    doc_status: {
+        type: DataTypes.BOOLEAN,
+        required: true
+    },
+
+    info_recebedor_status: {
+        type: DataTypes.BOOLEAN,
+        required: true
+    },
+
     analista_comentario: {
         type: DataTypes.STRING,
         required: false
 
+    },
+    id_pedido: DataTypes.INTEGER,
+    id_usuario: DataTypes.INTEGER,
+
+    status_relatorio_analista: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
     }
 
 
 })
 
 Pedido.hasMany(RelatorioAnalista, { foreignKey: 'id_pedido' });
-RelatorioAnalista.belongsTo(Usuario,{foreignKey: 'id_usuario'})
-RelatorioAnalista.belongsTo(Pedido,{foreignKey: 'id_pedido'})
+RelatorioAnalista.belongsTo(Usuario, { foreignKey: 'id_usuario' })
+RelatorioAnalista.belongsTo(Pedido, { foreignKey: 'id_pedido' })
 
 module.exports = RelatorioAnalista

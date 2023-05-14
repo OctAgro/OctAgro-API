@@ -1,0 +1,116 @@
+#container {
+  background-color: #e7e0d1;
+  border-radius: 10px;
+  font-family: "Gotham Black";
+  font-size: 90%;
+  margin: 1% auto;
+  padding: 0.5%;
+  filter: drop-shadow(2px 2px 2px #000);
+  width: 80%;
+  display: grid;
+  grid-template-columns: 49% 2% 49%;
+
+}
+
+#container div {
+  padding: 0.2rem 0;
+}
+
+.fullSizeInput {
+  background-color: #D9D9D9;
+  border-radius: 5px;
+  font-size: 100%;
+  text-align: left;
+  width: 100%;
+  padding-left: 3%;
+  text-align: center;
+}
+
+#titulo {
+  margin: auto;
+  font-size: 1.7rem;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+hr {
+  border: #000 solid 0.02rem;
+}
+
+#ladoEsquerdo{
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-template-columns: 15% auto 20% auto;
+}
+
+#ladoDireito{
+  display: grid;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-template-columns: 16% 30% auto 30%;
+}
+
+#id, #cnpj, #tel, #cep, #numero {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#inputId, #inputCep, #inputNum {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#data, #ie, #cel, #estado, #complemento {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  text-align: right;
+  margin-right: 15%;
+}
+
+#inputData, #inputIe, #inputEstado, #inputComp {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+.dadosEmpresa{
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
+.inputEmail, .inputEndereco{
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+#subtitle {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  margin: 1% 0;
+}
+
+
+.botaoConfirmarModal {
+  text-align: center;
+  cursor: pointer;
+  background-color: #4c4b16;
+  color: white;
+  font-family: "Gotham Black";
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: solid 2px black;
+  border-radius: 7px;
+  margin: 0.5% 0;
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
+
+.conteudoModal {
+  text-align: center;
+  margin: 5rem;
+  font-size: 2rem;
+}
+
+.iconeModal {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}

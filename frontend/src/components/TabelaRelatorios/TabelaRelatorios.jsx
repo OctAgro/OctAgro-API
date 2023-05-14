@@ -9,6 +9,9 @@ import styles from "../TabelaRelatorios/TabelaRelatorios.module.css"
 import { RelatoriosAprovadorContext } from "../../context/RelatoriosAprovadorContext"
 import { buscarRelatoriosAnalista } from "../../hooks/buscarRelatorios"
 
+// TABELA REFERENTE AO APROVADOR <-------------
+
+
 export const TabelaRelatorios = () => {
   const dados = useContext(RelatoriosAprovadorContext)
 
@@ -23,6 +26,8 @@ export const TabelaRelatorios = () => {
     fetchRelatoriosAnalista()
   }, [])
 
+console.log('Relatorios Analista' , relatoriosAnalista)
+
   return (
     <div className={styles.table}>
       <div className={styles.title}>
@@ -34,24 +39,32 @@ export const TabelaRelatorios = () => {
           <tr>
             <th>Nº Pedido</th>
             <th>Descrição</th>
-            <th>Situação</th>
-            <th>Funcionário</th>
+            <th>Estado de Aprovação</th>
+            <th>Data</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          {relatoriosAnalista?.map((relatorio) => (
+          {relatoriosAnalista?.data?.map((relatorio) => (
             <tr key={relatorio.id_relatorio_analista}>
               <td className={styles.tableData}>{relatorio.id_relatorio_analista}</td>
               <td className={styles.tableData}>{relatorio.pedido.produto.descricao}</td>
-              <td className={styles.tableData}>{relatorio.info_analista_status ? 'Aprovado' : 'Recusado'} </td>
+              <td className={styles.tableData}>{relatorio.status_aprovacao} </td>
               <td className={styles.tableData}>{relatorio.pedido.produto.data_entrada_empresa}</td>
               <td className={styles.tableData}>
+              {relatorio.status_aprovacao === 'Pendente' ? (
                 <button className={styles.button}>
                   <Link to={`/aprovador/relatorio/${relatorio.id_relatorio_analista}`}>
                     Analisar <FontAwesomeIcon icon={faClipboardList} />
                   </Link>
                 </button>
+                ) : (
+                  <button className={styles.button}>
+                    <Link to={`/aprovador/home`}>
+                      Visualizar <FontAwesomeIcon icon={faClipboardList} />
+                    </Link>
+                  </button>
+                )}
               </td>
             </tr>
           ))}

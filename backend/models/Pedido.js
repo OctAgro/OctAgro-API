@@ -13,18 +13,46 @@ const Pedido = db.define ("pedido" , {
 
     status_pedido: {
         type: Sequelize.STRING,
-        defaultValue: 'Recebido',
-        require: true
+        require: true,
+        defaultValue: "Recebido"
+
     },
 
     status_aprovacao:{
         type: Sequelize.STRING,
-        defaultValue: 'Pendente',
-        require: true
+        require: true,
+        defaultValue: "Pendente"
+    },
+
+    nome_motorista: {
+        type:Sequelize.STRING,
+        require: false,
+        allowNull: true,
+        defaultValue: ""
+    },
+    
+    placa_veiculo: {
+        type:Sequelize.STRING,
+        require: false,
+        allowNull: true,
+        defaultValue: ""
+    },
+
+    documentos_anexos: {
+        type:Sequelize.STRING,
+        require: false,
+        allowNull: true
     },
 
     id_produto: Sequelize.INTEGER,
-    id_fornecedor: Sequelize.INTEGER
+    id_fornecedor: Sequelize.INTEGER,
+
+    status_pedido_situacao: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false,
+        defaultValue: 1
+    }
 
 },{
     timestamps: false
@@ -32,37 +60,5 @@ const Pedido = db.define ("pedido" , {
 
 Pedido.belongsTo(Produto, { foreignKey: "id_produto"});
 Pedido.belongsTo(Fornecedor, {foreignKey: "id_fornecedor"});
-
-async function contar(){
-    const pedidos = await Pedido.count(Pedido.id_pedido)
-    return pedidos
-}
-
-contar().then(function(valor){
-    console.log('Quantidade',valor);
-    if (valor===0) {
-
-        Pedido.create({
-            id_produto: 1,
-            id_fornecedor: 1,
-          });
-          Pedido.create({
-            id_produto: 2,
-            id_fornecedor: 2,
-          });
-          Pedido.create({
-            id_produto: 3,
-            id_fornecedor: 3,
-          });
-          Pedido.create({
-            id_produto: 4,
-            id_fornecedor: 4,
-          });
-    }
-
-}).catch(function(erro){
-    console.log('Erro',erro)
-})
-
 
 module.exports = Pedido

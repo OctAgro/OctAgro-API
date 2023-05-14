@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import styles from "./HeaderAnalista.module.css"
 
 import { Link } from "react-router-dom"
@@ -7,9 +7,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClipboard } from "@fortawesome/free-regular-svg-icons"
 import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
+import { PedidosAnalistaContext } from "../../../context/PedidosAnalistaContext"
+
 export const HeaderAnalista = (props) => {
   const arrow = props.arrow
   const link = props.link
+
+  const dados = useContext(PedidosAnalistaContext)
+
+  console.log(dados)
+
+  const numeroPedidos = dados[1]
+
+  // Falta essa lógica no backEnd ainda, por enquanto pegando o numero de pedidos geral.
+  const numeroPedidosTotal = dados[1]
 
   return (
     <div className={styles.external}>
@@ -30,7 +41,7 @@ export const HeaderAnalista = (props) => {
             <FontAwesomeIcon className="icon" icon={faClipboard} />
           </div>
           <div className={styles.rightSideA}>
-            <h2>0</h2>
+            <h2>{numeroPedidos ? numeroPedidos : 0}</h2>
             <h3>
               Pedido(s) <br /> pendentes
             </h3>
@@ -42,7 +53,7 @@ export const HeaderAnalista = (props) => {
             <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
           </div>
           <div className={styles.rightSideB}>
-            <h2>0</h2>
+            <h2>{numeroPedidosTotal ? numeroPedidosTotal : 0}</h2>
             <h3>
               Total <br /> de Pedidos
             </h3>

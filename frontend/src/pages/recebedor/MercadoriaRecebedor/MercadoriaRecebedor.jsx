@@ -6,26 +6,28 @@ import { HeaderRecebedor } from "../../../components/header/HeaderRecebedor/Head
 
 import { TabelaMercadoriasCadastradas } from "../../../components/TabelaMercadoriasCadastradas/TabelaMercadoriasCadastradas"
 
-// IMAGEM USADA PARA FINS DE TESTE (SIDEBAR)
-import UserImg from "../../../assets/UserImg.webp"
-
 // IMPORTANDO CSS
 import styles from "./MercadoriaRecebedor.module.css"
 
+// Importando o Provider
+import { MercadoriasProvider } from "../../../context/MercadoriasRecebedorContext"
+
 export const MercadoriaRecebedor = () => {
   return (
-    <div className={styles.main}>
-      <SidebarRecebedor nome="Leandro Luz" funcao="Recebedor" imagem={UserImg} />
+    <MercadoriasProvider>
+      <div className={styles.main}>
+        <SidebarRecebedor />
 
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <HeaderRecebedor arrow="True" link="/recebedor/home" />
-        </div>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <HeaderRecebedor arrow="True" link="/recebedor/home" />
+          </div>
 
-        <div className={styles.content}>
-          <TabelaMercadoriasCadastradas />
+          <div className={styles.content}>
+            <TabelaMercadoriasCadastradas />
+          </div>
         </div>
       </div>
-    </div>
+    </MercadoriasProvider>
   )
 }

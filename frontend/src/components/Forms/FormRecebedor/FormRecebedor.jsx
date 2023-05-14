@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom"
 import { UserContext } from "../../../context/usuarioContext"
 
 //IMPORTANDO COMPONENTES
-import { Button } from "../../Button/Button"
 import { Modal } from "../../Modal/Modal"
 
 // IMPORTANDO ICONES
@@ -18,7 +17,7 @@ import axios from "axios"
 //chamando o hook de encontrar pedidos por ID
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 
-export const FormRecebedor = () => {
+export const FormRecebedor = ({ hasButton }) => {
   const { usuario } = useContext(UserContext)
 
   const usuarioCarregado = usuario ? usuario.id_usuario : null
@@ -36,7 +35,7 @@ export const FormRecebedor = () => {
     fetchPedidos()
   }, [])
 
-  console.log(pedidos) //Fim do codigo de encontrar pedidos por ID
+  /*   console.log(pedidos) //Fim do codigo de encontrar pedidos por ID */
 
   const {
     register,
@@ -70,12 +69,10 @@ export const FormRecebedor = () => {
       ...data,
     }
 
-    console.log("aqui: " + dados)
-
     try {
       const resposta = await axios.post("http://localhost:3000/recebedor/entradamercadoria", dados)
       //esse console.log retorna respostas json do backend de erros de validacao
-      console.log(resposta.data.message)
+      /*       console.log(resposta.data.message) */
       setMensagemErro(resposta.data.message)
     } catch (erro) {
       //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
@@ -157,7 +154,7 @@ export const FormRecebedor = () => {
                     />
                   </label>
                 </div>
-
+              
                 <div className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Data:</h3>
@@ -186,8 +183,7 @@ export const FormRecebedor = () => {
                       name="textoDocmento"
                       value={textoDocmento}
                       onChange={(event) => setTextoDocmento(event.target.value)}
-                    >
-                    </input>
+                    ></input>
                   </label>
                 </div>
               </fieldset>
@@ -299,9 +295,16 @@ export const FormRecebedor = () => {
                   </div>
                 </div>
               </fieldset>
-              <div className={styles.buttons}>
-              <input className={styles.btnConfirmar} type="submit" value="CONFIRMAR" onClick={handleSubmit} />
-              </div>
+              {hasButton ? (
+                <div className={styles.buttons}>
+                  <input
+                    className={styles.btnConfirmar}
+                    type="submit"
+                    value="CONFIRMAR"
+                    onClick={handleSubmit}
+                  />
+                </div>
+              ) : null}
             </div>
           </form>
         </div>
@@ -313,7 +316,7 @@ export const FormRecebedor = () => {
                   <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                   <p className={styles.paragraph}>Mercadoria cadastrada com sucesso!</p>
                   <Link to="/recebedor/entradamercadoria">
-                  <input className={styles.btnConfirmar} value="CONFIRMAR"/>
+                    <input className={styles.btnConfirmar} value="CONFIRMAR" />
                   </Link>
                 </div>
               ) : null}

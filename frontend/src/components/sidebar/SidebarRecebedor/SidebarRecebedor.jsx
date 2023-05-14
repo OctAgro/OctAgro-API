@@ -13,6 +13,7 @@ import { UserContext } from "../../../context/usuarioContext"
 
 export const SidebarRecebedor = () => {
   const { usuario } = useContext(UserContext)
+  console.log("usuario: ", usuario?.funcao)
 
   return (
     <nav className={styles.navbar}>
@@ -25,7 +26,7 @@ export const SidebarRecebedor = () => {
         <li className={styles.actionItems}>
           <FontAwesomeIcon icon={faBox} className={styles.icon} />
           <Link to="/recebedor/entradamercadoria" className={styles.relatorio}>
-            Recebimento de <br /> Mercadoria
+            Recebimentos de <br /> Mercadoria
           </Link>
         </li>
         <li className={styles.actionItems}>
@@ -34,12 +35,21 @@ export const SidebarRecebedor = () => {
             Mercadorias <br /> Cadastradas
           </Link>
         </li>
+        {/* ESSA ABA SÓ APARECERÁ PARA USUÁRIOS APROVADORES! */}
+        {usuario?.funcao === 'Aprovador' ? (
+          <li className={styles.actionItems}>
+            <FontAwesomeIcon icon={faListCheck} className={styles.icon} />
+            <Link to="/aprovador/home" className={styles.relatorio}>
+              Voltar para <br /> Aprovadores
+            </Link>
+          </li>
+        ) : null}
       </ul>
       <div className={styles.botItems}>
         <ul className={styles.usuario}>
           <div className={styles.molduraFoto}>
             <img className={styles.molduraOctagonal} src={MolduraOctagonal} alt="Moldura Octagonal" />
-            <img className={styles.fotoUsuario}  src={ `../src/assets/${usuario ? usuario.foto : "Carregando..."}` }  alt="Foto de perfil do usuário" />
+            <img className={styles.fotoUsuario} src={usuario ? import.meta.env.BASE_URL + `src/assets/${usuario.foto}` : 'Carregando'} />
           </div>
           <div className={styles.infoUsuario}>
             <h3 className={styles.nomeUsuario}>{usuario ? usuario.nome : "Carregando..."}</h3>
@@ -47,12 +57,12 @@ export const SidebarRecebedor = () => {
           </div>
         </ul>
         <ul className={styles.sair}>
-          <li>
-            <FontAwesomeIcon icon={faRightToBracket} />
-            <a className={styles.sairTexto} href="/">
-              Sair
-            </a>
-          </li>
+        <Link to="/">
+            <li>
+              <FontAwesomeIcon icon={faRightToBracket} />
+              <a className={styles.sairTexto}>Sair</a>
+            </li>
+          </Link>
         </ul>
       </div>
     </nav>

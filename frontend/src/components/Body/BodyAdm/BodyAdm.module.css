@@ -1,0 +1,94 @@
+h1 {
+    font-size: 10%;
+}
+
+h3 {
+    font-size: 15%;
+    margin: 0.5rem;
+}
+
+#container {
+    font-family: "Gotham Black";
+    font-size: 1rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+/* #container div {
+    padding: 0.2rem 0;
+    align-items: center;
+  } */
+
+.clipboard {
+    display: flex;
+    border-radius: 15px;
+    background-color: rgba(231, 224, 209, 1);
+    filter: drop-shadow(2px 2px 2px #000);
+    margin: 0.5rem 1rem;
+    width: 22rem;
+    height: 7rem;
+}
+
+.leftSide {
+    font-size: 3rem;
+    padding: 0rem 1rem;
+    border-right: rgba(0, 0, 0, 0.3) solid;
+    border-radius: 15px;
+    margin: 0;
+    width: 40%;
+    display: flex;
+}
+
+.rightSide {
+    text-align: center;
+    font-size: 1.5rem;
+    width: 60%;
+    margin: auto;
+}
+
+.icon {
+    margin: auto;
+    font-size: 3rem;
+}
+
+#graficoCapacidade {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    margin: 1% auto;
+
+}
+
+#graficoEstocagem {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    margin: 1% auto;
+}
+
+#graficoProduto {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    margin: 1% auto;
+}
+
+.imgGrafico,
+.imgGrafEstocagem,
+.imgGrafProduto {
+    border-radius: 15px;
+    filter: drop-shadow(2px 2px 2px #000);
+}
+
+.imgGrafico,
+.imgGrafProduto {
+    width: 22rem;
+    height: 15rem;
+}
+
+.imgGrafEstocagem {
+    width: 47rem;
+    height: 15rem;
+}
+

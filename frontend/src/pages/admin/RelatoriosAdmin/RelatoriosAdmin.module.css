@@ -1,0 +1,35 @@
+#main {
+  background-color: #F7F1E5;
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 20% 5% auto;
+}
+
+#sidebar {
+  grid-row-start: 1;
+  grid-row-end: 4;
+  height: 100vh;
+}
+
+#header {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin: auto;
+
+}
+
+#barraPesquisa {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#body {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}

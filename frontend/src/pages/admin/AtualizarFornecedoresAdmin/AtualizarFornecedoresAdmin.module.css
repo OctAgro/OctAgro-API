@@ -1,0 +1,66 @@
+#main {
+  background-color: #F7F1E5;
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 20% 5% auto;
+}
+
+#sidebar {
+  grid-row-start: 1;
+  grid-row-end: 5;
+  height: 100vh;
+}
+
+#header {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin: auto;
+}
+
+#barraPesquisa {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#body {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  background-color: #F7F1E5; 
+}
+
+.conteudoModal {
+  text-align: center;
+  margin: 5rem;
+  font-size: 2rem;
+}
+
+.iconeModal {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}
+
+.botaoConfirmarModal,
+.botaoRecusarModal {
+  cursor: pointer;
+  margin-top: 1rem;
+  margin: 0.5rem;
+  padding: 0rem 3rem;
+  color: white;
+  border-radius: 5px;
+  font-family: "Gotham Medium";
+  font-size: 2rem;
+}
+
+.botaoConfirmarModal {
+  background-color: #4c4b16;
+}
+
+.botaoRecusarModal {
+  background-color: #898121;
+}

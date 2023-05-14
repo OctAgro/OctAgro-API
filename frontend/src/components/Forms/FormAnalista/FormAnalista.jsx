@@ -6,9 +6,7 @@ import { UserContext } from "../../../context/usuarioContext"
 
 //IMPORTANDO COMPONENTES
 import { Button } from "../../Button/Button"
-import { Checkbox } from "../../Checkbox/Checkbox"
 import { Modal } from "../../Modal/Modal"
-import { CheckboxDupla } from "../../Checkbox/CheckboxDupla/CheckboxDupla"
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -19,7 +17,7 @@ import axios from "axios"
 
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
 
-export const FormAnalista = (props) => {
+export const FormAnalista = ({ hasButton }) => {
   //incluindo trecho de contexto de usuario e salvar dados
 
   const { usuario } = useContext(UserContext)
@@ -48,23 +46,22 @@ export const FormAnalista = (props) => {
 
     handleCadastrarMercadoria()
     handleAprovacao()
-    
   } // enviando os dados pro banco de dados atraves do clique
 
   //conectando os dados do usuario para enviar ao banco de dados
-  const enviarDados = async (data) => {
-
+  const enviarDados = async (data, event) => {
     const dados = {
       comentarioAnalista: revisao,
       idPedido: pedidos.id_pedido,
       idUsuario: usuarioCarregado,
-      ...data
+      ...data,
     }
 
+    handleAceitar(event)
     console.log("aqui: " + dados)
-  
+
     try {
-      const resposta = await axios.post('http://localhost:3000/analista/relatorios', dados)
+      const resposta = await axios.post("http://localhost:3000/analista/relatorios", dados)
       //esse console.log retorna respostas json do backend de erros de validacao
       console.log(resposta.data.message)
       setMensagemErro(resposta.data.message)
@@ -89,7 +86,6 @@ export const FormAnalista = (props) => {
   const [isRecusadoWarning, setIsRecusadoWarning] = useState(false)
 
   const handleAceitar = (e) => {
-    e.preventDefault()
     if (isAprovadoWarning) {
       // useState que trata se foi aprovado ou recusado pelo aprovador vira false, pois ele não pode aprovar ou recusar ainda, tem que ver o WARNING
       setIsAprovado(false)
@@ -229,12 +225,19 @@ export const FormAnalista = (props) => {
                   </label>
 
                   <div className={styles.inputBlock}>
-                    <Link to={`/analista/documentacao/${pedidoId}`}>
+                    {hasButton ? (
+                      <Link to={`/analista/documentacao/${pedidoId}`}>
+                        <button className={styles.btn}>
+                          <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
+                          Visualizar
+                        </button>
+                      </Link>
+                    ) : (
                       <button className={styles.btn}>
                         <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
                         Visualizar
                       </button>
-                    </Link>
+                    )}
                     <input
                       className={styles.aprovar}
                       type="checkbox"
@@ -245,7 +248,7 @@ export const FormAnalista = (props) => {
                       className={styles.recusar}
                       type="checkbox"
                       id="checkboxDocumentacaoProdutoRecusado"
-                      {...register("checkboxDocumentacaoProdutoRecusado")}
+                      {...register("checkboxDocumentacaoProdutoReprovado")}
                     />
                   </div>
                 </div>
@@ -255,12 +258,19 @@ export const FormAnalista = (props) => {
                 </label>
 
                 <div className={styles.inputBlock}>
-                  <Link to={`/analista/documentacaoRecebedor/${pedidoId}`}>
+                  {hasButton ? (
+                    <Link to={`/analista/documentacaoRecebedor/${pedidoId}`}>
+                      <button className={styles.btn}>
+                        <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
+                        Visualizar
+                      </button>
+                    </Link>
+                  ) : (
                     <button className={styles.btn}>
                       <FontAwesomeIcon icon={faEye} className={styles.iconEye} />
                       Visualizar
                     </button>
-                  </Link>
+                  )}
                   <input
                     className={styles.aprovar}
                     type="checkbox"
@@ -271,7 +281,7 @@ export const FormAnalista = (props) => {
                     className={styles.recusar}
                     type="checkbox"
                     id="checkboxInfoRecebedorRecusado"
-                    {...register("checkboxInfoRecebedorRecusado")}
+                    {...register("checkboxInfoRecebedorReprovado")}
                   />
                 </div>
               </div>
@@ -289,9 +299,13 @@ export const FormAnalista = (props) => {
                     value={revisao}
                     onChange={(event) => setRevisao(event.target.value)}
                   />
-                  <div className={styles.buttons}>
-                    <Button value1="CONFIRMAR" type="submit" />
-                  </div>
+                  {hasButton ? (
+                    <div className={styles.buttons}>
+                      <div className={styles.button}>
+                        <Button style={{ backgroundColor: "#FF8A00" }} value1="CONFIRMAR" type="submit" />
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </fieldset>
             </div>
@@ -305,7 +319,7 @@ export const FormAnalista = (props) => {
                   <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                   <p className={styles.paragraph}>Mercadoria cadastrada com sucesso!</p>
                   <Link to="/analista/mercadoria">
-                    <Button className={styles.button} value1="CONFIRMAR" />
+                    <Button style={{ backgroundColor: "#FF8A00" }} className={styles.button} value1="CONFIRMAR" />
                   </Link>
                 </div>
               ) : null}

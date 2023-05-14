@@ -30,7 +30,6 @@ export const Login = () => {
     try {
       const dados = await fazerLogin(username, password)
       console.log(dados)
-      alert(dados.message)
 
       //setando dados para dentro do context de usuario
       setUsuario(dados)
@@ -48,6 +47,8 @@ export const Login = () => {
         navigate("/analista/home")
       } else if (tipoFuncao === "Recebedor") {
         navigate("/recebedor/home")
+      } else if (tipoFuncao === "Administrador") {
+        navigate("/admin/home")
       }
     } catch (erro) {
       setErrorMessage(erro.response.data.message)

@@ -1,46 +1,32 @@
-import React from "react";
+import React from "react"
 
-import styles from "./InformacoesAnalista.module.css";
+import { Link, useParams } from "react-router-dom"
 
-export const InformacoesAnalista = ({
-  nomeAnalista,
-  numeroPedido,
-  descricaoPedido,
-  regrasAceitacao,
-  regrasAceitacaoInput,
-  mercadoria,
-  mercadoriaInput,
-  comentarios,
-}) => {
+import styles from "./InformacoesAnalista.module.css"
+
+import { FormAnalista } from "../../Forms/FormAnalista/FormAnalista"
+
+// IMPORTANDO ICONES
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
+
+export const InformacoesAnalista = (props) => {
+  //Para encontrar pedidos por ID
+  const { id } = useParams()
+  const pedidoId = parseInt(id)
+
   return (
     <div>
       <div>
-        <h1>Informações do Analista</h1>
-        <h2>{nomeAnalista}</h2>
+        <div className={styles.icon}>
+          <Link to={`/aprovador/relatorio/${pedidoId}`}>
+            <FontAwesomeIcon icon={faCircleXmark} />
+          </Link>
+        </div>
       </div>
-
       <div>
-        <div>
-          <h2>
-            {numeroPedido} - {descricaoPedido}
-          </h2>
-        </div>
-
-        <div>
-          <h1>Regras de Aceitação</h1>
-          <hr />
-        </div>
-
-        <div>
-          <h1>Mercadoria</h1>
-          <hr />
-        </div>
-        
-      </div>
-
-      <div>
-        <h1>Comentários:</h1>
+        <FormAnalista />
       </div>
     </div>
-  );
-};
+  )
+}

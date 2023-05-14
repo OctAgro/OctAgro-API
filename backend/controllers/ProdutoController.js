@@ -134,7 +134,6 @@ module.exports = class ProdutoControllers {
         const produtoProcurado = await Produto.findByPk(oId_produto)
 
         if (!produtoProcurado) {
-            console.log('Deu ruim garai')
             res.status(422).json({message: "Produto não encontrado"})
         }
         console.log('Encontrou isso no Back:', produtoProcurado)

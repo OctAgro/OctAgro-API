@@ -133,7 +133,7 @@ module.exports = class FornecedorControllers {
   }
 
   static async atualizarFornecedor(req, res) {
-    const idForncedor = req.params.id
+    const idFornecedor = req.params.id
     const data = req.body
 
     if (!data.CNPJ) {
@@ -192,18 +192,6 @@ module.exports = class FornecedorControllers {
       return res.json({ message: "Por favor, digite o nome do fornecedor!" })
     }
 
-    if (!data.nome_motorista) {
-      return res.json({ message: "Por favor, digite o nome do motorista!" })
-    }
-
-    if (!data.placa_veiculo) {
-      return res.json({ message: "Por favor, digite a placa do veiculo!" })
-    }
-
-    if (!data.documentos_anexos) {
-      return res.json({ message: "Por favor, anexe um documento!" })
-    }
-
     try {
       await Fornecedor.update(
         {
@@ -223,15 +211,11 @@ module.exports = class FornecedorControllers {
           numero: data.numero,
           complemento: data.complemento,
           comentario: data.comentario,
-          nome_fornecedor: data.nome_fornecedor,
-          nome_motorista: data.nome_motorista,
-          placa_veiculo: data.placa_veiculo,
-          documentos_anexos: data.documentos_anexos,
-          status_fornecedor: data.status_fornecedor,
+          nome_fornecedor: data.nome_fornecedor
         },
         {
           where: {
-            id_fornecedor: idForncedor,
+            id_fornecedor: idFornecedor,
           },
         }
       )
@@ -253,8 +237,9 @@ module.exports = class FornecedorControllers {
   }
 
   static async procurarFornecedor(req, res) {
-    const idFornecedor = req.params.id_fornecedor
+    const idFornecedor = req.params.id
     const fornecedorProcurado = await Fornecedor.findByPk(idFornecedor)
+    
     if (!fornecedorProcurado) {
       res.status(422).json({ message: "Fornecedor não encontrado" })
     }

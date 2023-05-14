@@ -64,7 +64,7 @@ export const FormCadastroPedidos = () => {
       }
 
       const pedido = await criarPedido(data)
-      setErrorMessage(pedido.message)
+      setErrorMessage(pedido.mensagem)
       setOpenModalFornecedorCadastrado(true)
     } catch (erro) {
       setErrorMessage(erro.response.data.message)

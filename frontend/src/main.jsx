@@ -24,6 +24,7 @@ import { AtualizarProdutosAdmin } from "./pages/admin/AtualizarProdutosAdmin/Atu
 import { PedidosAdmin } from "./pages/admin/PedidosAdmin/PedidosAdmin"
 import { CadastroPedidosAdmin } from "./pages/admin/CadastroPedidosAdmin/CadastroPedidosAdmin"
 import { AtualizarFornecedoresAdmin } from "./pages/admin/AtualizarFornecedoresAdmin/AtualizarFornecedoresAdmin"
+import { AtualizarPedidosAdmin } from "./pages/admin/AtualizarPedidosAdmin/AtualizarPedidosAdmin"
 
 // RECEBEDOR
 /* import  PathRecebedor from "./components/Paths/PathRecebedor"  */
@@ -108,6 +109,11 @@ const router = createBrowserRouter([
     path: "/admin/pedidos/cadastrar",
     element: <CadastroPedidosAdmin />,
   },
+  {
+    path: "/admin/pedidos/atualizar/:id",
+    element: <AtualizarPedidosAdmin />,
+  },
+
   {
     path: "/admin/relatorios",
     element: <RelatoriosAdmin />,

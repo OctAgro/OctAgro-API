@@ -29,7 +29,18 @@ module.exports = class PedidoController {
 
     static async encontrarPedido(req, res) {
         const idPedido = req.params.id
-        const pedidoProcurado = await Pedido.findByPk(idPedido)
+        const pedidoProcurado = await Pedido.findByPk(idPedido, {
+            include: [
+              {
+                model: Produto,
+                as: "produto"
+              },
+              {
+                model: Fornecedor,
+                as: "fornecedor"
+              }
+            ]
+          });
 
         if (!pedidoProcurado) {
             res.status(422).json({ mensagem: "Pedido não encontrado!" })
@@ -47,8 +58,10 @@ module.exports = class PedidoController {
             await Pedido.update({
                 status_pedido: data.status_pedido,
                 status_aprovacao: data.status_aprovacao,
-                id_produto: data.id_produto,
-                id_fornecedor: data.id_fornecedor
+                id_produto: data.idProduto,
+                id_fornecedor: data.idFornecedor,
+                nome_motorista: data.nome_motorista,
+                placa_veiculo: data.placa_veiculo
             }, {
                 where: {
                     id_pedido: idPedido

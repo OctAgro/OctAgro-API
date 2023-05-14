@@ -163,6 +163,7 @@ module.exports = class RelatorioController {
     static async listarRelatorios(req, res) {
         try {
             const relatorios = await RelatorioAnalista.findAll({
+                where: { status_relatorio_analista: 1 },
                 include: [
                     {
                         model: Pedido,
@@ -262,6 +263,46 @@ module.exports = class RelatorioController {
             } catch (error) {
                 return res.json(error).status(500)
             }
+    }
+
+    static async apagarRelatorio(req, res) {
+        const idRelatorio = req.params.id
+
+        const analista = await RelatorioAnalista.findByPk(idRelatorio)
+
+        try {
+            if (analista.status_relatorio_analista == true) {
+                await RelatorioAnalista.update(
+                    {
+                        status_relatorio_analista: false,
+                    },
+                    {
+                        where: {
+                            id_relatorio_analista: idRelatorio,
+                        }
+                    }
+                )
+            } else {
+                await RelatorioAnalista.update(
+                    {
+                        status_relatorio_analista: true,
+                    },
+                    {
+                        where: {
+                            id_relatorio_analista: idRelatorio,
+                        }
+                    }
+                )
+            }
+            return res
+                .json({
+                    message: "Status do relatorio do recebedor alterado com sucesso!",
+                    status: 201,
+                })
+                .status(201)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
     }
     
 }

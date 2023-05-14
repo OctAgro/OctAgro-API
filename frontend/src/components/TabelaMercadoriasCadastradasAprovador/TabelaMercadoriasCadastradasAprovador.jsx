@@ -9,11 +9,9 @@ import styles from "./TabelaMercadoriasCadastradasAprovador.module.css"
 
 import { encontrarPedidos } from "../../hooks/encontrarPedidos"
 import { buscarRelatoriosAprovador } from "../../hooks/buscarRelatorios"
+import { excluirRelatorioAprovador } from "../../hooks/excluirRelatorioAprovador"
 
 export const TabelaMercadoriasCadastradasAprovador = () => {
-  const handleExclusao = () => {
-    // logica de exclusao + modal
-  }
 
   //trazendo todos os pedidos
   const [pedidos, setPedidos] = useState([])
@@ -39,6 +37,18 @@ export const TabelaMercadoriasCadastradasAprovador = () => {
   }, [])
 
   console.log('Relatorios: ', relatoriosAprovador)
+
+  const [analistaExcluir, setAnalistaExcluir] = useState(null)
+
+  const handleExclusao = async (idRelatorio) => {
+    try {
+      const exclusao = await excluirRelatorioAprovador(idRelatorio)
+      console.log(exclusao)
+      window.location.reload()
+    } catch (erro) {
+      alert(erro)
+    }
+  }
 
   return (
     <div className={styles.table}>
@@ -74,7 +84,9 @@ export const TabelaMercadoriasCadastradasAprovador = () => {
                     </button>
                   </div>
                   <div>
-                    <button className={styles.button} onClick={handleExclusao}>
+                    <button className={styles.button} onClick={() => {
+                          handleExclusao(relatorios.pedido.id_pedido)
+                        }}>
                       Excluir <FontAwesomeIcon icon={faTrash} />
                     </button>
                   </div>

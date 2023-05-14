@@ -63,9 +63,8 @@ export const FormAtualizarPedidos = () => {
         nome_motorista,
         placa_veiculo
       }
-
       const pedido = await atualizarPedido(pedidoId, data)
-      setErrorMessage(pedido.message)
+      setErrorMessage(pedido.data.message)
       setOpenModalFornecedorCadastrado(true)
     } catch (erro) {
       setErrorMessage(erro.response.data.message)

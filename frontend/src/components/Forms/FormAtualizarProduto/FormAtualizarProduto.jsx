@@ -109,18 +109,15 @@ export const FormAtualizarProduto = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const dados = {
+      const data = {
         nome_produto,
         tipo,
         quantidade_produto,
-        unidade_medida,
-        descricao,
-        data_entrada_empresa,
-        hora_entrada_empresa,
+        descricao
       }
-      console.log(dados)
+      console.log("dados do produto: ", data)
 
-      const produto = await atualizarProduto(produtoId, dados)
+      const produto = await atualizarProduto(produtoId, data)
       console.log(produto)
       setErrorMessage(produto.data.message)
       setOpenModalProdutoAtualizado(true)

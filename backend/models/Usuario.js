@@ -1,199 +1,311 @@
-const Sequelize = require('sequelize')
-const db = require('../db/conexao')
+const Sequelize = require("sequelize")
+const db = require("../db/conexao")
 
-const bcrypt = require('bcryptjs')
+const bcrypt = require("bcryptjs")
 
-
-const Usuario = db.define('usuario', {
+const Usuario = db.define(
+  "usuario",
+  {
     id_usuario: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
     },
+    
+    data_admissao: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+
+    senha: {
+      type: Sequelize.STRING,
+      require: true,
+    },
+
+    funcao: {
+      type: Sequelize.STRING,
+      require: true,
+    },
+
     nome: {
+      type: Sequelize.STRING,
+      require: true,
+    },
+
+    CPF: { 
+        type:Sequelize.STRING,
+        require: true,
+    },
+
+    RG: {
         type:Sequelize.STRING,
         require: true
     },
-    senha: {
-        type:Sequelize.STRING,
+
+    dataNascimento: {
+        type:Sequelize.DATE,
+        require: true    
+    },
+    
+    genero: {
+        type:Sequelize.STRING(1),
+        require: true
+    },
+
+    
+    telefone: {
+        type: Sequelize.STRING,
+        require: false,
+        defaultValue: ""
+    },
+
+    celular: {
+        type: Sequelize.STRING,
+        require: true
+    },
+
+    email: {
+        type: Sequelize.STRING,
+        require: true,
+    },
+
+    cep: {
+        type: Sequelize.STRING,
+        require: true
+    },
+
+    endereco: {
+        type: Sequelize.STRING,
+        require: true
+    },
+
+    numero: {
+        type: Sequelize.STRING,
+        require: true
+    },
+
+    complemento: {
+        type: Sequelize.STRING,
+        defaultValue: ""
+    },
+
+    bairro: {
+        type: Sequelize.STRING,
+        require: true
+    },
+
+    cidade: {
+        type: Sequelize.STRING,
+        require: true
+    },
+
+    estado: {
+        type: Sequelize.STRING,
         require: true
     },
     
-    email: {
-        type:Sequelize.STRING,
-        require: true
-    },
-
-    funcao: Sequelize.STRING,
-
-    dataAdmissao: Sequelize.DATE,
-
-    CPF: Sequelize.INTEGER,
-
-    RG: Sequelize.INTEGER,
-
-    dataNascimento: Sequelize.DATE,
-
-    genero: Sequelize.STRING(1),
-
     foto: {
-        type: Sequelize.STRING
+      type: Sequelize.STRING,
+      require: false
     },
 
     status_usuario: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-        allowNull: false,
-        defaultValue: 1
-    }
-
-}, {
-    timestamp: false
-})
+      type: Sequelize.BOOLEAN,
+      defaultValue: true,
+      allowNull: false,
+      defaultValue: 1,
+    },
+  },
+  {
+    timestamp: false,
+  }
+)
 
 //adicionei---------------------------------------------------
-async function contar(){
-    const usuarios = await Usuario.count(Usuario.id_usuario)
-    return usuarios
+async function contar() {
+  const usuarios = await Usuario.count(Usuario.id_usuario)
+  return usuarios
 }
-contar().then(function(valor) {
-    console.log('Quantidade', valor);
+contar()
+  .then(function (valor) {
+    console.log("Quantidade", valor)
     if (valor === 0) {
+      const salt = bcrypt.genSaltSync(10)
+      const hashedSenha = bcrypt.hashSync("123", salt)
+
+      Usuario.create({
+        data_admissao: "2023-12-12",
+        senha: hashedSenha,
+        funcao: "Analista",
+        nome: "Gabriel Briscese",
+        CPF: "123",
+        RG: "321",
+        dataNascimento: "10-03-1998",
+        genero: "M",
+        telefone:"123456789",
+        celular: "12345678",
+        email: "gabriel@live.com",
+        cep: "456789",
+        endereco: "Rua Palmares",
+        numero: "20",
+        complemento: "complemento",
+        bairro: "bairro",
+        cidade: "Sao Jose dos Campos",
+        estado: "SP",
+        foto: "gabriel.png",
+        status_usuario: true
+      })
+
+      Usuario.create({
+        data_admissao: "2023-12-12",
+        senha: hashedSenha,
+        funcao: "Aprovador",
+        nome: "Jean",
+        CPF: "1234",
+        RG: "4321",
+        dataNascimento: "10-03-1998",
+        genero: "M",
+        telefone:"123456789",
+        celular: "12345678",
+        email: "jean@live.com",
+        cep: "456789",
+        endereco: "Rua Palmares",
+        numero: "20",
+        complemento: "complemento",
+        bairro: "bairro",
+        cidade: "Sao Jose dos Campos",
+        estado: "SP",
+        foto: "jean.png",
+        status_usuario: true
+      })
+
+      Usuario.create({
+        data_admissao: "2023-12-12",
+        senha: hashedSenha,
+        funcao: "Aprovador",
+        nome: "Jonas",
+        CPF: "12345",
+        RG: "54321",
+        dataNascimento: "10-03-1998",
+        genero: "M",
+        telefone:"123456789",
+        celular: "12345678",
+        email: "jonas@live.com",
+        cep: "456789",
+        endereco: "Rua Palmares",
+        numero: "20",
+        complemento: "complemento",
+        bairro: "bairro",
+        cidade: "Sao Jose dos Campos",
+        estado: "SP",
+        foto: "jonas.png",
+        status_usuario: true
+
+      })
+
+      Usuario.create({
+        data_admissao: "2023-12-12",
+        senha: hashedSenha,
+        funcao: "Gerente",
+        nome: "Felipe",
+        CPF: "12345",
+        RG: "54321",
+        dataNascimento: "10-03-1998",
+        genero: "M",
+        telefone:"123456789",
+        celular: "12345678",
+        email: "felipe@live.com",
+        cep: "456789",
+        endereco: "Rua Palmares",
+        numero: "20",
+        complemento: "complemento",
+        bairro: "bairro",
+        cidade: "Sao Jose dos Campos",
+        estado: "SP",
+        foto: "felipe.png",
+        status_usuario: true
+
+      })
+
+      Usuario.create({
+        data_admissao: "2023-12-12",
+        senha: hashedSenha,
+        funcao: "Recebedor",
+        nome: "Thiago",
+        CPF: "12345",
+        RG: "54321",
+        dataNascimento: "10-03-1998",
+        genero: "M",
+        telefone:"123456789",
+        celular: "12345678",
+        email: "thiago@live.com",
+        cep: "456789",
+        endereco: "Rua Palmares",
+        numero: "20",
+        complemento: "complemento",
+        bairro: "bairro",
+        cidade: "Sao Jose dos Campos",
+        estado: "SP",
+        foto: "thiago.png",
+        status_usuario: true
+
+      })
 
 
-        const salt = bcrypt.genSaltSync(10)
-        const hashedSenha = bcrypt.hashSync('123', salt)
-    
-        Usuario.create({
-            nome: 'Gabriel Briscese',
-            senha: hashedSenha,
-            email: 'gabriel@live.com',
-            funcao: 'Analista',
-            dataAdmissao: '10-01-2010',
-            CPF: '123',
-            RG: '321',
-            dataNascimento: '10-03-1998',
-            genero: 'M',
-            foto: 'gabriel.png'
-    
-        })
-    
-        Usuario.create({
-            nome: 'Jean',
-            senha: hashedSenha,
-            email: 'jean@live.com',
-            funcao: 'Aprovador',
-            dataAdmissao: '10-01-2010',
-            CPF: '1234',
-            RG: '4321',
-            dataNascimento: '10-03-1998',
-            genero: 'M',
-            foto: 'jean.png'
-    
-        })
-    
-        Usuario.create({
-            nome: 'Jonas',
-            senha: hashedSenha,
-            email: 'jonas@live.com',
-            funcao: 'Aprovador',
-            dataAdmissao: '10-01-2010',
-            CPF: '12345',
-            RG: '54321',
-            dataNascimento: '10-03-1998',
-            genero: 'M',
-            foto: 'jonas.png'
-    
-        })
-    
-        Usuario.create({
-            nome: 'Felipe',
-            senha: hashedSenha,
-            email: 'felipe@live.com',
-            funcao: 'Gerente',
-            dataAdmissao: '10-01-2010',
-            CPF: '12345',
-            RG: '54321',
-            dataNascimento: '10-03-1998',
-            genero: 'M',
-            foto: 'felipe.png'
-    
-        })
-    
-        Usuario.create({
-            nome: 'Thiago',
-            senha: hashedSenha,
-            email: 'thiago@live.com',
-            funcao: 'Recebedor',
-            dataAdmissao: '10-01-2010',
-            CPF: '12345',
-            RG: '54321',
-            dataNascimento: '10-03-1998',
-            genero: 'M',
-            foto: 'thiago.png'
-    
-        })
 
-        Usuario.create({
-            nome: 'Leandro',
-            senha: hashedSenha,
-            email: 'leandro@live.com',
-            funcao: 'Recebedor',
-            dataAdmissao: '10-01-2010',
-            CPF: '12345',
-            RG: '54321',
-            dataNascimento: '10-03-1998',
-            genero: 'M',
-            foto: 'leandro.png'
-    
-        })
+      Usuario.create({
+        data_admissao: "2023-12-12",
+        senha: hashedSenha,
+        funcao: "Aprovador",
+        nome: "Igor",
+        CPF: "12345",
+        RG: "54321",
+        dataNascimento: "10-03-1998",
+        genero: "M",
+        telefone:"123456789",
+        celular: "12345678",
+        email: "igor@live.com",
+        cep: "456789",
+        endereco: "Rua Palmares",
+        numero: "20",
+        complemento: "complemento",
+        bairro: "bairro",
+        cidade: "Sao Jose dos Campos",
+        estado: "SP",
+        foto: "igor.png",
+        status_usuario: true
+        
+      })
 
-        Usuario.create({
-            nome: 'Kenzo',
-            senha: hashedSenha,
-            email: 'kenzo@live.com',
-            funcao: 'Recebedor',
-            dataAdmissao: '10-01-2010',
-            CPF: '12345',
-            RG: '54321',
-            dataNascimento: '10-03-1998',
-            genero: 'M',
-            foto: 'kenzo.png'
-    
-        })
+      Usuario.create({
+        data_admissao: "2023-12-12",
+        senha: hashedSenha,
+        funcao: "Administrador",
+        nome: "Gabriela",
+        CPF: "12345",
+        RG: "54321",
+        dataNascimento: "10-03-1998",
+        genero: "F",
+        telefone:"123456789",
+        celular: "12345678",
+        email: "gabriela@live.com",
+        cep: "456789",
+        endereco: "Rua Palmares",
+        numero: "20",
+        complemento: "complemento",
+        bairro: "bairro",
+        cidade: "Sao Jose dos Campos",
+        estado: "SP",
+        foto: "gabriela.png",
+        status_usuario: true
 
-        Usuario.create({
-            nome: 'Igor',
-            senha: hashedSenha,
-            email: 'igor@live.com',
-            funcao: 'Aprovador',
-            dataAdmissao: '10-01-2010',
-            CPF: '12345',
-            RG: '54321',
-            dataNascimento: '10-03-1998',
-            genero: 'M',
-            foto: 'igor.png'
-    
-        })
-
-        Usuario.create({
-            nome: 'Gabriela',
-            senha: hashedSenha,
-            email: 'gabriela@live.com',
-            funcao: 'Administrador',
-            dataAdmissao: '10-01-2010',
-            CPF: '12345',
-            RG: '54321',
-            dataNascimento: '01-01-2002',
-            genero: 'F',
-            foto: 'gabriela.png'
-    
-        })
+      })
     }
-}).catch(function(erro) {
-    console.log('Erro', erro)
-})
+  })
+  .catch(function (erro) {
+    console.log("Erro", erro)
+  })
 
 //--------------------------------------------------
 

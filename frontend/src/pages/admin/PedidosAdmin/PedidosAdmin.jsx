@@ -19,7 +19,8 @@ import { faCircleCheck, faTriangleExclamation, faTrash, faPersonCirclePlus, faMa
 import styles from "./PedidosAdmin.module.css"
 
 // Importando Hooks
-import { encontrarPedidos } from "../../../hooks/encontrarPedidos"
+import { encontrarPedidosAdministrador } from "../../../hooks/encontrarPedidos"
+import { excluirPedido } from "../../../hooks/excluirPedido"
 
 export const PedidosAdmin = () => {
 
@@ -27,7 +28,7 @@ export const PedidosAdmin = () => {
   const [pedidos, setPedidos] = useState([])
   useEffect(() => {
     async function fetchPedidos() {
-      const dadosPedidos = await encontrarPedidos()
+      const dadosPedidos = await encontrarPedidosAdministrador()
       setPedidos(dadosPedidos)
     }
     fetchPedidos()
@@ -35,14 +36,26 @@ export const PedidosAdmin = () => {
 
   console.log("pedidos: ", pedidos)
 
-  // HANDLES DO MODAL DE ATUALIZAR
+  const handleExclusao = async () => {
+    try {
+      const exclusao = await excluirPedido(pedidoExcluir)
+      setErrorMessage(exclusao.data.message)
+      setOpenModalProdutoExcluir(true)
+    } catch (erro) {
+      setErrorMessage(erro.response.data.message)
+      setOpenModalProdutoExcluir(true)
+      alert(errorMessage)
+    }
+  }
+
+  /* // HANDLES DO MODAL DE ATUALIZAR
   const handleCloseModalPedidoAtualizado = () => {
     setOpenModalPedidoAtualizado(false)
   }
 
   const handleOpenModalPedidoAtualizado = () => {
     setOpenModalPedidoAtualizado(true)
-  }
+  } */
 
   // HANDLES DO MODAL DE EXCLUIR WARNING
   const handleCloseModalPedidoExcluirWarning = () => {
@@ -54,20 +67,26 @@ export const PedidosAdmin = () => {
   }
 
   function handleCloseAndOpenModals() {
-    handleCloseModalPedidoExcluirWarning()
-    handleOpenModalPedidoExcluir()
+    handleCloseModalPedidoExcluirWarning(false)
+    handleOpenModalPedidoExcluir(false)
+    handleExclusao()
   }
 
   // HANDLES DO MODAL DE EXCLUIR
   const handleCloseModalPedidoExcluir = () => {
     setOpenModalPedidoExcluir(false)
+    window.location.reload()
   }
 
   const handleOpenModalPedidoExcluir = () => {
     setOpenModalPedidoExcluir(true)
   }
 
-  const [openModalPedidoAtualizado, setOpenModalPedidoAtualizado] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const [pedidoExcluir, setPedidoExcluir] = useState(null)
+
+  /* const [openModalPedidoAtualizado, setOpenModalPedidoAtualizado] = useState(false) */
   const [openModalPedidoExcluirWarning, setOpenModalPedidoExcluirWarning] = useState(false)
   const [openModalPedidoExcluir, setOpenModalPedidoExcluir] = useState(false)
 
@@ -81,25 +100,6 @@ export const PedidosAdmin = () => {
             <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/pedidos/cadastrar">
               <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo Pedido!" />
             </BarraAdmin>
-
-            <div>
-              <input type="button" onClick={handleOpenModalPedidoAtualizado} value="Atualizar" />
-              <input type="button" onClick={handleOpenModalPedidoExcluirWarning} value="Excluir" />
-            </div>
-
-            {/* MODAL ATUALIZAR */}
-            <Modal isOpen={openModalPedidoAtualizado} onClick={handleCloseModalPedidoAtualizado}>
-              <div className={styles.conteudoModal}>
-                <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                <p> (nomeDoPedido) foi atualizado com sucesso! (puxar do backend)</p>
-                <input
-                  className={styles.botaoConfirmarModal}
-                  type="button"
-                  value="OK"
-                  onClick={handleCloseModalPedidoAtualizado}
-                />
-              </div>
-            </Modal>
 
             {/* MODAL EXCLUIR_WARNING */}
             <Modal
@@ -128,7 +128,7 @@ export const PedidosAdmin = () => {
             <Modal isOpen={openModalPedidoExcluir} onClick={handleCloseModalPedidoExcluir}>
               <div className={styles.conteudoModal}>
                 <FontAwesomeIcon icon={faTrash} className={styles.iconeModal} />
-                <p> (nomeDoPedido) foi excluído! (puxar do backend)</p>
+                <p>{errorMessage}</p>
                 <input
                   className={styles.botaoConfirmarModal}
                   type="button"
@@ -165,16 +165,20 @@ export const PedidosAdmin = () => {
 
                       {/* verificando com é o estado da aprovação para mostrar ação */}
                       <button className={styles.button}>
-                        <Link to={``}>
+                        <Link to={`/admin/pedidos/atualizar/${pedido.id_pedido}`}>
                           Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </Link>
                       </button>
                     </td>
                     <td className={styles.tableData}>
-                      <button className={styles.button}>
-                        <Link to={``}>
-                          Excluir <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </Link>
+                      <button
+                        className={styles.button}
+                        onClick={() => {
+                          setPedidoExcluir(pedido.id_pedido)
+                          setOpenModalPedidoExcluirWarning(true)
+                        }}
+                      >
+                        Excluir <FontAwesomeIcon icon={faTrash} />
                       </button>
                     </td>
                   </tr>

@@ -105,32 +105,10 @@ const Fornecedor = db.define('fornecedor', {
         allowNull: false
     },
 
-
-    nome_motorista: {
-        type:Sequelize.STRING,
-        require: false,
-        allowNull: true,
-        defaultValue: ""
-
-        
-    },
-    
-    placa_veiculo: {
-        type:Sequelize.STRING,
-        require: false,
-        allowNull: true,
-        defaultValue: ""
-    },
-
-    documentos_anexos: {
-        type:Sequelize.STRING,
-        require: false,
-        allowNull: true
-    },
+    //removido nome_motorista, placa_veiculo, documento_anexos de Fornecedor para Pedido
 
     status_fornecedor: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true,
         allowNull: false,
         defaultValue: 1
     }
@@ -163,10 +141,7 @@ contar().then(function(valor) {
             numero: "999",
             complemento: "Atras da boca de fumo",
             comentario: "Teste de comentario",
-            nome_fornecedor: 'Trigostoso', // nome fantasia
-            nome_motorista: 'Adenilson Pereira',
-            placa_veiculo: 'ABC1A23',
-            documentos_anexos: 'DocumentoA.pdf'
+            nome_fornecedor: 'Trigostoso' // nome fantasia
         })
 
         Fornecedor.create({
@@ -186,10 +161,7 @@ contar().then(function(valor) {
             numero: "111",
             complemento: "Atras da boca do Beco",
             comentario: "Teste de comentario",
-            nome_fornecedor: 'Fornecedor Agrícola S/A',
-            nome_motorista: 'João da Silva',
-            placa_veiculo: 'DEF5678',
-            documentos_anexos: 'DocumentoB.pdf'
+            nome_fornecedor: 'Fornecedor Agrícola S/A'
         })
 
         Fornecedor.create({
@@ -209,10 +181,7 @@ contar().then(function(valor) {
             numero: "555",
             complemento: "Atras da Mercadinho",
             comentario: "Teste de comentario",
-            nome_fornecedor: 'Fornecedor Grãos Export',
-            nome_motorista: 'Dirlei Vasconcelos de Almeida',
-            placa_veiculo: 'GHI9101',
-            documentos_anexos: 'DocumentoC.pdf'
+            nome_fornecedor: 'Fornecedor Grãos Export'
         })
 
         Fornecedor.create({
@@ -232,10 +201,7 @@ contar().then(function(valor) {
             numero: "222",
             complemento: "Atras do escuro",
             comentario: "Teste de comentario",
-            nome_fornecedor: 'Fornecedor Cereal Farmers',
-            nome_motorista: 'Maria Aparecida Ramos',
-            placa_veiculo: 'JKL2345',
-            documentos_anexos: 'DocumentoD.pdf'
+            nome_fornecedor: 'Fornecedor Cereal Farmers'
         })
     }
 }).catch(function(erro) {

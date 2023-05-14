@@ -154,7 +154,7 @@ export const FormRecebedor = ({ hasButton }) => {
                     />
                   </label>
                 </div>
-
+              
                 <div className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Data:</h3>

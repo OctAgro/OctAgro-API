@@ -68,7 +68,8 @@ module.exports = class ProdutoControllers {
     static async atualizarProduto(req, res) {
         const oId_produto = req.params.id
 
-        const data = req.body.data
+        const data = req.body
+        console.log(data)
 
         if (!data.nome_produto) {
             return res.json({message: "Por favor, adicione um nome ao produto cadastrado!", status: 500}).status(500)
@@ -78,35 +79,16 @@ module.exports = class ProdutoControllers {
             return res.json({message: "Por favor, adicione um tipo", status: 500}).status(500)
         }
 
-        else if (!data.quantidade_produto) {
-            return res.json({message: "Por favor, digite a quantidade do produto!", status: 500}).status(500)
-        }
-
-        else if (!data.unidade_medida) {
-            return res.json({message: "Por favor, digite a unidade de medida do produto!", status: 500}).status(500)
-        }
-
         else if (!data.descricao) {
             return res.json({message: "Por favor, dê uma descrição ao produto!", status: 500}).status(500)
-        }
-
-        else if (!data.data_entrada_empresa) {
-            return res.json({message: "Por favor, adicione uma data de entrega da empresa", status: 500}).status(500)
-        }
-
-        else if(!data.hora_entrada_empresa) {
-            return res.json({message: "Por favor, adicione um horário para entrega do Produto", status: 500}).status(500)
         }
 
         try {
             const atualizarProduto = await Produto.update({            
                 nome_produto: data.nome_produto,
                 tipo: data.tipo, 
-                quantidade_produto: data.quantidade_produto, 
-                unidade_medida: data.unidade_medida, 
+                quantidade_produto: data.quantidade_produto,
                 descricao: data.descricao, 
-                data_entrada_empresa: data.data_entrada_empresa, 
-                hora_entrada_empresa: data.hora_entrada_empresa
                 },{
                 where: {
                     id_produto: oId_produto
@@ -120,7 +102,9 @@ module.exports = class ProdutoControllers {
 
     static async listarProduto(req, res) {
         try {
-            const produto = await Produto.findAll()
+            const produto = await Produto.findAll({
+                where: { status_produto: 1 },
+              })
             return res.json(produto).status(201)
         } catch (error) {
             return res.json(error).status(500)
@@ -132,7 +116,6 @@ module.exports = class ProdutoControllers {
         const produtoProcurado = await Produto.findByPk(oId_produto)
 
         if (!produtoProcurado) {
-            console.log('Deu ruim garai')
             res.status(422).json({message: "Produto não encontrado"})
         }
         console.log('Encontrou isso no Back:', produtoProcurado)

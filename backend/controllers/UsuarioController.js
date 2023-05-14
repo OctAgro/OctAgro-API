@@ -5,26 +5,28 @@ const bcrypt = require('bcryptjs')
 module.exports = class UsuarioControllers {
 
     static async registrarUsuarioPost(req, res) {
-        const data = req.body.data
+        const data = req.body
 
-        if (!data.nome) {
-            return res.json({message: "Por favor, adicione um nome!", status: 500}).status(500)
+
+        if (!data.data_admissao) {
+            return res.json({message: "Por favor, adicione uma data de admissão válida!", status: 500}).status(500)
         }
-
-        else if (!data.email) {
-            return res.json({message: "Por favor, adicione um e-mail válido!", status: 500}).status(500)
-        }
-
         else if (!data.senha) {
             return res.json({message: "Por favor, adicione uma senha!", status: 500}).status(500)
         }
+        //checagem se a senha é a mesma de confirmar senha
+        if (data.senha != data.confirmarSenha) {
+            //mensagem
+            return res.json({message: "As senhas não conferem, tente novamente!", status: 500}).status(500)
+            //res.render('/usuario/registrarUsuario')
 
+        }
         else if (!data.funcao) {
             return res.json({message: "Por favor, adicione uma função!", status: 500}).status(500)
         }
 
-        else if (!data.dataAdmissao) {
-            return res.json({message: "Por favor, adicione uma data de admissão!", status: 500}).status(500)
+        if (!data.nome) {
+            return res.json({message: "Por favor, adicione um nome!", status: 500}).status(500)
         }
 
         else if (!data.CPF) {
@@ -43,13 +45,42 @@ module.exports = class UsuarioControllers {
             return res.json({message: "Por favor, adicione o gênero!", status: 500}).status(500)
         }
 
-        //checagem se a senha é a mesma de confirmar senha
-        if (data.senha != data.confirmarSenha) {
-            //mensagem
-            return res.json({message: "As senhas não conferem, tente novamente!", status: 500}).status(500)
-            //res.render('/usuario/registrarUsuario')
-
+        else if (!data.telefone) {
+            return res.json({message: "Por favor, adicione um telefone!", status: 500}).status(500)
         }
+
+        else if (!data.celular) {
+            return res.json({message: "Por favor, adicione um numero de celular valido!", status: 500}).status(500)
+        }
+
+        else if (!data.email) {
+            return res.json({message: "Por favor, adicione um e-mail válido!", status: 500}).status(500)
+        }
+
+        else if (!data.cep) {
+            return res.json({message: "Por favor, adicione um cep valido!", status: 500}).status(500)
+        }
+
+        else if (!data.endereco) {
+            return res.json({message: "Por favor, adicione um endereço!", status: 500}).status(500)
+        }
+
+        else if (!data.numero) {
+            return res.json({message: "Por favor, adicione um numero!", status: 500}).status(500)
+        }
+
+        else if (!data.bairro) {
+            return res.json({message: "Por favor, adicione um bairro!", status: 500}).status(500)
+        }
+
+        else if (!data.cidade) {
+            return res.json({message: "Por favor, adicione uma cidade!", status: 500}).status(500)
+        }
+        
+        else if (!data.estado) {
+            return res.json({message: "Por favor, adicione uma cidade!", status: 500}).status(500)
+        }
+
 
         //checar se usuário existe
         const checarSeUsuarioExiste = await Usuario.findOne({
@@ -77,15 +108,27 @@ module.exports = class UsuarioControllers {
         const hashedSenha = bcrypt.hashSync(data.senha, salt)
 
         const usuario = {
-            nome: data.nome,
-            email: data.email,
+            data_admissao: data.data_admissao,
             senha: hashedSenha,
             funcao: data.funcao,
-            dataAdmissao: data.dataAdmissao,
+            nome: data.nome,
             CPF: data.CPF,
             RG: data.RG,
             dataNascimento: data.dataNascimento,
-            genero: data.genero
+            genero: data.genero,
+            telefone: data.telefone,
+            celular: data.celular,
+            email: data.email,
+            cep: data.cep,
+            endereco: data.endereco,
+            numero: data.numero,
+            complemento: data.complemento,
+            bairro: data.bairro,
+            cidade: data.cidade,
+            estado: data.estado,
+            foto: data.foto,
+            status_usuario: data.status_usuario
+
         }
 
         try {
@@ -173,42 +216,131 @@ module.exports = class UsuarioControllers {
     }
 
     static async deletarUsuario(req, res) {
-        const oId_produto = req.params.id_usuario
 
-        try {
-            await Usuario.destroy({
-                where: {
-                    id_usuario: oId_produto
-                }
-            })
-            return res.json({message: "Usuario excluído com sucesso!", status: 201}).status(201)
-        } catch (error) {
-            return res.json(error).status(500)
-        }
+
+        const id_usuario = req.params.id
+    const usuario = await Usuario.findByPk(id_usuario)
+    const data = req.body
+    try {
+        await Usuario.update(
+          {
+            status_usuario: data.status_usuario
+          },
+          {
+            where: {
+              id_usuario: id_usuario,
+            },
+          }
+        )
+        res.status(200).json({ message: "Usuario deletado  com sucesso!" })
+      } catch (error) {
+        return res.json("deu erro").status(500)
+      }
     }
 
     static async atualizarUsuario(req, res) {
-        const oId_usuario = req.params.id_usuario
+        const oId_usuario = req.params.id
 
         const data = req.body
 
-        if (!data.nome) {
+        if (!data.data_admissao) {
+            return res.json({message: "Por favor, adicione uma data de admissão válida!", status: 500}).status(500)
+        }
+        else if (!data.senha) {
+            return res.json({message: "Por favor, adicione uma senha!", status: 500}).status(500)
+        }
+        //checagem se a senha é a mesma de confirmar senha
+        else if (data.senha != data.confirmarSenha) {
+            //mensagem
+            return res.json({message: "As senhas não conferem, tente novamente!", status: 500}).status(500)
+            //res.render('/usuario/registrarUsuario')
+
+        }
+        else if (!data.funcao) {
+            return res.json({message: "Por favor, adicione uma função!", status: 500}).status(500)
+        }
+
+        else if (!data.nome) {
             return res.json({message: "Por favor, adicione um nome!", status: 500}).status(500)
+        }
+
+        else if (!data.CPF) {
+            return res.json({message: "Por favor, adicione um CPF!", status: 500}).status(500)
+        }
+
+        else if (!data.RG) {
+            return res.json({message: "Por favor, adicione um RG!", status: 500}).status(500)
+        }
+
+        else if (!data.dataNascimento) {
+            return res.json({message: "Por favor, adicione a data de nacimento!", status: 500}).status(500)
+        }
+
+        else if (!data.genero) {
+            return res.json({message: "Por favor, adicione o gênero!", status: 500}).status(500)
+        }
+
+        else if (!data.telefone) {
+            return res.json({message: "Por favor, adicione um telefone!", status: 500}).status(500)
+        }
+
+        else if (!data.celular) {
+            return res.json({message: "Por favor, adicione um numero de celular valido!", status: 500}).status(500)
         }
 
         else if (!data.email) {
             return res.json({message: "Por favor, adicione um e-mail válido!", status: 500}).status(500)
         }
 
-        else if (!data.funcao) {
-            return res.json({message: "Por favor, adicione uma função!", status: 500}).status(500)
+        else if (!data.cep) {
+            return res.json({message: "Por favor, adicione um cep valido!", status: 500}).status(500)
         }
+
+        else if (!data.endereco) {
+            return res.json({message: "Por favor, adicione um endereço!", status: 500}).status(500)
+        }
+
+        else if (!data.numero) {
+            return res.json({message: "Por favor, adicione um numero!", status: 500}).status(500)
+        }
+
+        else if (!data.bairro) {
+            return res.json({message: "Por favor, adicione um bairro!", status: 500}).status(500)
+        }
+
+        else if (!data.cidade) {
+            return res.json({message: "Por favor, adicione uma cidade!", status: 500}).status(500)
+        }
+        
+        else if (!data.estado) {
+            return res.json({message: "Por favor, adicione uma cidade!", status: 500}).status(500)
+        }
+
+        const salt = bcrypt.genSaltSync(10)
+        const hashedSenha = bcrypt.hashSync(data.senha, salt)
 
         try {
             await Usuario.update({
-                nome: data.nome, 
-                email: data.email, 
-                funcao: data.funcao
+            data_admissao: data.data_admissao,
+            senha: hashedSenha,
+            funcao: data.funcao,
+            nome: data.nome,
+            CPF: data.CPF,
+            RG: data.RG,
+            dataNascimento: data.dataNascimento,
+            genero: data.genero,
+            telefone: data.telefone,
+            celular: data.celular,
+            email: data.email,
+            cep: data.cep,
+            endereco: data.endereco,
+            numero: data.numero,
+            complemento: data.complemento,
+            bairro: data.bairro,
+            cidade: data.cidade,
+            estado: data.estado,
+            foto: data.foto,
+
             }, {
                 where: {
                     id_usuario: oId_usuario

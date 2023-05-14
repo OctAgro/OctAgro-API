@@ -42,23 +42,31 @@ hr {
   display: grid;
   grid-column-start: 1;
   grid-column-end: 2;
-  grid-template-columns: 15% auto 20% auto;
+  grid-template-columns: 15% 35% auto 35%;
 }
 
 #ladoDireito{
   display: grid;
   grid-column-start: 3;
   grid-column-end: 5;
-  grid-template-columns: 16% 30% auto 30%;
+  grid-template-columns: 20% 25% auto auto;
 
 }
 
-#cnpj, #produto {
+#cnpj, #produto, #idProd {
   grid-column-start: 1;
   grid-column-end: 2;
 }
+#caminhao, #idForrnecedor{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
 
-#selectCnpj, #selectProduto {
+#inputCaminhao, #selectIdFornecedor {
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
+#selectCnpj, #selectProduto, #selectidProd {
   grid-column-start: 2;
   grid-column-end: 3;
 }

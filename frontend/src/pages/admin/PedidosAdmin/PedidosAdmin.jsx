@@ -101,25 +101,6 @@ export const PedidosAdmin = () => {
               <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo Pedido!" />
             </BarraAdmin>
 
-            <div>
-              {/* <input type="button" onClick={handleOpenModalPedidoAtualizado} value="Atualizar" /> */}
-              <input type="button" onClick={handleOpenModalPedidoExcluirWarning} value="Excluir" />
-            </div>
-
-            {/* MODAL ATUALIZAR
-            <Modal isOpen={openModalPedidoAtualizado} onClick={handleCloseModalPedidoAtualizado}>
-              <div className={styles.conteudoModal}>
-                <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                <p> (nomeDoPedido) foi atualizado com sucesso! (puxar do backend)</p>
-                <input
-                  className={styles.botaoConfirmarModal}
-                  type="button"
-                  value="OK"
-                  onClick={handleCloseModalPedidoAtualizado}
-                />
-              </div>
-            </Modal> */}
-
             {/* MODAL EXCLUIR_WARNING */}
             <Modal
               isOpen={openModalPedidoExcluirWarning}
@@ -147,7 +128,7 @@ export const PedidosAdmin = () => {
             <Modal isOpen={openModalPedidoExcluir} onClick={handleCloseModalPedidoExcluir}>
               <div className={styles.conteudoModal}>
                 <FontAwesomeIcon icon={faTrash} className={styles.iconeModal} />
-                <p> (nomeDoPedido) foi excluído! (puxar do backend)</p>
+                <p>{errorMessage}</p>
                 <input
                   className={styles.botaoConfirmarModal}
                   type="button"

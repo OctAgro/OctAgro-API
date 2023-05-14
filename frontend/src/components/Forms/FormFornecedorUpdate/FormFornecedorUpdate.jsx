@@ -56,7 +56,8 @@ export const FormFornecedorUpdate = () => {
       }
       const fornecedor = await atualizarFornecedor(fornecedorId, data)
       console.log('Resposta do Fornecedor', fornecedor)
-      setErrorMessage(fornecedor.message)
+      setErrorMessage(fornecedor.data.message)
+      console.log('Mensagem de erro: ', errorMessage)
       setOpenModalFornecedorCadastrado(true)
     } catch (erro) {
       setErrorMessage(erro.response.data.message)

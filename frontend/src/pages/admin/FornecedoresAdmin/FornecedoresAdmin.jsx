@@ -113,25 +113,6 @@ export const FornecedoresAdmin = () => {
               <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo fornecedor!" />
             </BarraAdmin>
 
-            <div>
-              {/* <input type="button" onClick={handleOpenModalFornecedorAtualizado} value="Atualizar" /> */}
-              <input type="button" onClick={handleOpenModalFornecedorExcluirWarning} value="Excluir" />
-            </div>
-
-            {/* MODAL ATUALIZAR
-            <Modal isOpen={openModalFornecedorAtualizado} onClick={handleCloseModalFornecedorAtualizado}>
-              <div className={styles.conteudoModal}>
-                <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-                <p> (nomeDoFornecedor) foi atualizado com sucesso! (puxar do backend)</p>
-                <input
-                  className={styles.botaoConfirmarModal}
-                  type="button"
-                  value="OK"
-                  onClick={handleCloseModalFornecedorAtualizado}
-                />
-              </div>
-            </Modal> */}
-
             {/* MODAL EXCLUIR_WARNING */}
             <Modal
               isOpen={openModalFornecedorExcluirWarning}
@@ -162,7 +143,7 @@ export const FornecedoresAdmin = () => {
             >
               <div className={styles.conteudoModal}>
                 <FontAwesomeIcon icon={faTrash} className={styles.iconeModal} />
-                <p> (nomeDoFornecedor) foi excluído! (puxar do backend)</p>
+                <p>{errorMessage}</p>
                 <input
                   className={styles.botaoConfirmarModal}
                   type="button"

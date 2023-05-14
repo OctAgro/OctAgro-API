@@ -40,9 +40,9 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 <h2>Demonstração - Gifs<a id="demo"></a></h2>
 <div align="center">
     <h3>Visão dos usuários (Recebedor, Analista e Aprovador)</h3>
-    <img src="../gifs/sprint1/RecebedorSp2.gif" alt='Visão do Recebedor' width="300"/>
-    <img src="../gifs/sprint1/AnalistaSp2.gif" alt='Visão do Analista' width="300"/>
-    <img src="../gifs/sprint1/AprovadorSp2.gif" alt='Visão do Aprovador' width="300"/> 
+    <img src="../gifs/sprint2/RecebedorSp2.gif" alt='Visão do Recebedor' width="300"/>
+    <img src="../gifs/sprint2/AnalistaSp2.gif" alt='Visão do Analista' width="300"/>
+    <img src="../gifs/sprint2/AprovadorSp2.gif" alt='Visão do Aprovador' width="300"/> 
 </div>
 
 <h3> Sprint 2: [03/04/23-23/04/23]</h3> 

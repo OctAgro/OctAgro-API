@@ -25,8 +25,8 @@ export const HeaderPedidos = (props) => {
         <div className={styles.rightSide}>
           {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
 
-          <h1>0</h1>
-          <h3>
+          <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
             Fornecedores
           </h3>
         </div>
@@ -39,8 +39,8 @@ export const HeaderPedidos = (props) => {
         <div className={styles.rightSide}>
           {/*             <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
  */}
-          <h1>0</h1>
-          <h3>
+          <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
             Produtos
           </h3>
         </div>

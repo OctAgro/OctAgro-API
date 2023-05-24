@@ -21,8 +21,8 @@ export const BodyAdm = () => {
                         </div>
                         <div className={styles.rightSide}>
                             {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-                            <h1>0</h1>
-                            <h3>
+                            <h1 className={styles.title}>0</h1>
+                            <h3 className={styles.subtitle}>
                                 Usuários
                             </h3>
                         </div>
@@ -35,8 +35,8 @@ export const BodyAdm = () => {
                         </div>
                         <div className={styles.rightSide}>
                             {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-                            <h1>0</h1>
-                            <h3>
+                            <h1 className={styles.title}>0</h1>
+                            <h3 className={styles.subtitle}>
                                 Fornecedores
                             </h3>
                         </div>
@@ -49,8 +49,8 @@ export const BodyAdm = () => {
                         </div>
                         <div className={styles.rightSide}>
                             {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-                            <h1>0</h1>
-                            <h3>
+                            <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
                                 Produtos
                             </h3>
                         </div>
@@ -63,8 +63,8 @@ export const BodyAdm = () => {
                         </div>
                         <div className={styles.rightSide}>
                             {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-                            <h1>0</h1>
-                            <h3>
+                            <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
                                 Recebidos
                             </h3>
                         </div>
@@ -78,8 +78,8 @@ export const BodyAdm = () => {
                             </div>
                             <div className={styles.rightSide}>
                                 {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-                                <h1>0</h1>
-                                <h3>
+                                <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
                                     Aprovados
                                 </h3>
                             </div>
@@ -97,8 +97,8 @@ export const BodyAdm = () => {
                         </div>
                         <div className={styles.rightSide}>
                             {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-                            <h1>0</h1>
-                            <h3>
+                            <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
                                 Análise
                             </h3>
                         </div>
@@ -111,8 +111,8 @@ export const BodyAdm = () => {
                         </div>
                         <div className={styles.rightSide}>
                             {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-                            <h1>0</h1>
-                            <h3>
+                            <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
                                 Reprovados
                             </h3>
                         </div>
@@ -125,7 +125,7 @@ export const BodyAdm = () => {
 
 
                 <div id={styles["graficoProduto"]}>
-                <img className={styles.imgGrafProduto} src={graficoProduto} alt="Grafico Produto Não Implementado" />
+                    <img className={styles.imgGrafProduto} src={graficoProduto} alt="Grafico Produto Não Implementado" />
                 </div>
 
             </div >

@@ -15,19 +15,20 @@ import { MercadoriasProvider } from "../../../context/MercadoriasRecebedorContex
 export const MercadoriaRecebedor = () => {
   return (
     <MercadoriasProvider>
-      <div className={styles.main}>
-        <SidebarRecebedor />
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarRecebedor />
+        </div>
 
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderRecebedor arrow="True" link="/recebedor/home" />
-          </div>
+        <div id={styles["header"]}>
+          <HeaderRecebedor arrow="True" link="/recebedor/home" />
+        </div>
 
-          <div className={styles.content}>
-            <TabelaMercadoriasCadastradas />
-          </div>
+        <div id={styles["body"]}>
+          <TabelaMercadoriasCadastradas />
         </div>
       </div>
+
     </MercadoriasProvider>
   )
 }

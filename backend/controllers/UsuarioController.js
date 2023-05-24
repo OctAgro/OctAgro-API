@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs')
 module.exports = class UsuarioControllers {
 
     static async registrarUsuarioPost(req, res) {
-        const data = req.body
-
+        const data = req.body.data
+        console.log('Backend', data)
 
         if (!data.data_admissao) {
             return res.json({message: "Por favor, adicione uma data de admissão válida!", status: 500}).status(500)
@@ -14,13 +14,16 @@ module.exports = class UsuarioControllers {
         else if (!data.senha) {
             return res.json({message: "Por favor, adicione uma senha!", status: 500}).status(500)
         }
-        //checagem se a senha é a mesma de confirmar senha
+
+        // não possuimos confirmar senha no form
+
+/*         //checagem se a senha é a mesma de confirmar senha
         if (data.senha != data.confirmarSenha) {
             //mensagem
             return res.json({message: "As senhas não conferem, tente novamente!", status: 500}).status(500)
             //res.render('/usuario/registrarUsuario')
 
-        }
+        } */
         else if (!data.funcao) {
             return res.json({message: "Por favor, adicione uma função!", status: 500}).status(500)
         }
@@ -107,6 +110,9 @@ module.exports = class UsuarioControllers {
         const salt = bcrypt.genSaltSync(10)
         const hashedSenha = bcrypt.hashSync(data.senha, salt)
 
+        //transformar Masculino em M, Feminino em F, e Outro em O (pegar primeira letra da palavra)
+        const generoTransformado = data.genero[0]
+
         const usuario = {
             data_admissao: data.data_admissao,
             senha: hashedSenha,
@@ -115,7 +121,7 @@ module.exports = class UsuarioControllers {
             CPF: data.CPF,
             RG: data.RG,
             dataNascimento: data.dataNascimento,
-            genero: data.genero,
+            genero: generoTransformado,
             telefone: data.telefone,
             celular: data.celular,
             email: data.email,

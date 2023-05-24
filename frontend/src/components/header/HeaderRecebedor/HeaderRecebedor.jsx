@@ -22,40 +22,43 @@ export const HeaderRecebedor = (props) => {
   const numeroMercadoriasTotal = dados[1]
 
   return (
-    <div className={styles.external}>
-      {arrow ? (
-        <div className={styles.arrow}>
-          <Link to={link} className={styles.arrow}>
-            <FontAwesomeIcon icon={faCircleChevronLeft} className={styles.iconArrow} />
-          </Link>
-        </div>
-      ) : null}
 
-      <div className={styles.clipboards}>
-        <div className={styles.clipboardA}>
-          <div className={styles.leftSideA}>
-            <FontAwesomeIcon className="icon" icon={faTruck} />
-          </div>
-          <div className={styles.rightSideA}>
-          <h2>{numeroMercadorias ? numeroMercadorias : 0}</h2>
-            <h3>
-              Mercadorias <br /> à Caminho
-            </h3>
-          </div>
-        </div>
 
-        <div className={styles.clipboardB}>
-          <div className={styles.leftSideB}>
-            <FontAwesomeIcon className={styles.icon} icon={faTruck} />
+    <div className={styles.clipboards}>
+      <div className={styles.external}>
+        {arrow ? (
+          <div className={styles.arrow}>
+            <Link to={link} className={styles.arrow}>
+              <FontAwesomeIcon icon={faCircleChevronLeft} className={styles.iconArrow} />
+            </Link>
           </div>
-          <div className={styles.rightSideB}>
-          <h2>{numeroMercadoriasTotal ? numeroMercadoriasTotal : 0}</h2>
-            <h3>
-              Total <br /> Mercadorias
-            </h3>
-          </div>
+        ) : null}
+      </div>
+
+      <div className={styles.clipboard}>
+        <div className={styles.leftSide}>
+          <FontAwesomeIcon className={styles.icon} icon={faTruck} />
+        </div>
+        <div className={styles.rightSide}>
+          <h1 className={styles.title}>{numeroMercadorias ? numeroMercadorias : 0}</h1>
+          <h3 className={styles.subtitle}>
+            Mercadorias <br /> à Caminho
+          </h3>
+        </div>
+      </div>
+
+      <div className={styles.clipboard}>
+        <div className={styles.leftSide}>
+          <FontAwesomeIcon className={styles.icon} icon={faTruck} />
+        </div>
+        <div className={styles.rightSide}>
+          <h1 className={styles.title}>{numeroMercadoriasTotal ? numeroMercadoriasTotal : 0}</h1>
+          <h3 className={styles.subtitle}>
+            Total <br /> Mercadorias
+          </h3>
         </div>
       </div>
     </div>
+
   )
 }

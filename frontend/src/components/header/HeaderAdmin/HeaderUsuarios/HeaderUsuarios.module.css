@@ -1,9 +1,9 @@
-h1 {
-  font-size: 10%;
+.title {
+  font-size: 3rem;
 }
 
-h3{
-  font-size: 15%;
+.subtitle{
+  font-size: 1.2rem;
   margin: 0.5rem;
 }
 
@@ -19,7 +19,7 @@ h3{
   background-color: rgba(231, 224, 209, 1);
   filter: drop-shadow(2px 2px 2px #000);
   margin: 1%;
-  width: 25%;
+  width: 18rem;
   height: 10%;
 }
 
@@ -36,7 +36,7 @@ h3{
 .rightSide {
   text-align: center;
   font-size: 1.5rem;
-  width: 60%;
+  width: 70%;
   margin: auto;
 }
 

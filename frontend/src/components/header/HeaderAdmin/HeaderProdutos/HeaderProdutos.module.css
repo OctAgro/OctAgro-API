@@ -1,17 +1,16 @@
-h1 {
-  font-size: 4rem;
+.title {
+  font-size: 3rem;
 }
 
-h3{
-  font-size: 1.5rem;
+.subtitle{
+  font-size: 1.2rem;
   margin: 0.5rem;
 }
 
 .clipboards {
   cursor: default;
-  margin: 0 auto;
   display: flex;
-  font-family: "Gotham Black";
+  font-family: "Gotham Black";  
 }
 
 .clipboard {
@@ -19,30 +18,31 @@ h3{
   border-radius: 15px;
   background-color: rgba(231, 224, 209, 1);
   filter: drop-shadow(2px 2px 2px #000);
-  margin: 0.5rem 1rem;
+  margin: 1%;
   width: 20rem;
-  height: 7rem;
+  height: 10%;
 }
 
 .leftSide {
-  font-size: 5rem;
+  font-size: 4rem;
   padding: 0rem 1rem;
   border-right: rgba(0, 0, 0, 0.3) solid;
   border-radius: 15px;
   margin: 0;
-  width: 8rem;
+  width: 40%;
   display: flex;
 }
 
 .rightSide {
   text-align: center;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
+  width: 70%;
   margin: auto;
 }
 
 .icon{
   margin: auto;
-  font-size: 4rem;
+  font-size: 3rem;
 
 }
 

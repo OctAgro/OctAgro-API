@@ -1,4 +1,4 @@
-.external {
+/* .external {
     font-family: "Gotham Black";
     display: flex;
     justify-content: space-between;
@@ -40,14 +40,60 @@
   .rightSideA h3,
   .rightSideB h3 {
     font-size: 16px;
-  }
-  
-  .arrow {
-    margin: auto 0;
-    font-size: 3.5rem;
-  }
-  
-  .arrow:hover {
-    color: #363636;
-  }
-  
+  } */
+
+.title {
+  font-size: 3rem;
+}
+
+.subtitle{
+  font-size: 1.2rem;
+  margin: 0.5rem;
+}
+
+.clipboards {
+  cursor: default;
+  display: flex;
+  font-family: "Gotham Black";
+}
+
+.clipboard {
+  display: flex;
+  border-radius: 15px;
+  background-color: rgba(231, 224, 209, 1);
+  filter: drop-shadow(2px 2px 2px #000);
+  margin: 1%;
+  width: 20rem;
+  height: 10%;
+}
+
+.leftSide {
+  font-size: 4rem;
+  padding: 0rem 1rem;
+  border-right: rgba(0, 0, 0, 0.3) solid;
+  border-radius: 15px;
+  margin: 0;
+  width: 40%;
+  display: flex;
+}
+
+.rightSide {
+  text-align: center;
+  font-size: 1.5rem;
+  width: 70%;
+  margin: auto;
+}
+
+.icon {
+  margin: auto;
+  font-size: 3rem;
+}
+
+.arrow {
+  margin: auto 0;
+  font-size: 3.5rem;
+}
+
+.arrow:hover {
+  color: #363636;
+}

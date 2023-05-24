@@ -25,8 +25,8 @@ export const HeaderRelatorios = (props) => {
         <div className={styles.rightSide}>
           {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
 
-          <h1>0</h1>
-          <h3>
+          <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
             Relatórios
           </h3>
         </div>
@@ -39,8 +39,8 @@ export const HeaderRelatorios = (props) => {
         <div className={styles.rightSide}>
           {/*             <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
  */}
-          <h1>0</h1>
-          <h3>
+          <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
             Aprovados
           </h3>
         </div>
@@ -52,8 +52,8 @@ export const HeaderRelatorios = (props) => {
         <div className={styles.rightSide}>
           {/*             <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
  */}
-          <h1>0</h1>
-          <h3>
+          <h1 className={styles.title}>0</h1>
+          <h3 className={styles.subtitle}>
             Recusados
           </h3>
         </div>

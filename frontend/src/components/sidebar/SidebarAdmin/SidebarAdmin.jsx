@@ -4,7 +4,7 @@ import sidebarOctagro from "../../../assets/sidebarOctagro.png"
 import MolduraOctagonal from "../../../assets/MolduraOctagonal.webp"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faRightToBracket, faUserGroup, faBuildingWheat, faWheatAwn, faFilePen } from "@fortawesome/free-solid-svg-icons"
+import { faRightToBracket, faUserGroup, faBuildingWheat, faWheatAwn, faFilePen, faClipboardList } from "@fortawesome/free-solid-svg-icons"
 
 
 import styles from "./SidebarAdmin.module.css"
@@ -23,42 +23,71 @@ export const SidebarAdmin = () => {
         </div>
       </Link>
       <ul className={styles.topItems}>
-        <li className={styles.actionItems}>
+        <Link to="/admin/usuarios" >
+          <li className={styles.actionItems}>
 
-          <FontAwesomeIcon className={styles.icon} icon={faUserGroup} />
+            <div className={styles.icon}>
+              <FontAwesomeIcon icon={faUserGroup} />
+            </div>
 
-          <Link to="/admin/usuarios" className={styles.relatorio}>
-            Usuários
-          </Link>
-        </li>
-        <li className={styles.actionItems}>
-          <FontAwesomeIcon className={styles.icon} icon={faBuildingWheat} />
+            <div className={styles.relatorio}>
 
-          <Link to="/admin/fornecedores" className={styles.relatorio}>
-            Fornecedores
-          </Link>
-        </li>        
-        <li className={styles.actionItems}>
-          <FontAwesomeIcon className={styles.wheal} icon={faWheatAwn} />
-          
-          <Link to="/admin/produtos" className={styles.relatorio}>
-            Produtos
-          </Link>
-        </li>
-        <li className={styles.actionItems}>
-          <FontAwesomeIcon className={styles.reportIcon} icon={faFilePen} />
-          
-          <Link to="/admin/relatorios" className={styles.relatorio}>
-            Relatórios
-          </Link>
-        </li>
-        <li className={styles.actionItems}>
-          <FontAwesomeIcon className={styles.reportIcon} icon={faFilePen} />
-          
-          <Link to="/admin/pedidos" className={styles.relatorio}>
-            Pedidos
-          </Link>
-        </li>
+              Usuários
+
+            </div>
+
+          </li>
+        </Link>
+        <Link to="/admin/fornecedores">
+          <li className={styles.actionItems}>
+            <div className={styles.icon}>
+              <FontAwesomeIcon icon={faBuildingWheat} />
+            </div>
+
+            <div className={styles.relatorio}>
+
+              Fornecedores
+
+            </div>
+          </li>
+        </Link>
+        <Link to="/admin/produtos" >
+          <li className={styles.actionItems}>
+            <div className={styles.icon}>
+              <FontAwesomeIcon icon={faWheatAwn} />
+            </div>
+            <div className={styles.relatorio}>
+
+              Produtos
+
+            </div>
+          </li>
+        </Link>
+        <Link to="/admin/relatorios" >
+          <li className={styles.actionItems}>
+            <div className={styles.icon}>
+              <FontAwesomeIcon icon={faFilePen} />
+            </div>
+            <div className={styles.relatorio}>
+
+              Relatórios
+            </div>
+
+          </li>
+        </Link>
+        <Link to="/admin/pedidos">
+          <li className={styles.actionItems}>
+            <div className={styles.icon}>
+              <FontAwesomeIcon icon={faClipboardList} />
+            </div>
+            <div className={styles.relatorio}>
+
+              Pedidos
+
+            </div>
+
+          </li>
+        </Link>
       </ul>
       <div className={styles.botItems}>
         <ul className={styles.usuario}>

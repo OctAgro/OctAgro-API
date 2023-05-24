@@ -51,7 +51,7 @@ module.exports = class RelatorioController {
                 { status_aprovacao: 'Concluído' },
                 { where: { id_pedido: data.idPedido }, returning: true }
             );
-            res.status(201).json({ mensagem: 'Relatório aprovado com sucesso!' }, )
+            res.status(201).json({ mensagem: 'Relatório aprovado com sucesso!' },)
         } catch (erro) {
             console.log(erro)
             res.status(500).json(erro)
@@ -137,8 +137,8 @@ module.exports = class RelatorioController {
             const pedido = await Pedido.findOne({
                 where: { id_pedido: data.idPedido },
                 include: [Produto, Fornecedor],
-              });
-              
+            });
+
             const idProduto = pedido.id_produto;
             const idFornecedor = pedido.id_fornecedor;
 
@@ -146,21 +146,21 @@ module.exports = class RelatorioController {
                 nome_fornecedor: data.textoNomeFornecedor,
                 nome_motorista: data.textoNomeEntregador,
                 placa_veiculo: data.textoPlacaVeiculo
-              }, {
+            }, {
                 where: {
-                  id_fornecedor: idFornecedor
+                    id_fornecedor: idFornecedor
                 }
-              })
-            
-              const produtoAtualizado = await Produto.update({
+            })
+
+            const produtoAtualizado = await Produto.update({
                 nome_produto: data.textoProduto,
                 quantidade_produto: data.numeroQuantidade,
                 unidade_medida: data.textoUnidadeMedida
-              }, {
+            }, {
                 where: {
-                  id_produto: idProduto
+                    id_produto: idProduto
                 }
-              })
+            })
 
             res.status(200).json({ mensagem: 'Relatório atualizado com sucesso!' })
         } catch (erro) {
@@ -172,6 +172,7 @@ module.exports = class RelatorioController {
     static async listarRelatorios(req, res) {
         try {
             const relatoriosRecebedor = await RelatorioRecebedor.findAll({
+                where: { status_recebedor: 1 },
                 include: [
                     {
                         model: Pedido,
@@ -257,52 +258,75 @@ module.exports = class RelatorioController {
     }
 
     static async apagarRelatorio(req, res) {
-        const idRelatorio = req.params.id;
+        const idRelatorio = req.params.id
+
+        const recebedor = await RelatorioRecebedor.findByPk(idRelatorio)
+
         try {
-            const relatorioAtualizado = await RelatorioRecebedor.destroy({
-                where: { id_relatorio_recebedor: idRelatorio }
-            });
-            if (relatorioAtualizado != undefined) {
-                res.status(422).json({ message: "Relatório excluido com sucesso!" });
+            if (recebedor.status_recebedor == true) {
+                await RelatorioRecebedor.update(
+                    {
+                        status_recebedor: false,
+                    },
+                    {
+                        where: {
+                            id_relatorio_recebedor: idRelatorio,
+                        }
+                    }
+                )
             } else {
-                res.status(200).json({ message: "Relatório não excluido!" });
+                await RelatorioRecebedor.update(
+                    {
+                        status_recebedor: true,
+                    },
+                    {
+                        where: {
+                            id_relatorio_recebedor: idRelatorio,
+                        }
+                    }
+                )
             }
-        } catch (erro) {
-            console.log(erro)
-            res.status(500).json({ message: erro });
+            return res
+                .json({
+                    message: "Status do relatorio do recebedor alterado com sucesso!",
+                    status: 201,
+                })
+                .status(201)
+        } catch (error) {
+            return res.json(error).status(500)
         }
     }
 
     static async alterarStatusRecebedor(req, res) {
-        const oId_relatorio_recebedor = req.params.id
+    const oId_relatorio_recebedor = req.params.id
 
-        console.log(oId_relatorio_recebedor)
+    console.log(oId_relatorio_recebedor)
 
-        const recebedor = await RelatorioRecebedor.findByPk(oId_relatorio_recebedor)
+    const recebedor = await RelatorioRecebedor.findByPk(oId_relatorio_recebedor)
 
 
-            try {
-                if (recebedor.status_recebedor == true) {
-                    await RelatorioRecebedor.update({
-                        status_recebedor: false
-                    },{
-                        where: {
-                            id_relatorio_recebedor: oId_relatorio_recebedor
-                        }
-                    })
-                } else {
-                    await RelatorioRecebedor.update({
-                        status_recebedor: true
-                    },{
-                        where: {
-                            id_relatorio_recebedor: oId_relatorio_recebedor
-                        }
-                    })
+    try {
+        if (recebedor.status_recebedor == true) {
+            await RelatorioRecebedor.update({
+                status_recebedor: false
+            }, {
+                where: {
+                    id_relatorio_recebedor: oId_relatorio_recebedor
                 }
-                return res.json({message: "Status do relatório do recebedor alterado com sucesso!", status: 201}).status(201)
-            } catch (error) {
-                return res.json(error).status(500)
-            }
+            })
+        } else {
+            await RelatorioRecebedor.update({
+                status_recebedor: true
+            }, {
+                where: {
+                    id_relatorio_recebedor: oId_relatorio_recebedor
+                }
+            })
+        }
+        return res.json({ message: "Status do relatório do recebedor alterado com sucesso!", status: 201 }).status(201)
+    } catch (error) {
+        return res.json(error).status(500)
     }
-    
+}
+
 }

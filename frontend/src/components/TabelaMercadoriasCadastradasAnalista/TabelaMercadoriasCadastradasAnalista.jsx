@@ -10,14 +10,11 @@ import styles from "./TabelaMercadoriasCadastradasAnalista.module.css"
 import { encontrarPedidos } from "../../hooks/encontrarPedidos"
 import { buscarRelatoriosAnalista } from "../../hooks/buscarRelatorios"
 import { UserContext } from "../../context/usuarioContext"
+import { excluirRelatorioAnalista } from "../../hooks/excluirRelatorioAnalista"
 
 export const TabelaMercadoriasCadastradasAnalista = () => {
   //importando contexto do Usuario
   const { usuario } = useContext(UserContext)
-
-  const handleExclusao = () => {
-    // logica de exclusao + modal
-  }
 
   //trazendo todos os pedidos
   const [pedidos, setPedidos] = useState([])
@@ -42,6 +39,18 @@ export const TabelaMercadoriasCadastradasAnalista = () => {
   }, [])
 
   console.log('Relatorios', relatoriosAnalista.data)
+
+  const [analistaExcluir, setAnalistaExcluir] = useState(null)
+
+  const handleExclusao = async (idRelatorio) => {
+    try {
+      const exclusao = await excluirRelatorioAnalista(idRelatorio)
+      console.log(exclusao)
+      window.location.reload()
+    } catch (erro) {
+      alert(erro)
+    }
+  }
 
   return (
     <div className={styles.table}>
@@ -79,7 +88,9 @@ export const TabelaMercadoriasCadastradasAnalista = () => {
                     {/* O BOTÃO DE EXCLUSÃO SÓ APARECE PARA USUÁRIOS APROVADORES */}
                     {usuario?.funcao === 'Aprovador' ? (
                       <div>
-                        <button className={styles.button} onClick={handleExclusao}>
+                        <button className={styles.button} onClick={() => {
+                          handleExclusao(relatorios.pedido.id_pedido)
+                        }}>
                           Excluir <FontAwesomeIcon icon={faTrash} />
                         </button>
                       </div>

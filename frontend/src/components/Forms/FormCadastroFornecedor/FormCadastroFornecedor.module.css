@@ -13,8 +13,7 @@
 }
 
 #container div {
-  padding: 0.2rem 0;
-  align-items: center;
+  padding: 0.2rem 0; 
 }
 
 .fullSizeInput {

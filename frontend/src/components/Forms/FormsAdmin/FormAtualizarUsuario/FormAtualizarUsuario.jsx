@@ -187,18 +187,6 @@ export const FormAtualizarUsuario = () => {
                 className={styles.fullSizeInput}
               />
             </div>
-            
-            {/* campo senha ficou deslocado, teria que trocar todos os numeros abaixo dele, entao coloquei 100 */}
-            <div id={styles["item-100"]}>SENHA:</div>
-            <div id={styles["item-101"]}>
-              <InputMask
-                type="text"
-                value={senha}
-                onChange={(event) => setSenha(event.target.value)}
-                maxLength="64"
-                className={styles.fullSizeInput}
-              />
-            </div>
 
             <div id={styles["item-5"]}>MATRÍCULA:</div>
             <div id={styles["item-6"]}>
@@ -226,6 +214,17 @@ export const FormAtualizarUsuario = () => {
                 <option value="Aprovador">Aprovador</option>
                 <option value="Recebedor">Recebedor</option>
               </select>
+            </div>
+            {/* campo senha ficou deslocado, teria que trocar todos os numeros abaixo dele, entao coloquei 100 */}
+            <div id={styles["item-9"]}>SENHA:</div>
+            <div id={styles["item-10"]}>
+              <InputMask
+                type="text"
+                value={senha}
+                onChange={(event) => setSenha(event.target.value)}
+                maxLength="64"
+                className={styles.fullSizeInput}
+              />
             </div>
           </div >
           <div id={styles["body"]}>

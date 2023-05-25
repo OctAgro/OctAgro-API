@@ -31,3 +31,79 @@
   grid-row-start: 3;
   grid-row-end: 4;
 }
+
+.conteudoModal {
+  text-align: center;
+  margin: 5rem;
+  font-size: 2rem;
+}
+
+.iconeModal {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}
+
+.botaoConfirmarModal,
+.botaoRecusarModal {
+  cursor: pointer;
+  margin-top: 1rem;
+  margin: 0.5rem;
+  padding: 0rem 3rem;
+  color: white;
+  border-radius: 5px;
+  font-family: "Gotham Medium";
+  font-size: 2rem;
+}
+
+.botaoConfirmarModal {
+  background-color: #4c4b16;
+}
+
+.botaoRecusarModal {
+  background-color: #898121;
+}
+
+.divBody{
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+/* importando para tabelas */
+
+.table {
+  font-family: 'Gotham Black';
+}
+
+.tableBackground {
+  filter: drop-shadow(2px 2px 2px #000);
+  background-color: #E7E0D1;
+  padding: 1rem;
+  width: 60vw;
+  border-radius: 5px;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Gotham Black';
+  margin: 1rem;
+}
+
+.tableRow {
+  border: 1px solid black;
+}
+
+.tableData {
+  padding: 0.5rem;
+  text-align: center;
+  border: 2px solid black;
+}
+
+.button {
+  width: 100%;
+  font-family: 'Gotham Black';
+  font-size: 1rem;
+  background-color: #E7E0D1;
+  border: none;
+  cursor: pointer;
+}

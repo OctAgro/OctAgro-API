@@ -74,7 +74,7 @@ const router = createBrowserRouter([
     element: <CadastroUsuario />,
   },
   {
-    path: "/admin/usuarios/atualizarusuarios",
+    path: "/admin/usuarios/atualizarusuarios/:id",
     element: <AtualizarUsuario />,
   },
   {

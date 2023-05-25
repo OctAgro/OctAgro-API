@@ -23,7 +23,7 @@
 #imgUser,
 #cadUser {
   grid-row-start: 1;
-  grid-row-end: 4;
+  grid-row-end: 5;
   font-size: 7rem;
   margin: auto;
 }

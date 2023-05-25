@@ -20,7 +20,7 @@ export const BarraAdmin = ({ linkVoltar, linkCadastrar, children }) => {
       </div>
       <div className={styles.rightSide}>
         <Link to={linkCadastrar}>
-          <div className={styles.childrenButton}>{children}</div>
+          <div className={styles.childrenButton}>{children}<h3 className={styles.cadastrar}>Cadastrar</h3></div>
         </Link>
         <div className={styles.searchBar}>
           <label>

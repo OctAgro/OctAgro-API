@@ -14,7 +14,7 @@ const Usuario = db.define(
     },
     
     data_admissao: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
     },
 
@@ -44,7 +44,7 @@ const Usuario = db.define(
     },
 
     dataNascimento: {
-        type:Sequelize.DATE,
+        type:Sequelize.DATEONLY,
         require: true    
     },
     

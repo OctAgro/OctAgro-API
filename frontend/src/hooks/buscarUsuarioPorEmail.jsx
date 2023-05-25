@@ -11,7 +11,7 @@ export async function buscarUsuarioPorEmail(email){
 
 export async function buscarTodosUsuarios(){
     try{
-        const todosUsuarios = await api.get('/usuario/buscar-todos-usuarios')
+        const todosUsuarios = await api.get('/usuario/listar')
         return todosUsuarios.data
 
 

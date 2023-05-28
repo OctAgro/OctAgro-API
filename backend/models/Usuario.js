@@ -49,7 +49,7 @@ const Usuario = db.define(
     },
     
     genero: {
-        type:Sequelize.STRING(1),
+        type:Sequelize.STRING(15),
         require: true
     },
 

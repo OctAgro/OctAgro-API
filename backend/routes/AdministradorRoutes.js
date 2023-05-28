@@ -8,6 +8,7 @@ const UsuarioControllers = require('../controllers/UsuarioController')
 const RecebedorController = require('../controllers/RecebedorController')
 const AnalistaController = require('../controllers/AnalistaController')
 const AprovadorController = require('../controllers/AprovadorController')
+const CriteriosController = require('../controllers/CriteriosController')
 
 // Rotas do Administrador para fazer CRUD de Fornecedores
 
@@ -71,5 +72,13 @@ router.post('/aprovador/relatorios/:id', AprovadorController.encontrarRelatorioP
 router.get('/aprovador/relatorios/criterios/:id', AprovadorController.listarCriterios)
 router.put('/aprovador/alterarStatus/:id', AprovadorController.alterarStatusAprovador)
 router.post('/aprovador/relatorios/apagar/:id', AprovadorController.apagarRelatorio)
+
+// Rotas de Criterios
+
+router.post('/criterio/criar',CriteriosController.criarCriterio) // Criar um criterio
+router.get('/criterio/listar',CriteriosController.listarCriterios) // Listar Criterios
+router.get('/criterio/listarById/:id',CriteriosController.listarCriteriosById) // Listar Criterios pela ID
+
+
 
 module.exports = router

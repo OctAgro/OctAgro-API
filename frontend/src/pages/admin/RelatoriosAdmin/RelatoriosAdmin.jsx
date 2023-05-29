@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 
 import { Link } from "react-router-dom"
 
+// Importando bibliotecas para lidar com Data e PDF
 import { format } from "date-fns";
 
 // Importando o Provider
@@ -20,6 +21,7 @@ import { BarraAdmin } from "../../../components/BarraAdmin/BarraAdmin"
 import styles from "./RelatoriosAdmin.module.css"
 
 import { buscarRelatoriosAprovador } from "../../../hooks/buscarRelatorios"
+import { criarRelatorioFinal } from "../../../hooks/criarRelatorioFinal";
 
 export const RelatoriosAdmin = () => {
 
@@ -101,10 +103,15 @@ export const RelatoriosAdmin = () => {
                       <td className={styles.tableData}>
 
                         {/* verificando com é o estado da aprovação para mostrar ação */}
-                        <button className={styles.button}>
-                          <Link to={`/admin/pedidos/atualizar/${relatorio.pedido.id_pedido}`}>
-                            Visualizar <FontAwesomeIcon icon={faMagnifyingGlass} />
-                          </Link>
+                        <button
+                          className={styles.button}
+                          onClick={async () => {
+                            const pdfData = await criarRelatorioFinal(relatorio.pedido.id_pedido);
+                            const pdfUrl = URL.createObjectURL(new Blob([pdfData], { type: 'application/pdf' }));
+                            window.open(pdfUrl, '_blank');
+                          }}
+                        >
+                          Visualizar <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                       </td>
                       <td className={styles.tableData}>
@@ -133,10 +140,16 @@ export const RelatoriosAdmin = () => {
                       <td className={styles.tableData}>
 
                         {/* verificando com é o estado da aprovação para mostrar ação */}
-                        <button className={styles.button}>
-                          <Link to={`/admin/pedidos/atualizar/${relatorio.pedido.id_pedido}`}>
-                            Visualizar <FontAwesomeIcon icon={faMagnifyingGlass} />
-                          </Link>
+                        <button
+                          className={styles.button}
+                          onClick={async () => {
+                            const pdfData = await criarRelatorioFinal(relatorio.pedido.id_pedido);
+                            const blob = new Blob([pdfData], { type: 'application/pdf' });
+                            const pdfUrl = URL.createObjectURL(blob);
+                            window.open(pdfUrl, '_blank');
+                          }}
+                        >
+                          Visualizar <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                       </td>
                       <td className={styles.tableData}>

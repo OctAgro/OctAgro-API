@@ -1,6 +1,5 @@
 const router = require ('express').Router()
 
-
 const FornecedorController = require('../controllers/FornecedorController')
 const PedidoController = require('../controllers/PedidoController')
 const ProdutoController = require('../controllers/ProdutoController')
@@ -9,6 +8,7 @@ const RecebedorController = require('../controllers/RecebedorController')
 const AnalistaController = require('../controllers/AnalistaController')
 const AprovadorController = require('../controllers/AprovadorController')
 const CriteriosController = require('../controllers/CriteriosController')
+const RelatorioFinalController = require('../controllers/RelatorioFinal')
 
 // Rotas do Administrador para fazer CRUD de Fornecedores
 
@@ -78,6 +78,9 @@ router.post('/aprovador/relatorios/apagar/:id', AprovadorController.apagarRelato
 router.post('/criterio/criar',CriteriosController.criarCriterio) // Criar um criterio
 router.get('/criterio/listar',CriteriosController.listarCriterios) // Listar Criterios
 router.get('/criterio/listarById/:id',CriteriosController.listarCriteriosById) // Listar Criterios pela ID
+
+//Rotas de Relatórios Finais
+router.get('/relatorio/gerar/:id', RelatorioFinalController.gerarRelatorioFinal)
 
 
 

@@ -26,6 +26,11 @@ export const FormRecebedor = ({ hasButton }) => {
   const { id } = useParams()
   const pedidoId = parseInt(id)
 
+  //com id pedido buscar id produto
+
+  //puxar todos os criterios by id produto
+
+
   const [pedidos, setPedidos] = useState([])
   useEffect(() => {
     async function fetchPedidos() {

@@ -13,19 +13,21 @@ import { MercadoriasProvider } from "../../../context/MercadoriasRecebedorContex
 export const FormularioRecebedor = () => {
   return (
     <MercadoriasProvider>
-      <div className={styles.main}>
-        <SidebarRecebedor />
 
-        <div className={styles.container}>
-          <div className={styles.header}>
+        <div id={styles["main"]}>
+          <div id={styles["sidebar"]}>
+            <SidebarRecebedor />
+          </div>
+
+          <div id={styles["header"]}>
             <HeaderRecebedor arrow="True" link="/recebedor/entradamercadoria" />
           </div>
 
-          <div className={styles.content}>
+          <div id={styles["body"]}>
             <FormRecebedor hasButton="true" />
           </div>
         </div>
-      </div>
+      
     </MercadoriasProvider>
   )
 }

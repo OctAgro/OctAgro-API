@@ -22,10 +22,8 @@ export const HeaderRecebedor = (props) => {
   const numeroMercadoriasTotal = dados[1]
 
   return (
-
-
     <div className={styles.clipboards}>
-      <div className={styles.external}>
+      
         {arrow ? (
           <div className={styles.arrow}>
             <Link to={link} className={styles.arrow}>
@@ -33,7 +31,7 @@ export const HeaderRecebedor = (props) => {
             </Link>
           </div>
         ) : null}
-      </div>
+      
 
       <div className={styles.clipboard}>
         <div className={styles.leftSide}>

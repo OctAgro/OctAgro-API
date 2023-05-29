@@ -90,6 +90,30 @@ export const PedidosAdmin = () => {
   const [openModalPedidoExcluirWarning, setOpenModalPedidoExcluirWarning] = useState(false)
   const [openModalPedidoExcluir, setOpenModalPedidoExcluir] = useState(false)
 
+  //barra de pesquisar
+  const [pedidosFiltrados, setPedidosFiltrados] = useState([]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const searchTermLower = searchTerm.toLowerCase();
+    const filtro = pedidos.filter((pedido) => {
+      const idPesquisa = pedido.id_pedido.toString().toLowerCase();
+      const cnpjPesquisa = pedido.fornecedor.CNPJ.toString().toLowerCase();
+      const razaoPesquisa = pedido.fornecedor.razao_social.toLowerCase();
+      const produtosPesquisa = pedido.produto.nome_produto.toLowerCase();
+      return (
+        idPesquisa.includes(searchTermLower) ||
+        cnpjPesquisa.includes(searchTermLower) ||
+        razaoPesquisa.includes(searchTermLower) ||
+        produtosPesquisa.includes(searchTermLower)
+      );
+    });
+    console.log("dado filtrado: ", filtro)
+    setPedidosFiltrados(filtro);
+  };
+
   return (
     <PedidosProvider>
       <div id={styles["main"]}>
@@ -97,7 +121,7 @@ export const PedidosAdmin = () => {
         <div id={styles["header"]}><HeaderPedidos /></div>
         <div id={styles["barraPesquisa"]}>
           <div>
-            <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/pedidos/cadastrar">
+            <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/pedidos/cadastrar" handleSearch={handleSearch} setSearchTerm={setSearchTerm}>
               <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo Pedido!" />
             </BarraAdmin>
 
@@ -155,34 +179,65 @@ export const PedidosAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {pedidos?.map((pedido) => (
-                  <tr key={pedido.id_pedido}>
-                    <td className={styles.tableData}>{pedido.id_pedido}</td>
-                    <td className={styles.tableData}>{pedido.fornecedor.CNPJ}</td>
-                    <td className={styles.tableData}>{pedido.fornecedor.razao_social}</td>
-                    <td className={styles.tableData}>{pedido.produto.nome_produto}</td>
-                    <td className={styles.tableData}>
+                {pedidosFiltrados.length > 0 ? (
+                  pedidosFiltrados.map((pedido) => (
+                    <tr key={pedido.id_pedido}>
+                      <td className={styles.tableData}>{pedido.id_pedido}</td>
+                      <td className={styles.tableData}>{pedido.fornecedor.CNPJ}</td>
+                      <td className={styles.tableData}>{pedido.fornecedor.razao_social}</td>
+                      <td className={styles.tableData}>{pedido.produto.nome_produto}</td>
+                      <td className={styles.tableData}>
 
-                      {/* verificando com é o estado da aprovação para mostrar ação */}
-                      <button className={styles.button}>
-                        <Link to={`/admin/pedidos/atualizar/${pedido.id_pedido}`}>
-                          Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </Link>
-                      </button>
-                    </td>
-                    <td className={styles.tableData}>
-                      <button
-                        className={styles.button}
-                        onClick={() => {
-                          setPedidoExcluir(pedido.id_pedido)
-                          setOpenModalPedidoExcluirWarning(true)
-                        }}
-                      >
-                        Excluir <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={`/admin/pedidos/atualizar/${pedido.id_pedido}`}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button
+                          className={styles.button}
+                          onClick={() => {
+                            setPedidoExcluir(pedido.id_pedido)
+                            setOpenModalPedidoExcluirWarning(true)
+                          }}
+                        >
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  pedidos?.map((pedido) => (
+                    <tr key={pedido.id_pedido}>
+                      <td className={styles.tableData}>{pedido.id_pedido}</td>
+                      <td className={styles.tableData}>{pedido.fornecedor.CNPJ}</td>
+                      <td className={styles.tableData}>{pedido.fornecedor.razao_social}</td>
+                      <td className={styles.tableData}>{pedido.produto.nome_produto}</td>
+                      <td className={styles.tableData}>
+
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={`/admin/pedidos/atualizar/${pedido.id_pedido}`}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button
+                          className={styles.button}
+                          onClick={() => {
+                            setPedidoExcluir(pedido.id_pedido)
+                            setOpenModalPedidoExcluirWarning(true)
+                          }}
+                        >
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

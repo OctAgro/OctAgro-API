@@ -57,23 +57,23 @@ export const FormAprovador = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => {
+  const onSubmit = (dados) => {
     handleAprovacao()
-    enviarDados(data)
+    enviarDados(dados)
   }
 
   //fazendo o post
-  const enviarDados = async (data) => {
-    const dados = {
+  const enviarDados = async (dados) => {
+    const data = {
       idPedido: pedidos.id_pedido,
       idUsuario: usuarioCarregado,
       textoRevisaoFinalAprovador: revisao,
       statusFinalAprovacao: true, //PRECISA SER ALTERADO!
-      ...data,
+      ...dados,
     }
 
     try {
-      const resposta = await axios.post("http://localhost:3000/aprovador/relatorios", dados)
+      const resposta = await axios.post("http://localhost:3000/aprovador/relatorios", data)
       //esse console.log retorna respostas json do backend de erros de validacao
       console.log(resposta.data.message)
       setMensagemErro(resposta.data.message)

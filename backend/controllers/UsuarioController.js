@@ -213,7 +213,7 @@ module.exports = class UsuarioControllers {
     }
 
     static async procurarUsuario(req, res) {
-        const oId_usuario = req.params.id_usuario
+        const oId_usuario = req.params.id
 
         try {
             const usuario = await Usuario.findByPk(oId_usuario)
@@ -362,7 +362,7 @@ module.exports = class UsuarioControllers {
     }
 
     static async alterarStatusUsuario(req, res) {
-        const oId_usuario = req.params.id_usuario
+        const oId_usuario = req.params.id
 
         console.log(oId_usuario)
 

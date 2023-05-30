@@ -16,9 +16,7 @@ export const DocumentacaoAnalistaRecebedor = () => {
       <div id={styles["main"]}>
         <div id={styles["sidebar"]}>
           <SidebarAnalista />
-        </div>
-        <div id={styles["header"]}>
-        </div>
+        </div>        
 
         <div id={styles["body"]}>
           <InformacoesRecebedorPageAnalista />

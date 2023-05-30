@@ -1,15 +1,21 @@
-.main {
-  display: flex;
-  height: 100vh;
+#main {
   background-color: #F7F1E5;
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 20% 0 auto;
 }
 
-.container {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+#sidebar {
+  grid-row-start: 1;
+  grid-row-end: 4;
+  height: 100vh;
 }
 
-.header {
-  margin: 0 auto;
+#header {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin: auto;
+
 }

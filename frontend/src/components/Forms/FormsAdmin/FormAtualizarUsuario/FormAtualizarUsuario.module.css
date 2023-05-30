@@ -214,3 +214,13 @@
   filter: drop-shadow(2px 2px 2px #000);
 }
 
+.conteudoModal {
+  text-align: center;
+  margin: 5rem;
+  font-size: 2rem;
+}
+
+.iconeModal {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}

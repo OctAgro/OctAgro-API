@@ -359,7 +359,7 @@ export const FormCadastroProduto = () => {
         <Modal isOpen={openModalRegra} onClick={handleCloseModalRegra}>
           <div className={styles.conteudoModalRegra}>
             <div className={styles.tituloModal}>
-              <p>Nova regra de aceitação</p>
+              <p>NOVA REGRA DE ACEITAÇÃO</p>
             </div>
             <div className={styles.usuarioModal}>
               <label>
@@ -403,7 +403,7 @@ export const FormCadastroProduto = () => {
                 </label>
               </label>
             </div>
-            <div>
+            <div className={styles.inserirValoresModal}>
               {radioInserirValores && (
                 <label>
                   Valores:
@@ -418,7 +418,7 @@ export const FormCadastroProduto = () => {
               )}
             </div>
             <input
-              className={styles.botaoConfirmar}
+              className={styles.botaoConfirmarModal}
               type="button"
               value="CADASTRAR"
               onClick={handleOpenModalRegra}

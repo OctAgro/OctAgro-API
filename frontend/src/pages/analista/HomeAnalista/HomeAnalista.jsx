@@ -11,16 +11,18 @@ import styles from "./HomeAnalista.module.css"
 export const HomeAnalista = () => {
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAnalista />
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAnalista />
+        </div>
 
-        <div className={styles.container}>
-          <HeaderAnalista />
-          <div>
-            <MercadoriasPendentes />
-          </div>
+        <div id={styles["header"]}>          <HeaderAnalista />
+        </div>
+
+        <div id={styles["body"]}>
+          <MercadoriasPendentes />
         </div>
       </div>
-    </PedidosProvider>
+    </PedidosProvider >
   )
 }

@@ -36,13 +36,18 @@ module.exports = class RelatorioController {
 
 
         const relatorioRecebedor = new RelatorioRecebedor({
-            coloracao: data.checkboxColoracaoAprovado,
-            odor: data.checkboxOdorAprovado,
-            ausencia_animais: data.checkboxAusenciaAnimaisAprovado,
-            ausencia_mofo: data.checkboxAusenciaMofoAprovado,
             id_pedido: data.idPedido,
             id_usuario: data.idUsuario
         })
+
+        for (const key in data) {
+            if (key.startsWith('checkbox') && data[key] === true) {
+                const checkboxName = key.replace('checkbox', '').replace('Aprovado', '').toLowerCase();
+                relatorioRecebedor[checkboxName] = true;
+            }
+        }
+
+        console.log(relatorioRecebedor);
 
 
         try {

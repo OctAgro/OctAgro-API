@@ -1,8 +1,8 @@
 import api from '../utils/api';
 
-export async function encontrarCriteriosById(id) {
+export async function encontrarCriterios() {
     try {
-        const criterio = await api.get(`/criterio/listarById/${id}`) 
+        const criterio = await api.get(`/administrador/criterio/listar`) 
         console.log(criterio)
         return criterio.data
     } catch (erro) { 

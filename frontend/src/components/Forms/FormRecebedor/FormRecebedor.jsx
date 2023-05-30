@@ -16,6 +16,7 @@ import axios from "axios"
 
 //chamando o hook de encontrar pedidos por ID
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
+import { encontrarCriteriosByPedidoId } from "../../../hooks/encontrarCriteriosById"
 
 export const FormRecebedor = ({ hasButton }) => {
   const { usuario } = useContext(UserContext)
@@ -26,10 +27,17 @@ export const FormRecebedor = ({ hasButton }) => {
   const { id } = useParams()
   const pedidoId = parseInt(id)
 
-  //com id pedido buscar id produto
+  //puxar todos os criterios by id pedido
+  const [criteriosNovos, setCriteriosNovos] = useState([])
+  useEffect(() => {
+    async function fetchCriteriosNovos() {
+      const dadosCriterios = await encontrarCriteriosByPedidoId(pedidoId)
+      setCriteriosNovos(dadosCriterios)
+    }
+    fetchCriteriosNovos()
+  }, [])
 
-  //puxar todos os criterios by id produto
-
+  console.log("criterios: ", criteriosNovos)
 
   const [pedidos, setPedidos] = useState([])
   useEffect(() => {
@@ -73,6 +81,12 @@ export const FormRecebedor = ({ hasButton }) => {
       idUsuario: usuarioCarregado,
       ...data,
     }
+
+    Object.keys(data).forEach((key) => {
+      if (key.startsWith("checkbox")) {
+        dados[key] = data[key];
+      }
+    });
 
     try {
       const resposta = await axios.post("http://localhost:3000/recebedor/entradamercadoria", dados)
@@ -159,7 +173,7 @@ export const FormRecebedor = ({ hasButton }) => {
                     />
                   </label>
                 </div>
-              
+
                 <div className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Data:</h3>
@@ -273,14 +287,14 @@ export const FormRecebedor = ({ hasButton }) => {
                     <input
                       className={styles.aprovar}
                       type="checkbox"
-                      id="checkboxAusenciaAnimaisAprovado"
-                      {...register("checkboxAusenciaAnimaisAprovado")}
+                      id="checkboxAusencia_AnimaisAprovado"
+                      {...register("checkboxAusencia_AnimaisAprovado")}
                     />
                     <input
                       className={styles.recusar}
                       type="checkbox"
-                      id="checkboxAusenciaAnimaisReprovado"
-                      {...register("checkboxAusenciaAnimaisReprovado")}
+                      id="checkboxAusencia_AnimaisReprovado"
+                      {...register("checkboxAusencia_AnimaisReprovado")}
                     />
                   </div>
                   <div className={styles.inputBlock}>
@@ -288,16 +302,40 @@ export const FormRecebedor = ({ hasButton }) => {
                     <input
                       className={styles.aprovar}
                       type="checkbox"
-                      id="checkboxAusenciaMofoAprovado"
-                      {...register("checkboxAusenciaMofoAprovado")}
+                      id="checkboxAusencia_MofoAprovado"
+                      {...register("checkboxAusencia_MofoAprovado")}
                     />
                     <input
                       className={styles.recusar}
                       type="checkbox"
-                      id="checkboxAusenciaMofoReprovado"
-                      {...register("checkboxAusenciaMofoReprovado")}
+                      id="checkboxAusencia_MofoReprovado"
+                      {...register("checkboxAusencia_MofoReprovado")}
                     />
                   </div>
+
+                  {/* for para distribuir os novos Critérios */}
+                  <div>
+                    {criteriosNovos.filter((criterio) => criterio.funcao === "Recebedor").map((criterio) => (
+                      <div key={criterio.id_criterio}>
+                        <div className={styles.inputBlock}>
+                          <input className={styles.btnsRN} value={criterio.descricao_regra} readOnly />
+                          <input
+                            className={styles.aprovar}
+                            type="checkbox"
+                            id={`checkbox${criterio.descricao_regra}Aprovado`}
+                            {...register(`checkbox${criterio.descricao_regra}Aprovado`)}
+                          />
+                          <input
+                            className={styles.recusar}
+                            type="checkbox"
+                            id={`checkbox${criterio.descricao_regra}Reprovado`}
+                            {...register(`checkbox${criterio.descricao_regra}Reprovado`)}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
                 </div>
               </fieldset>
               {hasButton ? (

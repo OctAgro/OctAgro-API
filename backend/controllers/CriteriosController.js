@@ -44,7 +44,7 @@ module.exports = class CriteriosController {
 
             const idProduto = pedidos.id_produto
 
-            const criterios = await CriteriosAvaliacao.findOne({
+            const criterios = await CriteriosAvaliacao.findAll({
                 where: { id_produto: idProduto },
                 attributes: ['descricao_regra', 'inserir_valor', 'valor_max', 'funcao']
             })

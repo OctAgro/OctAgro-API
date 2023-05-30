@@ -23,7 +23,8 @@ export const HeaderAprovador = (props) => {
   const numeroRelatoriosTotal = 1
 
   return (
-    <div className={styles.external}>
+    <div className={styles.clipboards}>
+
       {arrow ? (
         <div className={styles.arrow}>
           <Link to={link} className={styles.arrow}>
@@ -32,29 +33,27 @@ export const HeaderAprovador = (props) => {
         </div>
       ) : null}
 
-      <div className={styles.clipboards}>
-        <div className={styles.clipboardA}>
-          <div className={styles.leftSideA}>
-            <FontAwesomeIcon className="icon" icon={faClipboard} />
-          </div>
-          <div className={styles.rightSideA}>
-            <h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>
-            <h3>
-              Relatório(s) <br /> pendentes
-            </h3>
-          </div>
+      <div className={styles.clipboard}>
+        <div className={styles.leftSide}>
+          <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
         </div>
+        <div className={styles.rightSide}>
+          <h1 className={styles.title}>{numeroRelatorios ? numeroRelatorios : 0}</h1>
+          <h3 className={styles.subtitle}>
+            Relatório(s) <br /> pendentes
+          </h3>
+        </div>
+      </div>
 
-        <div className={styles.clipboardB}>
-          <div className={styles.leftSideB}>
-            <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
-          </div>
-          <div className={styles.rightSideB}>
-            <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
-            <h3>
-              Total <br /> de relatórios
-            </h3>
-          </div>
+      <div className={styles.clipboard}>
+        <div className={styles.leftSide}>
+          <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
+        </div>
+        <div className={styles.rightSide}>
+          <h1 className={styles.title}>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h1>
+          <h3 className={styles.subtitle}>
+            Total <br /> de relatórios
+          </h3>
         </div>
       </div>
     </div>

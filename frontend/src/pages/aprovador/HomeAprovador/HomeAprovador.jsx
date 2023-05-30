@@ -14,17 +14,16 @@ import { RelatoriosProvider } from "../../../context/RelatoriosAprovadorContext"
 export const HomeAprovador = () => {
   return (
     <RelatoriosProvider>
-      <div className={styles.main}>
-        <SidebarAprovador />
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAprovador />
+        </div>
 
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAprovador />
-          </div>
+        <div id={styles["header"]}>          <HeaderAprovador />
+        </div>
 
-          <div>
-            <RelatoriosPendentes />
-          </div>
+        <div id={styles["body"]}>
+          <RelatoriosPendentes />
         </div>
       </div>
     </RelatoriosProvider>

@@ -1,48 +1,51 @@
-.external {
-  font-family: "Gotham Black";
-  display: flex;
-  justify-content: space-between;
+.title {
+  font-size: 3rem;
+}
+
+.subtitle{
+  font-size: 1rem;
+  margin: 0.5rem;
 }
 
 .clipboards {
   cursor: default;
-  margin: 0 7rem;
-  padding-right: 3rem;
   display: flex;
+  font-family: "Gotham Black";
 }
 
-.clipboardA,
-.clipboardB {
+.clipboard {
   display: flex;
   border-radius: 15px;
   background-color: rgba(231, 224, 209, 1);
   filter: drop-shadow(2px 2px 2px #000);
-  padding: 0.5rem;
-  margin-top: 1rem;
+  margin: 1%;
+  width: 20rem;
+  height: 10%;
 }
 
-.clipboardB {
-  margin-left: 3rem;
+.leftSide {
+  font-size: 4rem;
+  padding: 0rem 1rem;
+  border-right: rgba(0, 0, 0, 0.3) solid;
+  border-radius: 15px;
+  margin: 0;
+  width: 40%;
+  display: flex;
 }
 
-.leftSideA,
-.leftSideB {
-  font-size: 5rem;
-}
-
-.rightSideA,
-.rightSideB {
+.rightSide {
   text-align: center;
-  font-size: 1.7rem;
-  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  width: 70%;
+  margin: auto;
 }
 
-.rightSideA h3,
-.rightSideB h3 {
-  font-size: 16px;
+.icon {
+  margin: auto;
+  font-size: 3rem;
 }
 
-.arrow {
+.arrow {  
   margin: auto 0;
   font-size: 3.5rem;
 }

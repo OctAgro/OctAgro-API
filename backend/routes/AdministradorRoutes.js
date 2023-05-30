@@ -9,6 +9,7 @@ const AnalistaController = require('../controllers/AnalistaController')
 const AprovadorController = require('../controllers/AprovadorController')
 const CriteriosController = require('../controllers/CriteriosController')
 const RelatorioFinalController = require('../controllers/RelatorioFinal')
+const chartData = require('../helpers/chartData')
 
 // Rotas do Administrador para fazer CRUD de Fornecedores
 
@@ -81,6 +82,10 @@ router.get('/criterio/listarById/:id', CriteriosController.listarCriteriosById) 
 
 //Rotas de Relatórios Finais
 router.get('/relatorio/gerar/:id', RelatorioFinalController.gerarRelatorioFinal)
+
+//Rotas dos Graficos
+
+router.get('/grafico/produto',chartData.graficoProduto)
 
 
 

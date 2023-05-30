@@ -2,33 +2,25 @@
   background-color: #e7e0d1;
   border-radius: 15px;
   font-family: "Gotham Black";
-  height: 90vh;
   filter: drop-shadow(2px 2px 2px #000);
   display: flex;
-  margin: 2%;
+  margin: 1%;
 }
 
 .inside {
   text-align: center;
   width: 100%;
   height: 80%;
-  margin: 3%;
+  margin: 1%;
 }
 
 .insideLeft {
   margin-top: 1rem;
-  border-radius: 15px;
-  border: 1px solid black;
-  height: 100%;
-  margin: 2%;
 }
 
 .insideRight {
   margin-top: 1rem;
-  border-radius: 15px;
-  border: 1px solid black;
-  height: 100%;
-  margin: 2%;
+ 
 }
 
 .icon {
@@ -37,7 +29,7 @@
     right: 0;
     transform: translate(-50%, 50%);
     cursor: pointer;
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   .relatorioCompra {

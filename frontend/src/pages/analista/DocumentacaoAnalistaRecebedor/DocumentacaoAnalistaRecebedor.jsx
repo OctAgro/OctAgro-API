@@ -13,12 +13,16 @@ import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
 export const DocumentacaoAnalistaRecebedor = () => {
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAnalista />
-        <div className={styles.container}>
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAnalista />
+        </div>        
+
+        <div id={styles["body"]}>
           <InformacoesRecebedorPageAnalista />
         </div>
       </div>
+
     </PedidosProvider>
   )
 }

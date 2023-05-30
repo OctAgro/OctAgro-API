@@ -3,13 +3,13 @@
   background-color: #e7e0d1;
   border-radius: 10px;
   font-family: "Gotham Black";
-  width: 85%;
+  width: 70%;
   filter: drop-shadow(2px 2px 2px #000);
 }
 
 .formTop {
   text-align: center;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 
 .iconSmile {
@@ -40,15 +40,15 @@
 .btn {
   cursor: pointer;
   background-color: #D9D9D9;
-  height: 3rem;
+  height: 2rem;
+  width: 16rem;
   border-radius: 5px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-family: 'Gotham Black';
   display: flex;
-  padding: 0 2rem;
-  padding-top: 0.5rem;
-  margin: 2rem 0;
   justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
 }
 
 .btn:hover {
@@ -58,7 +58,7 @@
 .buttons {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   filter: drop-shadow(2px 2px 2px #000);
 }
 
@@ -84,8 +84,8 @@
   width: 100%;
   border-radius: 5px;
   resize: none;
-  padding: 0.5rem;
-  font-size: 1.2rem;
+  padding: 0.2rem;
+  font-size: 1rem;
 }
 
 .row {
@@ -95,8 +95,8 @@
 
 .legend {
   cursor: default;
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  margin: 0.3rem 0;
   text-align: left;
 }
 
@@ -137,15 +137,15 @@
   cursor: default;
   background-color: #D9D9D9;
   width: 60%;
-  height: 2rem;
+  height: 1rem;
   border-radius: 5px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: 'Gotham Black';
   display: flex;
   text-align: center;
   margin: 0.5rem 0;
   margin-right: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 /* inputs */

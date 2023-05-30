@@ -13,16 +13,16 @@ import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
 export const FormularioAnalista = () => {
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAnalista />
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAnalista />
+        </div>
+        <div id={styles["header"]}>
+          <HeaderAnalista arrow="True" link="/analista/mercadoria" />
+        </div>
 
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAnalista arrow="True" link="/analista/mercadoria" />
-          </div>
-          <div className={styles.content}>
-            <FormAnalista hasButton="True" />
-          </div>
+        <div id={styles["body"]}>
+          <FormAnalista hasButton="True" />
         </div>
       </div>
     </PedidosProvider>

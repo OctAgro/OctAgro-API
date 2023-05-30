@@ -1,16 +1,21 @@
-.main {
-  display: flex;
+#main {
+  background-color: #F7F1E5;
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 20% 0 auto;
+}
+
+#sidebar {
+  grid-row-start: 1;
+  grid-row-end: 4;
   height: 100vh;
-  background-color: #f7f1e5;
 }
 
-.container {
-  width: 80vw;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-}
+#header {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin: auto;
 
-.header {
-  margin: 0 auto;
 }

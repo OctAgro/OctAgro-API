@@ -98,6 +98,32 @@ export const FornecedoresAdmin = () => {
   const [openModalFornecedorExcluirWarning, setOpenModalFornecedorExcluirWarning] = useState(false)
   const [openModalFornecedorExcluir, setOpenModalFornecedorExcluir] = useState(false)
 
+  //teste barra de pesquisar
+  const [filteredFornecedores, setFilteredFornecedores] = useState([]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const searchTermLower = searchTerm.toLowerCase();
+    const filtered = fornecedores.filter((fornecedor) => {
+      const idFornecedor = fornecedor.id_fornecedor.toString().toLowerCase();
+      const cnpj = fornecedor.CNPJ.toLowerCase();
+      const razaoSocial = fornecedor.razao_social.toLowerCase();
+      const telefone = fornecedor.telefone.toLowerCase();
+      const email = fornecedor.e_mail1.toLowerCase();
+      return (
+        idFornecedor.includes(searchTermLower) ||
+        cnpj.includes(searchTermLower) ||
+        razaoSocial.includes(searchTermLower) ||
+        telefone.includes(searchTermLower) ||
+        email.includes(searchTermLower)
+      );
+    });
+    console.log("dado filtrado: ", filtered)
+    setFilteredFornecedores(filtered);
+  };
+
   return (
     <PedidosProvider>
       <div id={styles["main"]}>
@@ -109,7 +135,7 @@ export const FornecedoresAdmin = () => {
         </div>
         <div id={styles["barraPesquisa"]}>
           <div>
-            <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/fornecedores/cadastrar">
+            <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/fornecedores/cadastrar" handleSearch={handleSearch} setSearchTerm={setSearchTerm}>
               <FontAwesomeIcon icon={faPersonCirclePlus} title="Cadastrar novo fornecedor!" />
             </BarraAdmin>
 
@@ -137,8 +163,8 @@ export const FornecedoresAdmin = () => {
             </Modal>
 
             {/* MODAL EXCLUIR */}
-            <Modal 
-              isOpen={openModalFornecedorExcluir} 
+            <Modal
+              isOpen={openModalFornecedorExcluir}
               onClick={handleCloseModalFornecedorExcluir}
             >
               <div className={styles.conteudoModal}>
@@ -171,34 +197,65 @@ export const FornecedoresAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {fornecedores?.map((fornecedor) => (
-                  <tr key={fornecedor.id_fornecedor}>
-                    <td className={styles.tableData}>{fornecedor.id_fornecedor}</td>
-                    <td className={styles.tableData}>{fornecedor.CNPJ}</td>
-                    <td className={styles.tableData}>{fornecedor.razao_social}</td>
-                    <td className={styles.tableData}>{fornecedor.telefone}</td>
-                    <td className={styles.tableData}>{fornecedor.e_mail1}</td>
-                    <td className={styles.tableData}>
-                      {/* verificando com é o estado da aprovação para mostrar ação */}
-                      <button className={styles.button}>
-                        <Link to={`/admin/fornecedores/atualizar/${fornecedor.id_fornecedor}`}>
-                          Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </Link>
-                      </button>
-                    </td>
-                    <td className={styles.tableData}>
-                      <button
-                        className={styles.button}
-                        onClick={() => {
-                          setFornecedorExcluir(fornecedor.id_fornecedor)
-                          setOpenModalFornecedorExcluirWarning(true)
-                        }}
-                      >
-                        Excluir <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {filteredFornecedores.length > 0 ? (
+                  filteredFornecedores.map((fornecedor) => (
+                    <tr key={fornecedor.id_fornecedor}>
+                      <td className={styles.tableData}>{fornecedor.id_fornecedor}</td>
+                      <td className={styles.tableData}>{fornecedor.CNPJ}</td>
+                      <td className={styles.tableData}>{fornecedor.razao_social}</td>
+                      <td className={styles.tableData}>{fornecedor.telefone}</td>
+                      <td className={styles.tableData}>{fornecedor.e_mail1}</td>
+                      <td className={styles.tableData}>
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={`/admin/fornecedores/atualizar/${fornecedor.id_fornecedor}`}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button
+                          className={styles.button}
+                          onClick={() => {
+                            setFornecedorExcluir(fornecedor.id_fornecedor)
+                            setOpenModalFornecedorExcluirWarning(true)
+                          }}
+                        >
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  fornecedores.map((fornecedor) => (
+                    <tr key={fornecedor.id_fornecedor}>
+                      <td className={styles.tableData}>{fornecedor.id_fornecedor}</td>
+                      <td className={styles.tableData}>{fornecedor.CNPJ}</td>
+                      <td className={styles.tableData}>{fornecedor.razao_social}</td>
+                      <td className={styles.tableData}>{fornecedor.telefone}</td>
+                      <td className={styles.tableData}>{fornecedor.e_mail1}</td>
+                      <td className={styles.tableData}>
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={`/admin/fornecedores/atualizar/${fornecedor.id_fornecedor}`}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button
+                          className={styles.button}
+                          onClick={() => {
+                            setFornecedorExcluir(fornecedor.id_fornecedor)
+                            setOpenModalFornecedorExcluirWarning(true)
+                          }}
+                        >
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

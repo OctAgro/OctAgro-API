@@ -6,6 +6,11 @@ const FileStore = require('session-file-store')(session)
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
+const router = require ('express').Router()
+const chartData = require('./helpers/chartData')
+const { Chart, registerables } = require("chart.js");
+Chart.register(...registerables);
+const { createCanvas, registerFont } = require("canvas");
 
 //Chamando Inputs do Banco de Dados
 const Fornecedores = require('./models/Fornecedor')
@@ -41,6 +46,16 @@ app.use('/pedido', PedidoRotas)
 app.use('/produto', ProdutoRotas)
 app.use('/fornecedor', FornecedorRotas)
 app.use('/administrador',AdministradorRotas)
+
+app.get('/administrador/grafico/produto', async (req, res) => {
+    try {
+      const dadosGrafico = await chartData.graficoProduto(req,res);
+      res.json(dadosGrafico);
+    } catch (error) {
+      console.error('Erro ao gerar o gráfico', error);
+      res.status(500).json({ error: 'Erro ao gerar o gráfico' });
+    }
+  });
 
 //Mensagens com flash
 app.use(flash())

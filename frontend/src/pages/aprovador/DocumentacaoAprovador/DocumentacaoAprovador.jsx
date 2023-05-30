@@ -43,13 +43,15 @@ export const DocumentacaoAprovador = ({ documentacao, analista, recebedor }) => 
   } else if (recebedor) {
     return (
       <RelatoriosProvider>
-        <div className={styles.main}>
-          <SidebarAprovador />
+        <div id={styles["main"]}>
+          <div id={styles["sidebar"]}>
+            <SidebarAprovador />
+          </div>
+          <div id={styles["header"]}>
+          </div>
 
-          <div className={styles.container}>
-            <div className={styles.content}>
-              <InformacoesRecebedor />;
-            </div>
+          <div id={styles["body"]}>
+            <InformacoesRecebedor />
           </div>
         </div>
       </RelatoriosProvider>

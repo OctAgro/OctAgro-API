@@ -14,17 +14,17 @@ import styles from "./MercadoriaAprovador.module.css"
 
 export const MercadoriaAprovador = () => {
   return (
-      <div className={styles.main}>
-        <SidebarAprovador />
+    
+    <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAprovador />
+        </div>
+        <div id={styles["header"]}>
+        <HeaderAprovador arrow="True" link="/aprovador/home" />
+        </div>
 
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAprovador arrow="True" link="/aprovador/home" />
-          </div>
-
-          <div className={styles.content}>
-            <TabelaMercadoriasCadastradasAprovador />
-          </div>
+        <div id={styles["body"]}>
+        <TabelaMercadoriasCadastradasAprovador />
         </div>
       </div>
   )

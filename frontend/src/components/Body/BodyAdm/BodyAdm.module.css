@@ -8,6 +8,9 @@
 }
 
 #container {
+    position: fixed;
+    bottom: 0;
+    left: 20%;
     font-family: "Gotham Black";
     font-size: 1rem;
     width: 80%;

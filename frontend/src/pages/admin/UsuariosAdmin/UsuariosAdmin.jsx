@@ -83,6 +83,28 @@ export const UsuariosAdmin = () => {
   const [openModalFornecedorExcluirWarning, setOpenModalFornecedorExcluirWarning] = useState(false)
   const [openModalFornecedorExcluir, setOpenModalFornecedorExcluir] = useState(false)
 
+  //barra de pesquisar
+  const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const searchTermLower = searchTerm.toLowerCase();
+    const filtro = usuarios.filter((usuario) => {
+      const idPesquisa = usuario.id_usuario.toString().toLowerCase();
+      const nomePesquisa = usuario.nome.toLowerCase();
+      const funcaoPesquisa = usuario.funcao.toLowerCase();
+      return (
+        idPesquisa.includes(searchTermLower) ||
+        nomePesquisa.includes(searchTermLower) ||
+        funcaoPesquisa.includes(searchTermLower)
+      );
+    });
+    console.log("dado filtrado: ", filtro)
+    setUsuariosFiltrados(filtro);
+  };
+
   return (
     <UsuariosCadastradosProvider>
       <div id={styles["main"]}>
@@ -93,7 +115,7 @@ export const UsuariosAdmin = () => {
           <HeaderUsuarios />
         </div>
         <div id={styles["barraPesquisa"]}>
-          <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/usuarios/cadastrousuarios">
+          <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/usuarios/cadastrousuarios" handleSearch={handleSearch} setSearchTerm={setSearchTerm}>
             <FontAwesomeIcon icon={faUserPlus} title="Cadastrar novo usuário!" />
           </BarraAdmin>
         </div>
@@ -153,32 +175,61 @@ export const UsuariosAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {usuarios?.map((usuario) => (
-                  <tr key={usuario.id_usuario}>
-                    <td className={styles.tableData}>{usuario.id_usuario}</td>
-                    <td className={styles.tableData}>{usuario.nome}</td>
-                    <td className={styles.tableData}>{usuario.funcao}</td>
-                    <td className={styles.tableData}>
-                      {/* verificando com é o estado da aprovação para mostrar ação */}
-                      <button className={styles.button}>
-                        <Link to={`/admin/usuarios/atualizarusuarios/${usuario.id_usuario}`}>
-                          Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </Link>
-                      </button>
-                    </td>
-                    <td className={styles.tableData}>
-                      <button
-                        className={styles.button}
-                        onClick={() => {
-                          setUsuarioExcluir(usuario.id_usuario)
-                          setOpenModalFornecedorExcluirWarning(true)
-                        }}
-                      >
-                        Excluir <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {usuariosFiltrados.length > 0 ? (
+                  usuariosFiltrados.map((usuario) => (
+                    <tr key={usuario.id_usuario}>
+                      <td className={styles.tableData}>{usuario.id_usuario}</td>
+                      <td className={styles.tableData}>{usuario.nome}</td>
+                      <td className={styles.tableData}>{usuario.funcao}</td>
+                      <td className={styles.tableData}>
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={`/admin/usuarios/atualizarusuarios/${usuario.id_usuario}`}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button
+                          className={styles.button}
+                          onClick={() => {
+                            setUsuarioExcluir(usuario.id_usuario)
+                            setOpenModalFornecedorExcluirWarning(true)
+                          }}
+                        >
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  usuarios?.map((usuario) => (
+                    <tr key={usuario.id_usuario}>
+                      <td className={styles.tableData}>{usuario.id_usuario}</td>
+                      <td className={styles.tableData}>{usuario.nome}</td>
+                      <td className={styles.tableData}>{usuario.funcao}</td>
+                      <td className={styles.tableData}>
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={`/admin/usuarios/atualizarusuarios/${usuario.id_usuario}`}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button
+                          className={styles.button}
+                          onClick={() => {
+                            setUsuarioExcluir(usuario.id_usuario)
+                            setOpenModalFornecedorExcluirWarning(true)
+                          }}
+                        >
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

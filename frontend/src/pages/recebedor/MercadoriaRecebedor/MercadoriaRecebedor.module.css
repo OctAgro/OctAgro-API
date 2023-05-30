@@ -2,7 +2,7 @@
   background-color: #F7F1E5;
   display: grid;
   grid-template-columns: 20% auto;
-  grid-template-rows: 20% 5% auto;
+  grid-template-rows: 20% 0 auto;
 }
 
 #sidebar {

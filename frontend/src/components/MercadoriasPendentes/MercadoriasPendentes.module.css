@@ -5,8 +5,9 @@
   border-radius: 10px;
   background-color: #e7e0d1;
   padding: 4rem 2rem;
-  margin-top: 7rem;
+  margin: auto;
   filter: drop-shadow(0px 2px 5px #000);
+  width: 80%;
 }
 
 .icon {

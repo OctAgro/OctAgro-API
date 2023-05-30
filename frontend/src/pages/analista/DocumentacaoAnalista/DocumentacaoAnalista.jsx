@@ -18,9 +18,7 @@ export const DocumentacaoAnalista = () => {
         <div id={styles["sidebar"]}>
           <SidebarAnalista />
         </div>
-        <div id={styles["header"]}>          
-        </div>
-        
+             
         <div id={styles["body"]}>
           <InformacoesDocAnalistaRcNf />
         </div>

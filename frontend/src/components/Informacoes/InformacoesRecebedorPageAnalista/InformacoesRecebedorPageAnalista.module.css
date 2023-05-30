@@ -1,4 +1,7 @@
 .icon {
-    font-size: 4rem;
-    margin: 2rem 0 0 2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 3rem;
+    margin: 1rem;
 }

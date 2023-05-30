@@ -17,7 +17,7 @@ export const FormularioAprovador = () => {
     <RelatoriosProvider>
       <div id={styles["main"]}>
         <div id={styles["sidebar"]}>
-          <SidebarAnalista />
+          <SidebarAprovador />
         </div>
         <div id={styles["header"]}>
           <HeaderAprovador arrow="True" link="/aprovador/relatorio" />

@@ -47,16 +47,6 @@ app.use('/produto', ProdutoRotas)
 app.use('/fornecedor', FornecedorRotas)
 app.use('/administrador',AdministradorRotas)
 
-app.get('/administrador/grafico/produto', async (req, res) => {
-    try {
-      const dadosGrafico = await chartData.graficoProduto(req,res);
-      res.json(dadosGrafico);
-    } catch (error) {
-      console.error('Erro ao gerar o gráfico', error);
-      res.status(500).json({ error: 'Erro ao gerar o gráfico' });
-    }
-  });
-
 //Mensagens com flash
 app.use(flash())
 

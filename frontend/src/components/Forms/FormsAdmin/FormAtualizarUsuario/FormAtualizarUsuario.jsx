@@ -1,16 +1,14 @@
 import React from "react"
 import { useState, useEffect, useContext } from "react"
-import { useForm } from "react-hook-form"
 import InputMask from "react-input-mask"
 import { Link, useParams, useNavigate } from "react-router-dom"
 
 //IMPORTANDO COMPONENTES
 import { Modal } from "../../../Modal/Modal"
-import { Button } from "../../../Button/Button"
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faImagePortrait } from "@fortawesome/free-solid-svg-icons"
+import { faImagePortrait, faCircleCheck } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./FormAtualizarUsuario.module.css"
 
@@ -19,7 +17,6 @@ import { procurarUsuarioPorId } from "../../../../hooks/procurarUsuarios"
 import { atualizarUsuario } from "../../../../hooks/atualizarUsuario"
 
 export const FormAtualizarUsuario = () => {
-
   //procurando o Usuario pelo Id
   const { id } = useParams()
   const usuarioId = parseInt(id)
@@ -80,8 +77,7 @@ export const FormAtualizarUsuario = () => {
   const [estado, setEstado] = useState("")
 
   const [errorMessage, setErrorMessage] = useState("")
-  const [openModalUsuarioCadastrado, setOpenModalUsuarioCadastrado] = useState(false)
-
+  const [openModalUsuarioAtualizado, setOpenModalUsuarioAtualizado] = useState(false)
 
   const handleCepChange = (e) => {
     const enteredCep = e.target.value
@@ -134,12 +130,10 @@ export const FormAtualizarUsuario = () => {
       const usuario = await atualizarUsuario(usuarioId, data)
       console.log("Resposta do Usuario", usuario)
       setErrorMessage(usuario.data.message)
-      alert(usuario.data.message)
-      setOpenModalUsuarioCadastrado(true)
+      setOpenModalUsuarioAtualizado(true)
     } catch (erro) {
       setErrorMessage(erro)
-      setOpenModalUsuarioCadastrado(true)
-      alert(errorMessage)
+      setOpenModalUsuarioAtualizado(true)
     }
   }
 
@@ -148,8 +142,8 @@ export const FormAtualizarUsuario = () => {
     fileInput.click()
   }
 
-  const handleCloseModalUsuarioCadastrado = () => {
-    setOpenModalUsuarioCadastrado(false)
+  const handleCloseModalUsuarioAtualizado = () => {
+    setOpenModalUsuarioAtualizado(false)
   }
 
   const navigate = useNavigate()
@@ -161,7 +155,6 @@ export const FormAtualizarUsuario = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-
         <div id={styles["container"]}>
           <div id={styles["header"]}>
             <div id={styles["imgUser"]}>
@@ -173,11 +166,8 @@ export const FormAtualizarUsuario = () => {
                 onChange={(event) => setFoto(event.target.value)}
               />
             </div>
-            <div id={styles["cadUser"]}>
-              CADASTRO USUÁRIO
-            </div>
-            <div id={styles["admisao"]}>
-              DATA DE ADMISSÃO:</div>
+            <div id={styles["cadUser"]}>CADASTRO USUÁRIO</div>
+            <div id={styles["admisao"]}>DATA DE ADMISSÃO:</div>
             <div id={styles["item-4"]}>
               <InputMask
                 type="date"
@@ -200,7 +190,8 @@ export const FormAtualizarUsuario = () => {
             </div>
             <div id={styles["item-7"]}>FUNÇÃO:</div>
             <div id={styles["item-8"]}>
-              <select className={styles.fullSizeInput}
+              <select
+                className={styles.fullSizeInput}
                 name="funcaoUsuario"
                 id="funcaoUsuario"
                 value={funcao}
@@ -226,7 +217,7 @@ export const FormAtualizarUsuario = () => {
                 className={styles.fullSizeInput}
               />
             </div>
-          </div >
+          </div>
           <div id={styles["body"]}>
             <div id={styles["nome"]}>NOME:</div>
             <div id={styles["input-nome"]}>
@@ -398,12 +389,35 @@ export const FormAtualizarUsuario = () => {
                 value="ATUALIZAR"
               />
             </div>
-          </div >
+          </div>
         </div>
-
-
-      </form >
-
-    </div >
+      </form>
+      {errorMessage === "Usuário atualizado com sucesso!" ? (
+        /* MODAL CADASTRO COM SUCESSO */
+        <Modal isOpen={openModalUsuarioAtualizado} onClick={handleRedirect}>
+          <div className={styles.conteudoModal}>
+            <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+            <p>{errorMessage}</p>
+            <Link to="/admin/usuarios">
+              <input className={styles.botaoConfirmarModal} type="button" value="OK" />
+            </Link>
+          </div>
+        </Modal>
+      ) : (
+        /* MODAL CADASTRO COM INPUT FALTANDO */
+        <Modal isOpen={openModalUsuarioAtualizado} onClick={handleCloseModalUsuarioAtualizado}>
+          <div className={styles.conteudoModal}>
+            <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+            <p>{errorMessage}</p>
+            <input
+              className={styles.botaoConfirmarModal}
+              type="button"
+              value="OK"
+              onClick={handleCloseModalUsuarioAtualizado}
+            />
+          </div>
+        </Modal>
+      )}
+    </div>
   )
 }

@@ -29,8 +29,10 @@ export const Login = () => {
     event.preventDefault()
     try {
       const dados = await fazerLogin(username, password)
-      console.log(dados)
-
+      console.log('Dados', dados.message)
+      if (dados.message != "Login feito com sucesso!") {
+        alert(dados.message)
+      }
       //setando dados para dentro do context de usuario
       setUsuario(dados)
 
@@ -39,7 +41,7 @@ export const Login = () => {
 
       //capturando a funcao do usuario
       const tipoFuncao = dados.funcao
-
+1
       //redirecionamento do usuário para a página "home" com base no tipo de função
       if (tipoFuncao === "Aprovador") {
         navigate("/aprovador/home")

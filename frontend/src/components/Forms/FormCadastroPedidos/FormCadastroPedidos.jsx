@@ -217,7 +217,7 @@ export const FormCadastroPedidos = () => {
                         ({produto.nome_produto})
                       </option>
                     ))}
-                  </select>
+              </select>
               </div>
               
               <div id={styles["tipo"]}>Tipo</div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import { Link, useNavigate } from "react-router-dom"
 
@@ -13,8 +13,23 @@ import { faFileLines, faCircleCheck } from "@fortawesome/free-solid-svg-icons"
 
 // HOOK
 import { criarProduto } from "../../../hooks/criarProduto"
+import { criarCriterio } from "../../../hooks/criarCriterio"
+import { buscarProduto } from "../../../hooks/procurarProduto"
+import { encontrarCriteriosById } from "../../../hooks/encontrarCriterios"
 
 export const FormCadastroProduto = () => {
+  //Buscando todos Produtos
+  const [produtos, setProdutos] = useState([])
+  useEffect(() => {
+    async function fetchProdutos() {
+      const dadosProdutos = await buscarProduto()
+      setProdutos(dadosProdutos)
+    }
+    fetchProdutos()
+  }, [])
+
+  console.log("produtos: ", produtos)
+
   // MODAL
   const [openModalRegra, setOpenModalRegra] = useState(false)
   const [openModalProduto, setOpenModalProduto] = useState(false)
@@ -139,7 +154,7 @@ export const FormCadastroProduto = () => {
 
   // MODAL CADASTRO PRODUTO
   const [openModalProdutoCadastrado, setOpenModalProdutoCadastrado] = useState(false)
-  
+
   // HANDLES DO MODAL DE CADASTRO
   const handleCloseModalProdutoCadastrado = () => {
     setOpenModalProdutoCadastrado(false)
@@ -157,6 +172,39 @@ export const FormCadastroProduto = () => {
   const handleRedirect = () => {
     navigate("/admin/produtos/")
   }
+
+  // CRIANDO HANDLESUBMIT PARA CRITERIOS NOVOS
+  const [descricaoRegra, setDescricaoRegra] = useState("")
+  const [inserirValor, setInserirValor] = useState("")
+  const [valorMax, setValorMax] = useState(0)
+  const [funcaoUsuario, setFuncaoUsuario] = useState("")
+  const [produtoId, setProdutoId] = useState("")
+
+  // enviando os dados
+  const handleSubmitCriterio = async (event) => {
+    event.preventDefault()
+    try {
+      const data = {
+        descricaoRegra,
+        inserirValor,
+        valorMax,
+        funcaoUsuario,
+        produtoId
+      }
+
+      console.log(data)
+
+      const criterio = await criarCriterio(data)
+      console.log(criterio)
+      setErrorMessage(criterio.mensagem)
+      setOpenModalProdutoCadastrado(true)
+    } catch (erro) {
+      setErrorMessage(erro)
+      setOpenModalProdutoCadastrado(true)
+      alert(errorMessage)
+    }
+  }
+
 
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -365,9 +413,30 @@ export const FormCadastroProduto = () => {
               <label>
                 Usuário:
                 <br />
-                <select className={styles.inputModal}>
+                <select className={styles.inputModal}
+                  onChange={(event) => setFuncaoUsuario(event.target.value)}
+                >
+                  <option value="">Selecione</option>
                   <option value="Recebedor">Recebedor</option>
                   <option value="Analista">Analista</option>
+                </select>
+              </label>
+            </div>
+            <div className={styles.usuarioModal}>
+              <label>
+                Produto:
+                <br />
+                <select
+                  className={styles.inputModal}
+                  onChange={(event) => setProdutoId(event.target.value)}
+                >
+                  <option value="">Selecione</option>
+                  <option value="Todos">Todos</option>
+                  {produtos.map((produto) => (
+                    <option key={produto.id_produto} value={produto.id_produto}>
+                      {produto.nome_produto}
+                    </option>
+                  ))}
                 </select>
               </label>
             </div>
@@ -375,7 +444,8 @@ export const FormCadastroProduto = () => {
               <label>
                 Descrição:
                 <br />
-                <input type="text" className={styles.inputModal} />
+                <input type="text" className={styles.inputModal}
+                  onChange={(event) => setDescricaoRegra(event.target.value)} />
               </label>
             </div>
             <div className={styles.inserirModal}>
@@ -386,9 +456,11 @@ export const FormCadastroProduto = () => {
                   <input
                     type="radio"
                     id="radioInserirValores"
+                    value="true"
                     className={styles.radioModal}
                     checked={radioInserirValores}
                     onClick={handleRadioInserirValores}
+                    onChange={(event) => setInserirValor(event.target.value)}
                   />
                 </label>
                 <label className={styles.radioModal}>
@@ -396,32 +468,34 @@ export const FormCadastroProduto = () => {
                   <input
                     type="radio"
                     id="radioNaoInserirValores"
+                    value="false"
                     className={styles.radioModal}
-                    checked={radioNaoInserirValores}
                     onClick={handleRadioNaoInserirValores}
+                    onChange={(event) => setInserirValor(event.target.value)}
                   />
                 </label>
               </label>
             </div>
             <div>
-              {radioInserirValores && (
+              {radioInserirValores ? (
                 <label>
                   Valores:
                   <div>
                     <label>
                       Máx.
-                      <input type="text" className={styles.porcentagem} min="0" max="100" />
+                      <input type="text" className={styles.porcentagem} min="0" max="100"
+                        onChange={(event) => setValorMax(event.target.value)} />
                     </label>
                     %
                   </div>
                 </label>
-              )}
+              ) : (null)}
             </div>
             <input
               className={styles.botaoConfirmar}
               type="button"
               value="CADASTRAR"
-              onClick={handleOpenModalRegra}
+              onClick={handleSubmitCriterio}
             />
           </div>
         </Modal>

@@ -8,21 +8,19 @@ module.exports = class CriteriosController {
         const data = req.body
 
         const criterio = new CriteriosAvaliacao({
-
-
-            descricao_regra: data.descricao_regra,
-            inserir_valor: data.inserir_valor,
-            valor_max: data.valor_max,
-            funcao:data.funcao,
-            id_produto: data.id_produto
-            
+            descricao_regra: data.descricaoRegra,
+            inserir_valor: data.inserirValor,
+            valor_max: data.valorMax,
+            funcao: data.funcaoUsuario,
+            id_produto: data.produtoId
         })
 
         try {
             const novoCriterio = await criterio.save()
             res.json({ mensagem: 'Criterio criado com sucesso!', status: 201 }).status(201)
         } catch (erro) {
-            res.status(500).json({ mensagem: erro })
+            console.log(erro)
+            res.status(500).json(erro)
         }
 
     }

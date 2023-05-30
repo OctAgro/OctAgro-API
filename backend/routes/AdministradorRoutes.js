@@ -85,7 +85,7 @@ router.get('/relatorio/gerar/:id', RelatorioFinalController.gerarRelatorioFinal)
 
 //Rotas dos Graficos
 
-//router.get('/grafico/produto',chartData.graficoProduto) // gerar grafico do produto
+router.get('/grafico/produto',chartData.graficoProduto)
 
 
 

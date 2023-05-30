@@ -1,12 +1,10 @@
-const express = require('express')
+const express = require('express');
 const Sequelize = require("sequelize");
 const db = require("../db/conexao");
 const Produto = require("../models/Produto");
 const { createCanvas, registerFont } = require("canvas");
 const { Chart, registerables } = require("chart.js");
 Chart.register(...registerables);
-
-
 
 class Graficos {
   static async graficoProduto(req, res) {
@@ -20,11 +18,38 @@ class Graficos {
       const labels = produtos.map((produto) => produto.nome_produto);
       const data = produtos.map((produto) => produto.quantidade_produto);
 
-      const canvas = createCanvas(800, 600); // Define as dimensões do canvas
+      const canvas = createCanvas(800, 600);
       const ctx = canvas.getContext("2d");
 
-      const chartType = req && req.query && req.query.type ? req.query.type : "bar"
-      // Renderizar o gráfico em um canvas
+      const chartType = req && req.query && req.query.type ? req.query.type : "bar";
+      const chartOptions = {
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 32, // Defina o tamanho da fonte desejado para o eixo x
+              },
+            },
+          },
+          y: {
+            ticks: {
+              font: {
+                size: 32, // Defina o tamanho da fonte desejado para o eixo y
+              },
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 32, // Defina o tamanho da fonte desejado para as legendas
+              },
+            },
+          },
+        },
+      };
+
       new Chart(ctx, {
         type: chartType || "bar",
         data: {
@@ -39,9 +64,9 @@ class Graficos {
             },
           ],
         },
+        options: chartOptions,
       });
 
-      // Obter a representação em buffer da imagem do canvas
       const imageBuffer = canvas.toBuffer();
 
       res.contentType("image/png");

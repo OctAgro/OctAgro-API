@@ -5,6 +5,11 @@
   grid-template-rows: 20% 5% auto;
 }
 
+textarea {
+  font-family: 'Gotham Medium';
+  padding-top: 0.2rem;
+}
+
 #sidebar {
   grid-row-start: 1;
   grid-row-end: 5;

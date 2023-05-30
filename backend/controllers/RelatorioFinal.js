@@ -108,11 +108,17 @@ module.exports = class RelatorioFinalController {
             doc.text(`- Revisão do Aprovador: ${relatorioAprovador.revisao_aprovador}`);
             doc.text(`- Status Final de Aprovação: ${relatorioAprovador.status_final_aprovacao}`);
 
+            const buffers = [];
+            doc.on('data', (buffer) => buffers.push(buffer));
+            doc.on('end', () => {
+                const pdfData = Buffer.concat(buffers);
+                res.setHeader('Content-Type', 'application/pdf');
+                res.setHeader('Content-Disposition', `inline; filename=relatorio_pedido_${id_pedido}.pdf`);
+                res.send(pdfData).status(200);
+            });
+
             doc.end();
 
-            console.log(`Relatório final criado: ${nomeArquivo}`);
-
-            res.status(200).json({ message: `Relatório final criado: ${nomeArquivo}` });
         } catch (error) {
             res.status(500).json({ message: error });
         }

@@ -8,7 +8,7 @@ const createDatabase = async () => {
   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Topsp808!@',
+    password: '',
   });
 
   await connection.query('CREATE DATABASE IF NOT EXISTS octagro');
@@ -25,7 +25,7 @@ const sequelize = new Sequelize({
   host: 'localhost',
   port: 3306,
   username: 'root',
-  password: 'Topsp808!@',
+  password: '',
   database: 'octagro',
   define: {
     timestamps: true,

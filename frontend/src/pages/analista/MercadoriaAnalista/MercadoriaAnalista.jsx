@@ -14,17 +14,16 @@ import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
 export const MercadoriaAnalista = () => {
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAnalista />
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAnalista />
+        </div>
 
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAnalista arrow="True" link="/analista/home" />
-          </div>
+        <div id={styles["header"]}>          <HeaderAnalista arrow="True" link="/analista/home" />
+        </div>
 
-          <div className={styles.content}>
-            <TabelaMercadorias />
-          </div>
+        <div id={styles["body"]}>
+          <TabelaMercadorias />
         </div>
       </div>
     </PedidosProvider>

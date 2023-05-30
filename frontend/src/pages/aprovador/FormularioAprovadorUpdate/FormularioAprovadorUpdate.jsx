@@ -13,17 +13,16 @@ import { MercadoriasProvider } from "../../../context/MercadoriasRecebedorContex
 export const FormularioAprovadorUpdate = () => {
   return (
     <MercadoriasProvider>
-      <div className={styles.main}>
-        <SidebarAprovador />
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAprovador />
+        </div>
+        <div id={styles["header"]}>
+          <HeaderAprovador arrow="True" link="/analista/mercadoriascadastradas" />
+        </div>
 
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAprovador arrow="True" link="/analista/mercadoriascadastradas" />
-          </div>
-
-          <div className={styles.content}>
-            <FormAprovadorUpdate />
-          </div>
+        <div id={styles["body"]}>
+          <FormAprovadorUpdate />
         </div>
       </div>
     </MercadoriasProvider>

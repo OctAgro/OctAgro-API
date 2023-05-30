@@ -15,17 +15,16 @@ import styles from "./FormularioAprovador.module.css"
 export const FormularioAprovador = () => {
   return (
     <RelatoriosProvider>
-      <div className={styles.main}>
-        <SidebarAprovador />
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAnalista />
+        </div>
+        <div id={styles["header"]}>
+          <HeaderAprovador arrow="True" link="/aprovador/relatorio" />
+        </div>
 
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <HeaderAprovador arrow="True" link="/aprovador/relatorio" />
-          </div>
-
-          <div className={styles.content}>
-            <FormAprovador />
-          </div>
+        <div id={styles["body"]}>
+          <FormAprovador />
         </div>
       </div>
     </RelatoriosProvider>

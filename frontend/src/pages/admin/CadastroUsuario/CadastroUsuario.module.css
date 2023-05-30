@@ -5,7 +5,6 @@
   grid-template-rows: 20% 5% auto;
 }
 
-
 #sidebar {
   grid-row-start: 1;
   grid-row-end: 4;
@@ -17,6 +16,7 @@
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 2;
+  margin: auto;
 }
 
 #barraPesquisa {

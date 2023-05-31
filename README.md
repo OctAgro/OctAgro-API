@@ -66,9 +66,6 @@ O Backlog do Produto pode ser analisado abaixo:
 | **9** | Controle de relatorios do ADM |
 | **10** | Geração dos gráficos |
 
-
-Para acessar o Backlog Total, clique [aqui](./doc/backlog/backlog.md).
-
 <br>
 
 

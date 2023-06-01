@@ -80,13 +80,6 @@
 }
 
 .imgGrafico,
-.imgGrafEstocagem,
-.imgGrafProduto {
-    border-radius: 15px;
-    filter: drop-shadow(2px 2px 2px #000);
-}
-
-.imgGrafico,
 .imgGrafProduto {
     width: 22rem;
     height: 15rem;

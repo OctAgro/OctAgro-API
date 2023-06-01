@@ -38,6 +38,14 @@ class Graficos {
               font: {
                 size: 32, // Defina o tamanho da fonte desejado para o eixo y
               },
+              callback: function (value, index, values) {
+                // Retorna apenas o valor mínimo (0) e o valor máximo (1)
+                if (index === 0 || index === values.length - 1) {
+                  return value.toString();
+                } else {
+                  return "";
+                }
+              },
             },
           },
         },

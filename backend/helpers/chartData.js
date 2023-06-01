@@ -2,6 +2,8 @@ const express = require('express');
 const Sequelize = require("sequelize");
 const db = require("../db/conexao");
 const Produto = require("../models/Produto");
+const Fornecedor = require("../models/Fornecedor");
+const Pedido = require("../models/Pedido");
 const { createCanvas, registerFont } = require("canvas");
 const { Chart, registerables } = require("chart.js");
 Chart.register(...registerables);
@@ -35,6 +37,14 @@ class Graficos {
             ticks: {
               font: {
                 size: 32, // Defina o tamanho da fonte desejado para o eixo y
+              },
+              callback: function (value, index, values) {
+                // Retorna apenas o valor mínimo (0) e o valor máximo (1)
+                if (index === 0 || index === values.length - 1) {
+                  return value.toString();
+                } else {
+                  return "";
+                }
               },
             },
           },
@@ -76,6 +86,110 @@ class Graficos {
       return null;
     }
   }
+
+  static async graficoFornecedor(req, res) {
+    try {
+      await db.sync();
+
+      const fornecedores = await Fornecedor.findAll({
+        attributes: ["nome_fornecedor", "numero"],
+      });
+
+      const labels = fornecedores.map((fornecedor) => fornecedor.nome_fornecedor);
+      const data = [300,300];
+
+      const canvas = createCanvas(800, 600); // Define as dimensões do canvas
+      const ctx = canvas.getContext("2d");
+
+      const chartType = req && req.query && req.query.type ? req.query.type : "pie"
+      // Renderizar o gráfico em um canvas
+      new Chart(ctx, {
+        type: chartType || "pie",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Quantidade de Fornecedores",
+              data,
+              borderWidth: 1,
+            },
+          ],
+        },
+      });
+
+      // Obter a representação em buffer da imagem do canvas
+      const imageBuffer = canvas.toBuffer();
+
+      res.contentType("image/png");
+      res.send(imageBuffer);
+    } catch (error) {
+      console.error("Erro ao gerar o gráfico", error);
+      return null;
+    }
+  }
+
+  static async graficoPedido(req, res) {
+    try {
+      await db.sync();
+  
+      const pedidos = await Pedido.findAll({
+        raw: true,
+        attributes: ['id_pedido'],
+        include: [
+          {
+            model: Produto,
+            required: true,
+            attributes: ['nome_produto'],
+          },
+          {
+            model: Fornecedor,
+            required: true,
+            attributes: ['nome_fornecedor'],
+          },
+        ],
+        order: [['id_produto', 'ASC']]
+      });
+
+      console.log(pedidos)
+  
+      const labelsProduto = pedidos.map((pedido) => pedido['produto.nome_produto']);
+      const labelsFornecedor = pedidos.map((pedido) => pedido['fornecedor.nome_fornecedor']);
+      const numeroPedidos = pedidos.reduce((count) => count + 1, 0);
+  
+      const canvas = createCanvas(800, 600);
+      const ctx = canvas.getContext("2d");
+
+      console.log(labelsProduto, labelsFornecedor)
+
+      console.log(numeroPedidos)
+
+  
+      const chartType = req && req.query && req.query.type ? req.query.type : "pie";
+  
+      new Chart(ctx, {
+        type: chartType || "pie",
+        data: {
+          labels: [labelsProduto, labelsFornecedor],
+          datasets: [
+            {
+              label: "Quantidade de Pedidos",
+              data: [numeroPedidos],
+              borderWidth: 1,
+            },
+          ],
+        },
+      });
+  
+      const imageBuffer = canvas.toBuffer();
+  
+      res.contentType("image/png");
+      res.send(imageBuffer);
+    } catch (error) {
+      console.error("Erro ao gerar o gráfico", error);
+      return null;
+    }
+  }
+  
 }
 
 module.exports = Graficos;

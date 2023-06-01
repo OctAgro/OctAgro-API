@@ -166,7 +166,7 @@ export const FormAtualizarUsuario = () => {
                 onChange={(event) => setFoto(event.target.value)}
               />
             </div>
-            <div id={styles["cadUser"]}>CADASTRO USUÁRIO</div>
+            <div id={styles["cadUser"]}>ATUALIZAR USUÁRIO</div>
             <div id={styles["admisao"]}>DATA DE ADMISSÃO:</div>
             <div id={styles["item-4"]}>
               <InputMask

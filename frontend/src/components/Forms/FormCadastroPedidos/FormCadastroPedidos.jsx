@@ -6,7 +6,7 @@ import { Modal } from "../../Modal/Modal"
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons"
+import { faCircleCheck, faWarning } from "@fortawesome/free-solid-svg-icons"
 
 // IMPORTANDO ESTILOS
 import styles from "./FormCadastroPedidos.module.css"
@@ -17,7 +17,6 @@ import { buscarFornecedores } from "../../../hooks/buscarFornecedores"
 import { buscarProduto } from "../../../hooks/procurarProduto"
 
 export const FormCadastroPedidos = () => {
-
   //trazendo lista de todos os Fornecedores
   const [fornecedores, setFornecedores] = useState([])
   useEffect(() => {
@@ -42,7 +41,6 @@ export const FormCadastroPedidos = () => {
 
   console.log("produtos: ", produtos)
 
-
   // HANDLES DO MODAL DE CADASTRO
   const handleCloseModalFornecedorCadastrado = () => {
     setOpenModalFornecedorCadastrado(false)
@@ -60,7 +58,7 @@ export const FormCadastroPedidos = () => {
         idProduto,
         idFornecedor,
         nome_motorista,
-        placa_veiculo
+        placa_veiculo,
       }
 
       const pedido = await criarPedido(data)
@@ -74,7 +72,7 @@ export const FormCadastroPedidos = () => {
   }
 
   // NAVIGATE DO REACT ROUTER DOM
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // STATES DO FORMULÁRIO
   const [idFornecedor, setIdFornecedor] = useState("")
@@ -96,183 +94,197 @@ export const FormCadastroPedidos = () => {
 
   const [openModalFornecedorCadastrado, setOpenModalFornecedorCadastrado] = useState(false)
 
+  // LÓGICA DE PREENCHER OS CAMPOS BASEADO NO ID
+
+  const [fornecedorSelecionado, setFornecedorSelecionado] = useState(null)
+
+  useEffect(() => {
+    if (idFornecedor) {
+      const fornecedor = fornecedores.find((fornecedor) => fornecedor.id_fornecedor === idFornecedor)
+      if (fornecedor) {
+        setCNPJ(fornecedor.CNPJ)
+        setIE(fornecedor.IE)
+        setRazaoSocial(fornecedor.razao_social)
+        setNomeFornecedor(fornecedor.nome_fornecedor)
+        // ...
+        setFornecedorSelecionado(fornecedor)
+      }
+    }
+  }, [idFornecedor, fornecedores])
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div id={styles["container"]}>
-          <div id={styles["titulo"]}>CADASTRO PEDIDOS</div>          
-            <div id={styles["ladoEsquerdo"]}>
-              <div id={styles["subtitle"]}>
-                Dados do Fornecedor
-                <hr />
-              </div>
-              <div id={styles["idForrnecedor"]}>Id Fornecedor:</div>
-              <div id={styles["selectIdFornecedor"]}>
-              <select
-                    className={styles.fullSizeInput}
-                    value={idFornecedor}
-                    onChange={(event) => setIdFornecedor(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {fornecedores.map((fornecedor) => (
-                      <option key={fornecedor.id_fornecedor} value={fornecedor.id_fornecedor}>
-                        ({fornecedor.id_fornecedor})
-                      </option>
-                    ))}
-                  </select>
-                
-              </div>
-              <div id={styles["cnpj"]}>CNPJ:</div>
-              <div id={styles["inputId"]}>
-              <select
-                    className={styles.fullSizeInput}
-                    value={CNPJ}
-                    onChange={(event) => setCNPJ(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {fornecedores.map((fornecedor) => (
-                      <option key={fornecedor.id} value={fornecedor.CNPJ}>
-                        ({fornecedor.CNPJ})
-                      </option>
-                    ))}
-                  </select>
-                
-              </div>
-              <div id={styles["ie"]}>IE:</div>
-              <div id={styles["inputIe"]}>
-              <select
-                    className={styles.fullSizeInput}
-                    value={IE}
-                    onChange={(event) => setIE(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {fornecedores.map((fornecedor) => (
-                      <option key={fornecedor.id} value={fornecedor.IE}>
-                        ({fornecedor.IE})
-                      </option>
-                    ))}
-                  </select>
-              </div>
-              <div className={styles.dadosEmpresa}>Razão Social:</div>
-              <div className={styles.dadosEmpresa}>
-              <select
-                    className={styles.fullSizeInput}
-                    value={razao_social}
-                    onChange={(event) => setRazaoSocial(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {fornecedores.map((fornecedor) => (
-                      <option key={fornecedor.id} value={fornecedor.razao_social}>
-                        ({fornecedor.razao_social})
-                      </option>
-                    ))}
-                  </select>
-              </div>
-              <div className={styles.dadosEmpresa}>Nome Fantasia:</div>
-              <div className={styles.dadosEmpresa}>
-              <select
-                    className={styles.fullSizeInput}
-                    value={nome_fornecedor}
-                    onChange={(event) => setNomeFornecedor(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {fornecedores.map((fornecedor) => (
-                      <option key={fornecedor.id} value={fornecedor.nome_fornecedor}>
-                        ({fornecedor.nome_fornecedor})
-                      </option>
-                    ))}
-                  </select>
-              </div>
+          <div id={styles["titulo"]}>CADASTRO PEDIDOS</div>
+          <div id={styles["ladoEsquerdo"]}>
+            <div id={styles["subtitle"]}>
+              Dados do Fornecedor
+              <hr />
             </div>
-            <div id={styles["ladoDireito"]}>
-              <div id={styles["subtitle"]}>
-                Dados do Produto
-                <hr />
-              </div>
-              <div id={styles["idProd"]}>Id Produto:</div>
-              <div id={styles["selectidProd"]}>
+            <div id={styles["idFornecedor"]}>Id Fornecedor:</div>
+            <div id={styles["selectIdFornecedor"]}>
               <select
-                    className={styles.fullSizeInput}
-                    value={idProduto}
-                    onChange={(event) => setIdProduto(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {produtos.map((produto) => (
-                      <option key={produto.id_produto} value={produto.id_produto}>
-                        ({produto.id_produto})
-                      </option>
-                    ))}
-                  </select>
-              </div>
-              <div id={styles["produto"]}>Produto:</div>
-              <div id={styles["selectProduto"]}>
-              <select
-                    className={styles.fullSizeInput}
-                    value={cep}
-                    onChange={(event) => setCep(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {produtos.map((produto) => (
-                      <option key={produto.id} value={produto.nome_produto}>
-                        ({produto.nome_produto})
-                      </option>
-                    ))}
+                className={styles.fullSizeInput}
+                value={idFornecedor}
+                onChange={(event) => setIdFornecedor(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {fornecedores.map((fornecedor) => (
+                  <option key={fornecedor.id_fornecedor} value={fornecedor.id_fornecedor}>
+                    ({fornecedor.id_fornecedor})
+                  </option>
+                ))}
               </select>
-              </div>
-              
-              <div id={styles["tipo"]}>Tipo</div>
-              <div id={styles["selectTipo"]}>
-              <select
-                    className={styles.fullSizeInput}
-                    value={estado}
-                    onChange={(event) => setEstado(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {produtos.map((produto) => (
-                      <option key={produto.id} value={produto.tipo}>
-                        ({produto.tipo})
-                      </option>
-                    ))}
-                  </select>
-              </div>
-              <div className={styles.dadosEmpresa}>Descrição:</div>
-              <div className={styles.dadosEmpresa}>
-              <select
-                    className={styles.fullSizeInput}
-                    value={cidade}
-                    onChange={(event) => setCidade(event.target.value)}
-                  >
-                    <option value="">Selecione</option>
-                    {produtos.map((produto) => (
-                      <option key={produto.id} value={produto.descricao}>
-                        ({produto.descricao})
-                      </option>
-                    ))}
-                  </select>
-              </div>
-              <div className={styles.dadosEmpresa}>Nome do Caminhoneiro:</div>
-              <div className={styles.dadosEmpresa}>
-              <input
-                      className={styles.fullSizeInput}
-                      type="text"
-                      name="textoNomeEntregador"
-                      value={nome_motorista}
-                      onChange={(event) => setNomeMotorista(event.target.value)}
-                    />
-              </div>
-              <div id={styles["caminhao"]}>Placa do Caminhão:</div>
-              <div id={styles["inputCaminhao"]}>
-              <input
-                    className={styles.fullSizeInput}
-                    type="text"
-                    name="textoPlacaVeiculo"
-                    value={placa_veiculo}
-                    onChange={(event) => setPlacaVeiculo(event.target.value)}
-                  />
-              </div>
-              
             </div>
-          
+            <div id={styles["cnpj"]}>CNPJ:</div>
+            <div id={styles["inputId"]}>
+              <select
+                className={styles.fullSizeInput}
+                value={CNPJ}
+                onChange={(event) => setCNPJ(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {fornecedores.map((fornecedor) => (
+                  <option key={fornecedor.id} value={fornecedor.CNPJ}>
+                    ({fornecedor.CNPJ})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div id={styles["ie"]}>IE:</div>
+            <div id={styles["inputIe"]}>
+              <select
+                className={styles.fullSizeInput}
+                value={IE}
+                onChange={(event) => setIE(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {fornecedores.map((fornecedor) => (
+                  <option key={fornecedor.id} value={fornecedor.IE}>
+                    ({fornecedor.IE})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className={styles.dadosEmpresa}>Razão Social:</div>
+            <div className={styles.dadosEmpresa}>
+              <select
+                className={styles.fullSizeInput}
+                value={razao_social}
+                onChange={(event) => setRazaoSocial(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {fornecedores.map((fornecedor) => (
+                  <option key={fornecedor.id} value={fornecedor.razao_social}>
+                    ({fornecedor.razao_social})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className={styles.dadosEmpresa}>Nome Fantasia:</div>
+            <div className={styles.dadosEmpresa}>
+              <select
+                className={styles.fullSizeInput}
+                value={nome_fornecedor}
+                onChange={(event) => setNomeFornecedor(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {fornecedores.map((fornecedor) => (
+                  <option key={fornecedor.id} value={fornecedor.nome_fornecedor}>
+                    ({fornecedor.nome_fornecedor})
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div id={styles["ladoDireito"]}>
+            <div id={styles["subtitle"]}>
+              Dados do Produto
+              <hr />
+            </div>
+            <div id={styles["idProd"]}>Id Produto:</div>
+            <div id={styles["selectidProd"]}>
+              <select
+                className={styles.fullSizeInput}
+                value={idProduto}
+                onChange={(event) => setIdProduto(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {produtos.map((produto) => (
+                  <option key={produto.id_produto} value={produto.id_produto}>
+                    ({produto.id_produto})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div id={styles["produto"]}>Produto:</div>
+            <div id={styles["selectProduto"]}>
+              <select
+                className={styles.fullSizeInput}
+                value={cep}
+                onChange={(event) => setCep(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {produtos.map((produto) => (
+                  <option key={produto.id} value={produto.nome_produto}>
+                    ({produto.nome_produto})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div id={styles["tipo"]}>Tipo</div>
+            <div id={styles["selectTipo"]}>
+              <select
+                className={styles.fullSizeInput}
+                value={estado}
+                onChange={(event) => setEstado(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {produtos.map((produto) => (
+                  <option key={produto.id} value={produto.tipo}>
+                    ({produto.tipo})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className={styles.dadosEmpresa}>Descrição:</div>
+            <div className={styles.dadosEmpresa}>
+              <select
+                className={styles.fullSizeInput}
+                value={cidade}
+                onChange={(event) => setCidade(event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {produtos.map((produto) => (
+                  <option key={produto.id} value={produto.descricao}>
+                    ({produto.descricao})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className={styles.dadosEmpresa}>Nome do Caminhoneiro:</div>
+            <div className={styles.dadosEmpresa}>
+              <input
+                className={styles.fullSizeInput}
+                type="text"
+                name="textoNomeEntregador"
+                value={nome_motorista}
+                onChange={(event) => setNomeMotorista(event.target.value)}
+              />
+            </div>
+            <div id={styles["caminhao"]}>Placa do Caminhão:</div>
+            <div id={styles["inputCaminhao"]}>
+              <input
+                className={styles.fullSizeInput}
+                type="text"
+                name="textoPlacaVeiculo"
+                value={placa_veiculo}
+                onChange={(event) => setPlacaVeiculo(event.target.value)}
+              />
+            </div>
+          </div>
 
           <input
             type="button"
@@ -280,16 +292,15 @@ export const FormCadastroPedidos = () => {
             onClick={handleSubmit}
             value="CADASTRAR"
           />
-
         </div>
       </form>
-      {errorMessage === "Fornecedor cadastrado com sucesso!" ? (
+      {errorMessage === "Pedido salvo com sucesso!" ? (
         /* MODAL CADASTRO COM SUCESSO */
         <Modal isOpen={openModalFornecedorCadastrado} onClick={handleRedirect}>
           <div className={styles.conteudoModal}>
             <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
             <p>{errorMessage}</p>
-            <Link to="/admin/fornecedores">
+            <Link to="/admin/pedidos">
               <input className={styles.botaoConfirmarModal} type="button" value="OK" />
             </Link>
           </div>
@@ -298,7 +309,7 @@ export const FormCadastroPedidos = () => {
         /* MODAL CADASTRO COM INPUT FALTANDO */
         <Modal isOpen={openModalFornecedorCadastrado} onClick={handleCloseModalFornecedorCadastrado}>
           <div className={styles.conteudoModal}>
-            <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+            <FontAwesomeIcon icon={faWarning} className={styles.iconeModal} />
             <p>{errorMessage}</p>
             <input
               className={styles.botaoConfirmarModal}
@@ -309,7 +320,6 @@ export const FormCadastroPedidos = () => {
           </div>
         </Modal>
       )}
-
     </div>
   )
 }

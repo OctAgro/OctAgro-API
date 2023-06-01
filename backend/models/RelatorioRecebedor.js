@@ -7,7 +7,7 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
     id_relatorio_recebedor: {
         type: Sequelize.INTEGER,
         autoIncrement:  true,
-        autoNull: false,
+        allowNull: false,
         primaryKey: true
     },
 

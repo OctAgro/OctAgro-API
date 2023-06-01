@@ -3,6 +3,8 @@ const Pedido = require('../models/Pedido')
 const Usuario = require('../models/Usuario')
 const Produto = require('../models/Produto')
 const Fornecedor = require('../models/Fornecedor')
+const Sequelize = require("sequelize")
+const db = require('../db/conexao')
 
 module.exports = class RelatorioController {
     static async criarRelatorio(req, res) {
@@ -10,40 +12,34 @@ module.exports = class RelatorioController {
 
         console.log(data)
 
-        if (data.checkboxColoracaoAprovado && data.checkboxColoracaoReprovado) {
-            return res.json({ message: 'Escolha apenas uma das opções!', status: 500 }).status(500)
-        } else if (!data.checkboxColoracaoAprovado && !data.checkboxColoracaoReprovado) {
-            return res.json({ message: 'Escolha apenas uma das opções!', status: 500 }).status(500)
-        }
-
-        if (data.checkboxOdorAprovado && data.checkboxOdorReprovado) {
-            return res.json({ message: 'Escolha apenas uma das opções!', status: 500 }).status(500)
-        } else if (!data.checkboxOdorAprovado && !data.checkboxOdorReprovado) {
-            return res.json({ message: 'Escolha apenas uma das opções!', status: 500 }).status(500)
-        }
-
-        if (data.checkboxAusenciaAnimaisAprovado && data.checkboxAusenciaAnimaisReprovado) {
-            return res.json({ message: 'Escolha apenas uma das opções!', status: 500 }).status(500)
-        } else if (!data.checkboxAusenciaAnimaisAprovado && !data.checkboxAusenciaAnimaisReprovado) {
-            return res.json({ message: 'Escolha apenas uma das opções!', status: 500 }).status(500)
-        }
-
-        if (data.checkboxAusenciaMofoAprovado && data.checkboxAusenciaMofoReprovado) {
-            return res.json({ message: 'Escolha apenas uma das opções!', status: 500 }).status(500)
-        } else if (!data.checkboxAusenciaMofoAprovado && !data.checkboxAusenciaMofoReprovado) {
-            return res.json({ message: 'Escolha apenas uma das opções!', status: 500 }).status(500)
-        }
-
-
         const relatorioRecebedor = new RelatorioRecebedor({
+            coloracao: data.checkboxColoracaoAprovado,
+            odor: data.checkboxOdorAprovado,
+            ausencia_animais: data.checkboxAusencia_AnimaisAprovado,
+            ausencia_mofo: data.checkboxAusencia_MofoAprovado,
             id_pedido: data.idPedido,
             id_usuario: data.idUsuario
         })
 
         for (const key in data) {
-            if (key.startsWith('checkbox') && data[key] === true) {
-                const checkboxName = key.replace('checkbox', '').replace('Aprovado', '').toLowerCase();
-                relatorioRecebedor[checkboxName] = true;
+            if (key !== 'idPedido' && key !== 'idUsuario'
+                && key !== 'checkboxColoracaoAprovado' && key !== 'checkboxOdorAprovado'
+                && key != 'checkboxAusencia_AnimaisAprovado' && key != 'checkboxAusencia_MofoAprovado') {
+
+                if (key.startsWith('checkbox') && data[key] === true) {
+                    const checkboxName = key.replace('checkbox', '').replace('Aprovado', '').toLowerCase();
+                    relatorioRecebedor[checkboxName] = true;
+                    try {
+                        await db.query(`ALTER TABLE relatoriorecebedor ADD COLUMN ${checkboxName} BOOLEAN`);
+                    } catch (erro) {
+                        console.log(erro);
+                        res.status(500).json(erro);
+                        return;
+                    }
+                }
+                else {
+                    relatorioRecebedor[key] = data[key];
+                }
             }
         }
 
@@ -52,6 +48,8 @@ module.exports = class RelatorioController {
 
         try {
             const novoRelatorioRecebedor = await relatorioRecebedor.save()
+
+            console.log(novoRelatorioRecebedor);
             const atualizacaoStatus = await Pedido.update(
                 { status_aprovacao: 'Concluído' },
                 { where: { id_pedido: data.idPedido }, returning: true }
@@ -303,35 +301,35 @@ module.exports = class RelatorioController {
     }
 
     static async alterarStatusRecebedor(req, res) {
-    const oId_relatorio_recebedor = req.params.id
+        const oId_relatorio_recebedor = req.params.id
 
-    console.log(oId_relatorio_recebedor)
+        console.log(oId_relatorio_recebedor)
 
-    const recebedor = await RelatorioRecebedor.findByPk(oId_relatorio_recebedor)
+        const recebedor = await RelatorioRecebedor.findByPk(oId_relatorio_recebedor)
 
 
-    try {
-        if (recebedor.status_recebedor == true) {
-            await RelatorioRecebedor.update({
-                status_recebedor: false
-            }, {
-                where: {
-                    id_relatorio_recebedor: oId_relatorio_recebedor
-                }
-            })
-        } else {
-            await RelatorioRecebedor.update({
-                status_recebedor: true
-            }, {
-                where: {
-                    id_relatorio_recebedor: oId_relatorio_recebedor
-                }
-            })
+        try {
+            if (recebedor.status_recebedor == true) {
+                await RelatorioRecebedor.update({
+                    status_recebedor: false
+                }, {
+                    where: {
+                        id_relatorio_recebedor: oId_relatorio_recebedor
+                    }
+                })
+            } else {
+                await RelatorioRecebedor.update({
+                    status_recebedor: true
+                }, {
+                    where: {
+                        id_relatorio_recebedor: oId_relatorio_recebedor
+                    }
+                })
+            }
+            return res.json({ message: "Status do relatório do recebedor alterado com sucesso!", status: 201 }).status(201)
+        } catch (error) {
+            return res.json(error).status(500)
         }
-        return res.json({ message: "Status do relatório do recebedor alterado com sucesso!", status: 201 }).status(201)
-    } catch (error) {
-        return res.json(error).status(500)
     }
-}
 
 }

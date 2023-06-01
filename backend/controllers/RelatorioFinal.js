@@ -62,9 +62,9 @@ module.exports = class RelatorioFinalController {
             const stream = fs.createWriteStream(nomeArquivo);
             doc.pipe(stream);
 
-            doc.rect(0, 0, doc.page.width, doc.page.height).fill('#F7F1E5');
+            doc.rect(0, 0, doc.page.width, doc.page.height).fill('#FFFFFF');
 
-            const logoPath = 'public/sidebarOctagro.png';
+            const logoPath = 'public/OCTAGRO_stroke.png';
             const logoBuffer = fs.readFileSync(logoPath);
 
             doc.image(logoBuffer, { fit: [200, 200], align: 'center', valign: 'top' }).strokeColor('black');

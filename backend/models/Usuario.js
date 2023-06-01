@@ -154,7 +154,7 @@ contar()
         cidade: "Sao Jose dos Campos",
         estado: "SP",
         foto: "gabriel.png",
-        status_usuario: true
+        status_usuario: true,
       })
 
       Usuario.create({

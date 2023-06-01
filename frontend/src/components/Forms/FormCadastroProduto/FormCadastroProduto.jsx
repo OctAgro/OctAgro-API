@@ -108,6 +108,7 @@ export const FormCadastroProduto = () => {
   // HANDLES DO MODAL DE CADASTRO
   const handleCloseModalProdutoCadastrado = () => {
     setOpenModalProdutoCadastrado(false)
+    window.location.reload();
   }
 
   const handleOpenModalProdutoCadastrado = (e) => {
@@ -139,7 +140,7 @@ export const FormCadastroProduto = () => {
         inserirValor,
         valorMax,
         funcaoUsuario,
-        produtoId
+        /* produtoId */
       }
 
       console.log(data)
@@ -347,7 +348,8 @@ export const FormCadastroProduto = () => {
                 </select>
               </label>
             </div>
-            <div className={styles.usuarioModal}>
+            {/* REMOVI PRODUTO DAQUI */}
+            {/* <div className={styles.usuarioModal}>
               <label>
                 Produto:
                 <br />
@@ -364,7 +366,7 @@ export const FormCadastroProduto = () => {
                   ))}
                 </select>
               </label>
-            </div>
+            </div> */}
             <div className={styles.descricaoModal}>
               <label>
                 Descrição:
@@ -421,6 +423,7 @@ export const FormCadastroProduto = () => {
               type="button"
               value="CADASTRAR"
               onClick={handleSubmitCriterio}
+
             />
           </div>
         </Modal>

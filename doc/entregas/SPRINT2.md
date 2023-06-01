@@ -29,13 +29,17 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 
 <h2>BackLog <a id="backlog"></a></h2>
 
-| Sprint | US  | Tarefa                                                       | Descrição                                                   | Prioridade |
+| Sprint | US  | Requisitos                                                   | Descrição                                                   | Prioridade |
 |:------:|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|:-----------|
 |  02    | 02  | Controle de entrada de mercadoria. | Criar as telas de home do recebedor, entrada da mercadoria, inspeção da mercadoria , mercadorias cadastradas. Criar as funções de inserção, alteração e exclusão das mercadorias. | Alta
 |  02    | 03  | Geração de relatorios por usuário. | Criar as funções de geração dos relatorios por usuário (recebedor,analista e aprovador). | Alta
 |  02    | 04  | Controle de analise de mercadoria. | Criar as telas de home do analista, mercadorias para analise e a tela de  analise. Criar as funções de inserção da analise. | Alta
 |  02    | 05  | Controle de aprovação. | Criar as telas de home do aprovador, mercadorias para aprovação e a tela de  aprovação. Criar as funções de inserção da aprovação e entrada no estoque. | Alta
 |  02    | 01  | Login e Logout. | Criação da tela de login. Criação das funções de autenticação e logout do usuário. | Média
+
+<h2>User Stories <a id="us"></a></h2>
+
+
 
 <h2>Demonstração - Gifs<a id="demo"></a></h2>
 <div align="center">

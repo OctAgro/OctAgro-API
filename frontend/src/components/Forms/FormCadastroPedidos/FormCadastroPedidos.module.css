@@ -57,7 +57,7 @@ hr {
   grid-column-start: 1;
   grid-column-end: 2;
 }
-#caminhao, #idForrnecedor{
+#caminhao, #idFornecedor{
   grid-column-start: 1;
   grid-column-end: 3;
 }

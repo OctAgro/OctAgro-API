@@ -8,7 +8,7 @@ import { Modal } from "../../Modal/Modal"
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons"
+import { faCircleCheck, faWarning } from "@fortawesome/free-solid-svg-icons"
 
 // IMPORTANDO ESTILOS
 import styles from "./FormFornecedorUpdate.module.css"
@@ -159,7 +159,7 @@ export const FormFornecedorUpdate = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div id={styles["container"]}>
-          <div id={styles["titulo"]}>CADASTRO FORNECEDOR</div>
+          <div id={styles["titulo"]}>ATUALIZAR FORNECEDOR</div>
           <div id={styles["ladoEsquerdo"]}>
             <div id={styles["subtitle"]}>
               Dados de Identificação
@@ -365,13 +365,13 @@ export const FormFornecedorUpdate = () => {
               type="button"
               className={styles.botaoConfirmarModal}
               onClick={handleSubmit}
-              value="CADASTRAR"
+              value="ATUALIZAR"
             />
           </div>
         </div>
       </form>
 
-      {errorMessage === "Fornecedor cadastrado com sucesso!" ? (
+      {errorMessage === "Fornecedor atualizado com sucesso!" ? (
         /* MODAL CADASTRO COM SUCESSO */
         <Modal isOpen={openModalFornecedorCadastrado} onClick={handleRedirect}>
           <div className={styles.conteudoModal}>
@@ -386,7 +386,7 @@ export const FormFornecedorUpdate = () => {
         /* MODAL CADASTRO COM InputMask FALTANDO */
         <Modal isOpen={openModalFornecedorCadastrado} onClick={handleCloseModalFornecedorCadastrado}>
           <div className={styles.conteudoModal}>
-            <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
+            <FontAwesomeIcon icon={faWarning} className={styles.iconeModal} />
             <p>{errorMessage}</p>
             <InputMask
               className={styles.botaoConfirmarModal}

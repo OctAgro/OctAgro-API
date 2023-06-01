@@ -163,7 +163,7 @@ module.exports = class PedidoController {
                     }
                 })
             }
-            return res.json({ message: "Status do pedido alterado com sucesso!", status: 201 }).status(201)
+            return res.json({ message: "Pedido excluído com sucesso!", status: 201 }).status(201)
         } catch (error) {
             return res.json(error).status(500)
         }

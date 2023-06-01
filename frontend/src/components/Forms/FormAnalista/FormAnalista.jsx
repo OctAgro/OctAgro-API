@@ -294,8 +294,8 @@ export const FormAnalista = ({ hasButton }) => {
                     className={styles.textoRevisao}
                     name="textoRevisaoFinalAprovador"
                     id="textoRevisaoFinalAprovador"
-                    rows="3"
-                    cols="20"
+                    rows="4"
+                    cols="600"
                     value={revisao}
                     onChange={(event) => setRevisao(event.target.value)}
                   />

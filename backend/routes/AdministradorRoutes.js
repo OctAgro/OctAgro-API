@@ -76,16 +76,16 @@ router.post('/aprovador/relatorios/apagar/:id', AprovadorController.apagarRelato
 
 // Rotas de Criterios
 
-router.post('/criterio/criar',CriteriosController.criarCriterio) // Criar um criterio
-router.get('/criterio/listar',CriteriosController.listarCriterios) // Listar Criterios
-router.get('/criterio/listarById/:id',CriteriosController.listarCriteriosById) // Listar Criterios pela ID
+router.post('/criterio/criar', CriteriosController.criarCriterio) // Criar um criterio
+router.get('/criterio/listar', CriteriosController.listarCriterios) // Listar Criterios
+router.get('/criterio/listarById/:id', CriteriosController.listarCriteriosById) // Listar Criterios pela ID
 
 //Rotas de Relatórios Finais
 router.get('/relatorio/gerar/:id', RelatorioFinalController.gerarRelatorioFinal)
 
 //Rotas dos Graficos
 
-//router.get('/grafico/produto',chartData.graficoProduto) // gerar grafico do produto
+router.get('/grafico/produto',chartData.graficoProduto)
 
 
 

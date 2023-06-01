@@ -135,6 +135,7 @@
 .mercadoria {
   cursor: default;
   text-align: center;
+  margin-top: 2rem;
   padding: 0.5%;
   font-family: "Gotham Black";
   font-size: 1rem;

@@ -6,6 +6,7 @@ const Fornecedor = require("../models/Fornecedor");
 const Pedido = require("../models/Pedido");
 const { createCanvas, registerFont } = require("canvas");
 const { Chart, registerables } = require("chart.js");
+const Usuario = require('../models/Usuario');
 Chart.register(...registerables);
 
 class Graficos {
@@ -23,7 +24,7 @@ class Graficos {
       const canvas = createCanvas(800, 600);
       const ctx = canvas.getContext("2d");
 
-      const chartType = req && req.query && req.query.type ? req.query.type : "bar";
+      const chartType = req && req.query && req.query.type ? req.query.type : "pie";
       const chartOptions = {
         scales: {
           x: {
@@ -61,15 +62,13 @@ class Graficos {
       };
 
       new Chart(ctx, {
-        type: chartType || "bar",
+        type: chartType || "pie",
         data: {
           labels,
           datasets: [
             {
               label: "Quantidade de Produto",
               data,
-              backgroundColor: "rgba(255, 99, 132, 0.2)",
-              borderColor: "rgba(255, 99, 132, 1)",
               borderWidth: 1,
             },
           ],
@@ -87,21 +86,29 @@ class Graficos {
     }
   }
 
-  static async graficoFornecedor(req, res) {
+  static async graficoUsuario(req, res) {
     try {
       await db.sync();
-
-      const fornecedores = await Fornecedor.findAll({
-        attributes: ["nome_fornecedor", "numero"],
+  
+      const funcoes = await Usuario.findAll({
+        attributes: ["funcao"],
+        group: ["funcao"],
       });
-
-      const labels = fornecedores.map((fornecedor) => fornecedor.nome_fornecedor);
-      const data = [300,300];
-
+  
+      const labels = funcoes.map((funcao) => funcao.funcao);
+      const data = await Promise.all(
+        funcoes.map(async (funcao) => {
+          const count = await Usuario.count({
+            where: { funcao: funcao.funcao },
+          });
+          return count;
+        })
+      );
+  
       const canvas = createCanvas(800, 600); // Define as dimensões do canvas
       const ctx = canvas.getContext("2d");
-
-      const chartType = req && req.query && req.query.type ? req.query.type : "pie"
+  
+      const chartType = req && req.query && req.query.type ? req.query.type : "pie";
       // Renderizar o gráfico em um canvas
       new Chart(ctx, {
         type: chartType || "pie",
@@ -109,17 +116,17 @@ class Graficos {
           labels,
           datasets: [
             {
-              label: "Quantidade de Fornecedores",
+              label: "Quantidade de Usuários",
               data,
               borderWidth: 1,
             },
           ],
         },
       });
-
+  
       // Obter a representação em buffer da imagem do canvas
       const imageBuffer = canvas.toBuffer();
-
+  
       res.contentType("image/png");
       res.send(imageBuffer);
     } catch (error) {
@@ -127,53 +134,42 @@ class Graficos {
       return null;
     }
   }
-
+  
   static async graficoPedido(req, res) {
     try {
       await db.sync();
   
       const pedidos = await Pedido.findAll({
-        raw: true,
-        attributes: ['id_pedido'],
+        attributes: [
+          [Sequelize.fn('COUNT', Sequelize.col('pedido.id_pedido')), 'quantidadePedidos'],
+        ],
         include: [
           {
             model: Produto,
             required: true,
             attributes: ['nome_produto'],
           },
-          {
-            model: Fornecedor,
-            required: true,
-            attributes: ['nome_fornecedor'],
-          },
         ],
-        order: [['id_produto', 'ASC']]
+        group: ['produto.nome_produto'],
+        raw: true,
       });
-
-      console.log(pedidos)
   
-      const labelsProduto = pedidos.map((pedido) => pedido['produto.nome_produto']);
-      const labelsFornecedor = pedidos.map((pedido) => pedido['fornecedor.nome_fornecedor']);
-      const numeroPedidos = pedidos.reduce((count) => count + 1, 0);
+      const labels = pedidos.map((pedido) => pedido['produto.nome_produto']);
+      const quantidadePedidos = pedidos.map((pedido) => pedido.quantidadePedidos);
   
       const canvas = createCanvas(800, 600);
       const ctx = canvas.getContext("2d");
-
-      console.log(labelsProduto, labelsFornecedor)
-
-      console.log(numeroPedidos)
-
   
-      const chartType = req && req.query && req.query.type ? req.query.type : "pie";
+      const chartType = req && req.query && req.query.type ? req.query.type : "bar";
   
       new Chart(ctx, {
-        type: chartType || "pie",
+        type: chartType || "bar",
         data: {
-          labels: [labelsProduto, labelsFornecedor],
+          labels,
           datasets: [
             {
               label: "Quantidade de Pedidos",
-              data: [numeroPedidos],
+              data: quantidadePedidos,
               borderWidth: 1,
             },
           ],

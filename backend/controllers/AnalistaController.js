@@ -4,6 +4,7 @@ const Usuario = require('../models/Usuario')
 const Produto = require('../models/Produto')
 const Fornecedor = require('../models/Fornecedor')
 const RelatorioRecebedor = require('../models/RelatorioRecebedor')
+const CriteriosAvaliacao = require('../models/CriteriosAvaliacao')
 
 
 module.exports = class RelatorioController {
@@ -71,6 +72,20 @@ module.exports = class RelatorioController {
                 { status_aprovacao: 'Concluído' },
                 { where: { id_pedido: data.idPedido }, returning: true }
             );
+
+           for (const key in data) {
+                if (key.startsWith('checkbox') && data[key] === true) {
+                    const checkboxName = key.replace('checkbox', '').replace('Aprovado', '')
+                    console.log(checkboxName)
+                    relatorioAnalista[checkboxName] = true;
+
+                    const criteriosAtualizados = await CriteriosAvaliacao.update(
+                        { id_pedido: data.idPedido, status_checkbox: relatorioAnalista[checkboxName] },
+                        { where: { descricao_regra: checkboxName } }
+                    );
+                }
+            } 
+
             res.status(201).json({ message: 'Relatório salvo com sucesso!' })
             console.log(data)
         } catch (erro) {
@@ -151,6 +166,20 @@ module.exports = class RelatorioController {
                 }
             })
 
+            for (const criterio in data.criteriosAdicionais) {
+                const valorCheckbox = data.criteriosAdicionais[criterio];
+                console.log(`Atualizando CriteriosAvaliacao: id_pedido=${data.idPedido}, descricao_regra=${criterio}, status_checkbox=${valorCheckbox}`);
+                await CriteriosAvaliacao.update(
+                    { status_checkbox: valorCheckbox },
+                    {
+                        where: {
+                            id_pedido: data.idPedido,
+                            descricao_regra: criterio
+                        }
+                    }
+                );
+            }
+
             console.log(relatorioAtualizado)
 
             return res.status(201).json({ message: 'Relatório atualizado com sucesso!' })
@@ -208,7 +237,23 @@ module.exports = class RelatorioController {
                 return res.status(404).json({ message: 'Pedido não encontrado' });
             }
 
-            res.status(200).json(pedidos)
+            const criterios = await CriteriosAvaliacao.findAll({
+                where: { id_pedido: id },
+                attributes: ['descricao_regra', 'status_checkbox']
+            });
+
+            const paresCriterios = criterios.reduce((pares, criterio) => {
+                const { descricao_regra, status_checkbox } = criterio;
+                pares[descricao_regra] = status_checkbox;
+                return pares;
+            }, {});
+
+            const response = {
+                ...pedidos.toJSON(),
+                criteriosAdicionais: paresCriterios
+            };
+
+            res.status(200).json(response);
 
         } catch (erro) {
             res.status(500).json({ message: erro })

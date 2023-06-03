@@ -3,62 +3,71 @@ const Pedido = require('../models/Pedido')
 const Usuario = require('../models/Usuario')
 const Produto = require('../models/Produto')
 const Fornecedor = require('../models/Fornecedor')
-const Sequelize = require("sequelize")
-const db = require('../db/conexao')
+const CriteriosAvaliacao = require('../models/CriteriosAvaliacao')
 
 module.exports = class RelatorioController {
     static async criarRelatorio(req, res) {
-        const data = req.body
+        const data = req.body;
 
-        console.log(data)
+        console.log(data);
+
+        if (data.checkboxColoracaoAprovado && data.checkboxColoracaoReprovado) {
+            return res.status(500).json({ message: 'Escolha apenas uma das opções!' });
+        } else if (!data.checkboxColoracaoAprovado && !data.checkboxColoracaoReprovado) {
+            return res.status(500).json({ message: 'Escolha apenas uma das opções!' });
+        }
+
+        if (data.checkboxOdorAprovado && data.checkboxOdorReprovado) {
+            return res.status(500).json({ message: 'Escolha apenas uma das opções!' });
+        } else if (!data.checkboxOdorAprovado && !data.checkboxOdorReprovado) {
+            return res.status(500).json({ message: 'Escolha apenas uma das opções!' });
+        }
+
+        if (data.checkboxAusenciaAnimaisAprovado && data.checkboxAusenciaAnimaisReprovado) {
+            return res.status(500).json({ message: 'Escolha apenas uma das opções!' });
+        } else if (!data.checkboxAusenciaAnimaisAprovado && !data.checkboxAusenciaAnimaisReprovado) {
+            return res.status(500).json({ message: 'Escolha apenas uma das opções!' });
+        }
+
+        if (data.checkboxAusenciaMofoAprovado && data.checkboxAusenciaMofoReprovado) {
+            return res.status(500).json({ message: 'Escolha apenas uma das opções!' });
+        } else if (!data.checkboxAusenciaMofoAprovado && !data.checkboxAusenciaMofoReprovado) {
+            return res.status(500).json({ message: 'Escolha apenas uma das opções!' });
+        }
 
         const relatorioRecebedor = new RelatorioRecebedor({
             coloracao: data.checkboxColoracaoAprovado,
             odor: data.checkboxOdorAprovado,
-            ausencia_animais: data.checkboxAusencia_AnimaisAprovado,
-            ausencia_mofo: data.checkboxAusencia_MofoAprovado,
+            ausencia_animais: data.checkboxAusenciaAnimaisAprovado,
+            ausencia_mofo: data.checkboxAusenciaMofoAprovado,
             id_pedido: data.idPedido,
-            id_usuario: data.idUsuario,
-        })
-
-        for (const key in data) {
-            console.log(key)
-            if (key != 'idPedido' && key != 'idUsuario'
-                && key != 'checkboxColoracaoAprovado' && key != 'checkboxOdorAprovado'
-                && key != 'checkboxAusencia_AnimaisAprovado' && key != 'checkboxAusencia_MofoAprovado') {
-
-                if (key.startsWith('checkbox') && data[key] === true) {
-                    const checkboxName = key.replace('checkbox', '').replace('Aprovado', '').toLowerCase();
-                    relatorioRecebedor[checkboxName] = true;
-                    try {
-                        await db.query(`ALTER TABLE relatoriorecebedor ADD COLUMN ${checkboxName} BOOLEAN;`);
-
-                        await db.query(`INSERT INTO relatoriorecebedor (${checkboxName})
-                        VALUES (${relatorioRecebedor[checkboxName]});`);
-
-                    } catch (erro) {
-                        console.log(erro);
-                        res.status(500).json(erro);
-                        return;
-                    }
-                }
-            }
-        }
-
-        console.log(relatorioRecebedor);
+            id_usuario: data.idUsuario
+        });
 
         try {
-            const novoRelatorioRecebedor = await relatorioRecebedor.save()
-
-            console.log(novoRelatorioRecebedor);
+            const novoRelatorioRecebedor = await relatorioRecebedor.save();
             const atualizacaoStatus = await Pedido.update(
                 { status_aprovacao: 'Concluído' },
                 { where: { id_pedido: data.idPedido }, returning: true }
             );
-            res.status(201).json({ mensagem: 'Relatório aprovado com sucesso!' },)
+
+            for (const key in data) {
+                if (key.startsWith('checkbox') && data[key] === true) {
+                    const checkboxName = key.replace('checkbox', '').replace('Aprovado', '')
+                    console.log(checkboxName)
+                    relatorioRecebedor[checkboxName] = true;
+
+                    const criteriosAtualizados = await CriteriosAvaliacao.update(
+                        { id_pedido: data.idPedido, status_checkbox: relatorioRecebedor[checkboxName] },
+                        { where: { descricao_regra: checkboxName } }
+                    );
+                }
+            }
+
+            res.status(201).json({ mensagem: 'Relatório aprovado com sucesso!' });
         } catch (erro) {
-            console.log(erro)
-            res.status(500).json(erro)
+            console.log(erro);
+            res.status(500).json(erro);
         }
     }
 
@@ -136,6 +145,20 @@ module.exports = class RelatorioController {
                     id_relatorio_recebedor: data.idPedido
                 }
             })
+
+            for (const criterio in data.criteriosAdicionais) {
+                const valorCheckbox = data.criteriosAdicionais[criterio];
+                console.log(`Atualizando CriteriosAvaliacao: id_pedido=${data.idPedido}, descricao_regra=${criterio}, status_checkbox=${valorCheckbox}`);
+                await CriteriosAvaliacao.update(
+                    { status_checkbox: valorCheckbox },
+                    {
+                        where: {
+                            id_pedido: data.idPedido,
+                            descricao_regra: criterio
+                        }
+                    }
+                );
+            }
 
             //encontrando os id de Produto e Fornecedor por meio do id de Pedido
             const pedido = await Pedido.findOne({
@@ -243,21 +266,49 @@ module.exports = class RelatorioController {
     }
 
     static async listarCriterios(req, res) {
-        const id = req.params.id
-        try {
-            const pedidos = await RelatorioRecebedor.findOne({
-                where: { id_relatorio_recebedor: id },
-                attributes: ['coloracao', 'odor', 'ausencia_animais', 'ausencia_mofo'],
-            })
+        const id = req.params.id;
 
-            if (!pedidos) {
+        await RelatorioRecebedor.sync();
+
+        try {
+            const relatorio = await RelatorioRecebedor.findOne({
+                where: { id_relatorio_recebedor: id },
+                attributes: {
+                    exclude: [
+                        'id_relatorio_recebedor',
+                        'status_aprovacao',
+                        'id_pedido',
+                        'id_usuario',
+                        'status_recebedor',
+                        'createdAt',
+                        'updatedAt'
+                    ]
+                }
+            });
+
+            if (!relatorio) {
                 return res.status(404).json({ message: 'Pedido não encontrado' });
             }
 
-            res.status(200).json(pedidos)
+            const criterios = await CriteriosAvaliacao.findAll({
+                where: { id_pedido: id },
+                attributes: ['descricao_regra', 'status_checkbox']
+            });
 
+            const paresCriterios = criterios.reduce((pares, criterio) => {
+                const { descricao_regra, status_checkbox } = criterio;
+                pares[descricao_regra] = status_checkbox;
+                return pares;
+            }, {});
+
+            const response = {
+                ...relatorio.toJSON(),
+                criteriosAdicionais: paresCriterios
+            };
+
+            res.status(200).json(response);
         } catch (erro) {
-            res.status(500).json({ message: erro })
+            res.status(500).json({ message: erro });
         }
     }
 

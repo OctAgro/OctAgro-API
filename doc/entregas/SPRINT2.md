@@ -39,7 +39,13 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 
 <h2>User Stories <a id="us"></a></h2>
 
-
+| US_Id | US | Usuário |
+|:-----:|:---|:--------|
+| 01    | Como usuário do sistema, desejo fazer o login e logout, para entrar e sair da minha conta. | Geral 
+| 02    | Como Recebedor/Analista, desejo registrar, editar ou excluir a entrada da mercadoria descrevendo suas principais características para que o processo de análise seja possível. | Recebedor
+| 03    | Como Recebedor,Analista e Aprovador, desejo a criação de um relatório baseado nas informações de comparação entre o Relatório de Compras, a Nota Fiscal e a Mercadoria, para que haja prosseguimento na aprovação da entrada do grão no estoque. | Recebedor/Analista/Aprovador
+| 04    | Como Analista, desejo comparar as características da mercadoria recebida com as informações da mercadoria descritas no Relatório de Compras e na Nota Fiscal para aprovação ou rejeição da entrada. | Analista
+| 05    | Como Aprovador, desejo validar a mercadoria que foi inspecionada para a entrada do estoque, mesmo ela estando rejeitada pelos critérios. | Aprovador
 
 <h2>Demonstração - Gifs<a id="demo"></a></h2>
 <div align="center">

@@ -84,9 +84,12 @@ router.get('/criterio/listarById/:id', CriteriosController.listarCriteriosById) 
 router.get('/relatorio/gerar/:id', RelatorioFinalController.gerarRelatorioFinal)
 
 //Rotas dos Graficos
-
 router.get('/grafico/produto',chartData.graficoProduto)
+router.get('/grafico/usuarios',chartData.graficoUsuario)
+router.get('/grafico/pedidos',chartData.graficoPedido)
 
+//Rotas dos Contadores do Sistema
+router.get('/contador', UsuarioControllers.contadoresSistema)
 
 
 module.exports = router

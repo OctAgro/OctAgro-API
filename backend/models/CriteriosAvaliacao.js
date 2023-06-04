@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db/conexao')
 
 const Produto = require('./Produto')
+const Pedido = require('./Pedido')
 
 const CriteriosAvaliacao = db.define('criterios_avaliacao', {
     id_criterio: {
@@ -31,12 +32,20 @@ const CriteriosAvaliacao = db.define('criterios_avaliacao', {
         type: Sequelize.STRING,
         allowNull: false
     },
+  
+    status_checkbox: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: 0
+    },
 
-    id_produto: Sequelize.INTEGER
+    id_produto: Sequelize.INTEGER,
+    id_pedido: Sequelize.INTEGER
 
 })
 
 CriteriosAvaliacao.belongsTo(Produto, { foreignKey: "id_produto"});
+CriteriosAvaliacao.belongsTo(Pedido, { foreignKey: "id_pedido"});
 
 
 module.exports = CriteriosAvaliacao

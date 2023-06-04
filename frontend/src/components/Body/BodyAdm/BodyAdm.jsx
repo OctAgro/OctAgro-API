@@ -9,8 +9,24 @@ import graficoCapacidade from "../../../assets/graficoCapacidade.png"
 import graficoEstocagem from "../../../assets/graficoEstocagem.png"
 import graficoProduto from "../../../assets/graficoProduto.png"
 
+import { buscarContadores } from "../../../hooks/buscarContadoresSistema"
+
 export const BodyAdm = () => {
   const [imageUrl, setImageUrl] = useState("")
+
+  //Pegando dados dos contadores
+  const [contadores, setContadores] = useState([])
+
+  useEffect(() => {
+    async function fetchContadores() {
+      const dadosContadores = await buscarContadores()
+      setContadores(dadosContadores)
+    }
+    fetchContadores()
+  }, [])
+
+  console.log("usuarios: ", contadores)
+
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -42,7 +58,7 @@ export const BodyAdm = () => {
             </div>
             <div className={styles.rightSide}>
               {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-              <h1 className={styles.title}>0</h1>
+              <h1 className={styles.title}>{contadores.totalUsuarios}</h1>
               <h3 className={styles.subtitle}>Usuários</h3>
             </div>
           </div>
@@ -54,7 +70,7 @@ export const BodyAdm = () => {
             </div>
             <div className={styles.rightSide}>
               {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-              <h1 className={styles.title}>0</h1>
+              <h1 className={styles.title}>{contadores.totalFornecedores}</h1>
               <h3 className={styles.subtitle}>Fornecedores</h3>
             </div>
           </div>
@@ -66,7 +82,7 @@ export const BodyAdm = () => {
             </div>
             <div className={styles.rightSide}>
               {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-              <h1 className={styles.title}>0</h1>
+              <h1 className={styles.title}>{contadores.totalProdutos}</h1>
               <h3 className={styles.subtitle}>Produtos</h3>
             </div>
           </div>
@@ -78,7 +94,7 @@ export const BodyAdm = () => {
             </div>
             <div className={styles.rightSide}>
               {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-              <h1 className={styles.title}>0</h1>
+              <h1 className={styles.title}>{contadores.totalRelatoriosRecebedor}</h1>
               <h3 className={styles.subtitle}>Recebidos</h3>
             </div>
           </div>
@@ -91,7 +107,7 @@ export const BodyAdm = () => {
               </div>
               <div className={styles.rightSide}>
                 {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-                <h1 className={styles.title}>0</h1>
+                <h1 className={styles.title}>{contadores.countRelatoriosAprovados}</h1>
                 <h3 className={styles.subtitle}>Aprovados</h3>
               </div>
             </div>
@@ -111,7 +127,7 @@ export const BodyAdm = () => {
             </div>
             <div className={styles.rightSide}>
               {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-              <h1 className={styles.title}>0</h1>
+              <h1 className={styles.title}>{contadores.totalRelatoriosAnalista}</h1>
               <h3 className={styles.subtitle}>Análise</h3>
             </div>
           </div>
@@ -123,7 +139,7 @@ export const BodyAdm = () => {
             </div>
             <div className={styles.rightSide}>
               {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
-              <h1 className={styles.title}>0</h1>
+              <h1 className={styles.title}>{contadores.countRelatoriosRecusados}</h1>
               <h3 className={styles.subtitle}>Reprovados</h3>
             </div>
           </div>

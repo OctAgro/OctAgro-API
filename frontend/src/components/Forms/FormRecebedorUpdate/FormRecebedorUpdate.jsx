@@ -67,6 +67,34 @@ export const FormRecebedorUpdate = () => {
 
   console.log("relatorios", relatorioRecebedor)
 
+  // Criando estrutura para as checkbox dos Criterios Adicionais
+  const [criteriosAdicionais, setCriteriosAdicionais] = useState({});
+
+  const [checkboxValues, setCheckboxValues] = useState({});
+
+  useEffect(() => {
+    if (relatorioRecebedor !== undefined && relatorioRecebedor.criteriosAdicionais) {
+      setCriteriosAdicionais(relatorioRecebedor.criteriosAdicionais);
+    }
+  }, [relatorioRecebedor]);
+
+  useEffect(() => {
+    if (criteriosAdicionais) {
+      const updatedCheckboxValues = {};
+      for (const criterio in criteriosAdicionais) {
+        updatedCheckboxValues[criterio] = criteriosAdicionais[criterio];
+      }
+      setCheckboxValues(updatedCheckboxValues);
+    }
+  }, [criteriosAdicionais]);
+
+  const handleCheckboxChange = (criterio) => {
+    setCheckboxValues((prevCheckboxValues) => ({
+      ...prevCheckboxValues,
+      [criterio]: !prevCheckboxValues[criterio]
+    }));
+  };
+
   //lidando com as checkboxs vindas do BD
 
   const [checkboxColoracaoAprovado, setCheckboxColoracaoAprovado] = useState(false);
@@ -124,7 +152,7 @@ export const FormRecebedorUpdate = () => {
       setCheckboxAusenciaAnimaisAprovado(false);
     }
   }, [relatorioRecebedor]);
-  
+
   //useEffect para carregar checkbox de mofo
   useEffect(() => {
     if (relatorioRecebedor === undefined) {
@@ -166,8 +194,8 @@ export const FormRecebedorUpdate = () => {
   const handleCheckboxARChange = () => {
     setCheckboxAusenciaAnimaisReprovado(!checkboxAusenciaAnimaisReprovado); //
   }
-  
-  
+
+
   const handleCheckboxMAChange = () => {
     setCheckboxAusenciaMofoAprovado(!checkboxAusenciaMofoAprovado);
   }
@@ -179,6 +207,7 @@ export const FormRecebedorUpdate = () => {
 
     const data = {
       idPedido: pedidos.id_pedido,
+      criteriosAdicionais: checkboxValues,
       checkboxColoracaoAprovado,
       checkboxColoracaoReprovado,
       checkboxOdorAprovado,
@@ -193,7 +222,7 @@ export const FormRecebedorUpdate = () => {
       numeroQuantidade,
       textoUnidadeMedida,
       textoProduto,
-    }  
+    }
 
     try {
       const resposta = await axios.post(`http://localhost:3000/recebedor/relatorios/editar`, data)
@@ -255,7 +284,7 @@ export const FormRecebedorUpdate = () => {
                         name="textoNomeFornecedor"
                         type="text"
                         value={textoNomeFornecedor}
-                        onChange={(event) => {setTextoNomeFornecedor(event.target.value)}}
+                        onChange={(event) => { setTextoNomeFornecedor(event.target.value) }}
                       ></input>
                     </div>
                   </label>
@@ -269,7 +298,7 @@ export const FormRecebedorUpdate = () => {
                         type="text"
                         name="textoNomeEntregador"
                         value={textoNomeEntregador}
-                        onChange={(event) => {setTextoNomeEntregador(event.target.value)}}
+                        onChange={(event) => { setTextoNomeEntregador(event.target.value) }}
                       />
                     </div>
                   </label>
@@ -282,7 +311,7 @@ export const FormRecebedorUpdate = () => {
                       type="text"
                       name="textoPlacaVeiculo"
                       value={textoPlacaVeiculo}
-                      onChange={(event) => {setTextoPlacaVeiculo(event.target.value)}}
+                      onChange={(event) => { setTextoPlacaVeiculo(event.target.value) }}
                     />
                   </label>
                 </div>
@@ -337,7 +366,7 @@ export const FormRecebedorUpdate = () => {
                       name="textoProduto"
                       type="text"
                       value={textoProduto}
-                      onChange={(event) => {setTextoProduto(event.target.value)}}
+                      onChange={(event) => { setTextoProduto(event.target.value) }}
                     ></input>
                   </div>
                   <div>
@@ -347,14 +376,14 @@ export const FormRecebedorUpdate = () => {
                       type="number"
                       name="numeroQuantidade"
                       value={numeroQuantidade}
-                      onChange={(event) => {setNumeroQuantidade(event.target.value)}}
+                      onChange={(event) => { setNumeroQuantidade(event.target.value) }}
                     />
                     <input
                       className={styles.selectMedida}
                       id="produtos"
                       name="textoUnidadeMedida"
                       value={textoUnidadeMedida}
-                      onChange={(event) => {setTextoUnidadeMedida(event.target.value)}}
+                      onChange={(event) => { setTextoUnidadeMedida(event.target.value) }}
                     ></input>
                   </div>
                 </fieldset>
@@ -441,6 +470,20 @@ export const FormRecebedorUpdate = () => {
                       onClick={handleCheckboxMRChange}
                     />
                   </div>
+
+                  <div>
+                    {Object.entries(criteriosAdicionais).map(([criterio, value]) => (
+
+                      <div key={criterio}>
+                        <div className={styles.inputBlock}>
+                          <input className={styles.btnsRN} value={criterio} readOnly />
+                          <input className={styles.aprovar} type="checkbox" checked={checkboxValues[criterio]} onChange={() => handleCheckboxChange(criterio)} />
+                          <input className={styles.recusar} type="checkbox" checked={!checkboxValues[criterio]} onChange={() => handleCheckboxRecusarChange(criterio)} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
                 </div>
               </fieldset>
               <div className={styles.buttons}>

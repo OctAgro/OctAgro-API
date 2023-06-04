@@ -154,7 +154,7 @@ contar()
         cidade: "Sao Jose dos Campos",
         estado: "SP",
         foto: "gabriel.png",
-        status_usuario: true
+        status_usuario: true,
       })
 
       Usuario.create({
@@ -207,7 +207,7 @@ contar()
       Usuario.create({
         data_admissao: "2023-12-12",
         senha: hashedSenha,
-        funcao: "Gerente",
+        funcao: "Administrador",
         nome: "Felipe",
         CPF: "12345",
         RG: "54321",

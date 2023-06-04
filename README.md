@@ -19,7 +19,8 @@
 <div align="center">
       <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT1.md">Sprint 1</a> | 
       <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT2.md">Sprint 2</a> |
-      <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT3.md">Sprint 3</a> 
+      <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT3.md">Sprint 3</a> |
+      <a href="https://github.com/OctAgro/OctAgro-API/blob/main/doc/entregas/SPRINT4.md">Sprint 4</a> 
 </div>
 
 ## Aprendizagem por Projetos Integrados <a id="API"></a>

@@ -48,7 +48,10 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 
 <h2>Demonstração - Gifs<a id="demo"></a></h2>
 <div align="center">
-
+      <h3>Controle de regras de recebimento | Controle de usuários | Geração de gráficos e Controle de relatorios</h3>
+    <img src="../gifs/sprint3/RegrasSp4.gif" alt='Regras de recebimento' width="300"/>
+    <img src="../gifs/sprint3/UsuarioSp4.gif" alt='Controle de usuários' width="300"/>
+    <img src="../gifs/sprint3/RelatorioSp4.gif" alt='Geração de gráficos e Controle de relatorios' width="300"/>
 </div>
 
 <h3> Sprint 3: [24/04/23-14/05image.png/23]</h3> 

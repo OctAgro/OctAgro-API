@@ -54,7 +54,7 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
     <img src="../gifs/sprint4/RelatorioSp4.gif" alt='Geração de gráficos e Controle de relatorios' width="300"/>
 </div>
 
-<h3> Sprint 3: [24/04/23-14/05image.png/23]</h3> 
+<h3> Sprint 4: [15/05/23-04/06/23]</h3> 
 
 <h2>BurnDown<a id="burndown"></a></h2>
 

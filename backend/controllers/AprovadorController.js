@@ -12,23 +12,25 @@ module.exports = class AprovadorController {
         //trazendo as informações preenchidas pelo usuario Aprovador através do "req.body"
         const data = req.body
 
+        console.log(data)
+
         //checando se as checkboxs/caixas de seleção estão corretamente preenchidas
 
-        if (data.checkboxDocumentacaoProdutoAprovado && data.checkboxDocumentacaoProdutoReprovado) {
+        if (data.checkboxDocumentacaoProdutoAprovado && data.checkboxDocumentacaoProdutoRecusado) {
             return res.json({message: "Não é possível marcar as duas opções ao mesmo tempo! A informação da Documentação deve ser aprovada ou reprovada!", status: 500}).status(500)
-        } else if (!data.checkboxDocumentacaoProdutoAprovado && !data.checkboxDocumentacaoProdutoAprovado){
+        } else if (!data.checkboxDocumentacaoProdutoAprovado && !data.checkboxDocumentacaoProdutoRecusado){
             return res.json({message: "Não é possível desmarcar as duas opções ao mesmo tempo! A informação da Documentação deve ser aprovada ou reprovada!", status: 500}).status(500)
         }
 
-        if (data.checkboxInfoRecebedorAprovado && data.checkboxInfoRecebedorReprovado) {
+        if (data.checkboxInfoRecebedorAprovado && data.checkboxInfoRecebedorRecusado) {
             return res.json({message: "Não é possível marcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!", status: 500}).status(500)
-        } else if (!data.checkboxInfoRecebedorAprovado && !data.checkboxInfoRecebedorReprovado){
+        } else if (!data.checkboxInfoRecebedorAprovado && !data.checkboxInfoRecebedorRecusado){
             return res.json({message: "Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Recebedor deve ser aprovada ou reprovada!", status: 500}).status(500)
         }
 
-        if (data.checkboxInfoAnalistaAprovado && data.checkboxInfoAnalistaReprovado) {
+        if (data.checkboxInfoAnalistaAprovado && data.checkboxInfoAnalistaRecusado) {
             return res.json({message: "Não é possível marcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!", status: 500}).status(500)
-        } else if (!data.checkboxInfoAnalistaAprovado && !data.checkboxInfoAnalistaReprovado){
+        } else if (!data.checkboxInfoAnalistaAprovado && !data.checkboxInfoAnalistaRecusado){
             return res.json({message: "Não é possível desmarcar as duas opções ao mesmo tempo! A informação do Analista deve ser aprovada ou reprovada!", status: 500}).status(500)
         }
 
@@ -50,6 +52,10 @@ module.exports = class AprovadorController {
         try {
             const novoRelatorioAprovador = await relatorioAprovador.save()
             const atualizacaoStatus = await RelatorioAprovador.update(
+                { status_aprovacao: 'Concluído' },
+                { where: { id_pedido: data.idPedido}, returning: true }
+            );
+            const atualizacaoStatusAnalista = await RelatorioAnalista.update(
                 { status_aprovacao: 'Concluído' },
                 { where: { id_pedido: data.idPedido}, returning: true }
             );

@@ -1,3 +1,9 @@
+const Fornecedor = require('../models/Fornecedor')
+const Pedido = require('../models/Pedido')
+const Produto = require('../models/Produto')
+const RelatorioAprovador = require('../models/RelatorioAprovador')
+const RelatorioRecebedor = require('../models/RelatorioRecebedor')
+const RelatorioAnalista = require('../models/RelatorioAnalista')
 const Usuario = require('../models/Usuario')
 
 const bcrypt = require('bcryptjs')
@@ -205,10 +211,93 @@ module.exports = class UsuarioControllers {
         try {
             const usuario = await Usuario.findAll({
                 where: { status_usuario: 1 },
-              })
+            })
             return res.json(usuario).status(201)
         } catch (error) {
             return res.json(error).status(500)
+        }
+    }
+
+    static async contadoresSistema(req, res) {
+        try {
+
+            //contadores de Usuarios
+            const usuarios = await Usuario.findAll({
+                where: { status_usuario: 1 },
+            });
+            const totalUsuarios = usuarios.length;
+            const countRecebedores = usuarios.filter((usuario) => usuario.funcao === 'Recebedor').length;
+            const countAnalistas = usuarios.filter((usuario) => usuario.funcao === 'Analista').length;
+            const countAprovadores = usuarios.filter((usuario) => usuario.funcao === 'Aprovador').length;
+
+            //contadores de Fornecedores
+            const fornecedores = await Fornecedor.findAll({
+                where: { status_fornecedor: 1 },
+            });
+            const totalFornecedores = fornecedores.length;
+
+            //contadores de Produtos
+            const produtos = await Produto.findAll({
+                where: { status_produto: 1 },
+            });
+            const totalProdutos = produtos.length;
+
+            //contadores de Pedidos
+            const pedidos = await Pedido.findAll({
+                where: { status_pedido_situacao: 1 },
+            });
+            const totalPedidos = pedidos.length;
+            const countPedidoPendente = pedidos.filter((pedido) => pedido.status_aprovacao === 'Pendente').length;
+            const countPedidoRecebido = pedidos.filter((pedido) => pedido.status_aprovacao === 'Concluído').length;
+
+            //contadores de Relatorios Aprovador (TOTAIS)
+            const relatorioAprovador = await RelatorioAprovador.findAll({
+                where: {status_relatorio_aprovador: 1}
+            })
+            const totalRelatorios = relatorioAprovador.length;
+            const countRelatoriosRecusados = relatorioAprovador.filter((relatorio) => relatorio.status_final_aprovacao === false).length;
+            const countRelatoriosAprovados = relatorioAprovador.filter((relatorio) => relatorio.status_final_aprovacao === true).length;
+
+            //contadores de Relatorios do Recebedor
+            const relatorioRecebedor = await RelatorioRecebedor.findAll({
+                where: {status_recebedor: 1}
+            })
+            const totalRelatoriosRecebedor = relatorioRecebedor.length;
+            const countRecebedorPendente = relatorioRecebedor.filter((relatorio) => relatorio.status_aprovacao === 'Pendente').length;
+            const countRecebedorRecebido = relatorioRecebedor.filter((relatorio) => relatorio.status_aprovacao === 'Concluído').length;
+
+            //contadores de Relatorios do Analista
+            const relatorioAnalista = await RelatorioAnalista.findAll({
+                where: {status_relatorio_analista: 1}
+            })
+            const totalRelatoriosAnalista = relatorioAnalista.length;
+            const countAnalistaPendente = relatorioAnalista.filter((relatorio) => relatorio.status_aprovacao === 'Pendente').length;
+            const countAnalistaRecebido = relatorioAnalista.filter((relatorio) => relatorio.status_aprovacao === 'Concluído').length;
+
+            const response = {
+                totalUsuarios,
+                countRecebedores,
+                countAnalistas,
+                countAprovadores,
+                totalFornecedores,
+                totalProdutos,
+                totalPedidos,
+                totalRelatorios,
+                countRelatoriosRecusados,
+                countRelatoriosAprovados,
+                totalRelatoriosRecebedor,
+                totalRelatoriosAnalista,
+                countPedidoPendente,
+                countPedidoRecebido,
+                countRecebedorPendente,
+                countRecebedorRecebido,
+                countAnalistaPendente,
+                countAnalistaRecebido
+            };
+
+            return res.json(response).status(201);
+        } catch (error) {
+            return res.json(error).status(500);
         }
     }
 

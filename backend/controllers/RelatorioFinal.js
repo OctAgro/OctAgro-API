@@ -57,6 +57,12 @@ module.exports = class RelatorioFinalController {
                 ],
             });
 
+            const criteriosAdicionais = await CriteriosAvaliacao.findAll({
+                where: { id_pedido }
+            });
+
+            console.log(criteriosAdicionais);
+
             const doc = new PDFDocument();
             const nomeArquivo = `Relatorio_Final_${id_pedido}.pdf`;
             const stream = fs.createWriteStream(nomeArquivo);
@@ -77,36 +83,64 @@ module.exports = class RelatorioFinalController {
             doc.text(`Nome: ${relatorioRecebedor.usuario.nome}`);
             doc.text(`Status de Aprovação: ${relatorioRecebedor.status_aprovacao}`);
             doc.text(`Critérios de Aceitação:`);
-            doc.text(`- Coloração: ${relatorioRecebedor.coloracao ? 'Aprovado' : 'Rejeitado'}`);
-            doc.text(`- Odor: ${relatorioRecebedor ? 'Aprovado' : 'Rejeitado'}`);
-            doc.text(`- Ausência de Animais: ${relatorioRecebedor.ausencia_animais ? 'Aprovado' : 'Rejeitado'}`);
-            doc.text(`- Ausência de Mofo: ${relatorioRecebedor.ausencia_mofo ? 'Aprovado' : 'Rejeitado'}`);
+            doc.text('- Coloração: ', { continued: true });
+            doc.fillColor(relatorioRecebedor.coloracao ? 'green' : 'red').text(relatorioRecebedor.coloracao ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Odor: `, { continued: true });
+            doc.fillColor(relatorioRecebedor.odor ? 'green' : 'red').text(relatorioRecebedor.odor ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Ausência de Animais: `, { continued: true });
+            doc.fillColor(relatorioRecebedor.ausencia_animais ? 'green' : 'red').text(relatorioRecebedor.ausencia_animais ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Ausência de Mofo: `, { continued: true });
+            doc.fillColor(relatorioRecebedor.ausencia_mofo ? 'green' : 'red').text(relatorioRecebedor.ausencia_mofo ? 'Aprovado' : 'Rejeitado');
+            criteriosAdicionais.forEach((criterio) => {
+                if (criterio.funcao === 'Recebedor') {
+                    doc.fillColor('black').text(`- ${criterio.descricao_regra}: `, { continued: true });
+                    doc.fillColor(criterio.status_checkbox ? 'green' : 'red').text(criterio.status_checkbox ? 'Aprovado' : 'Rejeitado');
+                }
+            });
 
             doc.moveDown();
 
-            doc.fontSize(14).text('Analista', { underline: true });
+            doc.fillColor('black').fontSize(14).text('Analista', { underline: true });
             doc.text(`Nome: ${relatorioAnalista.usuario.nome}`);
             doc.text(`Status de Aprovação: ${relatorioAnalista.status_aprovacao}`);
             doc.text(`Critérios de Aceitação:`);
-            doc.text(`- Qualidade do Grão: ${relatorioAnalista.qualidade_grao ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Formato do Grão: ${relatorioAnalista.formato_grao ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Nível de Agrotóxicos: ${relatorioAnalista.nivel_agrotoxicos ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Limpeza dos Grãos: ${relatorioAnalista.limpeza_graos ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Status do Documento: ${relatorioAnalista.doc_status ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Status do Recebedor: ${relatorioAnalista.info_recebedor_status ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Comentário do Analista: ${relatorioAnalista.analista_comentario}`);
+            doc.fillColor('black').text(`- Qualidade do Grão: `, { continued: true });
+            doc.fillColor(relatorioAnalista.qualidade_grao ? 'green' : 'red').text(relatorioAnalista.qualidade_grao ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Formato do Grão: `, { continued: true });
+            doc.fillColor(relatorioAnalista.formato_grao ? 'green' : 'red').text(relatorioAnalista.formato_grao ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Nível de Agrotóxicos: `, { continued: true });
+            doc.fillColor(relatorioAnalista.nivel_agrotoxicos ? 'green' : 'red').text(relatorioAnalista.nivel_agrotoxicos ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Limpeza dos Grãos: `, { continued: true });
+            doc.fillColor(relatorioAnalista.limpeza_graos ? 'green' : 'red').text(relatorioAnalista.limpeza_graos ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Status do Documento: `, { continued: true });
+            doc.fillColor(relatorioAnalista.doc_status ? 'green' : 'red').text(relatorioAnalista.doc_status ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Status do Recebedor: `, { continued: true });
+            doc.fillColor(relatorioAnalista.info_recebedor_status ? 'green' : 'red').text(relatorioAnalista.info_recebedor_status ? 'Aprovado' : 'Rejeitado');
+
+            criteriosAdicionais.forEach((criterio) => {
+                if (criterio.funcao === 'Analista') {
+                    doc.fillColor('black').text(`- ${criterio.descricao_regra}: `, { continued: true });
+                    doc.fillColor(criterio.status_checkbox ? 'green' : 'red').text(criterio.status_checkbox ? 'Aprovado' : 'Rejeitado');
+                }
+            });
+
+            doc.fillColor('black').text(`- Comentário do Analista: "${relatorioAnalista.analista_comentario}"`);
 
             doc.moveDown();
 
-            doc.fontSize(14).text('Aprovador', { underline: true });
+            doc.fillColor('black').fontSize(14).text('Aprovador', { underline: true });
             doc.text(`Nome: ${relatorioAprovador.usuario.nome}`);
             doc.text(`Status de Aprovação: ${relatorioAprovador.status_aprovacao}`);
             doc.text(`Critérios de Aceitação:`);
-            doc.text(`- Status do Documento: ${relatorioAprovador.doc_status ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Status do Recebedor: ${relatorioAprovador.info_recebedor_status ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Status do Analista: ${relatorioAprovador.info_analista_status ? 'Verdadeiro' : 'Falso'}`);
-            doc.text(`- Revisão do Aprovador: ${relatorioAprovador.revisao_aprovador}`);
-            doc.text(`- Status Final de Aprovação: ${relatorioAprovador.status_final_aprovacao}`);
+            doc.fillColor('black').text(`- Status do Documento: `, { continued: true });
+            doc.fillColor(relatorioAprovador.doc_status ? 'green' : 'red').text(relatorioAprovador.doc_status ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Status do Recebedor: `, { continued: true });
+            doc.fillColor(relatorioAprovador.info_recebedor_status ? 'green' : 'red').text(relatorioAprovador.info_recebedor_status ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Status do Analista: `, { continued: true });
+            doc.fillColor(relatorioAprovador.info_analista_status ? 'green' : 'red').text(relatorioAprovador.info_analista_status ? 'Aprovado' : 'Rejeitado');
+            doc.fillColor('black').text(`- Revisão do Aprovador: "${relatorioAprovador.revisao_aprovador}"`);
+            doc.fillColor('black').text(`- Status Final de Aprovação: `, { continued: true });
+            doc.fillColor(relatorioAprovador.status_final_aprovacao ? 'green' : 'red').text(relatorioAprovador.status_final_aprovacao ? 'Aprovado' : 'Rejeitado');
 
             const buffers = [];
             doc.on('data', (buffer) => buffers.push(buffer));

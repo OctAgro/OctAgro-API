@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "./HeaderFornecedores.module.css"
 
 import { Link } from "react-router-dom"
@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBuildingWheat, faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 
 import { UsuariosCadastradosContext } from "../../../../context/UsuariosCadastradosContext"
+import { buscarContadores } from "../../../../hooks/buscarContadoresSistema"
 
 export const HeaderFornecedores = (props) => {
   const arrow = props.arrow
@@ -15,6 +16,17 @@ export const HeaderFornecedores = (props) => {
   const dadosTodosUsuarios = useContext(UsuariosCadastradosContext)
 
   console.log(dadosTodosUsuarios)
+
+  //Pegando dados dos contadores
+  const [contadores, setContadores] = useState([])
+
+  useEffect(() => {
+    async function fetchContadores() {
+      const dadosContadores = await buscarContadores()
+      setContadores(dadosContadores)
+    }
+    fetchContadores()
+  }, [])
 
   return (
     <div className={styles.clipboards}>
@@ -25,7 +37,7 @@ export const HeaderFornecedores = (props) => {
         <div className={styles.rightSide}>
           {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
 
-          <h1 className={styles.title}>0</h1>
+          <h1 className={styles.title}>{contadores.totalFornecedores}</h1>
           <h3 className={styles.subtitle}>
             Fornecedores
           </h3>
@@ -39,7 +51,7 @@ export const HeaderFornecedores = (props) => {
         <div className={styles.rightSide}>
           {/*             <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
  */}
-          <h1 className={styles.title}>0</h1>
+          <h1 className={styles.title}>{contadores.totalPedidos}</h1>
           <h3 className={styles.subtitle}>
             Pedidos
           </h3>

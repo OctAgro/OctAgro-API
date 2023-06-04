@@ -22,15 +22,15 @@ export const FormAnalistaUpdate = ({ hasButton }) => {
   //Para encontrar pedidos por ID
 
   const { usuario } = useContext(UserContext)
-
   const idUsuario = usuario ? usuario.id_usuario : null
 
   const { id } = useParams()
   const pedidoId = parseInt(id)
 
-
-
   const [pedidos, setPedidos] = useState([])
+
+  const [relatorioAnalista, setRelatorioAnalista] = useState([])
+
   useEffect(() => {
     async function fetchPedidos() {
       const dadosPedidos = await encontrarPedidosById(pedidoId)
@@ -49,9 +49,35 @@ export const FormAnalistaUpdate = ({ hasButton }) => {
 
   const [revisao, setRevisao] = useState("")
 
-  const [relatorioAnalista, setRelatorioAnalista] = useState([])
-
   console.log("esse: ", relatorioAnalista)
+
+  // Criando estrutura para as checkbox dos Criterios Adicionais
+  const [criteriosAdicionais, setCriteriosAdicionais] = useState({});
+
+  const [checkboxValues, setCheckboxValues] = useState({});
+
+  useEffect(() => {
+    if (relatorioAnalista !== undefined && relatorioAnalista.criteriosAdicionais) {
+      setCriteriosAdicionais(relatorioAnalista.criteriosAdicionais);
+    }
+  }, [relatorioAnalista]);
+
+  useEffect(() => {
+    if (criteriosAdicionais) {
+      const updatedCheckboxValues = {};
+      for (const criterio in criteriosAdicionais) {
+        updatedCheckboxValues[criterio] = criteriosAdicionais[criterio];
+      }
+      setCheckboxValues(updatedCheckboxValues);
+    }
+  }, [criteriosAdicionais]);
+
+  const handleCheckboxChange = (criterio) => {
+    setCheckboxValues((prevCheckboxValues) => ({
+      ...prevCheckboxValues,
+      [criterio]: !prevCheckboxValues[criterio]
+    }));
+  };
 
   useEffect(() => {
     setRevisao(relatorioAnalista?.analista_comentario)
@@ -216,6 +242,7 @@ export const FormAnalistaUpdate = ({ hasButton }) => {
     const data = {
       comentarioAnalista: revisao,
       idPedido: pedidos.id_pedido,
+      criteriosAdicionais: checkboxValues,
       idUsuario: idUsuario,
       checkboxQualidadeGraoAprovado,
       checkboxQualidadeGraoReprovado,
@@ -481,6 +508,20 @@ export const FormAnalistaUpdate = ({ hasButton }) => {
                     onClick={handleCheckboxIARChange}
                   />
                 </div>
+
+                <div>
+                  {Object.entries(criteriosAdicionais).map(([criterio, value]) => (
+
+                    <div key={criterio}>
+                      <div className={styles.inputBlock}>
+                        <input className={styles.btnsRN} value={criterio} readOnly />
+                        <input className={styles.aprovar} type="checkbox" checked={checkboxValues[criterio]} onChange={() => handleCheckboxChange(criterio)} />
+                        <input className={styles.recusar} type="checkbox" checked={!checkboxValues[criterio]} onChange={() => handleCheckboxRecusarChange(criterio)} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
               </div>
             </div>
             <div className={styles.formDown}>
@@ -498,7 +539,7 @@ export const FormAnalistaUpdate = ({ hasButton }) => {
                   />
                   <div className={styles.buttons}>
                     <div className={styles.button}>
-                      <Button style={{ backgroundColor: "#FF8A00" }} value1="ATUALIZAR" type="submit" onClick={handleAtualizar}/>
+                      <Button style={{ backgroundColor: "#FF8A00" }} value1="ATUALIZAR" type="submit" onClick={handleAtualizar} />
                     </div>
                   </div>
                 </div>

@@ -287,14 +287,14 @@ export const FormRecebedor = ({ hasButton }) => {
                     <input
                       className={styles.aprovar}
                       type="checkbox"
-                      id="checkboxAusencia_AnimaisAprovado"
-                      {...register("checkboxAusencia_AnimaisAprovado")}
+                      id="checkboxAusenciaAnimaisAprovado"
+                      {...register("checkboxAusenciaAnimaisAprovado")}
                     />
                     <input
                       className={styles.recusar}
                       type="checkbox"
-                      id="checkboxAusencia_AnimaisReprovado"
-                      {...register("checkboxAusencia_AnimaisReprovado")}
+                      id="checkboxAusenciaAnimaisReprovado"
+                      {...register("checkboxAusenciaAnimaisReprovado")}
                     />
                   </div>
                   <div className={styles.inputBlock}>
@@ -302,14 +302,14 @@ export const FormRecebedor = ({ hasButton }) => {
                     <input
                       className={styles.aprovar}
                       type="checkbox"
-                      id="checkboxAusencia_MofoAprovado"
-                      {...register("checkboxAusencia_MofoAprovado")}
+                      id="checkboxAusenciaMofoAprovado"
+                      {...register("checkboxAusenciaMofoAprovado")}
                     />
                     <input
                       className={styles.recusar}
                       type="checkbox"
-                      id="checkboxAusencia_MofoReprovado"
-                      {...register("checkboxAusencia_MofoReprovado")}
+                      id="checkboxAusenciaMofoReprovado"
+                      {...register("checkboxAusenciaMofoReprovado")}
                     />
                   </div>
 

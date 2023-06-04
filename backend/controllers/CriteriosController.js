@@ -12,7 +12,7 @@ module.exports = class CriteriosController {
             inserir_valor: data.inserirValor,
             valor_max: data.valorMax,
             funcao: data.funcaoUsuario,
-            id_produto: data.produtoId
+            /* id_produto: data.produtoId */
         })
 
         try {

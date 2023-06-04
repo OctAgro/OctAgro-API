@@ -36,10 +36,10 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 
 | Sprint | Data | Status | Relatório
 |:------:|:----:|:------:|:------:|
-| Sprint 1 | 13/03/23 a 02/04/23 | :white_check_mark: Entregue | <a href="https://github.com/OctAgro/OctAgro-API/releases/tag/Sprint-2">Ver relatório</a> |
+| Sprint 1 | 13/03/23 a 02/04/23 | :white_check_mark: Entregue | <a href="https://github.com/OctAgro/OctAgro-API/releases/tag/Sprint-1">Ver relatório</a> |
 | Sprint 2 | 03/04/23 a 23/04/23 | :white_check_mark: Entregue | <a href="https://github.com/OctAgro/OctAgro-API/releases/tag/Sprint-2">Ver relatório</a> |
 | Sprint 3 | 24/04/23 a 14/05/23 | :white_check_mark: Entregue | <a href="https://github.com/OctAgro/OctAgro-API/releases/tag/Sprint-3">Ver relatório</a> |
-| Sprint 4 | 15/05/23 a 04/06/23 | :hourglass_flowing_sand: Em andamento |
+| Sprint 4 | 15/05/23 a 04/06/23 | :white_check_mark: Entregue | <a href="https://github.com/OctAgro/OctAgro-API/releases/tag/Sprint-4">Ver relatório</a> |
 
 <br>
 
@@ -67,7 +67,6 @@ O Backlog do Produto pode ser analisado abaixo:
 | **10** | Geração dos gráficos |
 
 <br>
-
 
 ## 💻 Tecnologias Utilizadas <a id="tecnologias"></a>
 A seguir, estão listadas as tecnologias utilizadas no projeto, abrangendo desde a codificação até a gestão e organização do mesmo:

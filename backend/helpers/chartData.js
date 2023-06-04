@@ -1,10 +1,9 @@
-const express = require('express');
 const Sequelize = require("sequelize");
 const db = require("../db/conexao");
 const Produto = require("../models/Produto");
 const Fornecedor = require("../models/Fornecedor");
 const Pedido = require("../models/Pedido");
-const { createCanvas, registerFont } = require("canvas");
+const { createCanvas } = require("canvas");
 const { Chart, registerables } = require("chart.js");
 const Usuario = require('../models/Usuario');
 Chart.register(...registerables);
@@ -21,35 +20,11 @@ class Graficos {
       const labels = produtos.map((produto) => produto.nome_produto);
       const data = produtos.map((produto) => produto.quantidade_produto);
 
-      const canvas = createCanvas(800, 600);
+      const canvas = createCanvas(800, 800);
       const ctx = canvas.getContext("2d");
 
       const chartType = req && req.query && req.query.type ? req.query.type : "pie";
       const chartOptions = {
-        scales: {
-          x: {
-            ticks: {
-              font: {
-                size: 32, // Defina o tamanho da fonte desejado para o eixo x
-              },
-            },
-          },
-          y: {
-            ticks: {
-              font: {
-                size: 32, // Defina o tamanho da fonte desejado para o eixo y
-              },
-              callback: function (value, index, values) {
-                // Retorna apenas o valor mínimo (0) e o valor máximo (1)
-                if (index === 0 || index === values.length - 1) {
-                  return value.toString();
-                } else {
-                  return "";
-                }
-              },
-            },
-          },
-        },
         plugins: {
           legend: {
             labels: {

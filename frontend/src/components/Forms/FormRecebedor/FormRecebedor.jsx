@@ -16,6 +16,7 @@ import axios from "axios"
 
 //chamando o hook de encontrar pedidos por ID
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
+import { encontrarCriteriosByPedidoId } from "../../../hooks/encontrarCriteriosById"
 
 export const FormRecebedor = ({ hasButton }) => {
   const { usuario } = useContext(UserContext)
@@ -25,6 +26,18 @@ export const FormRecebedor = ({ hasButton }) => {
   //Para encontrar pedidos por ID
   const { id } = useParams()
   const pedidoId = parseInt(id)
+
+  //puxar todos os criterios by id pedido
+  const [criteriosNovos, setCriteriosNovos] = useState([])
+  useEffect(() => {
+    async function fetchCriteriosNovos() {
+      const dadosCriterios = await encontrarCriteriosByPedidoId(pedidoId)
+      setCriteriosNovos(dadosCriterios)
+    }
+    fetchCriteriosNovos()
+  }, [])
+
+  console.log("criterios: ", criteriosNovos)
 
   const [pedidos, setPedidos] = useState([])
   useEffect(() => {
@@ -52,6 +65,7 @@ export const FormRecebedor = ({ hasButton }) => {
   const [textoProduto, setTextoProduto] = useState("")
 
   const [mensagemErro, setMensagemErro] = useState(null)
+  const [imagem, setImagem] = useState(null)
 
   const onSubmit = (data) => {
     //chamando a funcao de enviar dados
@@ -61,18 +75,31 @@ export const FormRecebedor = ({ hasButton }) => {
     handleAprovacao()
   } // enviando os dados pro banco de dados atraves do clique
 
+
+
   //conectando os dados do usuario para enviar ao banco de dados
   const enviarDados = async (data) => {
+
+    const formData = new FormData();
+    formData.append("imagem", imagem);
+    const nomeFoto = imagem.name
+
     const dados = {
       idPedido: pedidos.id_pedido,
       idUsuario: usuarioCarregado,
+      nomeFoto,
       ...data,
     }
 
+    Object.keys(data).forEach((key) => {
+      if (key.startsWith("checkbox")) {
+        dados[key] = data[key];
+      }
+    });
+
     try {
       const resposta = await axios.post("http://localhost:3000/recebedor/entradamercadoria", dados)
-      //esse console.log retorna respostas json do backend de erros de validacao
-      /*       console.log(resposta.data.message) */
+      const imagem = await axios.post("http://localhost:3000/recebedor/atualizarNF", formData)
       setMensagemErro(resposta.data.message)
     } catch (erro) {
       //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
@@ -136,7 +163,7 @@ export const FormRecebedor = ({ hasButton }) => {
                         className={styles.customSelect}
                         type="text"
                         name="textoNomeEntregador"
-                        value={pedidos?.fornecedor?.nome_motorista}
+                        value={pedidos?.nome_motorista}
                         onChange={(event) => setTextoNomeEntregador(event.target.value)}
                       />
                     </div>
@@ -149,12 +176,12 @@ export const FormRecebedor = ({ hasButton }) => {
                       className={styles.customSelect}
                       type="text"
                       name="textoPlacaVeiculo"
-                      value={pedidos?.fornecedor?.placa_veiculo}
+                      value={pedidos?.placa_veiculo}
                       onChange={(event) => setTextoPlacaVeiculo(event.target.value)}
                     />
                   </label>
                 </div>
-              
+
                 <div className={styles.idProduto}>
                   <div className={styles.divProduto}>
                     <h3>Data:</h3>
@@ -178,12 +205,15 @@ export const FormRecebedor = ({ hasButton }) => {
                     <h3>Documentos:</h3>
                     {/*                   <input type="file" /> */}
                     <input
-                      className={styles.anexarBTN}
-                      type="text"
-                      name="textoDocmento"
-                      value={textoDocmento}
-                      onChange={(event) => setTextoDocmento(event.target.value)}
-                    ></input>
+                      type="file"
+                      name="imagem"
+                      accept="image/*"
+                      onChange={(event) => {
+                        const selectedFile = event.target.files[0];
+                        setImagem(selectedFile);
+                        handleImageUpload(event.target.files[0])}
+                      }
+                    />
                   </label>
                 </div>
               </fieldset>
@@ -293,6 +323,30 @@ export const FormRecebedor = ({ hasButton }) => {
                       {...register("checkboxAusenciaMofoReprovado")}
                     />
                   </div>
+
+                  {/* for para distribuir os novos Critérios */}
+                  <div>
+                    {criteriosNovos.filter((criterio) => criterio.funcao === "Recebedor").map((criterio) => (
+                      <div key={criterio.id_criterio}>
+                        <div className={styles.inputBlock}>
+                          <input className={styles.btnsRN} value={criterio.descricao_regra} readOnly />
+                          <input
+                            className={styles.aprovar}
+                            type="checkbox"
+                            id={`checkbox${criterio.descricao_regra}Aprovado`}
+                            {...register(`checkbox${criterio.descricao_regra}Aprovado`)}
+                          />
+                          <input
+                            className={styles.recusar}
+                            type="checkbox"
+                            id={`checkbox${criterio.descricao_regra}Reprovado`}
+                            {...register(`checkbox${criterio.descricao_regra}Reprovado`)}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
                 </div>
               </fieldset>
               {hasButton ? (

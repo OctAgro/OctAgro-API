@@ -6,6 +6,11 @@ const FileStore = require('session-file-store')(session)
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
+const router = require ('express').Router()
+const chartData = require('./helpers/chartData')
+const { Chart, registerables } = require("chart.js");
+Chart.register(...registerables);
+const { createCanvas, registerFont } = require("canvas");
 
 //Chamando Inputs do Banco de Dados
 const Fornecedores = require('./models/Fornecedor')

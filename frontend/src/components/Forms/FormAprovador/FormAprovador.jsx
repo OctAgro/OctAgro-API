@@ -33,8 +33,17 @@ export const FormAprovador = () => {
     async function fetchPedidos() {
       const dadosPedidos = await encontrarPedidosById(pedidoId)
       setPedidos(dadosPedidos)
-      pedidos.produto.status_aprovacao ? setIsRecusadoWarning(true) : setIsAprovadoWarning(true)
+
+      /* // Movida a lógica para atualizar os estados para dentro do then de setPedidos
+      if (dadosPedidos.produto.status_aprovacao) {
+        setIsRecusadoWarning(true)
+        setIsAprovadoWarning(false)
+      } else {
+        setIsRecusadoWarning(false)
+        setIsAprovadoWarning(true)
+      } */
     }
+
     fetchPedidos()
   }, [pedidoId])
 
@@ -57,23 +66,24 @@ export const FormAprovador = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => {
-    handleAprovacao()
-    enviarDados(data)
+  const onSubmit = (dados) => {
+    handleAprovacao(dados)
   }
 
+  const [statusFinalAprovacao, setStatusFinalAprovacao] = useState(false)
+
   //fazendo o post
-  const enviarDados = async (data) => {
-    const dados = {
+  const enviarDados = async (dados) => {
+    const data = {
       idPedido: pedidos.id_pedido,
       idUsuario: usuarioCarregado,
       textoRevisaoFinalAprovador: revisao,
-      statusFinalAprovacao: true, //PRECISA SER ALTERADO!
-      ...data,
+      statusFinalAprovacao,
+      ...dados,
     }
 
     try {
-      const resposta = await axios.post("http://localhost:3000/aprovador/relatorios", dados)
+      const resposta = await axios.post("http://localhost:3000/aprovador/relatorios", data)
       //esse console.log retorna respostas json do backend de erros de validacao
       console.log(resposta.data.message)
       setMensagemErro(resposta.data.message)
@@ -84,23 +94,25 @@ export const FormAprovador = () => {
     }
   }
 
-  const handleAprovacao = () => {
+  const handleAprovacao = (dados) => {
     if (isAprovadoWarning) {
       setIsAprovado(true)
       setIsRecusado(false)
+      enviarDados(dados)
 
       setOpenModal(true)
     } else if (isRecusadoWarning) {
       setIsAprovado(false)
       setIsRecusado(true)
+      enviarDados(dados)
 
       setOpenModal(true)
-    } else {
+    } /* else {
       setIsAprovado(true)
       setIsRecusado(false)
 
       setOpenModal(true)
-    }
+    } */
   }
 
   const handleCloseModal = () => {
@@ -241,8 +253,10 @@ export const FormAprovador = () => {
             </fieldset>
 
             <div className={styles.buttons}>
-              <Button value1="RECUSAR" value2="MERCADORIA" type="submit" style={{ backgroundColor: "#512c13" }} /* onClick={handleAprovacao}  */ />
-              <Button value1="ACEITAR" value2="MERCADORIA" type="submit" style={{ backgroundColor: "#512c13" }} /* onClick={handleAprovacao} */ />
+              <Button value1="RECUSAR" value2="MERCADORIA" type="submit" style={{ backgroundColor: "#512c13" }} 
+              onClick={() => { setIsRecusadoWarning(true), setIsAprovadoWarning(false), setStatusFinalAprovacao(false) }} />
+              <Button value1="ACEITAR" value2="MERCADORIA" type="submit" style={{ backgroundColor: "#512c13" }} 
+              onClick={() => { setIsRecusadoWarning(false), setIsAprovadoWarning(true), setStatusFinalAprovacao(true) }} />
             </div>
           </div>
         </form>
@@ -250,12 +264,7 @@ export const FormAprovador = () => {
       <div className={styles.divModal}>
         <Modal isOpen={openModal} onClick={handleCloseModal}>
           <div className={styles.clearfix}>
-            {mensagemErro ? (
-              <div className={styles.container}>
-                <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
-                <p className={styles.paragraph}>{mensagemErro}</p>
-              </div>
-            ) : isAprovado && !isAprovadoWarning && !mensagemErro ? (
+            {isAprovado && !isAprovadoWarning ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {pedidoId} foi aprovado!</p>
@@ -263,7 +272,7 @@ export const FormAprovador = () => {
                   <Button className={styles.buttonConfirm} style={{ backgroundColor: "#512c13" }} value1="CONFIRMAR" />
                 </Link>
               </div>
-            ) : isRecusado && !isRecusadoWarning && !mensagemErro ? (
+            ) : isRecusado && !isRecusadoWarning ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faFaceFrown} className={styles.iconSmile} />
                 <p className={styles.paragraph}>O Pedido {pedidoId} foi recusado!</p>
@@ -271,7 +280,7 @@ export const FormAprovador = () => {
                   <Button className={styles.button} style={{ backgroundColor: "#512c13" }} value1="CONFIRMAR" />
                 </Link>
               </div>
-            ) : isAprovadoWarning && isAprovado && !mensagemErro ? (
+            ) : isAprovadoWarning && isAprovado ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faTriangleExclamation} className={styles.iconSmile} />
                 <p className={styles.paragraph}>
@@ -281,7 +290,7 @@ export const FormAprovador = () => {
                 </p>
                 <Button className={styles.button} style={{ backgroundColor: "#512c13" }} value1="CONFIRMAR" onClick={handleChangeModal} />
               </div>
-            ) : isRecusadoWarning && isRecusado && !mensagemErro ? (
+            ) : isRecusadoWarning && isRecusado ? (
               <div className={styles.container}>
                 <FontAwesomeIcon icon={faTriangleExclamation} className={styles.iconSmile} />
                 <p className={styles.paragraph}>
@@ -290,6 +299,11 @@ export const FormAprovador = () => {
                   Essa mercadoria foi aprovada pelo Analista.
                 </p>
                 <Button className={styles.button} style={{ backgroundColor: "#512c13" }} value1="CONFIRMAR" onClick={handleChangeModal} />
+              </div>
+            ) : mensagemErro ? (
+              <div className={styles.container}>
+                <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconSmile} />
+                <p className={styles.paragraph}>{mensagemErro}</p>
               </div>
             ) : null}
           </div>

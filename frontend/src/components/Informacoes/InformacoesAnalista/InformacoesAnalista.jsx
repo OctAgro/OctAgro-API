@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom"
 
 import styles from "./InformacoesAnalista.module.css"
 
-import { FormAnalista } from "../../Forms/FormAnalista/FormAnalista"
+import { FormAnalistaUpdate } from "../../Forms/FormAnalistaUpdate/FormAnalistaUpdate"
 
 // IMPORTANDO ICONES
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -25,7 +25,7 @@ export const InformacoesAnalista = (props) => {
         </div>
       </div>
       <div>
-        <FormAnalista />
+        <FormAnalistaUpdate />
       </div>
     </div>
   )

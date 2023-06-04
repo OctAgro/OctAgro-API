@@ -1,152 +1,145 @@
 .navbar {
-    position: fixed;
-    height: 100%;
-    background-color: rgba(77, 61, 19, 0.19);
-    font-size: 1.5rem;
-    box-shadow: 5px 0px 10px 1px #000000;
-    width: 20%;
-  }
-  
-  .actionItems {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-  }
-    
-  .topItems {
-    background-color: rgba(247, 241, 229, 0.7);
-    border: solid #000000;
-    border-width: 0.1rem 0 0.2rem 0;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  
-  .logo{
-    max-width: 80%;
-    margin: 1rem auto;
-    filter: drop-shadow(0px 2px 5px #000);
-  }
-  
-  .botItems {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-  }
-  
-  .topSidebar {
-    padding: 0.5rem;
-    display: flex;
-    text-align: center;
-    cursor: pointer;
-  }
-  
-  .actionItems:hover , .sair:hover {
-    background-color:rgba(77, 61, 19, 0.5);
-    transition: 0.4s;
-  }
-  
-  .sair {
-    padding: 0.5rem 0;
-    background-color: #F7F1E5;
-    border-top: 0.1rem solid #000000;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: 'Gotham Black';
-  }
-  
-  .sairTexto {
-    padding-left: 0.5rem;
-  }
-  
-  .icon, .wheal, .reportIcon {
-    padding: 0 1.2rem;
-  }
+  font-family: 'Gotham Black';
+  position: fixed;
+  height: 100%;
+  background-color: rgba(77, 61, 19, 0.19);
+  font-size: 1.1rem;
+  box-shadow: 5px 0px 10px 1px #000000;
+  width: 18%;
+  display: grid;
+  grid-template-rows: 5rem auto;
+}
 
-  .wheal {
-    margin-right: 0.4rem;
-  }
+.topSidebar {
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  grid-row-start: 1;
+}
 
-  .reportIcon{
-    margin-right: 0.2rem;
-  }
-  
-  .usuario {
-    padding: 0.5rem;
-  }
-  
-  .molduraOctagonal {
-    position: absolute;
-    height: 80px;
-    width: 80px;
-    z-index: 2;
-    clip-path: polygon(
-      32% 0,
+.logo {
+  max-width: 80%;
+  margin: 1rem auto;
+  filter: drop-shadow(0px 2px 5px #000);
+}
+
+.topItems {
+  background-color: rgba(247, 241, 229, 0.7);
+  border: solid #000000;
+  border-width: 0.1rem 0 0.2rem 0;
+  font-weight: 600;
+  cursor: pointer;
+  grid-row-start: 2;
+}
+
+.actionItems {
+  display: grid;
+  grid-template-columns: 20% auto;
+  border-bottom: 2px  #000 solid;
+  height: 3rem;
+}
+
+.icon{
+  grid-column-start: 1;
+  margin: auto;
+  padding: 0.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.relatorio{
+  grid-column-start: 2;
+  text-align: justify;
+  margin: auto 0;
+}
+
+.botItems {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+.actionItems:hover,
+.sair:hover {
+  background-color: rgba(77, 61, 19, 0.5);
+  transition: 0.4s;
+}
+
+.sair {
+  padding: 0.5rem 0;
+  background-color: #F7F1E5;
+  border-top: 0.1rem solid #000000;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Gotham Black';
+}
+
+.sairTexto {
+  padding-left: 0.5rem;
+}
+
+.reportIcon {
+  margin-right: 0.2rem;
+}
+
+.usuario {
+  padding: 0.5rem;
+  border-top:2px  #000 solid;
+}
+
+.molduraOctagonal {
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  z-index: 2;
+  clip-path: polygon(32% 0,
       68% 0,
       100% 32%,
       100% 68%,
       68% 100%,
       32% 100%,
       0 68%,
-      0 32%
-    );
-  }
-  
-  .fotoUsuario {
-    position: relative;
-    height: 80px;
-    width: 80px;
-    z-index: 1;
-    clip-path: polygon(
-      32% 0,
+      0 32%);
+      
+}
+
+.fotoUsuario {
+  position: relative;
+  height: 70px;
+  width: 70px;
+  z-index: 1;
+  clip-path: polygon(32% 0,
       68% 0,
       100% 32%,
       100% 68%,
       68% 100%,
       32% 100%,
       0 68%,
-      0 32%
-    );
-  }
-  
-  .usuario {
-    display: flex;
-    background-color: rgba(247, 241, 229, 0.7);
-  }
-  
-  .molduraFoto {
-    align-self: flex-start;
-  }
-  
-  .infoUsuario {
-    align-self: flex-end;
-    padding: 1rem 1rem;
-  }
-  
-  .nomeUsuario {
-    display: inline;
-    font-size: 1.2rem;
-    font-family: 'Gotham Black';
-  }
-  
-  .funcaoUsuario {
-    font-size: 1rem;
-    font-family: 'Gotham';
-  }
-  
-  .relatorio {
-    font-family: 'Gotham Black';
-    padding: 1rem 0;
-    margin-right: 1rem;
-    display: block;
-    order: 2;
-    flex-grow: 1;
-    flex-shrink: 0;
-  }
-  
-  .actionItems {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    border-bottom: #000 solid;
-  }
+      0 32%);
+}
+
+.usuario {
+  display: flex;
+  background-color: rgba(247, 241, 229, 0.7);
+}
+
+.molduraFoto {
+  align-self: flex-start;
+}
+
+.infoUsuario {
+  padding: 1rem 1rem;
+  margin: auto;
+}
+
+.nomeUsuario {
+  display: inline;
+  font-size: 1.2rem;
+  font-family: 'Gotham Black';
+}
+
+.funcaoUsuario {
+  font-size: 1rem;
+  font-family: 'Gotham';
+}

@@ -3,11 +3,13 @@
 }
 
 .tableBackground {
+    font-family: "Gotham Medium";
     filter: drop-shadow(2px 2px 2px #000);
     background-color: #E7E0D1;
     padding: 1rem;
     width: 60vw;
     border-radius: 5px;
+    margin: auto;
 }
 
 .title {
@@ -21,6 +23,7 @@
 }
 
 .tableData {
+    font-family: "Gotham Medium";
     padding: 0.5rem;
     text-align: center;
     border: 2px solid black;

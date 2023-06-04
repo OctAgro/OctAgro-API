@@ -16,6 +16,7 @@ import styles from "./FormAnalista.module.css"
 import axios from "axios"
 
 import { encontrarPedidosById } from "../../../hooks/encontrarPedidos"
+import { encontrarCriteriosByPedidoId } from "../../../hooks/encontrarCriteriosById"
 
 export const FormAnalista = ({ hasButton }) => {
   //incluindo trecho de contexto de usuario e salvar dados
@@ -39,6 +40,17 @@ export const FormAnalista = ({ hasButton }) => {
     fetchPedidos()
   }, [])
 
+  const [criteriosNovos, setCriteriosNovos] = useState([])
+  useEffect(() => {
+    async function fetchCriteriosNovos() {
+      const dadosCriterios = await encontrarCriteriosByPedidoId(pedidoId)
+      setCriteriosNovos(dadosCriterios)
+    }
+    fetchCriteriosNovos()
+  }, [])
+
+  console.log("criterios: ", criteriosNovos)
+
   const onSubmit = (data) => {
     //chamando a funcao de enviar dados
     enviarDados(data)
@@ -56,6 +68,12 @@ export const FormAnalista = ({ hasButton }) => {
       idUsuario: usuarioCarregado,
       ...data,
     }
+
+    Object.keys(data).forEach((key) => {
+      if (key.startsWith("checkbox")) {
+        dados[key] = data[key];
+      }
+    });
 
     handleAceitar(event)
     console.log("aqui: " + dados)
@@ -209,6 +227,30 @@ export const FormAnalista = ({ hasButton }) => {
                         {...register("checkboxLimpezaGraosReprovado")}
                       />
                     </div>
+
+                    {/* for para distribuir os novos Critérios */}
+                    <div>
+                      {criteriosNovos.filter((criterio) => criterio.funcao === "Analista").map((criterio) => (
+                        <div key={criterio.id_criterio}>
+                          <div className={styles.inputBlock}>
+                            <input className={styles.btnsRN} value={criterio.descricao_regra} readOnly />
+                            <input
+                              className={styles.aprovar}
+                              type="checkbox"
+                              id={`checkbox${criterio.descricao_regra}Aprovado`}
+                              {...register(`checkbox${criterio.descricao_regra}Aprovado`)}
+                            />
+                            <input
+                              className={styles.recusar}
+                              type="checkbox"
+                              id={`checkbox${criterio.descricao_regra}Reprovado`}
+                              {...register(`checkbox${criterio.descricao_regra}Reprovado`)}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
                   </div>
                 </fieldset>
               </div>
@@ -294,8 +336,8 @@ export const FormAnalista = ({ hasButton }) => {
                     className={styles.textoRevisao}
                     name="textoRevisaoFinalAprovador"
                     id="textoRevisaoFinalAprovador"
-                    rows="3"
-                    cols="20"
+                    rows="4"
+                    cols="600"
                     value={revisao}
                     onChange={(event) => setRevisao(event.target.value)}
                   />

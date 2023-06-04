@@ -6,12 +6,12 @@ const Pedido = require("./Pedido")
 const RelatorioRecebedor = db.define("RelatorioRecebedor", {
     id_relatorio_recebedor: {
         type: Sequelize.INTEGER,
-        autoIncrement:  true,
-        autoNull: false,
+        autoIncrement: true,
+        allowNull: false,
         primaryKey: true
     },
 
-    status_aprovacao:{
+    status_aprovacao: {
         type: Sequelize.STRING,
         require: true,
         defaultValue: 'Pendente'
@@ -43,6 +43,16 @@ const RelatorioRecebedor = db.define("RelatorioRecebedor", {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
         allowNull: false
+    },
+    createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+        /* ,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') */
     }
 })
 

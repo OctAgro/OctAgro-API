@@ -83,6 +83,32 @@ export const ProdutosAdmin = () => {
   const [openModalProdutoExcluirWarning, setOpenModalProdutoExcluirWarning] = useState(false)
   const [openModalProdutoExcluir, setOpenModalProdutoExcluir] = useState(false)
 
+  //barra de pesquisar
+  const [produtosFiltrados, setProdutosFiltrados] = useState([]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const searchTermLower = searchTerm.toLowerCase();
+    const filtro = produtos.filter((produto) => {
+      const idPesquisa = produto.id_produto.toString().toLowerCase();
+      const nomePesquisa = produto.nome_produto.toLowerCase();
+      const quantidadePesquisa = produto.quantidade_produto.toString().toLowerCase();
+      const tipoPesquisa = produto.tipo.toLowerCase();
+      const descricaoPesquisa = produto.descricao.toLowerCase();
+      return (
+        idPesquisa.includes(searchTermLower) ||
+        nomePesquisa.includes(searchTermLower) ||
+        quantidadePesquisa.includes(searchTermLower) ||
+        tipoPesquisa.includes(searchTermLower) ||
+        descricaoPesquisa.includes(searchTermLower)
+      );
+    });
+    console.log("dado filtrado: ", filtro)
+    setProdutosFiltrados(filtro);
+  };
+
   return (
     <PedidosProvider>
       <div id={styles["main"]}>
@@ -94,12 +120,12 @@ export const ProdutosAdmin = () => {
         </div>
         <div id={styles["barraPesquisa"]}>
           <div>
-            <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/produtos/cadastrar">
+            <BarraAdmin linkVoltar="/admin/home" linkCadastrar="/admin/produtos/cadastrar" handleSearch={handleSearch} setSearchTerm={setSearchTerm}>
               <FontAwesomeIcon icon={faPlus} title="Cadastrar novo produto!" />
             </BarraAdmin>
 
             {/* MODAL EXCLUIR_WARNING */}
-            <Modal 
+            <Modal
               isOpen={openModalProdutoExcluirWarning}
               onClick={handleCloseModalProdutoExcluirWarning}
             >
@@ -153,34 +179,65 @@ export const ProdutosAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {produtos?.map((produto) => (
-                  <tr key={produto.id_produto}>
-                    <td className={styles.tableData}>{produto.id_produto}</td>
-                    <td className={styles.tableData}>{produto.nome_produto}</td>
-                    <td className={styles.tableData}>{produto.quantidade_produto}</td>
-                    <td className={styles.tableData}>{produto.tipo}</td>
-                    <td className={styles.tableData}>{produto.descricao}</td>
-                    <td className={styles.tableData}>
-                      {/* verificando com é o estado da aprovação para mostrar ação */}
-                      <button className={styles.button}>
-                        <Link to={`/admin/produtos/atualizar/${produto.id_produto}`}>
-                          Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </Link>
-                      </button>
-                    </td>
-                    <td className={styles.tableData}>
-                      <button
-                        className={styles.button}
-                        onClick={() => {
-                          setprodutoExcluir(produto.id_produto)
-                          setOpenModalProdutoExcluirWarning(true)
-                        }}
-                      >
-                        Excluir <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {produtosFiltrados.length > 0 ? (
+                  produtosFiltrados.map((produto) => (
+                    <tr key={produto.id_produto}>
+                      <td className={styles.tableData}>{produto.id_produto}</td>
+                      <td className={styles.tableData}>{produto.nome_produto}</td>
+                      <td className={styles.tableData}>{produto.quantidade_produto}</td>
+                      <td className={styles.tableData}>{produto.tipo}</td>
+                      <td className={styles.tableData}>{produto.descricao}</td>
+                      <td className={styles.tableData}>
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={`/admin/produtos/atualizar/${produto.id_produto}`}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button
+                          className={styles.button}
+                          onClick={() => {
+                            setprodutoExcluir(produto.id_produto)
+                            setOpenModalProdutoExcluirWarning(true)
+                          }}
+                        >
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  produtos?.map((produto) => (
+                    <tr key={produto.id_produto}>
+                      <td className={styles.tableData}>{produto.id_produto}</td>
+                      <td className={styles.tableData}>{produto.nome_produto}</td>
+                      <td className={styles.tableData}>{produto.quantidade_produto}</td>
+                      <td className={styles.tableData}>{produto.tipo}</td>
+                      <td className={styles.tableData}>{produto.descricao}</td>
+                      <td className={styles.tableData}>
+                        {/* verificando com é o estado da aprovação para mostrar ação */}
+                        <button className={styles.button}>
+                          <Link to={`/admin/produtos/atualizar/${produto.id_produto}`}>
+                            Editar <FontAwesomeIcon icon={faMagnifyingGlass} />
+                          </Link>
+                        </button>
+                      </td>
+                      <td className={styles.tableData}>
+                        <button
+                          className={styles.button}
+                          onClick={() => {
+                            setprodutoExcluir(produto.id_produto)
+                            setOpenModalProdutoExcluirWarning(true)
+                          }}
+                        >
+                          Excluir <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

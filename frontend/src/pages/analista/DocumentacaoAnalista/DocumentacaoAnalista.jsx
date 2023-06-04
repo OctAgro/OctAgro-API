@@ -14,12 +14,13 @@ import styles from "./DocumentacaoAnalista.module.css"
 export const DocumentacaoAnalista = () => {
   return (
     <PedidosProvider>
-      <div className={styles.main}>
-        <SidebarAnalista />
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <InformacoesDocAnalistaRcNf />
-          </div>
+      <div id={styles["main"]}>
+        <div id={styles["sidebar"]}>
+          <SidebarAnalista />
+        </div>
+             
+        <div id={styles["body"]}>
+          <InformacoesDocAnalistaRcNf />
         </div>
       </div>
     </PedidosProvider>

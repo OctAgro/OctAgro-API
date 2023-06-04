@@ -23,7 +23,7 @@
 #imgUser,
 #cadUser {
   grid-row-start: 1;
-  grid-row-end: 4;
+  grid-row-end: 5;
   font-size: 7rem;
   margin: auto;
 }
@@ -214,3 +214,13 @@
   filter: drop-shadow(2px 2px 2px #000);
 }
 
+.conteudoModal {
+  text-align: center;
+  margin: 5rem;
+  font-size: 2rem;
+}
+
+.iconeModal {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}

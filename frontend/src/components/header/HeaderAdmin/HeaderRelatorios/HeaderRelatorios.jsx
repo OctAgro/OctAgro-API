@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "./HeaderRelatorios.module.css"
 
 import { Link } from "react-router-dom"
@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilePen, faCheckDouble, faThumbsDown } from "@fortawesome/free-solid-svg-icons"
 
 import { UsuariosCadastradosContext } from "../../../../context/UsuariosCadastradosContext"
+import { buscarContadores } from "../../../../hooks/buscarContadoresSistema"
 
 export const HeaderRelatorios = (props) => {
   const arrow = props.arrow
@@ -15,6 +16,17 @@ export const HeaderRelatorios = (props) => {
   const dadosTodosUsuarios = useContext(UsuariosCadastradosContext)
 
   console.log(dadosTodosUsuarios)
+
+  //Pegando dados dos contadores
+  const [contadores, setContadores] = useState([])
+
+  useEffect(() => {
+    async function fetchContadores() {
+      const dadosContadores = await buscarContadores()
+      setContadores(dadosContadores)
+    }
+    fetchContadores()
+  }, [])
 
   return (
     <div className={styles.clipboards}>
@@ -25,7 +37,7 @@ export const HeaderRelatorios = (props) => {
         <div className={styles.rightSide}>
           {/*<h2>{numeroRelatorios ? numeroRelatorios : 0}</h2>*/}
 
-          <h1 className={styles.title}>0</h1>
+          <h1 className={styles.title}>{contadores.totalRelatorios}</h1>
           <h3 className={styles.subtitle}>
             Relatórios
           </h3>
@@ -39,7 +51,7 @@ export const HeaderRelatorios = (props) => {
         <div className={styles.rightSide}>
           {/*             <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
  */}
-          <h1 className={styles.title}>0</h1>
+          <h1 className={styles.title}>{contadores.countRelatoriosAprovados}</h1>
           <h3 className={styles.subtitle}>
             Aprovados
           </h3>
@@ -52,7 +64,7 @@ export const HeaderRelatorios = (props) => {
         <div className={styles.rightSide}>
           {/*             <h2>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h2>
  */}
-          <h1 className={styles.title}>0</h1>
+          <h1 className={styles.title}>{contadores.countRelatoriosRecusados}</h1>
           <h3 className={styles.subtitle}>
             Recusados
           </h3>

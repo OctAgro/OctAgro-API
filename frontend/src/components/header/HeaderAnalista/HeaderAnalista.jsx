@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "./HeaderAnalista.module.css"
 
 import { Link } from "react-router-dom"
@@ -8,6 +8,7 @@ import { faClipboard } from "@fortawesome/free-regular-svg-icons"
 import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
 import { PedidosAnalistaContext } from "../../../context/PedidosAnalistaContext"
+import { buscarContadores } from "../../../hooks/buscarContadoresSistema"
 
 export const HeaderAnalista = (props) => {
   const arrow = props.arrow
@@ -21,6 +22,17 @@ export const HeaderAnalista = (props) => {
 
   // Falta essa lógica no backEnd ainda, por enquanto pegando o numero de pedidos geral.
   const numeroPedidosTotal = dados[1]
+
+  //Pegando dados dos contadores
+  const [contadores, setContadores] = useState([])
+
+  useEffect(() => {
+    async function fetchContadores() {
+      const dadosContadores = await buscarContadores()
+      setContadores(dadosContadores)
+    }
+    fetchContadores()
+  }, [])
 
   return (
     <div className={styles.clipboards}>
@@ -41,7 +53,7 @@ export const HeaderAnalista = (props) => {
           <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
         </div>
         <div className={styles.rightSide}>
-          <h1 className={styles.title}>{numeroPedidos ? numeroPedidos : 0}</h1>
+          <h1 className={styles.title}>{contadores.countRecebedorPendente}</h1>
           <h3 className={styles.subtitle}>
             Pedido(s) <br /> pendentes
           </h3>
@@ -53,7 +65,7 @@ export const HeaderAnalista = (props) => {
           <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
         </div>
         <div className={styles.rightSide}>
-          <h1 className={styles.title}>{numeroPedidosTotal ? numeroPedidosTotal : 0}</h1>
+          <h1 className={styles.title}>{contadores.countRecebedorRecebido}</h1>
           <h3 className={styles.subtitle}>
             Total <br /> de Pedidos
           </h3>

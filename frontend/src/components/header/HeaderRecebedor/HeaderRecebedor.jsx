@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "./HeaderRecebedor.module.css"
 
 import { Link } from "react-router-dom"
@@ -6,7 +6,9 @@ import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTruck } from "@fortawesome/free-solid-svg-icons"
 import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons"
+
 import { MercadoriasRecebedorContext } from "../../../context/MercadoriasRecebedorContext"
+import { buscarContadores } from "../../../hooks/buscarContadoresSistema"
 
 export const HeaderRecebedor = (props) => {
   const arrow = props.arrow
@@ -20,6 +22,17 @@ export const HeaderRecebedor = (props) => {
 
   // Falta essa lógica no backEnd ainda, por enquanto pegando o numero de pedidos geral.
   const numeroMercadoriasTotal = dados[1]
+
+  //Pegando dados dos contadores
+  const [contadores, setContadores] = useState([])
+
+  useEffect(() => {
+    async function fetchContadores() {
+      const dadosContadores = await buscarContadores()
+      setContadores(dadosContadores)
+    }
+    fetchContadores()
+  }, [])
 
   return (
     <div className={styles.clipboards}>
@@ -38,9 +51,9 @@ export const HeaderRecebedor = (props) => {
           <FontAwesomeIcon className={styles.icon} icon={faTruck} />
         </div>
         <div className={styles.rightSide}>
-          <h1 className={styles.title}>{numeroMercadorias ? numeroMercadorias : 0}</h1>
+          <h1 className={styles.title}>{contadores.countPedidoPendente}</h1>
           <h3 className={styles.subtitle}>
-            Mercadorias <br /> à Caminho
+            Mercadorias <br /> Pendentes
           </h3>
         </div>
       </div>
@@ -50,9 +63,9 @@ export const HeaderRecebedor = (props) => {
           <FontAwesomeIcon className={styles.icon} icon={faTruck} />
         </div>
         <div className={styles.rightSide}>
-          <h1 className={styles.title}>{numeroMercadoriasTotal ? numeroMercadoriasTotal : 0}</h1>
+          <h1 className={styles.title}>{contadores.countPedidoRecebido}</h1>
           <h3 className={styles.subtitle}>
-            Total <br /> Mercadorias
+            Mercadorias <br /> Recebidas
           </h3>
         </div>
       </div>

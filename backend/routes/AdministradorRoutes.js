@@ -88,5 +88,8 @@ router.get('/grafico/produto',chartData.graficoProduto)
 router.get('/grafico/usuarios',chartData.graficoUsuario)
 router.get('/grafico/pedidos',chartData.graficoPedido)
 
+//Rotas dos Contadores do Sistema
+router.get('/contador', UsuarioControllers.contadoresSistema)
+
 
 module.exports = router

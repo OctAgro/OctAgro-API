@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "./HeaderAprovador.module.css"
 
 import { Link } from "react-router-dom"
@@ -8,6 +8,8 @@ import { faClipboard } from "@fortawesome/free-regular-svg-icons"
 import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
 import { RelatoriosAprovadorContext } from "../../../context/RelatoriosAprovadorContext"
+import { buscarContadores } from "../../../hooks/buscarContadoresSistema"
+
 
 export const HeaderAprovador = (props) => {
   const arrow = props.arrow
@@ -21,6 +23,17 @@ export const HeaderAprovador = (props) => {
 
   // Falta essa lógica no backEnd ainda, por enquanto pegando o numero de relatórios geral.
   const numeroRelatoriosTotal = 1
+
+  //Pegando dados dos contadores
+  const [contadores, setContadores] = useState([])
+
+  useEffect(() => {
+    async function fetchContadores() {
+      const dadosContadores = await buscarContadores()
+      setContadores(dadosContadores)
+    }
+    fetchContadores()
+  }, [])
 
   return (
     <div className={styles.clipboards}>
@@ -38,7 +51,7 @@ export const HeaderAprovador = (props) => {
           <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
         </div>
         <div className={styles.rightSide}>
-          <h1 className={styles.title}>{numeroRelatorios ? numeroRelatorios : 0}</h1>
+          <h1 className={styles.title}>{contadores.countAnalistaPendente}</h1>
           <h3 className={styles.subtitle}>
             Relatório(s) <br /> pendentes
           </h3>
@@ -50,7 +63,7 @@ export const HeaderAprovador = (props) => {
           <FontAwesomeIcon className={styles.icon} icon={faClipboard} />
         </div>
         <div className={styles.rightSide}>
-          <h1 className={styles.title}>{numeroRelatoriosTotal ? numeroRelatoriosTotal : 0}</h1>
+          <h1 className={styles.title}>{contadores.countAnalistaRecebido}</h1>
           <h3 className={styles.subtitle}>
             Total <br /> de relatórios
           </h3>

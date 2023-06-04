@@ -37,6 +37,14 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 |  03    | 06  | Controle dos fornecedores. | Criar um formulário de listagem dos fornecedores com as informações necessárias e botões de adicionar, alterar e excluir. | Média
 |  03    | 07  | Controle dos produtos. | Criar um formulário de listagem dos produtos com as informações necessárias e botões de adicionar, alterar e excluir. | Média
 
+<h2>User Stories <a id="us"></a></h2>
+
+| US_Id | US | Usuário |
+|:-----:|:---|:--------|
+| 05    | Como Aprovador, desejo validar a mercadoria que foi inspecionada para a entrada do estoque, mesmo ela estando rejeitada pelos critérios. | Aprovador
+| 06    | Como Administrador, desejo gerenciar fornecedores de forma com que eles sejam cadastrados no sistema para que facilite os dados tanto do fornecedor quanto do produto. | Admin
+| 07    | Como Administrador, desejo gerenciar produtos (grãos) para caracterizar a mercadoria de forma em que ela possa ser recebida, analisada e aprovada de forma eficiente. | Admin
+
 <h2>Demonstração - Gifs<a id="demo"></a></h2>
 <div align="center">
     <h3>Visão dos usuários (Gerente aprovador, Controle de produtos ADM e Controle de fornecedores ADM)</h3>

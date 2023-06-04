@@ -4,7 +4,7 @@
 
 <p align="center">
       <img src="https://i.imgur.com/PcbMkzQ.png" alt="logo da equipe" width="200">
-      <h3 align="center">🌾 OctAgro 🐮 - Sprint 2</h3>
+      <h3 align="center">🌾 OctAgro 🐮 - Sprint 3</h3>
 <hr>
 
 <p align="center">

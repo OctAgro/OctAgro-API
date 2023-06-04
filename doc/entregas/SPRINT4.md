@@ -4,7 +4,7 @@
 
 <p align="center">
       <img src="https://i.imgur.com/PcbMkzQ.png" alt="logo da equipe" width="200">
-      <h3 align="center">🌾 OctAgro 🐮 - Sprint 3</h3>
+      <h3 align="center">🌾 OctAgro 🐮 - Sprint 4</h3>
 <hr>
 
 <p align="center">
@@ -19,7 +19,7 @@
 
 No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia.software/"> Jaia Software</a>, e nos fora proposto "Desenvolver um sistema de Inspeção de entrada para controle de recebimento de grãos".
 
-## <img class="emoji" alt="estrela" height="30" width="30" src="../img/star.png"> MVP
+## MVP
 
 <p>Desenvolvimento das paginas do gerente aprovador, controle de produtos e fornecedores por parte do Administrador</p>
 
@@ -33,31 +33,29 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 
 | Sprint | US  | Requisito                                               | Descrição                                                   | Prioridade |
 |:------:|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|:-----------|
-|  03    | 05  | Gereciamento de gerente como aprovador. | Criar o controle de gerente por parte do aprovador. | Média
-|  03    | 06  | Controle dos fornecedores. | Criar um formulário de listagem dos fornecedores com as informações necessárias e botões de adicionar, alterar e excluir. | Média
-|  03    | 07  | Controle dos produtos. | Criar um formulário de listagem dos produtos com as informações necessárias e botões de adicionar, alterar e excluir. | Média
+|  04    | 08  | Controle das regras de recebimento. | Criar um formulário de listagem das regras com as informações necessárias e botões de adicionar, alterar e excluir. | Média
+|  04    | 09  | Controle dos usuarios. | Criar um formulário de listagem dos usuários com as informações necessárias e botões de adicionar, alterar e excluir. | Baixa
+|  04    | 03  | Controle de relatorios do ADM. | Criar um formulário de listagem de todos os relatorios. | Baixa
+| 04     | 03  | Geração dos gráficos.  | Gerar os graficos na tela de home do administrador. | Baixa 
 
 <h2>User Stories <a id="us"></a></h2>
 
 | US_Id | US | Usuário |
 |:-----:|:---|:--------|
-| 05    | Como Aprovador, desejo validar a mercadoria que foi inspecionada para a entrada do estoque, mesmo ela estando rejeitada pelos critérios. | Aprovador
-| 06    | Como Administrador, desejo gerenciar fornecedores de forma com que eles sejam cadastrados no sistema para que facilite os dados tanto do fornecedor quanto do produto. | Admin
-| 07    | Como Administrador, desejo gerenciar produtos (grãos) para caracterizar a mercadoria de forma em que ela possa ser recebida, analisada e aprovada de forma eficiente. | Admin
+| 03    | Como Admin, desejo a criação de um relatório baseado nas informações de comparação entre o Relatório de Compras, a Nota Fiscal e a Mercadoria, para que haja prosseguimento na aprovação da entrada do grão no estoque | Admin
+| 08    | Como Administrador, desejo gerenciar regras de recebimento para determinar o conjunto de critérios a serem seguidos no processo de análise e aprovação da entrada de mercadorias. | Admin
+| 09    | Como Administrador, desejo gerenciar usuários colaboradores (recebedores, analistas e aprovadores) de forma com que seja possível criar, editar ou apagar as contas associadas a eles. | Admin
 
 <h2>Demonstração - Gifs<a id="demo"></a></h2>
 <div align="center">
-    <h3>Visão dos usuários (Gerente aprovador, Controle de produtos ADM e Controle de fornecedores ADM)</h3>
-    <img src="../gifs/sprint3/AprovadorSp3.gif" alt='Visão do Gerente aprovador' width="300"/>
-    <img src="../gifs/sprint3/AdmProdutoSp3.gif" alt='Controle de produtos' width="300"/>
-    <img src="../gifs/sprint3/AdmFornecedorSp3.gif" alt='Controle de fornecedores' width="300"/> 
+
 </div>
 
 <h3> Sprint 3: [24/04/23-14/05image.png/23]</h3> 
 
 <h2>BurnDown<a id="burndown"></a></h2>
 
-<img src="../BurnDownSp3.png" alt='BurnDown'/>
+<img src="../BurnDownSp4.png" alt='BurnDown'/>
 
 ## :mortar_board: Equipe <a id="equipe"></a>
 

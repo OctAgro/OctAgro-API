@@ -27,15 +27,16 @@ No primeiro semestre de 2023, o nosso cliente é a empresa <a href="https://jaia
 
 <img height="200" src="../img/timeline.png">
 
-<h2>BackLog <a id="backlog"></a></h2>
+<h3>Não tivemos entregas de requisitos nessa sprint, so de tarefas.</h3>
+<h2>Tarefas <a id="backlog"></a></h2>
 
-| Sprint | US  | Tarefa                                                       | Descrição                                                   | Prioridade |
-|:------:|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|:-----------|
-|  01    | *   | Criação do Mockup.                                           | Realizar o Wireframe do software para apresentação pro cliente. | Alta
-|  01    | *   | Criação do Banco de dados.                                   | Criar o banco de dados do projeto.                              | Alta
-|  01    | *   | Criação do Protótipo navegável.                              | Realizar um Protótipo navegável do software.                    | Alta
-|  01    | *   | Documentação do software.                                    | Realizar a documentação do software.                            | Alta
-|  01    | *   | Criação da arquitetura básica e configuração dos arquivos.   | Criação de CRUD básico.                                         | Alta
+| US  | Tarefa                                                       | Descrição                                                   |
+|:---:|:-------------------------------------------------------------|:------------------------------------------------------------|
+| *   | Criação do Mockup.                                           | Realizar o Wireframe do software para apresentação pro cliente. |
+| *   | Criação do Banco de dados.                                   | Criar o banco de dados do projeto.                              |
+| *   | Criação do Protótipo navegável.                              | Realizar um Protótipo navegável do software.                    |
+| *   | Documentação do software.                                    | Realizar a documentação do software.                            |
+| *   | Criação da arquitetura básica e configuração dos arquivos.   | Criação de CRUD básico.                                         |
 
 <h2>Demonstração - Gifs<a id="demo"></a></h2>
 <div align="center">

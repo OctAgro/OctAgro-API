@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./InformacoesRecebedorPageAnalista.module.css"
-import { FormRecebedor } from "../../Forms/FormRecebedor/FormRecebedor"
+import { FormRecebedorUpdate } from "../../Forms/FormRecebedorUpdate/FormRecebedorUpdate"
+
+import { buscarCriteriosRecebedorPorId } from "../../../hooks/buscarCriteriosRecebedorPorId"
 
 export const InformacoesRecebedorPageAnalista = () => {
   const { id } = useParams()
@@ -22,7 +24,7 @@ export const InformacoesRecebedorPageAnalista = () => {
       </Link>
 
       <div>
-        <FormRecebedor />
+        <FormRecebedorUpdate />
       </div>
     </div>
   )

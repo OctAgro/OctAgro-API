@@ -271,8 +271,8 @@ export const FormCadastroProduto = () => {
             {todosCriterios?.map((criterio) => {
               if (criterio.funcao === 'Recebedor') {
                 return (
-                  <div key={criterio.id_criterio}>
-                    <div id={styles["boxRegras"]}>{criterio.descricao_regra.toUpperCase()}</div>
+                  <div key={criterio.id_criterio} id={styles["boxRegras"]}>
+                    <div>{criterio.descricao_regra.toUpperCase()}</div>
                   </div>
                 );
               } else {
@@ -310,8 +310,10 @@ export const FormCadastroProduto = () => {
             {todosCriterios?.map((criterio) => {
               if (criterio.funcao === 'Analista') {
                 return (
-                  <div key={criterio.id_criterio}>
-                    <div id={styles["boxRegras"]}>{criterio.descricao_regra.toUpperCase()}</div>
+                  <div key={criterio.id_criterio} id={styles["boxRegras"]}>
+                    <div>
+                      {criterio.descricao_regra.toUpperCase()}
+                    </div>
                   </div>
                 );
               } else {

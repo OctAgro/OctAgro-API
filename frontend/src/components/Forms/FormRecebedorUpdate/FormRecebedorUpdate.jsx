@@ -42,8 +42,8 @@ export const FormRecebedorUpdate = () => {
 
   useEffect(() => {
     setTextoNomeFornecedor(pedidos?.fornecedor?.nome_fornecedor)
-    setTextoNomeEntregador(pedidos?.fornecedor?.nome_motorista)
-    setTextoPlacaVeiculo(pedidos?.fornecedor?.placa_veiculo)
+    setTextoNomeEntregador(pedidos?.nome_motorista)
+    setTextoPlacaVeiculo(pedidos?.placa_veiculo)
     setNumeroQuantidade(pedidos?.produto?.quantidade_produto)
     setTextoUnidadeMedida(pedidos?.produto?.unidade_medida)
     setTextoProduto(pedidos?.produto?.nome_produto)
@@ -203,11 +203,24 @@ export const FormRecebedorUpdate = () => {
     setCheckboxAusenciaMofoReprovado(!checkboxAusenciaMofoReprovado); //
   }
 
+  //lidando com a imagem
+  const handleImageUpload = async (files) => {
+    const formData = new FormData();
+    formData.append("imagem", files[0]);
+  }
+
+  const [imagem, setImagem] = useState(null)
+
   const enviarDados = async () => {
+
+    const formData = new FormData();
+    formData.append("imagem", imagem);
+    const nomeFoto = imagem.name
 
     const data = {
       idPedido: pedidos.id_pedido,
       criteriosAdicionais: checkboxValues,
+      nomeFoto,
       checkboxColoracaoAprovado,
       checkboxColoracaoReprovado,
       checkboxOdorAprovado,
@@ -226,6 +239,9 @@ export const FormRecebedorUpdate = () => {
 
     try {
       const resposta = await axios.post(`http://localhost:3000/recebedor/relatorios/editar`, data)
+
+      const imagem = await axios.post("http://localhost:3000/recebedor/atualizarNF", formData)
+
       //esse console.log retorna respostas json do backend de erros de validacao
       console.log("enviou? ", resposta)
       setMensagemErro(resposta.data.message)
@@ -345,7 +361,16 @@ export const FormRecebedorUpdate = () => {
                       value={textoDocmento}
                       onChange={(event) => setTextoDocmento(event.target.value)}
                     >
-                      anexar documentos
+                      <input
+                        type="file"
+                        name="imagem"
+                        accept="image/*"
+                        onChange={(event) => {
+                          const selectedFile = event.target.files[0];
+                          setImagem(selectedFile);
+                          handleImageUpload(event.target.files[0])}
+                        }
+                      />
                     </button>
                   </label>
                 </div>
@@ -483,7 +508,7 @@ export const FormRecebedorUpdate = () => {
                       </div>
                     ))}
                   </div>
-                  
+
                 </div>
               </fieldset>
               <div className={styles.buttons}>

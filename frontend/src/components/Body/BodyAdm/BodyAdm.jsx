@@ -12,7 +12,9 @@ import graficoProduto from "../../../assets/graficoProduto.png"
 import { buscarContadores } from "../../../hooks/buscarContadoresSistema"
 
 export const BodyAdm = () => {
-  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrlProduto, setImageUrlProduto] = useState("")
+  const [imageUrlUsuarios, setImageUrlUsuarios] = useState("")
+  const [imageUrlPedidos, setImageUrlPedidos] = useState("")
 
   //Pegando dados dos contadores
   const [contadores, setContadores] = useState([])
@@ -29,7 +31,7 @@ export const BodyAdm = () => {
 
 
   useEffect(() => {
-    const fetchImage = async () => {
+    const fetchImageProduct = async () => {
       try {
         const response = await axios.get("http://localhost:3000/administrador/grafico/produto", {
           responseType: "blob",
@@ -37,7 +39,7 @@ export const BodyAdm = () => {
         const reader = new FileReader()
         reader.onloadend = () => {
           const base64Image = reader.result
-          setImageUrl(base64Image)
+          setImageUrlProduto(base64Image)
         }
         reader.readAsDataURL(response.data)
       } catch (error) {
@@ -45,7 +47,42 @@ export const BodyAdm = () => {
       }
     }
 
-    fetchImage()
+    const fetchImageUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/administrador/grafico/usuarios", {
+          responseType: "blob",
+        })
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          const base64Image = reader.result
+          setImageUrlUsuarios(base64Image)
+        }
+        reader.readAsDataURL(response.data)
+      } catch (error) {
+        console.error("Erro ao buscar a imagem:", error)
+      }
+    }
+
+    const fetchImageOrder = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/administrador/grafico/pedidos", {
+          responseType: "blob",
+        })
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          const base64Image = reader.result
+          setImageUrlPedidos(base64Image)
+        }
+        reader.readAsDataURL(response.data)
+      } catch (error) {
+        console.error("Erro ao buscar a imagem:", error)
+      }
+    }
+
+    fetchImageProduct()
+    fetchImageUser()
+    fetchImageOrder()
+    console.log('Chegou aqui', imageUrlPedidos, imageUrlProduto, imageUrlUsuarios)
   }, [])
 
   return (
@@ -114,11 +151,15 @@ export const BodyAdm = () => {
           </div>
         </div>
         <div id={styles["graficoCapacidade"]}>
-          <img
-            className={styles.imgGrafico}
-            src={graficoCapacidade}
-            alt="Grafico Capacidade Não Implementado"
-          />
+        {imageUrlUsuarios ? (
+            <img src={imageUrlUsuarios} alt="Gráfico de Usuários" className={styles.imgGrafProduto} />
+          ) : (
+            <img
+              className={styles.imgGrafico}
+              src={graficoCapacidade}
+              alt="Grafico de capacidade não implementado"
+            />
+          )}
         </div>
         <div>
           <div className={styles.clipboard}>
@@ -146,16 +187,20 @@ export const BodyAdm = () => {
         </div>
 
         <div id={styles["graficoEstocagem"]}>
-          <img
-            className={styles.imgGrafEstocagem}
-            src={graficoEstocagem}
-            alt="Grafico Estocagem Não Implementado"
-          />
+        {imageUrlPedidos ? (
+            <img src={imageUrlPedidos} alt="Gráfico de pedido" className={styles.imgGrafProduto} />
+          ) : (
+            <img
+              className={styles.imgGrafEstocagem}
+              src={graficoEstocagem}
+              alt="Grafico de estocagem não implementado"
+            />
+          )}
         </div>
 
         <div id={styles["graficoProduto"]}>
-          {imageUrl ? (
-            <img src={imageUrl} alt="Gráfico de produto" className={styles.imgGrafProduto} />
+          {imageUrlProduto ? (
+            <img src={imageUrlProduto} alt="Gráfico de produto" className={styles.imgGrafProduto} />
           ) : (
             <img
               className={styles.imgGrafProduto}

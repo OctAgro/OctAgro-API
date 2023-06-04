@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "./InformacoesRecebedor.module.css"
-import { FormRecebedor } from "../../Forms/FormRecebedor/FormRecebedor"
+import { FormRecebedorUpdate } from "../../Forms/FormRecebedorUpdate/FormRecebedorUpdate"
 
 export const InformacoesRecebedor = () => {
   const { id } = useParams()
@@ -22,7 +22,7 @@ export const InformacoesRecebedor = () => {
           </Link>
         </div>
 
-        <FormRecebedor />
+        <FormRecebedorUpdate />
       </div>
     </div>
   )

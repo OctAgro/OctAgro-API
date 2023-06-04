@@ -65,6 +65,7 @@ export const FormRecebedor = ({ hasButton }) => {
   const [textoProduto, setTextoProduto] = useState("")
 
   const [mensagemErro, setMensagemErro] = useState(null)
+  const [imagem, setImagem] = useState(null)
 
   const onSubmit = (data) => {
     //chamando a funcao de enviar dados
@@ -74,11 +75,19 @@ export const FormRecebedor = ({ hasButton }) => {
     handleAprovacao()
   } // enviando os dados pro banco de dados atraves do clique
 
+
+
   //conectando os dados do usuario para enviar ao banco de dados
   const enviarDados = async (data) => {
+
+    const formData = new FormData();
+    formData.append("imagem", imagem);
+    const nomeFoto = imagem.name
+
     const dados = {
       idPedido: pedidos.id_pedido,
       idUsuario: usuarioCarregado,
+      nomeFoto,
       ...data,
     }
 
@@ -90,8 +99,7 @@ export const FormRecebedor = ({ hasButton }) => {
 
     try {
       const resposta = await axios.post("http://localhost:3000/recebedor/entradamercadoria", dados)
-      //esse console.log retorna respostas json do backend de erros de validacao
-      /*       console.log(resposta.data.message) */
+      const imagem = await axios.post("http://localhost:3000/recebedor/atualizarNF", formData)
       setMensagemErro(resposta.data.message)
     } catch (erro) {
       //esse console.log abaixo exibe as mensagens de erro do AXIOS/HTTP request errors
@@ -155,7 +163,7 @@ export const FormRecebedor = ({ hasButton }) => {
                         className={styles.customSelect}
                         type="text"
                         name="textoNomeEntregador"
-                        value={pedidos?.fornecedor?.nome_motorista}
+                        value={pedidos?.nome_motorista}
                         onChange={(event) => setTextoNomeEntregador(event.target.value)}
                       />
                     </div>
@@ -168,7 +176,7 @@ export const FormRecebedor = ({ hasButton }) => {
                       className={styles.customSelect}
                       type="text"
                       name="textoPlacaVeiculo"
-                      value={pedidos?.fornecedor?.placa_veiculo}
+                      value={pedidos?.placa_veiculo}
                       onChange={(event) => setTextoPlacaVeiculo(event.target.value)}
                     />
                   </label>
@@ -197,12 +205,15 @@ export const FormRecebedor = ({ hasButton }) => {
                     <h3>Documentos:</h3>
                     {/*                   <input type="file" /> */}
                     <input
-                      className={styles.anexarBTN}
-                      type="text"
-                      name="textoDocmento"
-                      value={textoDocmento}
-                      onChange={(event) => setTextoDocmento(event.target.value)}
-                    ></input>
+                      type="file"
+                      name="imagem"
+                      accept="image/*"
+                      onChange={(event) => {
+                        const selectedFile = event.target.files[0];
+                        setImagem(selectedFile);
+                        handleImageUpload(event.target.files[0])}
+                      }
+                    />
                   </label>
                 </div>
               </fieldset>

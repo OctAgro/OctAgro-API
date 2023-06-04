@@ -9,7 +9,7 @@ import { format } from "date-fns";
 import { PedidosProvider } from "../../../context/PedidosAnalistaContext"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash, faPencil, faCheckDouble, faPersonCirclePlus, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import { faTrash, faPencil, faCheckDouble, faPersonCirclePlus, faMagnifyingGlass, faClipboardList } from "@fortawesome/free-solid-svg-icons"
 
 // Importando Componentes
 import { SidebarAdmin } from "../../../components/sidebar/SidebarAdmin/SidebarAdmin"
@@ -60,6 +60,13 @@ export const RelatoriosAdmin = () => {
     console.log("dado filtrado: ", filtro)
     setRelatoriosFiltrados(filtro);
   };
+  
+  //EXIBINDO nf
+  const [exibirImagem, setExibirImagem] = useState(false);
+  const handleExibirImagem = () => {
+    setExibirImagem(true);
+  };
+
 
   return (
     <PedidosProvider>
@@ -122,7 +129,7 @@ export const RelatoriosAdmin = () => {
                             setOpenModalPedidoExcluirWarning(true)
                           }}
                         >
-                          NF <FontAwesomeIcon icon={faTrash} />
+                          NF <FontAwesomeIcon icon={faClipboardList} />
                         </button>
                       </td>
                     </tr>
@@ -158,10 +165,12 @@ export const RelatoriosAdmin = () => {
                           onClick={() => {
                             setPedidoExcluir(relatorio.pedido.id_pedido)
                             setOpenModalPedidoExcluirWarning(true)
+                            handleExibirImagem()
                           }}
                         >
-                          NF <FontAwesomeIcon icon={faTrash} />
+                          NF <FontAwesomeIcon icon={faClipboardList} />
                         </button>
+                        {exibirImagem && <img src={"/frontend/src/assets/" + relatorio.pedido.documentos_anexos} alt="Imagem" />}
                       </td>
                     </tr>
                   ))

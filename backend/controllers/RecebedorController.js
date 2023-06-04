@@ -64,6 +64,19 @@ module.exports = class RelatorioController {
                 }
             }
 
+            const nomeImagem = `${data.nomeFoto}`
+
+            await Pedido.update(
+                {
+                    documentos_anexos: nomeImagem,
+                },
+                {
+                    where: {
+                        id_pedido: data.idPedido,
+                    }
+                }
+            )
+
             res.status(201).json({ mensagem: 'Relatório aprovado com sucesso!' });
         } catch (erro) {
             console.log(erro);
@@ -188,6 +201,19 @@ module.exports = class RelatorioController {
                     id_produto: idProduto
                 }
             })
+
+            const nomeImagem = `${data.nomeFoto}`
+
+            await Pedido.update(
+                {
+                    documentos_anexos: nomeImagem,
+                },
+                {
+                    where: {
+                        id_pedido: data.idPedido,
+                    }
+                }
+            )
 
             res.status(200).json({ mensagem: 'Relatório atualizado com sucesso!' })
         } catch (erro) {
@@ -379,6 +405,33 @@ module.exports = class RelatorioController {
                 })
             }
             return res.json({ message: "Status do relatório do recebedor alterado com sucesso!", status: 201 }).status(201)
+        } catch (error) {
+            return res.json(error).status(500)
+        }
+    }
+
+    static async atualizarNF(req, res) {
+        const idPedido = req.params.id
+
+        const dados = req.body
+
+        const nomeImagem = `${dados.nomeFoto}`
+
+        try {
+            await RelatorioRecebedor.update(
+                {
+                    documentos_anexos: nomeImagem,
+                },
+                {
+                    where: {
+                        id_pedido: idPedido,
+                    }
+                }
+            )
+            return res.json({
+                message: "Status do relatorio do recebedor alterado com sucesso!",
+                status: 201,
+            }).status(201)
         } catch (error) {
             return res.json(error).status(500)
         }

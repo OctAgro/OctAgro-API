@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react"
+import React, { useState, useContext } from "react"
 import axios from "axios"
 import InputMask from "react-input-mask"
 import { Link, useNavigate } from "react-router-dom"
@@ -12,6 +12,7 @@ import { faImagePortrait, faCircleCheck } from "@fortawesome/free-solid-svg-icon
 
 // IMPORTANDO HOOK
 import { criarUsuario } from "../../../../hooks/criarUsuario"
+import { enviarFoto } from "../../../../hooks/criarUsuario"
 
 import styles from "./FormCadUsuario.module.css"
 
@@ -66,13 +67,17 @@ export const FormCadUsuario = () => {
   // HANDLE SUBMIT
   const handleSubmit = async (event) => {
     event.preventDefault()
+
     try {
+      const nomeFoto = foto.name
+      const formData = new FormData();
+      formData.append("foto", foto);
       const dados = {
         data_admissao,
         senha,
         funcao,
         nome,
-        foto,
+        nomeFoto,
         CPF,
         RG,
         dataNascimento,
@@ -88,8 +93,10 @@ export const FormCadUsuario = () => {
         cidade,
         estado,
       }
+      const fotoEnviada = await enviarFoto(formData)
       const usuario = await criarUsuario(dados)
       console.log("Resposta do Usuario", usuario)
+      console.log("Resposta da Foto", fotoEnviada)
       setErrorMessage(usuario.message)
       setOpenModalUsuarioCadastrado(true)
     } catch (erro) {
@@ -100,9 +107,9 @@ export const FormCadUsuario = () => {
   }
 
   const handleIconClick = () => {
-    const fileInput = document.getElementById("fileInput")
-    fileInput.click()
-  }
+    const fileInput = document.getElementById("fileInput");
+    fileInput.click();
+  };
 
   const handleCloseModalUsuarioCadastrado = () => {
     setOpenModalUsuarioCadastrado(false)
@@ -114,20 +121,38 @@ export const FormCadUsuario = () => {
     navigate("/admin/usuarios")
   }
 
+  //carregando a foto do usuario
+  const [previewUrl, setPreviewUrl] = useState("");
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div id={styles["container"]}>
           <div id={styles["header"]}>
             <div id={styles["imgUser"]}>
-              <FontAwesomeIcon icon={faImagePortrait} onClick={handleIconClick} />
+              {previewUrl ? (
+                <img src={previewUrl} alt="Preview" style={{ maxWidth: "150px", maxHeight: "90px" }} />
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={faImagePortrait} onClick={handleIconClick} />
+                  <input
+                    id="fileInput"
+                    name="foto"
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={(event) => {
+                      const selectedFile = event.target.files[0];
+                      setFoto(selectedFile);
 
-              <input
-                id="fileInput"
-                type="file"
-                style={{ display: "none" }}
-                onChange={(event) => setFoto(event.target.value)}
-              />
+                      const fileReader = new FileReader();
+                      fileReader.onload = () => {
+                        setPreviewUrl(fileReader.result);
+                      };
+                      fileReader.readAsDataURL(selectedFile);
+                    }}
+                  />
+                </>
+              )}
             </div>
             <div id={styles["cadUser"]}>CADASTRO USUÁRIO</div>
             <div id={styles["admisao"]}>DATA DE ADMISSÃO:</div>
@@ -346,7 +371,7 @@ export const FormCadUsuario = () => {
         <Modal isOpen={openModalUsuarioCadastrado} onClick={handleRedirect}>
           <div className={styles.conteudoModal}>
             <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-            <p>{errorMessage}</p>
+            <p>{errorMessage.toString()}</p>
             <Link to="/admin/usuarios">
               <input className={styles.botaoConfirmarModal} type="button" value="OK" />
             </Link>
@@ -357,7 +382,7 @@ export const FormCadUsuario = () => {
         <Modal isOpen={openModalUsuarioCadastrado} onClick={handleCloseModalUsuarioCadastrado}>
           <div className={styles.conteudoModal}>
             <FontAwesomeIcon icon={faCircleCheck} className={styles.iconeModal} />
-            <p>{errorMessage}</p>
+            <p>{errorMessage.toString()}</p>
             <input
               className={styles.botaoConfirmarModal}
               type="button"

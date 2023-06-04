@@ -11,8 +11,8 @@ const bcrypt = require('bcryptjs')
 module.exports = class UsuarioControllers {
 
     static async registrarUsuarioPost(req, res) {
-        const data = req.body.data
-        console.log('Backend', data)
+        const data = req.body
+        console.log(data)
 
         if (!data.data_admissao) {
             return res.json({ message: "Por favor, adicione uma data de admissão válida!", status: 500 }).status(500)
@@ -21,15 +21,6 @@ module.exports = class UsuarioControllers {
             return res.json({ message: "Por favor, adicione uma senha!", status: 500 }).status(500)
         }
 
-        // não possuimos confirmar senha no form
-
-        /*         //checagem se a senha é a mesma de confirmar senha
-                if (data.senha != data.confirmarSenha) {
-                    //mensagem
-                    return res.json({message: "As senhas não conferem, tente novamente!", status: 500}).status(500)
-                    //res.render('/usuario/registrarUsuario')
-        
-                } */
         else if (!data.funcao) {
             return res.json({ message: "Por favor, adicione uma função!", status: 500 }).status(500)
         }
@@ -119,6 +110,9 @@ module.exports = class UsuarioControllers {
         //transformar Masculino em M, Feminino em F, e Outro em O (pegar primeira letra da palavra)
         const generoTransformado = data.genero[0]
 
+        //pegando caminho da foto
+        const nomeFoto = `${data.nomeFoto}`
+
         const usuario = {
             data_admissao: data.data_admissao,
             senha: hashedSenha,
@@ -138,7 +132,7 @@ module.exports = class UsuarioControllers {
             bairro: data.bairro,
             cidade: data.cidade,
             estado: data.estado,
-            foto: data.foto,
+            foto: nomeFoto,
             status_usuario: data.status_usuario
 
         }
@@ -252,7 +246,7 @@ module.exports = class UsuarioControllers {
 
             //contadores de Relatorios Aprovador (TOTAIS)
             const relatorioAprovador = await RelatorioAprovador.findAll({
-                where: {status_relatorio_aprovador: 1}
+                where: { status_relatorio_aprovador: 1 }
             })
             const totalRelatorios = relatorioAprovador.length;
             const countRelatoriosRecusados = relatorioAprovador.filter((relatorio) => relatorio.status_final_aprovacao === false).length;
@@ -260,7 +254,7 @@ module.exports = class UsuarioControllers {
 
             //contadores de Relatorios do Recebedor
             const relatorioRecebedor = await RelatorioRecebedor.findAll({
-                where: {status_recebedor: 1}
+                where: { status_recebedor: 1 }
             })
             const totalRelatoriosRecebedor = relatorioRecebedor.length;
             const countRecebedorPendente = relatorioRecebedor.filter((relatorio) => relatorio.status_aprovacao === 'Pendente').length;
@@ -268,7 +262,7 @@ module.exports = class UsuarioControllers {
 
             //contadores de Relatorios do Analista
             const relatorioAnalista = await RelatorioAnalista.findAll({
-                where: {status_relatorio_analista: 1}
+                where: { status_relatorio_analista: 1 }
             })
             const totalRelatoriosAnalista = relatorioAnalista.length;
             const countAnalistaPendente = relatorioAnalista.filter((relatorio) => relatorio.status_aprovacao === 'Pendente').length;

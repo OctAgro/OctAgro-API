@@ -9,7 +9,9 @@ router.get("/listar", UsuarioController.listarUsuario)
 //!!!
 router.get("/listar/:id", UsuarioController.procurarUsuario)
 router.post('/loginPost', UsuarioController.loginPost)
-router.post('/registrarUsuarioPost', UsuarioController.registrarUsuarioPost)
+
+router.post('/registrarUsuarioPost', UsuarioController.registrarUsuarioPost);
+
 router.delete("/deletar/:id", UsuarioController.deletarUsuario)
 router.put("/atualizarUsuarioPost/:id", UsuarioController.atualizarUsuario)
 router.get('/buscar-usuario', UsuarioController.buscarUsuarioByEmail)

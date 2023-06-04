@@ -1,5 +1,21 @@
 const router = require ('express').Router()
 
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const destinationPath = path.join(__dirname, '../../frontend/src/assets');
+        cb(null, destinationPath);
+    },
+    filename: function (req, file, cb) {
+        const nomeFoto = file.originalname;
+        cb(null, nomeFoto);
+        console.log(nomeFoto);
+    }
+});
+const upload = multer({ storage: storage });
+
 const FornecedorController = require('../controllers/FornecedorController')
 const PedidoController = require('../controllers/PedidoController')
 const ProdutoController = require('../controllers/ProdutoController')
@@ -38,7 +54,7 @@ router.post('/produtos/procurar/:id',ProdutoController.procurarProduto) // Achar
 
 // Rotas do Administrador para fazer CRUD de Usuario
 
-router.post('/usuarios/cadastrar',UsuarioControllers.registrarUsuarioPost) // Cadastrar Usuario
+router.post('/usuarios/cadastrar', upload.single('foto'), UsuarioControllers.registrarUsuarioPost) // Cadastrar Usuario
 router.post('/usuarios/buscar', UsuarioControllers.buscarUsuarioByEmail) // Buscar Usuario por email
 router.get('/usuarios/listar',UsuarioControllers.listarUsuario) // Listar todos os usuarios
 router.post('/usuarios/deletar/:id',UsuarioControllers.deletarUsuario) // deletar usuario
